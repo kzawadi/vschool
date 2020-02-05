@@ -10,12 +10,13 @@ class UserDataLogin {
   Map childIds = Map<dynamic, dynamic>();
   Map parentIds = Map<dynamic, dynamic>();
 
-  UserDataLogin(
-      {this.id,
-      this.email,
-      this.isATeacher = false,
-      this.childIds,
-      this.parentIds}) {
+  UserDataLogin({
+    this.id,
+    this.email,
+    this.isATeacher = false,
+    this.childIds,
+    this.parentIds,
+  }) {
     setData();
   }
 

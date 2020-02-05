@@ -48,12 +48,16 @@ class Services {
   String addAssignmentUrl =
       Server.baseUrl + Server.webApi + Server.addAssignment;
 
+// This will make a firestore model of $schools/country.
+ 
   DocumentReference _schoolRef =
       _firestore.collection('Schools').document(country);
 
   Firestore get firestore => _firestore;
   FirebaseAuth get auth => _auth;
   User get loggedInUser => _user;
+
+///This will make a firestore model of $schools/country.
 
   DocumentReference get schoolRef => _schoolRef;
 
