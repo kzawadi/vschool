@@ -1,6 +1,7 @@
 {
   "projects": {
     "lupalilo": "academic-4e032",
-    "default": "academic-4e032"
+    "default": "academic-4e032",
+    "more": "academic-4e032"
   }
 }
