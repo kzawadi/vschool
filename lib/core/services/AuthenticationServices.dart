@@ -20,31 +20,11 @@ class AuthenticationServices extends Services {
   //   }
   // }
 
-
-    Future emailPasswordRegister(String email, String password, UserType userType,
-      String schoolCode) async {
-    // await sharedPreferencesHelper.clearAllData();
-    try {
-      AuthErrors authErrors = AuthErrors.UNKNOWN;
-      firebaseUser = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      authErrors = AuthErrors.SUCCESS;
-      sharedPreferencesHelper.setSchoolCode(schoolCode);
-      print("User Regestered using Email and Password");
-      // sharedPreferencesHelper.setUserType(userType);
-      isUserLoggedIn = true;
-      isUserLoggedInStream.add(isUserLoggedIn);
-      fireBaseUserStream.add(firebaseUser);
-      return authErrors;
-    } catch (e) {
-      return catchException(e);
-    }
-  }
-
   bool isUserLoggedIn = false;
   UserType userType = UserType.STUDENT;
 
-  StreamController<FirebaseUser> fireBaseUserStream =StreamController<FirebaseUser>();
+  StreamController<FirebaseUser> fireBaseUserStream =
+      StreamController<FirebaseUser>();
   StreamController<bool> isUserLoggedInStream = StreamController<bool>();
   StreamController<UserType> userTypeStream = StreamController<UserType>();
 
@@ -96,10 +76,9 @@ class AuthenticationServices extends Services {
     String loginType = userType == UserType.STUDENT
         ? "Student"
         : userType == UserType.TEACHER ? "Parent-Teacher" : "Parent-Teacher";
-        
-    /// this locate the schools
+
     DocumentReference _schoolLoginRef =
-        schoolRef.collection(schoolCode).document('Login');
+        schoolRef.collection(schoolCode.toUpperCase().trim()).document('Login');
 
     await _schoolLoginRef.get().then((onValue) {
       isSchoolPresent = onValue.exists;
@@ -183,7 +162,25 @@ class AuthenticationServices extends Services {
     return ReturnType.SUCCESS;
   }
 
-
+  Future emailPasswordRegister(String email, String password, UserType userType,
+      String schoolCode) async {
+    // await sharedPreferencesHelper.clearAllData();
+    try {
+      AuthErrors authErrors = AuthErrors.UNKNOWN;
+      firebaseUser = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      authErrors = AuthErrors.SUCCESS;
+      sharedPreferencesHelper.setSchoolCode(schoolCode);
+      print("User Regestered using Email and Password");
+      // sharedPreferencesHelper.setUserType(userType);
+      isUserLoggedIn = true;
+      isUserLoggedInStream.add(isUserLoggedIn);
+      fireBaseUserStream.add(firebaseUser);
+      return authErrors;
+    } catch (e) {
+      return catchException(e);
+    }
+  }
 
   Future<AuthErrors> emailPasswordSignIn(String email, String password,
       UserType userType, String schoolCode) async {

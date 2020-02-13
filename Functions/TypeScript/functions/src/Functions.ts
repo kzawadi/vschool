@@ -40,7 +40,7 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
         console.log(connectionsArray.length);
 
         connectionsArray.map(async (value, index) => {
-            var connectionProfileRef = await getProfileRef(schoolCode, country, UserType.TEACHER, value);
+            var connectionProfileRef = await getProfileRef(schoolCode, country, UserType.PARENT, value);
             const key = (index + 1) + '';
             // parentMap.set(key, connectionProfileRef);
             var parentMap: { [key: string]: any } = {};
@@ -53,7 +53,8 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
             const connectionMap = {
                 id: connectionProfileRef,
             }
-            return await db.collection('Schools').doc(country).collection(schoolCode).doc('Parents').collection(standard + division).doc(value).set(connectionMap, { merge: true });
+            var ref1 = db.collection('Schools').doc(country).collection(schoolCode).doc('Parents').collection(standard + division).doc(value);
+            batch.set(ref1, connectionMap, { merge: true });
         });
     }
 

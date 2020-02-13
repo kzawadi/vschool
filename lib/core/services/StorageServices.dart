@@ -80,7 +80,7 @@ class StorageServices extends Services {
 
     final StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
     final String postmageUrl = await downloadUrl.ref.getDownloadURL();
-    // change the return name becouse they match with uploadannauncementUrl.
+
     return postmageUrl;
   }
 }
