@@ -63,7 +63,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
                                         overflow: TextOverflow.fade,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline
+                                            .headline5
                                             .copyWith(fontSize: 14.0)),
                                   ),
                                 ],
@@ -92,7 +92,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
                             overflow: TextOverflow.fade,
                             style: Theme.of(context)
                                 .textTheme
-                                .headline
+                                .headline5
                                 .copyWith(fontSize: 16.0)),
                       ),
                     ],

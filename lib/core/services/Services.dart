@@ -22,7 +22,7 @@ class Services {
 
   UserDataLogin userDataLogin;
 
-  String schoolCode = null;
+  String schoolCode;
 
   final StorageReference _storageReference =
       FirebaseStorage.instance.ref().child(country);

@@ -10,9 +10,9 @@ class AssignmentPageModel extends BaseModel {
     print('Assignment Page Model Created');
   }
 
-  getAssignments(String stdDiv_Global) async {
+  getAssignments(String stdDivGlobal) async {
     setState(ViewState.Busy);
-    await _assignmentServices.getAssignments(stdDiv_Global);
+    await _assignmentServices.getAssignments(stdDivGlobal);
     setState(ViewState.Idle);
   }
 
@@ -23,8 +23,8 @@ class AssignmentPageModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-  onRefresh(String stdDiv_Global) async {
-    await getAssignments(stdDiv_Global);
+  onRefresh(String stdDivGlobal) async {
+    await getAssignments(stdDivGlobal);
   }
 
   @override

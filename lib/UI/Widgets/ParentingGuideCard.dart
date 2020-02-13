@@ -5,7 +5,6 @@ import 'package:ourESchool/UI/pages/shared/AnnouncementViewer.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/core/Models/User.dart';
-import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
 import 'package:ourESchool/locator.dart';

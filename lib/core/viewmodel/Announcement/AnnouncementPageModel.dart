@@ -12,16 +12,16 @@ class AnnouncementPageModel extends BaseModel {
   List<DocumentSnapshot> get postSnapshotList =>
       _announcementServices.postDocumentSnapshots;
 
-  getAnnouncements(String stdDiv_Global) async {
+  getAnnouncements(String stdDivGlobal) async {
     setState(ViewState.Busy);
-    await _announcementServices.getAnnouncements(stdDiv_Global);
+    await _announcementServices.getAnnouncements(stdDivGlobal);
     setState(ViewState.Idle);
   }
 
-  onRefresh(String stdDiv_Global) async {
+  onRefresh(String stdDivGlobal) async {
     _announcementServices.postDocumentSnapshots.clear();
     _announcementServices.lastPostSnapshot = null;
-    await getAnnouncements(stdDiv_Global);
+    await getAnnouncements(stdDivGlobal);
   }
 
   @override

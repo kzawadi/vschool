@@ -86,14 +86,14 @@ class _FeesPageState extends State<FeesPage>
                     child: Text(
                       string.fees_due,
                       style: ktitleStyle.copyWith(
-                          color: Theme.of(context).textTheme.body1.color),
+                          color: Theme.of(context).textTheme.bodyText2.color),
                     ),
                   ),
                   Tab(
                     child: Text(
                       string.fees_paid,
                       style: ktitleStyle.copyWith(
-                          color: Theme.of(context).textTheme.body1.color),
+                          color: Theme.of(context).textTheme.bodyText2.color),
                     ),
                   ),
                 ],

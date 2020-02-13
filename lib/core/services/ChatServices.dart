@@ -95,7 +95,7 @@ class ChatServices extends Services {
     List<User> parents = [];
 
     for (int index = 1; index < documentSnapshot.data.length; index++) {
-      await parents.add(await _profileServices.getUserDataFromReference(
+      parents.add(await _profileServices.getUserDataFromReference(
           documentSnapshot[index.toString()] as DocumentReference));
     }
 
