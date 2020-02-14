@@ -53,8 +53,8 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
             const connectionMap = {
                 id: connectionProfileRef,
             }
-            var ref1 = db.collection('Schools').doc(country).collection(schoolCode).doc('Parents').collection(standard + division).doc(value);
-            batch.set(ref1, connectionMap, { merge: true });
+            return db.collection('Schools').doc(country).collection(schoolCode).doc('Parents').collection(standard + division).doc(value).set(connectionMap, { merge: true });
+            //batch.set(ref1, connectionMap, { merge: true });
         });
     }
 
