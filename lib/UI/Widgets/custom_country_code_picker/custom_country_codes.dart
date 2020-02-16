@@ -1,9 +1,9 @@
-List<Map> codes = [
+List<Map> codess = [
   {"name": "India", "code": "IN", "dial_code": "+91"},
   {"name": "United States", "code": "US", "dial_code": "+1"},
 ];
 
-List<Map> codess = [
+List<Map> codes = [
   {"name": "افغانستان", "code": "AF", "dial_code": "+93"},
   {"name": "Åland", "code": "AX", "dial_code": "+358"},
   {"name": "Shqipëria", "code": "AL", "dial_code": "+355"},
