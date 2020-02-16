@@ -68,7 +68,7 @@ class OurSchoolApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Our E-School',
+      title: 'Vitone School',
       theme: theme,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
