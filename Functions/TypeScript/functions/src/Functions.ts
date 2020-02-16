@@ -18,13 +18,13 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
 
     // console.log(newValue);
 
-    let inJsonFormat = Object.assign(newValue, { id: newValue!.id });
+    var inJsonFormat = Object.assign(newValue, { id: newValue!.id });
 
     let map = {
         id: studentProfileRef,
     }
 
-    let batch = db.batch();
+    var batch = db.batch();
 
     // console.log(inJsonFormat);
 
@@ -40,10 +40,10 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
         console.log(connectionsArray.length);
 
         connectionsArray.map(async (value, index) => {
-            let connectionProfileRef = await getProfileRef(schoolCode, country, UserType.PARENT, value);
+            var connectionProfileRef = await getProfileRef(schoolCode, country, UserType.PARENT, value);
             const key = (index + 1) + '';
             // parentMap.set(key, connectionProfileRef);
-            let parentMap: { [key: string]: any } = {};
+            var parentMap: { [key: string]: any } = {};
             parentMap[key] = connectionProfileRef;
 
             // await db.collection('Schools').doc(country).collection(schoolCode).doc('Students').collection(standard + division).doc(studentId).set(parentMap, { merge: true });
@@ -53,12 +53,12 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
             const connectionMap = {
                 id: connectionProfileRef,
             }
-            return db.collection('Schools').doc(country).collection(schoolCode).doc('Parents').collection(standard + division).doc(value).set(connectionMap, { merge: true });
-            //batch.set(ref1, connectionMap, { merge: true });
+            var ref1 = db.collection('Schools').doc(country).collection(schoolCode).doc('Parents').collection(standard + division).doc(value);
+            batch.set(ref1, connectionMap, { merge: true });
         });
     }
 
-    let ref2 = db.collection('Schools').doc(country).collection(schoolCode).doc('Students').collection(standard + division).doc(studentId);
+    var ref2 = db.collection('Schools').doc(country).collection(schoolCode).doc('Students').collection(standard + division).doc(studentId);
 
     batch.set(ref2, map, { merge: true });
 
@@ -99,10 +99,10 @@ export async function messageIdAutoEntry(eventSnapshot: any, context: any) {
     const country = context.params.country;
     const chatId = context.params.chatId;
     const standard = context.params.standard;
-    let batch = db.batch();
-    let map: { [key: string]: any } = {};
 
-    let pathToChat = `/Schools/${country}/${schoolCode}/Chats/${standard}/Chat/${chatId}/`;
+    var map: { [key: string]: any } = {};
+
+    var pathToChat = `/Schools/${country}/${schoolCode}/Chats/${standard}/Chat/${chatId}/`;
 
     const snapShotData = eventSnapshot!.data()
 
@@ -112,10 +112,10 @@ export async function messageIdAutoEntry(eventSnapshot: any, context: any) {
 
     map[student] = pathToChat;
 
-    
+    var batch = db.batch();
 
-    let ref1 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${from}/`).doc(to);
-    let ref2 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${to}/`).doc(from);
+    var ref1 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${from}/`).doc(to);
+    var ref2 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${to}/`).doc(from);
 
     batch.set(ref1, map, { merge: true });
     batch.set(ref2, map, { merge: true });
