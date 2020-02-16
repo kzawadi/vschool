@@ -102,3 +102,5 @@ coverage/
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 .flutter-plugins-dependencies
 .gitignore
+Functions/TypeScript/functions/package-lock.json
+.flutter-plugins-dependencies
