@@ -4,7 +4,7 @@ import 'package:ourESchool/imports.dart';
 
 class AssignmentServices extends Services {
   StorageServices _storageServices = locator<StorageServices>();
-  DocumentSnapshot lastAssignmnetSnapshot;
+  DocumentSnapshot lastAssignmnetSnapshot = null;
   List<DocumentSnapshot> assignmnetDocumentSnapshots = List<DocumentSnapshot>();
 
   AssignmentServices() {
@@ -53,12 +53,12 @@ class AssignmentServices extends Services {
     }
   }
 
-  getAssignments(String stdDivGlobal) async {
+  getAssignments(String stdDiv_Global) async {
     // await getSchoolCode();
 
     var _assignmentRef = (await schoolRefwithCode())
         .document('Assignments')
-        .collection(stdDivGlobal);
+        .collection(stdDiv_Global);
 
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();

@@ -108,7 +108,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
                     child: Text(
                       "${currentMonthHolidayList.length == 0 ? "No" : currentMonthHolidayList.length} ${currentMonthHolidayList.length == 1 ? "holiday" : "holidays"}",
                       textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headline5.copyWith(
+                      style: Theme.of(context).textTheme.headline.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                     ),
@@ -142,7 +142,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
                         "No holidays this month",
                         style: Theme.of(context)
                             .textTheme
-                            .headline5
+                            .headline
                             .copyWith(fontSize: 16),
                       ),
                     )
@@ -169,7 +169,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
                                         holiday.name,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline5
+                                            .headline
                                             .copyWith(
                                               fontSize: 16,
                                             ),
@@ -184,7 +184,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
                                         style: Theme.of(context)
                                             .textTheme
                                             // .subhead
-                                            .subtitle2
+                                            .subtitle
                                             .copyWith(
                                               fontWeight: FontWeight.w300,
                                             ),
@@ -196,7 +196,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
                                         holiday.date.datetime.day.toString(),
                                         style: Theme.of(context)
                                             .textTheme
-                                            .headline4
+                                            .display1
                                             .copyWith(
                                                 fontWeight: FontWeight.w300),
                                       ),
@@ -213,7 +213,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
                                               "No description available",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline5
+                                              .headline
                                               .copyWith(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w300),

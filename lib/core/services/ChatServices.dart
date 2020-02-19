@@ -86,7 +86,7 @@ class ChatServices extends Services {
     User user =
         await _profileServices.getUserDataFromReference(documentSnapshot["id"]);
 
-      //studentListMap.putIfAbsent(documentSnapshot.documentID, () => user);
+    // studentListMap.putIfAbsent(documentSnapshot.documentID, () => user);
 
     return user;
   }
@@ -95,7 +95,7 @@ class ChatServices extends Services {
     List<User> parents = [];
 
     for (int index = 1; index < documentSnapshot.data.length; index++) {
-      parents.add(await _profileServices.getUserDataFromReference(
+      await parents.add(await _profileServices.getUserDataFromReference(
           documentSnapshot[index.toString()] as DocumentReference));
     }
 

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'dart:convert';
@@ -10,7 +11,7 @@ import 'package:path/path.dart' as p;
 
 class AnnouncementServices extends Services {
   StorageServices _storageServices = locator<StorageServices>();
-  DocumentSnapshot lastPostSnapshot;
+  DocumentSnapshot lastPostSnapshot = null;
   List<DocumentSnapshot> postDocumentSnapshots = new List<DocumentSnapshot>();
 
   AnnouncementServices() {
@@ -24,14 +25,14 @@ class AnnouncementServices extends Services {
   }
 
   getAnnouncements(
-    String stdDivGlobal,
+    String stdDiv_Global,
   ) async {
     // List<DocumentSnapshot> _data = new List<DocumentSnapshot>();
 
     if (schoolCode == null) await getSchoolCode();
 
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(stdDivGlobal);
+        (await schoolRefwithCode()).document('Posts').collection(stdDiv_Global);
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();
     if (lastPostSnapshot == null)

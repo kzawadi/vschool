@@ -31,7 +31,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
     isLoading = true;
     setState(() {});
     await widget.model.getParents(widget.documentSnapshot);
-    parent = widget
+    parent = await widget
         .model.studentsParentListMap[widget.documentSnapshot.documentID];
     isLoading = false;
     setState(() {});

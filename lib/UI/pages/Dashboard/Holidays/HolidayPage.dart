@@ -99,7 +99,7 @@ class HomeTab extends StatelessWidget {
               Text(
                 'Select Country',
                 style: Theme.of(context).textTheme.caption.copyWith(
-                    color: Theme.of(context).textTheme.headline3.color),
+                    color: Theme.of(context).textTheme.display2.color),
               ),
             ],
           ),
@@ -380,7 +380,7 @@ class CountryTitle extends StatelessWidget {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           text: model.currentSelectedCountryName,
-                          style: Theme.of(context).textTheme.headline5.copyWith(
+                          style: Theme.of(context).textTheme.headline.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 40,
                               ),

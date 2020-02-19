@@ -17,21 +17,21 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider<User>.controller(
           initialData: User(),
-          create: (context) => locator<ProfileServices>().loggedInUserStream,
+          builder: (context) => locator<ProfileServices>().loggedInUserStream,
         ),
         StreamProvider<FirebaseUser>.controller(
           initialData: null,
-          create: (context) =>
+          builder: (context) =>
               locator<AuthenticationServices>().fireBaseUserStream,
         ),
         StreamProvider<UserType>.controller(
           initialData: UserType.UNKNOWN,
-          create: (context) =>
+          builder: (context) =>
               locator<AuthenticationServices>().userTypeStream,
         ),
         StreamProvider<bool>.controller(
           initialData: false,
-          create: (context) =>
+          builder: (context) =>
               locator<AuthenticationServices>().isUserLoggedInStream,
         ),
       ],
@@ -68,7 +68,7 @@ class OurSchoolApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Vitone School',
+      title: 'Our E-School',
       theme: theme,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),

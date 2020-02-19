@@ -302,8 +302,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               textInputType: TextInputType.number,
                               hintText: string.your_parents,
                               labelText: string.mobile_no,
-                              onChanged: (mobileNo) {
-                                _mobileNo = mobileNo;
+                              onChanged: (mobile_no) {
+                                _mobileNo = mobile_no;
                               },
                               controller: TextEditingController(text: _mobileNo),
                             ),

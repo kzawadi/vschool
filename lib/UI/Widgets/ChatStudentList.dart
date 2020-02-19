@@ -26,7 +26,7 @@ class _ChatStudentListWidgetState extends State<ChatStudentListWidget> {
     }
   }
 
-  Color color(var context) => Theme.of(context).textTheme.bodyText2.color;
+  Color color(var context) => Theme.of(context).textTheme.body1.color;
 
   @override
   Widget build(BuildContext context) {
