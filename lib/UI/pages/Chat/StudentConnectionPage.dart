@@ -197,8 +197,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.all(Radius.circular(borderradius)),
           image: DecorationImage(
-            fit: BoxFit.cover
-            ,
+            fit: BoxFit.cover,
             image: url != 'default'
                 ? NetworkImage(
                     url,
