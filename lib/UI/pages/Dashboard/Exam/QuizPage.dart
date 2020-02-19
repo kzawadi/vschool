@@ -92,7 +92,7 @@ class StartPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(model.selectedTopic.topicName,
-              style: Theme.of(context).textTheme.headline),
+              style: Theme.of(context).textTheme.headline5),
           Divider(),
           Expanded(
             child: Text(model.selectedTopic.description),
@@ -140,7 +140,7 @@ class FinishPage extends StatelessWidget {
             children: <Widget>[
               Text(
                 model.selectedTopic.topicName,
-                style: Theme.of(context).textTheme.headline,
+                style: Theme.of(context).textTheme.headline5,
               ),
               MaterialButton(
                 onPressed: model.checkAnswers,
@@ -346,7 +346,7 @@ class QuestionPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: 16),
                   child: Text(
                     option.toString(),
-                    style: Theme.of(context).textTheme.body2,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
               )
@@ -405,7 +405,7 @@ class QuestionPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: 16),
                   child: Text(
                     option.toString(),
-                    style: Theme.of(context).textTheme.body2,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
               )
