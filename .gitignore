@@ -104,3 +104,4 @@ coverage/
 .gitignore
 Functions/TypeScript/functions/package-lock.json
 .flutter-plugins-dependencies
+.flutter-plugins-dependencies
