@@ -183,19 +183,22 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
 
   Widget _buildStudentProfileImageViewer(
       BuildContext context, String url, UserType userType) {
+        final double borderradius= 8;
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 10,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: BorderRadius.all(Radius.circular(borderradius)),
       ),
       child: Container(
         width: 200,
         height: 200,
         decoration: BoxDecoration(
-          // shape: BoxShape.circle,r
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.all(Radius.circular(borderradius)),
           image: DecorationImage(
-            fit: BoxFit.scaleDown,
+            fit: BoxFit.cover
+            ,
             image: url != 'default'
                 ? NetworkImage(
                     url,
