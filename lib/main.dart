@@ -17,21 +17,21 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider<User>.controller(
           initialData: User(),
-          builder: (context) => locator<ProfileServices>().loggedInUserStream,
+          create: (context) => locator<ProfileServices>().loggedInUserStream,
         ),
         StreamProvider<FirebaseUser>.controller(
           initialData: null,
-          builder: (context) =>
+          create: (context) =>
               locator<AuthenticationServices>().fireBaseUserStream,
         ),
         StreamProvider<UserType>.controller(
           initialData: UserType.UNKNOWN,
-          builder: (context) =>
+          create: (context) =>
               locator<AuthenticationServices>().userTypeStream,
         ),
         StreamProvider<bool>.controller(
           initialData: false,
-          builder: (context) =>
+          create: (context) =>
               locator<AuthenticationServices>().isUserLoggedInStream,
         ),
       ],
