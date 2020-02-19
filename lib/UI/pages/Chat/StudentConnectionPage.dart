@@ -183,7 +183,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
 
   Widget _buildStudentProfileImageViewer(
       BuildContext context, String url, UserType userType) {
-        final double borderradius= 8;
+        final double borderradius= 10;
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 10,
