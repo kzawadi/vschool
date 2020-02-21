@@ -4,12 +4,12 @@ import 'package:intl/intl.dart';
 // List<String> messageDates = [];
 
 class MessagesListViewBuilder extends StatelessWidget {
-  final List<Message> messagesList;
-  final ScrollController scrollController;
-  // List<String> messageDates = [];
-
   MessagesListViewBuilder({this.messagesList, this.scrollController});
+
+  // List<String> messageDates = [];
+  final List<Message> messagesList;
   String previusDate = '';
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -107,52 +107,47 @@ class OtherMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
-          Material(
-            elevation: 3,
-            shape: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: Theme.of(context).primaryColor, width: 1),
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
-            ),
-            child: Container(
-              color: Colors.blue.shade600,
-              constraints: BoxConstraints(
-                minWidth: MediaQuery.of(context).size.width / 4,
-                maxWidth: 3 * MediaQuery.of(context).size.width / 4,
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-              child: Text(
-                message.message,
-                textAlign: TextAlign.start,
-                style: ktitleStyle,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width * 0.75),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+            decoration: BoxDecoration(
+            color:  Colors.blue,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+              topLeft: Radius.circular(8) ,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
+            
             child: Text(
-              DateFormat("E").add_jm().format(
-                    DateTime.parse(
-                      message.timeStamp.toDate().toLocal().toString(),
-                    ),
-                  ),
-              style: ksubtitleStyle.copyWith(fontSize: 10),
+              message.message,
+              textAlign: TextAlign.start,
+              style: ktitleStyle,
             ),
+          ),),
+        
+        Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Text(
+            DateFormat("E").add_jm().format(
+                  DateTime.parse(
+                    message.timeStamp.toDate().toLocal().toString(),
+                  ),
+                ),
+            style: ksubtitleStyle.copyWith(fontSize: 10),
           ),
-          SizedBox(
-            height: 5,
-          )
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 4,
+        )
+      ],
     );
   }
 }
@@ -167,47 +162,47 @@ class MyMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
-          Material(
-            elevation: 3,
-            shape: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: Theme.of(context).primaryColor, width: 1),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
-            ),
-            // color: Theme.of(context).canvasColor.withOpacity(0.9),
-            child: Container(
-              color: Colors.green.shade600,
-              constraints: BoxConstraints(
-                minWidth: MediaQuery.of(context).size.width * 0.25,
-                maxWidth: MediaQuery.of(context).size.width * 0.75,
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-              child: Text(
-                message.message,
-                textAlign: TextAlign.end,
-                style: ktitleStyle,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width * 0.75),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+            decoration: BoxDecoration(
+            color:  Colors.green.shade600,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+              topLeft: Radius.circular(8) ,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
+            
             child: Text(
-              DateFormat("E").add_jm().format(DateTime.parse(
-                  message.timeStamp.toDate().toLocal().toString())),
-              style: ksubtitleStyle.copyWith(fontSize: 10),
+              message.message,
+              textAlign: TextAlign.start,
+              style: ktitleStyle,
             ),
+          ),),
+        
+        Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: Text(
+            DateFormat("E").add_jm().format(
+                  DateTime.parse(
+                    message.timeStamp.toDate().toLocal().toString(),
+                  ),
+                ),
+            style: ksubtitleStyle.copyWith(fontSize: 10),
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 4,
+        )
+      ],
     );
   }
 }
