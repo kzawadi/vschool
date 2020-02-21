@@ -120,7 +120,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
               elevation: 5,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(32),
+                  Radius.circular(15),
                 ),
               ),
               child: Container(
@@ -154,7 +154,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                         EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(25.0),
+                        Radius.circular(15.0),
                       ),
                     ),
                   ),
