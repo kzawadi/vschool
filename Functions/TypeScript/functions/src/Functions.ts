@@ -53,7 +53,8 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
             const parentMap: { [key: string]: any } = {};
             parentMap[key] = connectionProfileRef;
 
-            // await db.collection('Schools').doc(country).collection(schoolCode).doc('Students').collection(standard + division).doc(studentId).set(parentMap, { merge: true });
+            /* await db.collection('Schools').doc(country).collection(schoolCode).doc('Students')
+            .collection(standard + division).doc(studentId).set(parentMap, { merge: true });   */
 
             map = Object.assign(map, parentMap);
 
@@ -101,7 +102,8 @@ export async function teacherAutoEntry(eventSnapshot: any, context: any) {
             id: teacherProfileRef,
         }
 
-        return await db.collection('Schools').doc(country).collection(schoolCode).doc('Teachers').collection(standard + division).doc(teacherId).set(map, { merge: true });
+        return await db.collection('Schools').doc(country).collection(schoolCode).doc('Teachers')
+        .collection(standard + division).doc(teacherId).set(map, { merge: true });
     } else {
         return;
     }
@@ -128,8 +130,10 @@ export async function messageIdAutoEntry(eventSnapshot: any, context: any) {
 
     const batch2 = db.batch();
 
-    const ref1 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${from}/`).doc(to);
-    const ref2 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${to}/`).doc(from);
+    const ref1 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${from}/`)
+    .doc(to);
+    const ref2 = db.collection(`/Schools/${country}/${schoolCode}/Chats/${standard}/Parent-Teacher/${to}/`)
+    .doc(from);
 
     batch2.set(ref1, map, { merge: true });
     batch2.set(ref2, map, { merge: true });
