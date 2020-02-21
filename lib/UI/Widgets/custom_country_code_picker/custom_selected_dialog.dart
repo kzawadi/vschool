@@ -21,6 +21,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
 
   @override
   Widget build(BuildContext context) => new SimpleDialog(
+    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       title: new Column(
         children: <Widget>[
           new TextField(
