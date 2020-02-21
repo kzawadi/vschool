@@ -124,6 +124,7 @@ class OtherMessageWidget extends StatelessWidget {
                   bottomRight: Radius.circular(20)),
             ),
             child: Container(
+              color: Colors.blue.shade600,
               constraints: BoxConstraints(
                 minWidth: MediaQuery.of(context).size.width / 4,
                 maxWidth: 3 * MediaQuery.of(context).size.width / 4,
@@ -184,6 +185,7 @@ class MyMessageWidget extends StatelessWidget {
             ),
             // color: Theme.of(context).canvasColor.withOpacity(0.9),
             child: Container(
+              color: Colors.green.shade600,
               constraints: BoxConstraints(
                 minWidth: MediaQuery.of(context).size.width * 0.25,
                 maxWidth: MediaQuery.of(context).size.width * 0.75,
