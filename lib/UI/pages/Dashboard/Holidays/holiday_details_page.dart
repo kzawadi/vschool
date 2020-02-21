@@ -265,8 +265,8 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
                       duration: Duration(milliseconds: 300),
                       width: MediaQuery.of(context).size.width / 30,
                       height: currentMonthIndex == monthIndex
-                          ? (kBottomNavigationBarHeight / 1.2) + 20
-                          : (kBottomNavigationBarHeight / 2.0) + 15,
+                          ? (kBottomNavigationBarHeight / 1.2) + 60
+                          : (kBottomNavigationBarHeight / 2.0) + 3,
                       color: monthToColorMap.values.toList()[monthIndex],
                       // child: Text("kk"),
                     ),
