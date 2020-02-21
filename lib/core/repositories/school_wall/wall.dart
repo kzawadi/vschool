@@ -9,25 +9,26 @@ class SchoolWallRepo implements SchoolWallRepository {
   final wallCollection = Firestore.instance.collection('schoolwalls');
 
   @override
-  Future<void> addNewTodo(SchoolWall wall) {
+  Future<void> addNewWall(SchoolWall wall) {
     return wallCollection.add(wall.toJson());
   }
 
   @override
-  Future<void> deleteTodo(SchoolWall wall) {
+  Future<void> deleteWall(SchoolWall wall) {
     return wallCollection.document(wall.id).delete();
   }
 
   @override
-  Stream<List<SchoolWall>> todos() {
+  Stream<List<SchoolWall>> walls() {
    
   
   }
 
   @override
-  Future<void> updateTodo(SchoolWall wall) {
-    // TODO: implement updateTodo
-    throw UnimplementedError();
+  Future<void> updateWall(SchoolWall update) {
+    return wallCollection
+    .document(update.id)
+    .updateData(update.toJson());
   }
 
 }
