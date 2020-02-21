@@ -47,7 +47,7 @@ const validateFirebaseIdToken = async (req: express.Request, res: express.Respon
         return;
     }
 
-    var idToken;
+    let idToken;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
         console.log('Found "Authorization" header');
         // Read the ID Token from the Authorization header.
@@ -66,7 +66,7 @@ const validateFirebaseIdToken = async (req: express.Request, res: express.Respon
         const decodedIdToken = await admin.auth().verifyIdToken(idToken);
         console.log('ID Token correctly decoded', decodedIdToken);
         console.log('ID Token correctly decoded: Email', decodedIdToken.email);
-        var requestWrapper: IUserRequest = <IUserRequest>req;
+        const requestWrapper: IUserRequest = <IUserRequest>req;
         requestWrapper.user = decodedIdToken;
         next();
         return;
@@ -143,7 +143,7 @@ app.post('/userdata', async (req: express.Request, res: express.Response) => {
         const ref = await getProfileRef(data.schoolCode, data.country, data.userType, data.id);
         await ref.get().then((documentSnapshot) => {
             // console.log('JSON Data : ');
-            var inJsonFormat = Object.assign(documentSnapshot.data(), { id: documentSnapshot.id });
+            const inJsonFormat = Object.assign(documentSnapshot.data(), { id: documentSnapshot.id });
             // console.log(inJsonFormat);
             // console.log('Data : '+ documentSnapshot);
             // console.log('Data2 : '+ documentSnapshot.data);
@@ -166,10 +166,10 @@ export function _getSchoolRef(schoolCode: string, country: string): Firestoree.C
 export async function getProfileRef(schoolCode: string, country: string, userType: string, id: string): Promise<Firestoree.DocumentReference> {
     const _profileRef = _getSchoolRef(schoolCode, country).doc('Profile');
     let res: Firestoree.DocumentReference;
-    if (userType == UserType.STUDENT) {
+    if (userType === UserType.STUDENT) {
         res = await _profileRef.collection('Student').doc(id);
     } else
-        if (userType == UserType.TEACHER || userType == UserType.PARENT) {
+        if (userType === UserType.TEACHER || userType === UserType.PARENT) {
             res = await _profileRef.collection('Parent-Teacher').doc(id);
         } else {
             res = await _profileRef.collection('Unknown').doc(id);
@@ -197,7 +197,7 @@ app.post('/postAnnouncement', async (req: express.Request, res: express.Response
         let announcementMap = data.announcement;
         announcementMap = Object.assign(announcementMap, { timeStamp: Firestoree.Timestamp.now() });
 
-        const std = data.announcement.forClass == 'Global' ? 'Global' : data.announcement.forClass + data.announcement.forDiv;
+        const std = data.announcement.forClass === 'Global' ? 'Global' : data.announcement.forClass + data.announcement.forDiv;
 
         console.log(data.schoolCode + " " + data.announcement.forClass + " " + data.announcement.forDiv + " " + data.country);
 
@@ -205,7 +205,7 @@ app.post('/postAnnouncement', async (req: express.Request, res: express.Response
 
         await _announcementRef.add(announcementMap).then((success) => {
             success.get().then((documentSnapshot) => {
-                var inJsonFormat = Object.assign(documentSnapshot.data(), { id: documentSnapshot.id });
+                const inJsonFormat = Object.assign(documentSnapshot.data(), { id: documentSnapshot.id });
                 res.status(HttpStatus.OK).json(inJsonFormat);
             }, (failure) => {
                 res.status(HttpStatus.BAD_REQUEST).send('Failure : ' + HttpStatus.getStatusText(HttpStatus.BAD_REQUEST));
@@ -238,7 +238,7 @@ app.post('/addAssignment', async (req: express.Request, res: express.Response) =
         let assignmemtMap = data.assignment;
         assignmemtMap = Object.assign(assignmemtMap, { timeStamp: Firestoree.Timestamp.now() });
 
-        const std = data.assignment.standard == 'Global' ? 'Global' : data.assignment.standard + data.assignment.div;
+        const std = data.assignment.standard === 'Global' ? 'Global' : data.assignment.standard + data.assignment.div;
 
         // console.log(data.schoolCode + " " + data.assignment.standard + " " + data.assignment.div + " " + data.country);
 
@@ -246,7 +246,7 @@ app.post('/addAssignment', async (req: express.Request, res: express.Response) =
 
         await _announcementRef.add(assignmemtMap).then((success) => {
             success.get().then((documentSnapshot) => {
-                var inJsonFormat = Object.assign(documentSnapshot.data(), { id: documentSnapshot.id });
+                const inJsonFormat = Object.assign(documentSnapshot.data(), { id: documentSnapshot.id });
                 res.status(HttpStatus.OK).json(inJsonFormat);
             }, (failure) => {
                 res.status(HttpStatus.BAD_REQUEST).send('Failure : ' + HttpStatus.getStatusText(HttpStatus.BAD_REQUEST));
@@ -263,7 +263,7 @@ app.post('/addAssignment', async (req: express.Request, res: express.Response) =
 app.get('/jsonModel', async (req: express.Request, res: express.Response) => {
     try {
         db.collection("Schools").doc("India").collection("AMBE001").doc("Login").collection("Student").doc("5YBx4YxiQoVQNsKhtj1P").get().then((success) => {
-            var inJson = Object.assign(success.data(), { id: success.id });
+            const inJson = Object.assign(success.data(), { id: success.id });
             res.status(HttpStatus.OK).json(inJson);
         }, (failure) => {
             res.status(HttpStatus.BAD_REQUEST).send('Failure : ' + HttpStatus.getStatusText(HttpStatus.BAD_REQUEST));
