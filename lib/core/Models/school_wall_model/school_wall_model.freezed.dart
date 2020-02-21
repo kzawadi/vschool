@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'school_wall.dart';
+part of 'school_wall_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,16 +15,22 @@ abstract class _$SchoolWall {
   String get mission;
   String get history;
   String get location;
+  String get id;
 
   SchoolWall copyWith(
-      {String name, String mission, String history, String location});
+      {String name,
+      String mission,
+      String history,
+      String location,
+      String id});
 
   Map<String, dynamic> toJson();
 }
 
 @JsonSerializable()
 class _$_SchoolWall implements _SchoolWall {
-  const _$_SchoolWall({this.name, this.mission, this.history, this.location});
+  const _$_SchoolWall(
+      this.name, this.mission, this.history, this.location, this.id);
 
   factory _$_SchoolWall.fromJson(Map<String, dynamic> json) =>
       _$_$_SchoolWallFromJson(json);
@@ -37,10 +43,12 @@ class _$_SchoolWall implements _SchoolWall {
   final String history;
   @override
   final String location;
+  @override
+  final String id;
 
   @override
   String toString() {
-    return 'SchoolWall(name: $name, mission: $mission, history: $history, location: $location)';
+    return 'SchoolWall(name: $name, mission: $mission, history: $history, location: $location, id: $id)';
   }
 
   @override
@@ -49,7 +57,8 @@ class _$_SchoolWall implements _SchoolWall {
         (identical(other.name, name) || other.name == name) &&
         (identical(other.mission, mission) || other.mission == mission) &&
         (identical(other.history, history) || other.history == history) &&
-        (identical(other.location, location) || other.location == location);
+        (identical(other.location, location) || other.location == location) &&
+        (identical(other.id, id) || other.id == id);
   }
 
   @override
@@ -58,7 +67,8 @@ class _$_SchoolWall implements _SchoolWall {
       name.hashCode ^
       mission.hashCode ^
       history.hashCode ^
-      location.hashCode;
+      location.hashCode ^
+      id.hashCode;
 
   @override
   _$_SchoolWall copyWith({
@@ -66,12 +76,14 @@ class _$_SchoolWall implements _SchoolWall {
     Object mission = immutable,
     Object history = immutable,
     Object location = immutable,
+    Object id = immutable,
   }) {
     return _$_SchoolWall(
-      name: name == immutable ? this.name : name as String,
-      mission: mission == immutable ? this.mission : mission as String,
-      history: history == immutable ? this.history : history as String,
-      location: location == immutable ? this.location : location as String,
+      name == immutable ? this.name : name as String,
+      mission == immutable ? this.mission : mission as String,
+      history == immutable ? this.history : history as String,
+      location == immutable ? this.location : location as String,
+      id == immutable ? this.id : id as String,
     );
   }
 
@@ -82,11 +94,8 @@ class _$_SchoolWall implements _SchoolWall {
 }
 
 abstract class _SchoolWall implements SchoolWall {
-  const factory _SchoolWall(
-      {String name,
-      String mission,
-      String history,
-      String location}) = _$_SchoolWall;
+  const factory _SchoolWall(String name, String mission, String history,
+      String location, String id) = _$_SchoolWall;
 
   factory _SchoolWall.fromJson(Map<String, dynamic> json) =
       _$_SchoolWall.fromJson;
@@ -99,8 +108,14 @@ abstract class _SchoolWall implements SchoolWall {
   String get history;
   @override
   String get location;
+  @override
+  String get id;
 
   @override
   _SchoolWall copyWith(
-      {String name, String mission, String history, String location});
+      {String name,
+      String mission,
+      String history,
+      String location,
+      String id});
 }

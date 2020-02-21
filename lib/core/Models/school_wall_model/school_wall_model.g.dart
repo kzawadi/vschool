@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'school_wall.dart';
+part of 'school_wall_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -8,10 +8,11 @@ part of 'school_wall.dart';
 
 _$_SchoolWall _$_$_SchoolWallFromJson(Map<String, dynamic> json) {
   return _$_SchoolWall(
-    name: json['name'] as String,
-    mission: json['mission'] as String,
-    history: json['history'] as String,
-    location: json['location'] as String,
+    json['name'] as String,
+    json['mission'] as String,
+    json['history'] as String,
+    json['location'] as String,
+    json['id'] as String,
   );
 }
 
@@ -21,4 +22,5 @@ Map<String, dynamic> _$_$_SchoolWallToJson(_$_SchoolWall instance) =>
       'mission': instance.mission,
       'history': instance.history,
       'location': instance.location,
+      'id': instance.id,
     };
