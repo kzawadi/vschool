@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class CalendarificApiCall {
   String apiKey =
-      '9193832ffb3b76beee6797197bb6c2bbb79e5afd'; //API key from calendarific.com :)
+      'a0bb972df672fe8ee634d7b3aaac6a1110feaa11'; //API key from calendarific.com :)
   String currentYear = DateTime.now().year.toString();
 
   Future<HolidayData> getHolidays(String countryCode) async {

@@ -1,5 +1,5 @@
 List<Map> codes = [
-  {"name": "India", "code": "IN", "dial_code": "+91"},
+  {"name": "Tanzania", "code": "TZ", "dial_code": "+255"},
   {"name": "United States", "code": "US", "dial_code": "+1"},
 ];
 
