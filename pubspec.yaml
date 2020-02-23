@@ -44,7 +44,7 @@ dependencies:
 
   # State Management tools
   get_it: ^2.0.0
-  provider: ^4.0.4
+  provider: ^3.0.0+1
 
   # Icons
   cupertino_icons: ^0.1.2
