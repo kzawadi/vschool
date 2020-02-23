@@ -1,40 +1,39 @@
 
-// import 'dart:async';
+import 'dart:async';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:ourESchool/core/models/school_wall_model/school_wall_model.dart';
-// import 'package:ourESchool/core/repositories/school_wall/school_wall_repo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ourESchool/core/Models/school_wall/school_wall_model.dart';
+import 'package:ourESchool/core/entities/school_wall/school_wall_entity.dart';
+import 'package:ourESchool/core/repositories/school_wall/school_wall_repo.dart';
 
-// class SchoolWallRepo implements SchoolWallRepository {
-//   final wallCollection = Firestore.instance.collection('schoolwalls');
 
-//   @override
-//   Future<void> addNewWall(SchoolWall wall) {
-//     return wallCollection.add(wall.toJson());
-//   }
+class SchoolWallRepo implements SchoolWallRepository {
+  final wallCollection = Firestore.instance.collection('Schools')
+  .document('India').collection('walls');
 
-//   @override
-//   Future<void> deleteWall(SchoolWall wall) {
-//     return wallCollection.document(wall.id).delete();
-//   }
+  @override
+  Future<void> addNewWall(Wall wall) {
+    return wallCollection.add(wall.toEntity().toDocument());
+  }
 
-//   @override
-//   Stream<List<SchoolWall>> walls() {
-//     return wallCollection.snapshots()
-//     .map((snapshot) {
-//       return snapshot.documents
-//           .map((doc) => SchoolWall.fromJson(doc))
-//           .toList();
-//     });
-   
-  
-//   }
+  @override
+  Future<void> deleteWall(Wall wall) {
+    return wallCollection.document(wall.id).delete();
+  }
 
-//   @override
-//   Future<void> updateWall(SchoolWall update) {
-//     return wallCollection
-//     .document(update.id)
-//     .updateData(update.toJson());
-//   }
+  @override
+  Stream<List<Wall>> walls() {
+    return wallCollection.snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => Wall.fromEntity(WallEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
+  @override
+  Future<void> updateWall(Wall update) {
+    return wallCollection
+    .document(update.id)
+    .updateData(update.toEntity().toDocument());
+  }
 
-// }
+}

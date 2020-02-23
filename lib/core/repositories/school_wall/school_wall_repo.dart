@@ -1,13 +1,13 @@
-// import 'dart:async';
+import 'dart:async';
 
-// import 'package:ourESchool/core/models/school_wall_model/school_wall_model.dart';
+import 'package:ourESchool/core/Models/school_wall/school_wall_model.dart';
 
-// abstract class SchoolWallRepository {
-//   Future<void> addNewWall(SchoolWall wall);
+abstract class SchoolWallRepository {
+  Future<void> addNewWall(Wall wall);
 
-//   Future<void> deleteWall(SchoolWall wall);
+  Future<void> deleteWall(Wall wall);
 
-//   Stream<List<SchoolWall>> walls();
+  Stream<List<Wall>> walls();
 
-//   Future<void> updateWall(SchoolWall wall);
-// }
+  Future<void> updateWall(Wall wall);
+}

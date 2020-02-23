@@ -29,8 +29,13 @@ dependencies:
   image_picker: ^0.6.0+17
   photo_view: ^0.4.2
   path_provider: ^1.2.0
-  flutter_plugin_pdf_viewer: ^1.0.7
+  flutter_plugin_pdf_viewer:
   custom_radio_grouped_button: ^1.0.0
+  equatable: 
+  flutter_bloc:
+  rxdart: 
+  bloc :
+
 
 
 
@@ -39,7 +44,7 @@ dependencies:
 
   # State Management tools
   get_it: ^2.0.0
-  provider: ^3.0.0+1
+  provider: ^4.0.4
 
   # Icons
   cupertino_icons: ^0.1.2
