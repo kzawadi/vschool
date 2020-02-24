@@ -174,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   : Icon(Icons.check),
             ),
             body: SafeArea(
-                          child: SingleChildScrollView(
+              child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
