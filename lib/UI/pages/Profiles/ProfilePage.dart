@@ -162,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
             floatingActionButton: FloatingActionButton(
               tooltip: 'Save',
               elevation: 20,
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.green.shade300,
               onPressed: () async {
                 await floatingButoonPressed(model, userType);
               },

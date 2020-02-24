@@ -5,47 +5,47 @@ import 'package:ourESchool/core/entities/school_wall/school_wall_entity.dart';
 @immutable
 class Wall {
   final String id;
-  final String note;
-  final String task;
+  final String mission;
+  final String name;
 
-  Wall(this.task, {String note = '', String id})
-      : this.note = note ?? '',
+  Wall(this.name, {String mission = '', String id})
+      : this.mission = mission ?? '',
         this.id = id;
 
-  Wall copyWith({bool complete, String id, String note, String task}) {
+  Wall copyWith({String id, String mission, String name}) {
     return Wall(
-      task ?? this.task,
+      name ?? this.name,
       id: id ?? this.id,
-      note: note ?? this.note,
+      mission: mission ?? this.mission,
     );
   }
 
   @override
   int get hashCode =>
-      task.hashCode ^ note.hashCode ^ id.hashCode;
+      name.hashCode ^ mission.hashCode ^ id.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Wall &&
           runtimeType == other.runtimeType &&
-          task == other.task &&
-          note == other.note &&
+          name == other.name &&
+          mission == other.mission &&
           id == other.id;
 
   @override
   String toString() {
-    return 'Wall{task: $task, note: $note, id: $id}';
+    return 'Wall{name: $name, mission: $mission, id: $id}';
   }
 
   WallEntity toEntity() {
-    return WallEntity(task, id, note);
+    return WallEntity(name, id, mission);
   }
 
   static Wall fromEntity(WallEntity entity) {
     return Wall(
       entity.name,
-      note: entity.mission,
+      mission: entity.mission,
       id: entity.id,
     );
   }
