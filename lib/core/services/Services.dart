@@ -51,6 +51,9 @@ class Services {
   DocumentReference _schoolRef =
       _firestore.collection('Schools').document(country);
 
+  DocumentReference _wallRef =
+      _firestore.collection('walls').document('websites');
+
   Firestore get firestore => _firestore;
   FirebaseAuth get auth => _auth;
   User get loggedInUser => _user;
@@ -59,6 +62,10 @@ class Services {
 
   Future<CollectionReference> schoolRefwithCode() async =>
       _schoolRef.collection((await getSchoolCode())
+          .toUpperCase()
+          .trim());
+  Future<CollectionReference> wallRef() async =>
+      _wallRef.collection('wall'
           .toUpperCase()
           .trim());
 

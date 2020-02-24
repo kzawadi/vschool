@@ -59,6 +59,30 @@ class StorageServices extends Services {
     return postmageUrl;
   }
 
+
+  Future<String> uploadWallPhoto(
+      String filePath, String fileName) async {
+    if (schoolCode == null) await getSchoolCode();
+    if (firebaseUser == null) await getFirebaseUser();
+
+    final StorageUploadTask uploadTask = storageReference
+        .child(schoolCode + "/" + "Walls" + '/' + fileName)
+        .putFile(
+          File(filePath),
+          StorageMetadata(
+            contentType: "image",
+            customMetadata: {
+              "uploadedBy": firebaseUser.uid,
+            },
+          ),
+        );
+
+    final StorageTaskSnapshot downloadUrl = await uploadTask.onComplete;
+    final String postmageUrl = await downloadUrl.ref.getDownloadURL();
+
+    return postmageUrl;
+  }
+
   Future<String> uploadAssignment(String filePath, String fileName) async {
     if (schoolCode == null) await getSchoolCode();
     if (firebaseUser == null) await getFirebaseUser();

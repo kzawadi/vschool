@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Announcement {
+class Wall {
   String caption;
   String by;
   String forDiv;
@@ -10,7 +10,7 @@ class Announcement {
   String photoPath;
   String id;
 
-  Announcement(
+  Wall(
       {this.caption = '',
       this.by,
       this.forDiv,
@@ -20,7 +20,7 @@ class Announcement {
       this.photoPath = '',
       this.id});
 
-  Announcement.fromJson(Map<String, dynamic> json) {
+  Wall.fromJson(Map<String, dynamic> json) {
     caption = json['caption'] ?? '';
     by = json['by'];
     forDiv = json['forDiv'];
@@ -31,7 +31,7 @@ class Announcement {
     id = json['id'];
   }
 
-  Announcement.fromSnapshot(DocumentSnapshot snapshot) {
+  Wall.fromSnapshot(DocumentSnapshot snapshot) {
     caption = snapshot['caption'].toString() ?? '';
     by = snapshot['by'].toString();
     forDiv = snapshot['forDiv'].toString();

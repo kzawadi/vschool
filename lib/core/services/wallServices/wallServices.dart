@@ -2,18 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'dart:convert';
-import 'package:ourESchool/core/Models/Announcement.dart';
+import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/core/services/StorageServices.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:path/path.dart' as p;
 
-class AnnouncementServices extends Services {
+class Wallservices extends Services {
   StorageServices _storageServices = locator<StorageServices>();
   DocumentSnapshot lastPostSnapshot = null;
   List<DocumentSnapshot> postDocumentSnapshots = new List<DocumentSnapshot>();
 
-  AnnouncementServices() {
+  Wallservices() {
     getFirebaseUser();
     getSchoolCode();
   }
@@ -24,23 +24,22 @@ class AnnouncementServices extends Services {
   }
 
   getAnnouncements(
-    String stdDiv_Global,
+    String stdDivGlobal,
   ) async {
     // List<DocumentSnapshot> _data = new List<DocumentSnapshot>();
 
     if (schoolCode == null) await getSchoolCode();
 
-    var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(stdDiv_Global);
+    var _wallRef = (await wallRef());
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();
     if (lastPostSnapshot == null)
-      data = await _postRef
+      data = await _wallRef
           .orderBy('timeStamp', descending: true)
           .limit(10)
           .getDocuments();
     else
-      data = await _postRef
+      data = await _wallRef
           .orderBy('timeStamp', descending: true)
           .startAfter([lastPostSnapshot['timeStamp']])
           .limit(5)
@@ -54,39 +53,43 @@ class AnnouncementServices extends Services {
     }
   }
 
-  postAnnouncement(Announcement announcement) async {
+  postAnnouncement(Wall wall) async {
     // if (firebaseUser == null) await getFirebaseUser();
     if (schoolCode == null) await getSchoolCode();
 
     //Timestmap will be directly set by Firebase Functions(througn REST Api)
-    // announcement.timestamp = Timestamp.now();
+    // i am trying not to use function
+    wall.timestamp = Timestamp.now();
 
     String fileName = "";
     String filePath = "";
 
-    if (announcement.photoUrl != '') {
+    if (wall.photoUrl != '') {
       fileName = createCryptoRandomString(8) +
           createCryptoRandomString(8) +
-          p.extension(announcement.photoUrl);
+          p.extension(wall.photoUrl);
 
-      announcement.photoUrl = await _storageServices.uploadAnnouncemantPhoto(
-          announcement.photoUrl, fileName);
+      wall.photoUrl =
+          await _storageServices.uploadWallPhoto(wall.photoUrl, fileName);
 
-      filePath = '${Services.country}/$schoolCode/Posts/$fileName';
+      filePath = '${Services.country}/$schoolCode/Walls/$fileName';
     }
-    announcement.photoPath = filePath;
-    Map announcementMap = announcement.toJson();
+    wall.photoPath = filePath;
+    Map wallMap = wall.toJson();
 
     var body = json.encode({
-      "schoolCode": schoolCode.toUpperCase(),
-      "country": Services.country,
-      "announcement": announcementMap
+      //"schoolCode": schoolCode.toUpperCase(),
+      //"country": Services.country,
+      "wall": wallMap
     });
 
     print(body.toString());
 
-    final response =
-        await http.post(postAnnouncemnetUrl, body: body, headers: headers);
+    final response = await http.post(
+      postAnnouncemnetUrl,
+      body: body,
+      headers: headers,
+    );
 
     if (response.statusCode == 200) {
       print("Post posted Succesfully");
