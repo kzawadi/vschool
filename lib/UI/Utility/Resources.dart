@@ -128,6 +128,8 @@ Check School posts to stay updated with school news.''';
 
 //Announcements
   static const announcement = 'Announcement';
+//Wall
+  static const wall = 'Wall';
 
   static const show_announcement_of = 'Show Announcement of:';
   static const filter_announcement =

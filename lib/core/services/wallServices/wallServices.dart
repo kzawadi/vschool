@@ -8,12 +8,12 @@ import 'package:ourESchool/core/services/StorageServices.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:path/path.dart' as p;
 
-class Wallservices extends Services {
+class WallServices extends Services {
   StorageServices _storageServices = locator<StorageServices>();
   DocumentSnapshot lastPostSnapshot = null;
   List<DocumentSnapshot> postDocumentSnapshots = new List<DocumentSnapshot>();
 
-  Wallservices() {
+  WallServices() {
     getFirebaseUser();
     getSchoolCode();
   }

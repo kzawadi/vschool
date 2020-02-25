@@ -1,15 +1,23 @@
 import 'package:get_it/get_it.dart';
+import 'package:ourESchool/core/services/wallServices/wallServices.dart';
+
+import 'core/viewmodel/Wall/CreateWallModel.dart';
+import 'core/viewmodel/Wall/WallPageModel.dart';
 import 'imports.dart';
 
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
   // locator.registerLazySingleton(() => MainPageModel());
-  // locator.registerSingleton(Services());
+  // locator.registerSingleton(Services());z
 
   locator.registerLazySingleton(() => AnnouncementServices());
   locator.registerFactory(() => CreateAnnouncementModel());
   locator.registerFactory(() => AnnouncementPageModel());
+
+  locator.registerLazySingleton(() => WallServices());
+  locator.registerFactory(() => CreateWallModel());
+  locator.registerFactory(() => WallPageModel());
 
   locator.registerLazySingleton(() => SharedPreferencesHelper());
   locator.registerFactory(() => QuizStateModel());
