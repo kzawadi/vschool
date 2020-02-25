@@ -56,7 +56,7 @@ class _WallCardState extends State<WallCard> {
                 children: <Widget>[
                   Hero(
                     transitionOnUserGestures: false,
-                    tag: widget.wall.id + 'row',
+                    tag: widget.wall.id + 'rows',
                     child: Row(
                       children: <Widget>[
                         //User profile image section

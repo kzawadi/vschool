@@ -1,4 +1,5 @@
 import 'package:ourESchool/UI/Widgets/WallCard.dart';
+import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/viewmodel/Wall/WallPageModel.dart';
 import 'package:ourESchool/imports.dart';
@@ -82,7 +83,7 @@ class _WallPageState extends State<WallPage>
           return Scaffold(
             key: scaffoldKey,
             appBar: TopBar(
-                buttonHeroTag: string.announcement,
+                //buttonHeroTag: string.announcement,
                 title: stdDiv_Global + " Posts",
                 child: kBackBtn,
                 onPressed: () {
@@ -98,7 +99,7 @@ class _WallPageState extends State<WallPage>
                     child: FloatingActionButton(
                       elevation: 12,
                       onPressed: () {
-                        kopenPageSlide(context, CreateAnnouncement(),
+                        kopenPageSlide(context, CreateWall(),
                             duration: Duration(milliseconds: 200));
                       },
                       child: Icon(Icons.add),

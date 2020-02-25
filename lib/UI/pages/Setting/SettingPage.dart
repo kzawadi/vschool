@@ -2,6 +2,7 @@ import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/DynamicThemeChanger.dart';
 import 'package:ourESchool/UI/pages/About/About.dart';
+import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/UI/pages/Login/ForgotPassword.dart';
 import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
 import 'package:ourESchool/UI/pages/Profiles/ProfilePage.dart';
@@ -58,9 +59,10 @@ class _SettingPageState extends State<SettingPage> {
                   icon: FontAwesomeIcons.signOutAlt,
                   onTap: () async {
                     await model.logoutUser();
-                    Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context) => WelcomeScreen()
-                    ),);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                    );
                     // Navigator.pushNamedAndRemoveUntil(
                     //     context, WelcomeScreen.id, (r) => false);
                   },
@@ -85,7 +87,7 @@ class _SettingPageState extends State<SettingPage> {
                   icon: Icons.contact_mail,
                   onTap: () async {
                     print((await preferencesHelper.getParentsIds()).toString());
-                    kopenPage(context, AboutUs());
+                    kopenPage(context, CreateWall());
                   },
                   subtitle: string.about_subtitle,
                   title: string.about),
