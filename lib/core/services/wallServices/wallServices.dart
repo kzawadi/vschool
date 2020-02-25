@@ -32,18 +32,19 @@ class WallServices extends Services {
 
     var _wallRef = (await wallRef());
     QuerySnapshot data;
-    //  = await _schoolRef.getDocuments();
-    if (lastPostSnapshot == null)
-      data = await _wallRef
-          .orderBy('timeStamp', descending: true)
-          .limit(10)
-          .getDocuments();
-    else
-      data = await _wallRef
-          .orderBy('timeStamp', descending: true)
-          .startAfter([lastPostSnapshot['timeStamp']])
-          .limit(5)
-          .getDocuments();
+    data = await _wallRef.getDocuments();
+    // if (lastPostSnapshot == null)
+    //   data = await _wallRef
+    //       // .orderBy('timeStamp', descending: true)
+    //       // .limit(10)
+    print('wall retrived is $data'.toString());
+    //       .getDocuments();
+    // else
+    //   data = await _wallRef
+    //       .orderBy('timeStamp', descending: true)
+    //       .startAfter([lastPostSnapshot['timeStamp']])
+    //       .limit(5)
+    //       .getDocuments();
 
     if (data != null && data.documents.length > 0) {
       lastPostSnapshot = data.documents[data.documents.length - 1];
@@ -74,28 +75,32 @@ class WallServices extends Services {
 
       filePath = '${Services.country}/$schoolCode/Walls/$fileName';
     }
+    var _wallPostRef = (await wallRef());
+
     wall.photoPath = filePath;
     Map wallMap = wall.toJson();
 
-    var body = json.encode({
-      //"schoolCode": schoolCode.toUpperCase(),
-      //"country": Services.country,
-      "wall": wallMap
-    });
+    await _wallPostRef.add(wallMap);
 
-    print(body.toString());
+    // var body = json.encode({
+    //   //"schoolCode": schoolCode.toUpperCase(),
+    //   //"country": Services.country,
+    //   "wall": wallMap
+    // });
 
-    final response = await http.post(
-      postAnnouncemnetUrl,
-      body: body,
-      headers: headers,
-    );
+    print(wallMap.toString());
 
-    if (response.statusCode == 200) {
-      print("Post posted Succesfully");
-      print(json.decode(response.body).toString());
-    } else {
-      print("Post posting failed");
-    }
+    // final response = await http.post(
+    //   postAnnouncemnetUrl,
+    //   body: body,
+    //   headers: headers,
+    // );
+
+    // if (response.statusCode == 200) {
+    //   print("Post posted Succesfully");
+    //   print(json.decode(response.body).toString());
+    // } else {
+    //   print("Post posting failed");
+    // }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/core/helpers/FirebaseAnalytics.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -73,6 +74,16 @@ class _MainDashboardState extends State<MainDashboard> {
                       icon: CustomIcons.megaphone,
                       onPressed: () {
                         kopenPage(context, AnnouncementPage());
+                      },
+                    ),
+                    ColumnReusableCardButton(
+                      //directionIconHeroTag: string.announcement,
+                      height: 70,
+                      tileColor: Colors.orangeAccent,
+                      label: string.wall,
+                      icon: CustomIcons.megaphone,
+                      onPressed: () {
+                        kopenPage(context, WallPage());
                       },
                     ),
                     Container(

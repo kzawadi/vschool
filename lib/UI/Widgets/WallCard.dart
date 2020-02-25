@@ -90,18 +90,18 @@ class _WallCardState extends State<WallCard> {
                               ),
                             ),
                             //TimeStamp section
-                            Text(
-                              // 'data',
-                              DateFormat("MMM d, E").add_jm().format(
-                                  DateTime.parse(widget.wall.timestamp
-                                      .toDate()
-                                      .toLocal()
-                                      .toString())),
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                            // Text(
+                            //   // 'data',
+                            //   DateFormat("MMM d, E").add_jm().format(
+                            //       DateTime.parse(widget.wall.timestamp
+                            //           .toDate()
+                            //           .toLocal()
+                            //           .toString())),
+                            //   style: TextStyle(
+                            //     fontSize: 12,
+                            //     fontWeight: FontWeight.w600,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
