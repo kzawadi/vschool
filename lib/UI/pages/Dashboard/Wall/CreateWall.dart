@@ -15,6 +15,12 @@ class _CreateWallState extends State<CreateWall> {
   TextEditingController _divisionController;
   TextEditingController _captionController;
   TextEditingController _missionController;
+  TextEditingController _beliefsController;
+  TextEditingController _historyController;
+  TextEditingController _regNoController;
+  TextEditingController _locationController;
+  TextEditingController _contactsController;
+  TextEditingController _dirSmsController;
 
   AnnouncementType announcementType = AnnouncementType.EVENT;
 
@@ -33,6 +39,12 @@ class _CreateWallState extends State<CreateWall> {
     _captionController = TextEditingController();
     _divisionController = TextEditingController();
     _missionController = TextEditingController();
+    _beliefsController = TextEditingController();
+    _historyController = TextEditingController();
+    _regNoController = TextEditingController();
+    _locationController = TextEditingController();
+    _contactsController = TextEditingController();
+    _dirSmsController = TextEditingController();
   }
 
   floatingButtonPressed(CreateWallModel model, BuildContext context) async {
@@ -41,6 +53,12 @@ class _CreateWallState extends State<CreateWall> {
       by: user.id,
       caption: _captionController.text,
       mission: _missionController.text,
+      beliefs: _beliefsController.text,
+      history: _historyController.text,
+      contacts: _contactsController.text,
+      dirSms: _dirSmsController.text,
+      location: _locationController.text,
+      regNo: _regNoController.text,
       forClass:
           postType == 'SPECIFIC' ? _standardController.text.trim() : 'Global',
       forDiv: postType == 'SPECIFIC'
@@ -262,6 +280,168 @@ class _CreateWallState extends State<CreateWall> {
                         onChanged: (mission) {
                           setState(() {
                             isReadyToPost = mission == '' ? false : true;
+                          });
+                        },
+                        maxLines: 300,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: string.type_mission_here,
+                          labelText: string.mission,
+                        ),
+                      ),
+                    ),
+
+                    /// beliefs text entry
+                    Container(
+                      height: 150,
+                      // color: Colors.blueAccent.withOpacity(0.5),
+                      child: TextField(
+                        controller: _beliefsController,
+                        enabled: !isPosting,
+                        focusNode: _focusNode,
+                        maxLength: null,
+                        onChanged: (belief) {
+                          setState(() {
+                            isReadyToPost = belief == '' ? false : true;
+                          });
+                        },
+                        maxLines: 300,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: string.type_mission_here,
+                          labelText: string.mission,
+                        ),
+                      ),
+                    ),
+
+                    /// history text entry
+                    Container(
+                      height: 150,
+                      // color: Colors.blueAccent.withOpacity(0.5),
+                      child: TextField(
+                        controller: _historyController,
+                        enabled: !isPosting,
+                        focusNode: _focusNode,
+                        maxLength: null,
+                        onChanged: (history) {
+                          setState(() {
+                            isReadyToPost = history == '' ? false : true;
+                          });
+                        },
+                        maxLines: 300,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: string.type_mission_here,
+                          labelText: string.mission,
+                        ),
+                      ),
+                    ),
+
+                    /// regNo text entry
+                    Container(
+                      height: 150,
+                      // color: Colors.blueAccent.withOpacity(0.5),
+                      child: TextField(
+                        controller: _regNoController,
+                        enabled: !isPosting,
+                        focusNode: _focusNode,
+                        maxLength: null,
+                        onChanged: (regNo) {
+                          setState(() {
+                            isReadyToPost = regNo == '' ? false : true;
+                          });
+                        },
+                        maxLines: 300,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: string.type_mission_here,
+                          labelText: string.mission,
+                        ),
+                      ),
+                    ),
+
+                    /// location text entry
+                    Container(
+                      height: 150,
+                      // color: Colors.blueAccent.withOpacity(0.5),
+                      child: TextField(
+                        controller: _locationController,
+                        enabled: !isPosting,
+                        focusNode: _focusNode,
+                        maxLength: null,
+                        onChanged: (location) {
+                          setState(() {
+                            isReadyToPost = location == '' ? false : true;
+                          });
+                        },
+                        maxLines: 300,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: string.type_mission_here,
+                          labelText: string.mission,
+                        ),
+                      ),
+                    ),
+
+                    ///contacts text entry
+                    Container(
+                      height: 150,
+                      // color: Colors.blueAccent.withOpacity(0.5),
+                      child: TextField(
+                        controller: _contactsController,
+                        enabled: !isPosting,
+                        focusNode: _focusNode,
+                        maxLength: null,
+                        onChanged: (contact) {
+                          setState(() {
+                            isReadyToPost = contact == '' ? false : true;
+                          });
+                        },
+                        maxLines: 300,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: string.type_mission_here,
+                          labelText: string.mission,
+                        ),
+                      ),
+                    ),
+
+                    /// dirSms text entry
+                    Container(
+                      height: 150,
+                      // color: Colors.blueAccent.withOpacity(0.5),
+                      child: TextField(
+                        controller: _dirSmsController,
+                        enabled: !isPosting,
+                        focusNode: _focusNode,
+                        maxLength: null,
+                        onChanged: (dirsms) {
+                          setState(() {
+                            isReadyToPost = dirsms == '' ? false : true;
                           });
                         },
                         maxLines: 300,

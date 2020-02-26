@@ -112,6 +112,126 @@ class WallViewer extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 5.0, top: 5),
+                          child: Hero(
+                            transitionOnUserGestures: false,
+                            tag: wall.id + 'beliefs',
+                            child: Text(
+                              wall.beliefs,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 5.0, top: 5),
+                          child: Hero(
+                            transitionOnUserGestures: false,
+                            tag: wall.id + 'history',
+                            child: Text(
+                              wall.history,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 5.0, top: 5),
+                          child: Hero(
+                            transitionOnUserGestures: false,
+                            tag: wall.id + 'location',
+                            child: Text(
+                              wall.location,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 5.0, top: 5),
+                          child: Hero(
+                            transitionOnUserGestures: false,
+                            tag: wall.id + 'regNo',
+                            child: Text(
+                              wall.regNo,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 5.0, top: 5),
+                          child: Hero(
+                            transitionOnUserGestures: false,
+                            tag: wall.id + 'dirSms',
+                            child: Text(
+                              wall.dirSms,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 5.0, top: 5),
+                          child: Hero(
+                            transitionOnUserGestures: false,
+                            tag: wall.id + 'contacts',
+                            child: Text(
+                              wall.contacts,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Positioned(
