@@ -9,8 +9,7 @@ class WallPageModel extends BaseModel {
 
   WallPageModel();
 
-  List<DocumentSnapshot> get postSnapshotList =>
-      _wallServices.postDocumentSnapshots;
+  DocumentSnapshot get wall => _wallServices.wallsnapshot;
 
   getAnnouncements(String stdDiv_Global) async {
     setState(ViewState.Busy);
@@ -18,16 +17,8 @@ class WallPageModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-  onRefresh(String stdDiv_Global) async {
-    _wallServices.postDocumentSnapshots.clear();
-    _wallServices.lastPostSnapshot = null;
-    await getAnnouncements(stdDiv_Global);
-  }
-
   @override
   void dispose() {
-    _wallServices.lastPostSnapshot = null;
-    _wallServices.postDocumentSnapshots.clear();
     super.dispose();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/imports.dart';
 
 class StudentDashboard extends StatefulWidget with AnalyticsScreen {
@@ -60,6 +61,16 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       icon: CustomIcons.megaphone,
                       onPressed: () {
                         kopenPage(context, AnnouncementPage());
+                      },
+                    ),
+                    ColumnReusableCardButton(
+                      directionIconHeroTag: string.announcement,
+                      height: 70,
+                      tileColor: Colors.orangeAccent,
+                      label: string.wall,
+                      icon: CustomIcons.megaphone,
+                      onPressed: () {
+                        kopenPage(context, WallPage());
                       },
                     ),
                     Container(

@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/swipedetector.dart';
 import 'package:flutter/material.dart';
@@ -65,18 +64,6 @@ class WallViewer extends StatelessWidget {
                                     fontSize: 15,
                                   ),
                                 ),
-                                //TimeStamp section
-                                // Text(
-                                //   DateFormat("MMM d, E").add_jm().format(
-                                //       DateTime.parse(wall.timestamp
-                                //           .toDate()
-                                //           .toLocal()
-                                //           .toString())),
-                                //   style: TextStyle(
-                                //     fontSize: 12,
-                                //     fontWeight: FontWeight.w600,
-                                //   ),
-                                // ),
                               ],
                             ),
                           ],

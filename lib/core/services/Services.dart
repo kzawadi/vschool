@@ -61,13 +61,13 @@ class Services {
   DocumentReference get schoolRef => _schoolRef;
 
   Future<CollectionReference> schoolRefwithCode() async =>
-      _schoolRef.collection((await getSchoolCode())
-          .toUpperCase()
-          .trim());
-  Future<CollectionReference> wallRef() async =>
-      _wallRef.collection('wall'
-          .toUpperCase()
-          .trim());
+      _schoolRef.collection((await getSchoolCode()).toUpperCase().trim());
+
+  DocumentReference get wallRef => _wallRef;
+  // Future<DocumentReference> wallRef() async =>
+  //     _wallRef.collection('wall'
+  //         .toUpperCase()
+  //         .trim(),);
 
   StorageReference get storageReference => _storageReference;
 
