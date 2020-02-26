@@ -3,6 +3,7 @@ import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/pages/shared/AnnouncementViewer.dart';
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/pages/shared/wallViewer.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
@@ -54,124 +55,79 @@ class _WallCardState extends State<WallCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Hero(
-                    transitionOnUserGestures: false,
-                    tag: widget.wall.id + 'rows',
-                    child: Row(
-                      children: <Widget>[
-                        //User profile image section
-                        loading
-                            ? CircleAvatar(
-                                radius: 25.0,
-                                backgroundImage:
-                                    AssetImage(assetsString.teacher_welcome),
-                                backgroundColor: Colors.transparent,
-                              )
-                            : CircleAvatar(
-                                radius: 25.0,
-                                backgroundImage: user.photoUrl == 'default'
-                                    ? AssetImage(assetsString.teacher_welcome)
-                                    : NetworkImage(user.photoUrl),
-                                backgroundColor: Colors.transparent,
-                              ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            //Announcement by section
-                            Text(
-                              loading ? 'Loading...' : user.displayName,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 15,
-                              ),
+                  Row(
+                    children: <Widget>[
+                      //User profile image section
+                      loading
+                          ? CircleAvatar(
+                              radius: 25.0,
+                              backgroundImage:
+                                  AssetImage(assetsString.teacher_welcome),
+                              backgroundColor: Colors.transparent,
+                            )
+                          : CircleAvatar(
+                              radius: 25.0,
+                              backgroundImage: user.photoUrl == 'default'
+                                  ? AssetImage(assetsString.teacher_welcome)
+                                  : NetworkImage(user.photoUrl),
+                              backgroundColor: Colors.transparent,
                             ),
-                            //TimeStamp section
-                            // Text(
-                            //   // 'data',
-                            //   DateFormat("MMM d, E").add_jm().format(
-                            //       DateTime.parse(widget.wall.timestamp
-                            //           .toDate()
-                            //           .toLocal()
-                            //           .toString())),
-                            //   style: TextStyle(
-                            //     fontSize: 12,
-                            //     fontWeight: FontWeight.w600,
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          //Announcement by section
+                          Text(
+                            loading ? 'Loading...' : user.displayName,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  //Announcement Type section
-                  // Visibility(
-                  //   visible: widget.wall.type == null ? false : true,
-                  //   child: InkWell(
-                  //     onTap: () {
-                  //       print(widget.wall.timestamp.toString());
-                  //       buildShowDialogBox(context);
-                  //     },
-                  //     child: Card(
-                  //       shape: kCardCircularShape,
-                  //       // color: Colors.redAccent,
-                  //       elevation: 4,
-                  //       child: CircleAvatar(
-                  //         backgroundColor: ThemeData().canvasColor,
-                  //         child: Text(
-                  //           widget.wall.type
-                  //               .toString()
-                  //               .substring(
-                  //                   widget.wall.type.toString().indexOf('.') +
-                  //                       1)
-                  //               .substring(0, 1),
-                  //           style: TextStyle(
-                  //               fontSize: 25, fontWeight: FontWeight.bold),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
             ),
             //Announcemnet image Section
-            // Card(
-            //   elevation: 4,
-            //   child: Container(
-            //     constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
-            //     width: MediaQuery.of(context).size.width,
-            //     child: Hero(
-            //       transitionOnUserGestures: true,
-            //       tag: widget.wall.id + 'photo',
-            //       child: Material(
-            //         child: InkWell(
-            //           onTap: () {
-            //             kopenPageBottom(
-            //               context,
-            //               AnnouncementViewer(
-            //                 wall: widget.wall,
-            //               ),
-            //             );
-            //           },
-            //           child: widget.wall.photoUrl == ''
-            //               ? Container(
-            //                   height: 0,
-            //                 )
-            //               : Image(
-            //                   fit: BoxFit.contain,
-            //                   image: NetworkImage(
-            //                     widget.wall.photoUrl,
-            //                   ),
-            //                 ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            Card(
+              elevation: 4,
+              child: Container(
+                constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
+                width: MediaQuery.of(context).size.width,
+                child: Hero(
+                  transitionOnUserGestures: true,
+                  tag: widget.wall.id + 'photo',
+                  child: Material(
+                    child: InkWell(
+                      onTap: () {
+                        kopenPageBottom(
+                          context,
+                          WallViewer(
+                            wall: widget.wall,
+                          ),
+                        );
+                      },
+                      child: widget.wall.photoUrl == ''
+                          ? Container(
+                              height: 0,
+                            )
+                          : Image(
+                              fit: BoxFit.contain,
+                              image: NetworkImage(
+                                widget.wall.photoUrl,
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             //Caption Section
             Padding(
               padding: const EdgeInsets.all(8.0),
