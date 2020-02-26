@@ -77,7 +77,7 @@ class _MainDashboardState extends State<MainDashboard> {
                       },
                     ),
                     ColumnReusableCardButton(
-                      directionIconHeroTag: string.announcement,
+                      // directionIconHeroTag: string.announcement,
                       height: 70,
                       tileColor: Colors.orangeAccent,
                       label: string.wall,

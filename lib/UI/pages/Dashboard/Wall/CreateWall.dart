@@ -14,6 +14,7 @@ class _CreateWallState extends State<CreateWall> {
   TextEditingController _standardController;
   TextEditingController _divisionController;
   TextEditingController _captionController;
+  TextEditingController _missionController;
 
   AnnouncementType announcementType = AnnouncementType.EVENT;
 
@@ -31,6 +32,7 @@ class _CreateWallState extends State<CreateWall> {
     _standardController = TextEditingController();
     _captionController = TextEditingController();
     _divisionController = TextEditingController();
+    _missionController = TextEditingController();
   }
 
   floatingButtonPressed(CreateWallModel model, BuildContext context) async {
@@ -38,6 +40,7 @@ class _CreateWallState extends State<CreateWall> {
     var wall = Wall(
       by: user.id,
       caption: _captionController.text,
+      mission: _missionController.text,
       forClass:
           postType == 'SPECIFIC' ? _standardController.text.trim() : 'Global',
       forDiv: postType == 'SPECIFIC'
@@ -77,7 +80,7 @@ class _CreateWallState extends State<CreateWall> {
             onPressed: () {
               if (!isPosting) kbackBtn(context);
             },
-            title: string.create_post,
+            title: string.create_wall,
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -113,8 +116,11 @@ class _CreateWallState extends State<CreateWall> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
+                            // this is a title of the wall
+                            //it will say things as 'THIS IS LIKE WEBSITE
+                            //CONTAINING IMPORTNANT INFOMATION ABOUT YOUR SCHOOL'
                             child: Text(
-                              string.this_post_is_for,
+                              string.about_wall,
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),
@@ -122,200 +128,9 @@ class _CreateWallState extends State<CreateWall> {
                           SizedBox(
                             height: 5,
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(vertical: 10),
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //     children: <Widget>[
-                          //       Expanded(
-                          //         child: RawMaterialButton(
-                          //           elevation: 0,
-                          //           constraints: BoxConstraints(minHeight: 50),
-                          //           child: Text(
-                          //             'GLOBAL POST',
-                          //             style: TextStyle(
-                          //               color: postType == 'GLOBAL'
-                          //                   ? Colors.white
-                          //                   : postTypeFontColor,
-                          //               fontWeight: FontWeight.w600,
-                          //             ),
-                          //           ),
-                          //           onPressed: () {
-                          //             setState(() {
-                          //               postType = 'GLOBAL';
-                          //             });
-                          //           },
-                          //           fillColor: postType == 'GLOBAL'
-                          //               ? Theme.of(context).primaryColor
-                          //               : Colors.transparent,
-                          //         ),
-                          //       ),
-                          //       Expanded(
-                          //         child: RawMaterialButton(
-                          //           elevation: 0,
-                          //           constraints: BoxConstraints(minHeight: 50),
-                          //           child: Text(
-                          //             'SPECIFIC',
-                          //             style: TextStyle(
-                          //               color: postType == 'SPECIFIC'
-                          //                   ? Colors.white
-                          //                   : postTypeFontColor,
-                          //               fontWeight: FontWeight.w600,
-                          //             ),
-                          //           ),
-                          //           onPressed: () {
-                          //             setState(() {
-                          //               postType = 'SPECIFIC';
-                          //             });
-                          //           },
-                          //           fillColor: postType == 'SPECIFIC'
-                          //               ? Theme.of(context).primaryColor
-                          //               : Colors.transparent,
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          // postType == 'SPECIFIC'
-                          //     ? SizedBox(
-                          //         height: 5,
-                          //       )
-                          //     : Container(),
-                          // postType == 'SPECIFIC'
-                          //     ? Row(
-                          //         mainAxisAlignment:
-                          //             MainAxisAlignment.spaceEvenly,
-                          //         children: <Widget>[
-                          //           Expanded(
-                          //             // width: MediaQuery.of(context).size.width / 2.2,
-                          //             child: TextField(
-                          //               enabled: !isPosting,
-                          //               controller: _standardController,
-                          //               keyboardType: TextInputType.number,
-                          //               style: TextStyle(
-                          //                 fontSize: 20,
-                          //                 fontWeight: FontWeight.w500,
-                          //               ),
-                          //               decoration:
-                          //                   kTextFieldDecoration.copyWith(
-                          //                 hintText: string.standard_hint,
-                          //                 labelText: string.standard,
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           SizedBox(
-                          //             width: 10,
-                          //           ),
-                          //           Expanded(
-                          //             // width: MediaQuery.of(context).size.width / 2.2,
-                          //             child: TextField(
-                          //               enabled: !isPosting,
-                          //               controller: _divisionController,
-                          //               keyboardType: TextInputType.text,
-                          //               style: TextStyle(
-                          //                 fontSize: 20,
-                          //                 fontWeight: FontWeight.w500,
-                          //               ),
-                          //               decoration:
-                          //                   kTextFieldDecoration.copyWith(
-                          //                 hintText: string.division_hint,
-                          //                 labelText: string.division,
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       )
-                          //     : Container(),
                         ],
                       ),
                     ),
-                    // postType == 'SPECIFIC'
-                    //     ? SizedBox(
-                    //         height: 5,
-                    //       )
-                    // //     : Container(),
-                    // Container(
-                    //   // height: 60,
-                    //   // color: Colors.red,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: <Widget>[
-                    //       Expanded(
-                    //         child: FlatButton(
-                    //           child: Text(
-                    //             'EVENT',
-                    //             style: TextStyle(
-                    //               color:
-                    //                   announcementType == AnnouncementType.EVENT
-                    //                       ? Colors.white
-                    //                       : postTypeFontColor,
-                    //               fontWeight: FontWeight.w600,
-                    //             ),
-                    //           ),
-                    //           onPressed: () {
-                    //             setState(() {
-                    //               if (model.state == ViewState.Idle)
-                    //                 announcementType = AnnouncementType.EVENT;
-                    //             });
-                    //           },
-                    //           color: announcementType == AnnouncementType.EVENT
-                    //               ? Theme.of(context).primaryColor
-                    //               : Colors.transparent,
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //         child: FlatButton(
-                    //           child: Text(
-                    //             'CIRCULAR',
-                    //             style: TextStyle(
-                    //               color: announcementType ==
-                    //                       AnnouncementType.CIRCULAR
-                    //                   ? Colors.white
-                    //                   : postTypeFontColor,
-                    //               fontWeight: FontWeight.w600,
-                    //             ),
-                    //           ),
-                    //           onPressed: () {
-                    //             setState(() {
-                    //               if (model.state == ViewState.Idle)
-                    //                 announcementType =
-                    //                     AnnouncementType.CIRCULAR;
-                    //             });
-                    //           },
-                    //           color:
-                    //               announcementType == AnnouncementType.CIRCULAR
-                    //                   ? Theme.of(context).primaryColor
-                    //                   : Colors.transparent,
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //         child: FlatButton(
-                    //           child: Text(
-                    //             'ACTIVITY',
-                    //             style: TextStyle(
-                    //               color: announcementType ==
-                    //                       AnnouncementType.ACTIVITY
-                    //                   ? Colors.white
-                    //                   : postTypeFontColor,
-                    //               fontWeight: FontWeight.w600,
-                    //             ),
-                    //           ),
-                    //           onPressed: () {
-                    //             setState(() {
-                    //               if (model.state == ViewState.Idle)
-                    //                 announcementType =
-                    //                     AnnouncementType.ACTIVITY;
-                    //             });
-                    //           },
-                    //           color:
-                    //               announcementType == AnnouncementType.ACTIVITY
-                    //                   ? Theme.of(context).primaryColor
-                    //                   : Colors.transparent,
-                    //         ),
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
                     Container(
                       constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
                       child: path == ''
@@ -407,6 +222,8 @@ class _CreateWallState extends State<CreateWall> {
                     SizedBox(
                       height: 10,
                     ),
+
+                    ///caption text entry
                     Container(
                       height: 150,
                       // color: Colors.blueAccent.withOpacity(0.5),
@@ -429,6 +246,33 @@ class _CreateWallState extends State<CreateWall> {
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: string.type_your_stuff_here,
                           labelText: string.caption,
+                        ),
+                      ),
+                    ),
+
+                    ///mision text entry
+                    Container(
+                      height: 150,
+                      // color: Colors.blueAccent.withOpacity(0.5),
+                      child: TextField(
+                        controller: _missionController,
+                        enabled: !isPosting,
+                        focusNode: _focusNode,
+                        maxLength: null,
+                        onChanged: (mission) {
+                          setState(() {
+                            isReadyToPost = mission == '' ? false : true;
+                          });
+                        },
+                        maxLines: 300,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: kTextFieldDecoration.copyWith(
+                          hintText: string.type_mission_here,
+                          labelText: string.mission,
                         ),
                       ),
                     ),

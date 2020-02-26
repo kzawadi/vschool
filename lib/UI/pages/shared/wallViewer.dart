@@ -90,6 +90,28 @@ class WallViewer extends StatelessWidget {
                         ),
                       ),
                     ),
+
+                    /// mission view
+                    Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, bottom: 5.0, top: 5),
+                          child: Hero(
+                            transitionOnUserGestures: false,
+                            tag: wall.id + 'mission',
+                            child: Text(
+                              wall.mission,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Positioned(

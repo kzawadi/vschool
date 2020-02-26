@@ -9,16 +9,19 @@ class Wall {
   String photoUrl;
   String photoPath;
   String id;
+  String mission;
 
-  Wall(
-      {this.caption = '',
-      this.by,
-      this.forDiv,
-      this.timestamp,
-      this.forClass,
-      this.photoUrl = '',
-      this.photoPath = '',
-      this.id});
+  Wall({
+    this.caption = '',
+    this.by,
+    this.forDiv,
+    this.timestamp,
+    this.forClass,
+    this.photoUrl = '',
+    this.photoPath = '',
+    this.id,
+    this.mission,
+  });
 
   Wall.fromJson(Map<String, dynamic> json) {
     caption = json['caption'] ?? '';
@@ -29,6 +32,7 @@ class Wall {
     photoUrl = json['photoUrl'] ?? '';
     photoPath = json['photoPath'] ?? '';
     id = json['id'];
+    mission = json['mission'];
   }
 
   Wall.fromSnapshot(DocumentSnapshot snapshot) {
@@ -40,6 +44,7 @@ class Wall {
     photoUrl = snapshot['photoUrl'].toString() ?? '';
     photoPath = snapshot['photoPath'].toString() ?? '';
     id = snapshot.documentID;
+    mission = snapshot['mission'].toString() ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +57,7 @@ class Wall {
     data['photoUrl'] = this.photoUrl;
     data['photoPath'] = this.photoPath;
     // data['id'] = this.id;
+    data['mission'] = this.mission;
     return data;
   }
 }
