@@ -135,5 +135,5 @@ class _WallPageState extends State<WallPage>
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => throw UnimplementedError();
+  bool get wantKeepAlive => true;
 }
