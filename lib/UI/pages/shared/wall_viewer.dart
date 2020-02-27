@@ -51,6 +51,7 @@ class WallViewer extends StatelessWidget {
             ),
             Expanded(
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   Hero(
                     tag: 'tile2',
@@ -62,88 +63,16 @@ class WallViewer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              width: 70.0,
-                              height: 70.0,
+                              width: 180,
+                              height: 180,
                               decoration: BoxDecoration(
-                                shape: BoxShape.circle,
+                                shape: BoxShape.rectangle,
                                 image: DecorationImage(
                                   image: NetworkImage(
                                     wall.photoUrl,
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  EvaIcons.code,
-                                  color: invertColorsMild(context),
-                                  size: 18.0,
-                                ),
-                                SizedBox(
-                                  width: 6.0,
-                                ),
-                                Text(
-                                  'with',
-                                  style: isThemeCurrentlyDark(context)
-                                      ? BodyStylesDefault.white
-                                      : BodyStylesDefault.black,
-                                ),
-                                SizedBox(
-                                  width: 6.0,
-                                ),
-                                Icon(
-                                  EvaIcons.heart,
-                                  color: MyColors.heart,
-                                  size: 18.0,
-                                ),
-                                SizedBox(
-                                  width: 6.0,
-                                ),
-                                Text(
-                                  'by',
-                                  style: isThemeCurrentlyDark(context)
-                                      ? BodyStylesDefault.white
-                                      : BodyStylesDefault.black,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Text(
-                              'Urmil Shroff',
-                              style: isThemeCurrentlyDark(context)
-                                  ? LabelStyles.white
-                                  : LabelStyles.black,
-                              softWrap: true,
-                              overflow: TextOverflow.fade,
-                              maxLines: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                IconButton(
-                                    icon: Icon(
-                                      EvaIcons.person,
-                                      color: invertColorsMild(context),
-                                      size: 24.0,
-                                    ),
-                                    onPressed: () {}),
-                                IconButton(
-                                    icon: Icon(
-                                      EvaIcons.twitter,
-                                      color: MyColors.twitter,
-                                      size: 26.0,
-                                    ),
-                                    onPressed: () {}),
-                              ],
                             ),
                           ],
                         ),
@@ -222,18 +151,6 @@ class WallViewer extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-          heroTag: 'fab',
-          child: Icon(
-            EvaIcons.github,
-            size: 36.0,
-          ),
-          tooltip: 'View GitHub repo',
-          foregroundColor: invertInvertColorsStrong(context),
-          backgroundColor: invertColorsStrong(context),
-          elevation: 5.0,
-          onPressed: () {}),
     );
   }
 }
