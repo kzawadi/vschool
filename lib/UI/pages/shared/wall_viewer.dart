@@ -66,9 +66,11 @@ class WallViewer extends StatelessWidget {
                               height: 70.0,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                // image: DecorationImage(
-                                //   image: AssetImage('assets/credits/urmil.png'),
-                                // ),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    wall.photoUrl,
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(
