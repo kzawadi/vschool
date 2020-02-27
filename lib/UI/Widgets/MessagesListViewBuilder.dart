@@ -15,6 +15,7 @@ class MessagesListViewBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       reverse: true,
       controller: scrollController,
       itemCount: messagesList.length,
@@ -113,26 +114,25 @@ class OtherMessageWidget extends StatelessWidget {
         showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
         ConstrainedBox(
           constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.75),
+              maxWidth: MediaQuery.of(context).size.width * 0.75),
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
             decoration: BoxDecoration(
-            color:  Colors.blue,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(8),
-              bottomRight: Radius.circular(8),
-              bottomLeft: Radius.circular(8),
-              topLeft: Radius.circular(8) ,
+              color: Colors.blue,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+                topLeft: Radius.circular(8),
+              ),
             ),
-          ),
-            
             child: Text(
               message.message,
               textAlign: TextAlign.start,
               style: ktitleStyle,
             ),
-          ),),
-        
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 15),
           child: Text(
@@ -168,26 +168,25 @@ class MyMessageWidget extends StatelessWidget {
         showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
         ConstrainedBox(
           constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.75),
+              maxWidth: MediaQuery.of(context).size.width * 0.75),
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
             decoration: BoxDecoration(
-            color:  Colors.green.shade600,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(8),
-              bottomRight: Radius.circular(8),
-              bottomLeft: Radius.circular(8),
-              topLeft: Radius.circular(8) ,
+              color: Colors.green.shade600,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+                topLeft: Radius.circular(8),
+              ),
             ),
-          ),
-            
             child: Text(
               message.message,
               textAlign: TextAlign.start,
               style: ktitleStyle,
             ),
-          ),),
-        
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 15),
           child: Text(
