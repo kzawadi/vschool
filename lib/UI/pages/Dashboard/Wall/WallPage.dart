@@ -52,7 +52,7 @@ class _WallPageState extends State<WallPage>
     if (model.state == ViewState.Idle) {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
         // setState(() => _isLoading = true);
-        model.getAnnouncements(stdDiv_Global);
+        model.getWall(stdDiv_Global);
         // scaffoldKey.currentState.widget
       }
     }
@@ -75,7 +75,7 @@ class _WallPageState extends State<WallPage>
       print(stdDiv_Global);
     }
     return BaseView<WallPageModel>(
-        onModelReady: (model) => model.getAnnouncements(stdDiv_Global),
+        onModelReady: (model) => model.getWall(stdDiv_Global),
         builder: (context, model, child) {
           this.model = model;
           return Scaffold(

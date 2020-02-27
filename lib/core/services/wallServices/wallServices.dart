@@ -20,7 +20,7 @@ class WallServices extends Services {
     if (schoolCode == null) await getSchoolCode();
   }
 
-  getAnnouncements(
+  getWall(
     String stdDivGlobal,
   ) async {
     if (schoolCode == null) await getSchoolCode();
@@ -35,7 +35,7 @@ class WallServices extends Services {
     print('wall retrived is $wallsnapshot'.toString());
   }
 
-  postAnnouncement(Wall wall) async {
+  postWall(Wall wall) async {
     if (schoolCode == null) await getSchoolCode();
 
     wall.timestamp = Timestamp.now();

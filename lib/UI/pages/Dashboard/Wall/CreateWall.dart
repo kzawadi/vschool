@@ -72,11 +72,11 @@ class _CreateWallState extends State<CreateWall> {
         _scaffoldKey.currentState.showSnackBar(
             ksnackBar(context, 'Please Specify Class and Division'));
       } else {
-        await model.postAnnouncement(wall);
+        await model.postWall(wall);
         kbackBtn(context);
       }
     } else {
-      await model.postAnnouncement(wall);
+      await model.postWall(wall);
       kbackBtn(context);
     }
   }

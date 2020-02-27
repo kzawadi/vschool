@@ -13,9 +13,9 @@ class CreateWallModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-  Future postAnnouncement(Wall wall) async {
+  Future postWall(Wall wall) async {
     setState(ViewState.Busy);
-    await wallServices.postAnnouncement(wall);
+    await wallServices.postWall(wall);
     setState(ViewState.Idle);
   }
 

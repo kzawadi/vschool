@@ -11,9 +11,9 @@ class WallPageModel extends BaseModel {
 
   DocumentSnapshot get wall => _wallServices.wallsnapshot;
 
-  getAnnouncements(String stdDiv_Global) async {
+  getWall(String stdDiv_Global) async {
     setState(ViewState.Busy);
-    await _wallServices.getAnnouncements(stdDiv_Global);
+    await _wallServices.getWall(stdDiv_Global);
     setState(ViewState.Idle);
   }
 
