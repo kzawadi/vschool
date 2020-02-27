@@ -1,7 +1,10 @@
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/swipedetector.dart';
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/Widgets/sexy_tile.dart';
 
 class WallViewer extends StatelessWidget {
   final Wall wall;
@@ -70,6 +73,38 @@ class WallViewer extends StatelessWidget {
                         ),
                       ),
                     ),
+
+                    SexyTile(
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              wall.caption,
+                              //style: HeadingStylesDefault.accent,
+                              textAlign: TextAlign.center,
+                              softWrap: true,
+                              overflow: TextOverflow.fade,
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            Text(wall.caption
+                                // style: isThemeCurrentlyDark(context)
+                                //     ? BodyStylesDefault.white
+                                //     : BodyStylesDefault.black,
+                                // textAlign: TextAlign.left,
+                                //softWrap: true,
+                                //overflow: TextOverflow.fade,
+                                ),
+                          ],
+                        ),
+                      ),
+                      splashColor: MyColors.accent,
+                    ),
+
                     Expanded(
                       flex: 1,
                       child: SingleChildScrollView(

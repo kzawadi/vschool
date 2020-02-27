@@ -76,22 +76,22 @@ flutter:
   fonts:
     - family: Customicons
       fonts:
-        - asset: assets/fonts/Customicons.ttf
+        - asset: assets/fonts/nunito/Customicons.ttf
 
     - family: MyFlutterApp
       fonts:
-        - asset: assets/fonts/MyFlutterApp.ttf
+        - asset: assets/fonts/nunito/MyFlutterApp.ttf
 
     - family: Nunito
       fonts:
-        - asset: assets/fonts/Nunito-Light.ttf
+        - asset: assets/fonts/nunito/Nunito-Light.ttf
           weight: 300
-        - asset: assets/fonts/Nunito-Regular.ttf
-        - asset: assets/fonts/Nunito-SemiBold.ttf
+        - asset: assets/fonts/nunito/Nunito-Regular.ttf
+        - asset: assets/fonts/nunito/Nunito-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Nunito-Black.ttf
-        - asset: assets/fonts/Nunito-Bold.ttf
+        - asset: assets/fonts/nunito/Nunito-Black.ttf
+        - asset: assets/fonts/nunito/Nunito-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Nunito-ExtraBold.ttf
+        - asset: assets/fonts/nunito/Nunito-ExtraBold.ttf
           weight: 900
-        - asset: assets/fonts/Nunito-Italic.ttf
+        - asset: assets/fonts/nunito/Nunito-Italic.ttf
