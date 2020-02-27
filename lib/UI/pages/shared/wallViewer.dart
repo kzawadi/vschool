@@ -73,6 +73,7 @@ class WallViewer extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 8.0, right: 8.0, bottom: 5.0, top: 5),

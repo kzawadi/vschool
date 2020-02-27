@@ -95,7 +95,8 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                     child: FloatingActionButton(
                       elevation: 12,
                       onPressed: () {
-                        kopenPageSlide(context, CreateAnnouncement(), duration: Duration(milliseconds: 200));
+                        kopenPageSlide(context, CreateAnnouncement(),
+                            duration: Duration(milliseconds: 200));
                       },
                       child: Icon(Icons.add),
                       backgroundColor: Colors.red,
@@ -166,6 +167,7 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                               // color: Colors.red,
                             )
                       : ListView.builder(
+                          physics: BouncingScrollPhysics(),
                           addAutomaticKeepAlives: true,
                           cacheExtent: 10,
                           controller: controller,
