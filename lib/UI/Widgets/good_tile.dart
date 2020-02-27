@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 
-class SexyTile extends StatelessWidget {
-  const SexyTile({
+class GoodTile extends StatelessWidget {
+  const GoodTile({
     this.child,
     this.color,
     this.splashColor,

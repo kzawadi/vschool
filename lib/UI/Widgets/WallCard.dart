@@ -1,14 +1,12 @@
-import 'package:intl/intl.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'package:ourESchool/UI/pages/shared/AnnouncementViewer.dart';
 import 'package:flutter/material.dart';
-import 'package:ourESchool/UI/pages/shared/wallViewer.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
 import 'package:ourESchool/locator.dart';
+import 'package:ourESchool/UI/pages/shared/wall_viewer.dart';
 
 class WallCard extends StatefulWidget {
   WallCard({@required this.wall});

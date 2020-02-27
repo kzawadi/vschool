@@ -1,5 +1,4 @@
-import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
-import 'package:ourESchool/UI/pages/shared/wallViewer.dart';
+import 'package:ourESchool/UI/pages/shared/wall_viewer.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/viewmodel/Wall/WallPageModel.dart';
 import 'package:ourESchool/imports.dart';
@@ -78,58 +77,66 @@ class _WallPageState extends State<WallPage>
         onModelReady: (model) => model.getWall(stdDiv_Global),
         builder: (context, model, child) {
           this.model = model;
-          return Scaffold(
-            key: scaffoldKey,
-            appBar: TopBar(
-                buttonHeroTag: string.announcement,
-                title: stdDiv_Global + " Posts",
-                child: kBackBtn,
-                onPressed: () {
-                  kbackBtn(context);
-                }),
-            // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-            floatingActionButton: Stack(
-              children: <Widget>[
-                Visibility(
-                  visible: isTeacher,
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: FloatingActionButton(
-                      elevation: 12,
-                      onPressed: () {
-                        kopenPageSlide(context, CreateWall(),
-                            duration: Duration(milliseconds: 200));
-                      },
-                      child: Icon(Icons.add),
-                      backgroundColor: Colors.red,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            body: Center(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxWidth: 700,
-                ),
-                child: model.wall.data == null
-                    ? model.state == ViewState.Busy
-                        ? kBuzyPage(color: Theme.of(context).accentColor)
-                        : Container(
-                            child: Center(
-                              child: Text(
-                                'No info available....!',
-                                style: ksubtitleStyle.copyWith(fontSize: 25),
-                              ),
-                            ),
-                            // color: Colors.red,
-                          )
-                    : WallViewer(
-                        wall: Wall.fromSnapshot(model.wall),
-                      ),
-              ),
-            ),
+          return WallViewer(
+            wall: Wall.fromSnapshot(model.wall),
           );
+
+          // WallViewer(
+          //   wall: Wall.fromSnapshot(model.wall),
+          // );
+
+          // Scaffold(
+          //   key: scaffoldKey,
+          //   appBar: TopBar(
+          //       buttonHeroTag: string.announcement,
+          //       title: stdDiv_Global + " Posts",
+          //       child: kBackBtn,
+          //       onPressed: () {
+          //         kbackBtn(context);
+          //       }),
+          //   // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+          //   floatingActionButton: Stack(
+          //     children: <Widget>[
+          //       Visibility(
+          //         visible: isTeacher,
+          //         child: Align(
+          //           alignment: Alignment.bottomRight,
+          //           child: FloatingActionButton(
+          //             elevation: 12,
+          //             onPressed: () {
+          //               kopenPageSlide(context, CreateWall(),
+          //                   duration: Duration(milliseconds: 200));
+          //             },
+          //             child: Icon(Icons.add),
+          //             backgroundColor: Colors.red,
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          //   body: Center(
+          //     child: Container(
+          //       constraints: BoxConstraints(
+          //         maxWidth: 700,
+          //       ),
+          //       child: model.wall.data == null
+          //           ? model.state == ViewState.Busy
+          //               ? kBuzyPage(color: Theme.of(context).accentColor)
+          //               : Container(
+          //                   child: Center(
+          //                     child: Text(
+          //                       'No info available....!',
+          //                       style: ksubtitleStyle.copyWith(fontSize: 25),
+          //                     ),
+          //                   ),
+          //                   // color: Colors.red,
+          //                 )
+          //           : WallViewer(
+          //               wall: Wall.fromSnapshot(model.wall),
+          //             ),
+          //     ),
+          //   ),
+          // );
         });
   }
 
