@@ -5,6 +5,7 @@ import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/good_tile.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/UI/resources/text_styles.dart';
+import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 
 class WallViewer extends StatelessWidget {
@@ -39,11 +40,13 @@ class WallViewer extends StatelessWidget {
                   ),
                   Material(
                     color: Colors.transparent,
-                    child: Text(
-                      'About',
-                      style: isThemeCurrentlyDark(context)
-                          ? TitleStylesDefault.white
-                          : TitleStylesDefault.black,
+                    child: Center(
+                      child: Text(
+                        string.school_wall,
+                        style: isThemeCurrentlyDark(context)
+                            ? TitleStylesDefault.white
+                            : TitleStylesDefault.black,
+                      ),
                     ),
                   ),
                 ],

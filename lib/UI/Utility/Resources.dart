@@ -131,6 +131,7 @@ Check School posts to stay updated with school news.''';
 //Wall
   static const wall = 'Wall';
   static const create_wall = 'Create Wall';
+  static const school_wall = 'SCHOOL WALL';
 
   static const school_logo = 'UPLOAD SCHOOL LOGO';
   static const about_wall =
