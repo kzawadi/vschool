@@ -132,9 +132,18 @@ Check School posts to stay updated with school news.''';
   static const wall = 'Wall';
   static const create_wall = 'Create Wall';
   static const about_wall =
-      'This will be a page in our system so people can get importnant infomation about your school';
-  static const type_mission_here = 'Type your School mission here....';
-  static const mission = 'Mission';
+      'This will be a page in our system so people can get importnant infomation about your school.';
+  static const type_mission_here = 'Type School mission ...';
+  static const mission = 'MISSION';
+
+  static const history = 'HISTORY';
+  static const type_history_here = 'Type School History ...';
+  static const regNo = 'REGISTRATION';
+  static const type_registration_here = 'Type School registration number ...';
+
+  static const school_name = 'NAME OF THE SCHOOL';
+  static const school_logo = 'UPLOAD SCHOOL LOGO';
+  static const your_school_name = 'Type the School Name ...';
 
   static const show_announcement_of = 'Show Announcement of:';
   static const filter_announcement =

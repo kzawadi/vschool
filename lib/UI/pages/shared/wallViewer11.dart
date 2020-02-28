@@ -75,7 +75,7 @@ class WallViewer11 extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            wall.caption,
+                            wall.schoolName,
                             //style: HeadingStylesDefault.accent,
                             textAlign: TextAlign.center,
                             softWrap: true,
@@ -84,7 +84,7 @@ class WallViewer11 extends StatelessWidget {
                           SizedBox(
                             height: 20.0,
                           ),
-                          Text(wall.caption
+                          Text(wall.schoolName
                               // style: isThemeCurrentlyDark(context)
                               //     ? BodyStylesDefault.white
                               //     : BodyStylesDefault.black,
@@ -107,9 +107,9 @@ class WallViewer11 extends StatelessWidget {
                             left: 8.0, right: 8.0, bottom: 5.0, top: 5),
                         child: Hero(
                           transitionOnUserGestures: false,
-                          tag: wall.id + 'captionn',
+                          tag: wall.id + 'schoolNamen',
                           child: Text(
-                            wall.caption,
+                            wall.schoolName,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,

@@ -88,7 +88,7 @@ class WallViewer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            wall.caption,
+                            wall.schoolName,
                             style: HeadingStylesDefault.accent,
                             textAlign: TextAlign.center,
                             softWrap: true,

@@ -136,7 +136,7 @@ class _WallCardState extends State<WallCard> {
                   transitionOnUserGestures: false,
                   tag: widget.wall.id + 'captions',
                   child: Text(
-                    widget.wall.caption,
+                    widget.wall.schoolName,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 4,
                     style: TextStyle(fontWeight: FontWeight.w400),

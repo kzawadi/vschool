@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Wall {
-  String caption;
+  String schoolName;
   String by;
   String forDiv;
   Timestamp timestamp;
@@ -18,7 +18,7 @@ class Wall {
   String dirSms;
 
   Wall({
-    this.caption = '',
+    this.schoolName = '',
     this.by,
     this.forDiv,
     this.timestamp,
@@ -36,7 +36,7 @@ class Wall {
   });
 
   Wall.fromJson(Map<String, dynamic> json) {
-    caption = json['caption'] ?? '';
+    schoolName = json['schoolName'] ?? '';
     by = json['by'];
     forDiv = json['forDiv'];
     timestamp = json['timestamp'] as Timestamp;
@@ -54,7 +54,7 @@ class Wall {
   }
 
   Wall.fromSnapshot(DocumentSnapshot snapshot) {
-    caption = snapshot['caption'].toString() ?? '';
+    schoolName = snapshot['schoolName'].toString() ?? '';
     by = snapshot['by'].toString();
     forDiv = snapshot['forDiv'].toString();
     timestamp = snapshot['timeStamp'] as Timestamp;
@@ -73,7 +73,7 @@ class Wall {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['caption'] = this.caption;
+    data['schoolName'] = this.schoolName;
     data['by'] = this.by;
     data['forDiv'] = this.forDiv;
     // data['timestamp'] = this.timestamp;
