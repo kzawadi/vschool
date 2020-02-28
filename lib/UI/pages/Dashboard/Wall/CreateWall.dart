@@ -386,6 +386,56 @@ class _CreateWallState extends State<CreateWall> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 15,
+                ),
+
+                Center(
+                  child: Text(
+                    string.dirSms,
+                    style: isThemeCurrentlyDark(context)
+                        ? SubHeadingStylesMaterial.light
+                        : SubHeadingStylesMaterial.dark,
+                  ),
+                ),
+
+                // beliefs text entry
+                Container(
+                  height: 100,
+                  // color: Colors.blueAccent.withOpacity(0.5),
+                  child: TextField(
+                    controller: _dirSmsController,
+                    enabled: !isPosting,
+                    //focusNode: _focusNode,
+                    maxLength: null,
+                    onChanged: (belief) {
+                      setState(() {
+                        isReadyToPost = belief == '' ? false : true;
+                      });
+                    },
+                    maxLines: 300,
+                    keyboardType: TextInputType.multiline,
+                    style: isThemeCurrentlyDark(context)
+                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
+                        : BodyStylesDefault.black.copyWith(fontSize: 20),
+                    decoration: kTextFieldDecoration.copyWith(
+                      hintText: string.type_dirSms_here,
+                      labelText: string.dirSms,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+
+                Center(
+                  child: Text(
+                    'Forms and important school documents feature itakuwa implemented here soon',
+                    style: isThemeCurrentlyDark(context)
+                        ? SubHeadingStylesMaterial.light
+                        : SubHeadingStylesMaterial.dark,
+                  ),
+                ),
 
                 // /// history text entry
                 // Container(
