@@ -119,7 +119,7 @@ class WallViewer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            wall.regNo,
+                            wall.schoolName,
                             style: HeadingStylesDefault.accent,
                             textAlign: TextAlign.center,
                             softWrap: true,
@@ -129,7 +129,131 @@ class WallViewer extends StatelessWidget {
                             height: 20.0,
                           ),
                           Text(
-                            wall.beliefs,
+                            wall.history,
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white
+                                : BodyStylesDefault.black,
+                            textAlign: TextAlign.left,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                        ],
+                      ),
+                    ),
+                    splashColor: MyColors.accent,
+                  ),
+                  GoodTile(
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            wall.schoolName,
+                            style: HeadingStylesDefault.accent,
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            wall.mission,
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white
+                                : BodyStylesDefault.black,
+                            textAlign: TextAlign.left,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                        ],
+                      ),
+                    ),
+                    splashColor: MyColors.accent,
+                  ),
+                  GoodTile(
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            wall.schoolName,
+                            style: HeadingStylesDefault.accent,
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            wall.dirSms,
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white
+                                : BodyStylesDefault.black,
+                            textAlign: TextAlign.left,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                        ],
+                      ),
+                    ),
+                    splashColor: MyColors.accent,
+                  ),
+                  GoodTile(
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            wall.schoolName,
+                            style: HeadingStylesDefault.accent,
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            wall.mission,
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white
+                                : BodyStylesDefault.black,
+                            textAlign: TextAlign.left,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                        ],
+                      ),
+                    ),
+                    splashColor: MyColors.accent,
+                  ),
+                  GoodTile(
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            wall.schoolName,
+                            style: HeadingStylesDefault.accent,
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            wall.history,
                             style: isThemeCurrentlyDark(context)
                                 ? BodyStylesDefault.white
                                 : BodyStylesDefault.black,
