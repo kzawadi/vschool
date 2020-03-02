@@ -170,9 +170,17 @@ class AuthenticationServices extends Services {
       AuthResult authResult = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser = authResult.user;
+      await firestore.collection('users').document(firebaseUser.uid).setData({
+        "uid": firebaseUser.uid,
+        "email": firebaseUser.email,
+        "username": firebaseUser.displayName,
+        // "roles": {"admin": true, "editor": true},
+        "active": true
+      });
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);
       print("User Regestered using Email and Password");
+      print('user collection created with $firebaseUser'.toString());
       // sharedPreferencesHelper.setUserType(userType);
       isUserLoggedIn = true;
       isUserLoggedInStream.add(isUserLoggedIn);
