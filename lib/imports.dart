@@ -7,6 +7,8 @@ export 'package:provider/provider.dart';
 export 'package:flutter/material.dart';
 export 'package:provider/provider.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:firebase_analytics/firebase_analytics.dart';
+export 'package:firebase_analytics/observer.dart';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'dart:convert';
 export 'locator.dart';

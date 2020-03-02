@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider<UserType>.controller(
           initialData: UserType.UNKNOWN,
-          create: (context) =>
-              locator<AuthenticationServices>().userTypeStream,
+          create: (context) => locator<AuthenticationServices>().userTypeStream,
         ),
         StreamProvider<bool>.controller(
           initialData: false,
@@ -66,6 +65,8 @@ class OurSchoolApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAnalytics analytics = FirebaseAnalytics();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Vitone School App',
@@ -79,6 +80,9 @@ class OurSchoolApp extends StatelessWidget {
             ),
       },
       home: getHome(context),
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
     );
   }
 
