@@ -1,6 +1,7 @@
 import 'imports.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   // debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
   timeDilation = 2;
   Provider.debugCheckInvalidValueType = null;

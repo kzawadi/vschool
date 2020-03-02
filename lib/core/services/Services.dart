@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/UserDataLogin.dart';
 import 'package:ourESchool/core/Server.dart';
@@ -15,6 +16,7 @@ class Services {
   static FirebaseAuth _auth = FirebaseAuth.instance;
 
   static Firestore _firestore = Firestore.instance;
+  static FirebaseMessaging _fcm = FirebaseMessaging();
 
   FirebaseUser firebaseUser;
 
@@ -57,6 +59,7 @@ class Services {
   Firestore get firestore => _firestore;
   FirebaseAuth get auth => _auth;
   User get loggedInUser => _user;
+  FirebaseMessaging get cloudmesaging => _fcm;
 
   DocumentReference get schoolRef => _schoolRef;
 
