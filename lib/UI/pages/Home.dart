@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ourESchool/imports.dart';
 
 class Home extends StatefulWidget {
@@ -7,7 +8,9 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with Services {
+  StreamSubscription iosSubscription;
+
   var currentIndex = 0;
   Color background = Colors.white;
   // AuthenticationServices _auth = locator<AuthenticationServices>();
@@ -31,7 +34,101 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    getFirebaseUser();
     super.initState();
+    if (Platform.isIOS) {
+      iosSubscription = cloudmesaging.onIosSettingsRegistered.listen((data) {
+        print(data);
+        _saveDeviceToken();
+      });
+
+      cloudmesaging.requestNotificationPermissions(IosNotificationSettings());
+    } else {
+      _saveDeviceToken();
+    }
+
+    cloudmesaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        // final snackbar = SnackBar(
+        //   content: Text(message['notification']['title']),
+        //   action: SnackBarAction(
+        //     label: 'Go',
+        //     onPressed: () => null,
+        //   ),
+        // );
+
+        // Scaffold.of(context).showSnackBar(snackbar);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: ListTile(
+              title: Text(message['notification']['title']),
+              subtitle: Text(message['notification']['body']),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.amber,
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        // TODO optional
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        // TODO optional
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    if (iosSubscription != null) iosSubscription.cancel();
+    super.dispose();
+  }
+
+  _saveDeviceToken() async {
+    // FirebaseUser currentUser =
+    //     Provider.of<FirebaseUser>(context, listen: false);
+
+    // Get the current user
+    //String uid = 'jeffd23';
+    // FirebaseUser user = await _auth.currentUser();
+
+    // Get the token for this device
+    String fcmToken = await cloudmesaging.getToken();
+    if (firebaseUser == null) await getFirebaseUser();
+
+    // FirebaseUser curent = await getFirebaseUser();
+    print('curent user id is $firebaseUser'.toString());
+
+    // Save it to Firestore
+    if (fcmToken != null) {
+      var tokens = firestore
+          .collection('users')
+          .document(firebaseUser.uid)
+          .collection('tokens')
+          .document(fcmToken);
+
+      await tokens.setData({
+        'token': fcmToken,
+        'createdAt': FieldValue.serverTimestamp(), // optional
+        'platform': Platform.operatingSystem // optional
+      });
+    }
+    print('the token is $fcmToken'.toString());
+  }
+
+  /// Subscribe the user to a topic
+  _subscribeToTopic() async {
+    // Subscribe the user to a topic
+    cloudmesaging.subscribeToTopic('puppies');
   }
 
   ImageProvider<dynamic> setImage(User user) {

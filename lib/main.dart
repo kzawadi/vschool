@@ -57,8 +57,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class OurSchoolApp extends StatelessWidget {
-  const OurSchoolApp({
+class OurSchoolApp extends StatelessWidget with Services {
+  OurSchoolApp({
     Key key,
     @required this.theme,
   }) : super(key: key);
@@ -67,8 +67,6 @@ class OurSchoolApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAnalytics analytics = FirebaseAnalytics();
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Vitone School App',
