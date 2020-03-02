@@ -51,7 +51,7 @@ class _CreateWallState extends State<CreateWall> {
   }
 
   floatingButtonPressed(CreateWallModel model, BuildContext context) async {
-    User user = Provider.of<User>(context);
+    User user = Provider.of<User>(context, listen: false);
     var wall = Wall(
       by: user.id,
       schoolName: _schoolNameController.text,

@@ -39,7 +39,7 @@ export 'core/viewmodel/LoginPageModel.dart';
 export 'core/services/AuthenticationServices.dart';
 export 'core/helpers/shared_preferences_helper.dart';
 export 'core/services/AnnouncementServices.dart';
-import 'core/services/wallServices/wallServices.dart';
+export 'core/services/wallServices/wallServices.dart';
 export 'core/services/AssignmentServices.dart';
 export 'core/services/AuthenticationServices.dart';
 export 'core/services/ProfileServices.dart';

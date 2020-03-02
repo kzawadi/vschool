@@ -76,7 +76,7 @@ class HomeTab extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<HolidayModel>(context);
+    var model = Provider.of<HolidayModel>(context, listen: false);
     return Column(children: <Widget>[
       CountryTitle(),
       Expanded(
@@ -141,7 +141,7 @@ class MonthCardsState extends State<MonthCards> {
   ScrollController controller = ScrollController();
 
   Widget getMonthCard(BuildContext context, String month) {
-    var model = Provider.of<HolidayModel>(context);
+    var model = Provider.of<HolidayModel>(context, listen: false);
     int monthIndex = monthToColorMap.keys.toList().indexOf(month);
 
     if (model.state == ViewState.Idle) {
@@ -155,7 +155,7 @@ class MonthCardsState extends State<MonthCards> {
         for (var holiday in holidayList) {
           if (holidayDates.isEmpty) {
             holidayDates.add(holiday.date.datetime.day);
-          } else if(!holidayDates.contains(holiday.date.datetime.day)) {
+          } else if (!holidayDates.contains(holiday.date.datetime.day)) {
             holidayDates.add(holiday.date.datetime.day);
           }
         }
@@ -247,7 +247,7 @@ class MonthCardsState extends State<MonthCards> {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<HolidayModel>(context);
+    var model = Provider.of<HolidayModel>(context, listen: false);
     return Expanded(
       flex: 10,
       child: Container(
@@ -283,10 +283,10 @@ class MonthCardsState extends State<MonthCards> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HolidayDetailsPage(
-                                      monthIndex: monthIndex,
-                                      listOfHolidayList: listOfHolidayLists,
-                                      countryName: widget.countryName,
-                                    ),
+                                  monthIndex: monthIndex,
+                                  listOfHolidayList: listOfHolidayLists,
+                                  countryName: widget.countryName,
+                                ),
                               ),
                             );
                           }
@@ -344,7 +344,7 @@ class CountryTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<HolidayModel>(context);
+    var model = Provider.of<HolidayModel>(context, listen: false);
 
     return Expanded(
       flex: 6,

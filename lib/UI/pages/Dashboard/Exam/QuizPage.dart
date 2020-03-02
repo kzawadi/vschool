@@ -84,7 +84,7 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<QuizStateModel>(context);
+    var model = Provider.of<QuizStateModel>(context, listen: false);
     model.showTimer = true;
     return Container(
       padding: EdgeInsets.all(20),
@@ -130,7 +130,7 @@ class FinishPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<QuizStateModel>(context);
+    var model = Provider.of<QuizStateModel>(context, listen: false);
     return Container(
       padding: EdgeInsets.all(20),
       child: Column(
@@ -158,67 +158,66 @@ class FinishPage extends StatelessWidget {
                 : ListView.builder(
                     itemCount: model.checkedAnswersMap.length,
                     itemBuilder: (context, index) => Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'Question : ',
-                                        style: ktitleStyle,
-                                      ),
-                                      Text(
-                                        model.questions[index].question,
-                                        style: ksubtitleStyle,
-                                      ),
-                                    ],
+                                  Text(
+                                    'Question : ',
+                                    style: ktitleStyle,
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'Answer : ',
-                                        style: ktitleStyle,
-                                      ),
-                                      Text(
-                                        model.questions[index].answer
-                                            .toString(),
-                                        style: ksubtitleStyle,
-                                      ),
-                                    ],
+                                  Text(
+                                    model.questions[index].question,
+                                    style: ksubtitleStyle,
                                   ),
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'Your Answers : ',
-                                        style: ktitleStyle,
-                                      ),
-                                      Text(
-                                        model.selectedAnswerMap[
-                                                model.questions[index].id]
-                                            .toString(),
-                                        style: ksubtitleStyle,
-                                      ),
-                                    ],
-                                  ),
-                                  Divider(
-                                    height: 4,
-                                    indent: 2,
-                                  )
                                 ],
                               ),
-                              Icon(
-                                model.checkedAnswersMap[model.questions[index]]
-                                    ? Icons.done
-                                    : Icons.close,
-                                color: Theme.of(context).primaryColor,
-                                size: 30,
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Answer : ',
+                                    style: ktitleStyle,
+                                  ),
+                                  Text(
+                                    model.questions[index].answer.toString(),
+                                    style: ksubtitleStyle,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Your Answers : ',
+                                    style: ktitleStyle,
+                                  ),
+                                  Text(
+                                    model.selectedAnswerMap[
+                                            model.questions[index].id]
+                                        .toString(),
+                                    style: ksubtitleStyle,
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                height: 4,
+                                indent: 2,
                               )
                             ],
                           ),
-                        ),
+                          Icon(
+                            model.checkedAnswersMap[model.questions[index]]
+                                ? Icons.done
+                                : Icons.close,
+                            color: Theme.of(context).primaryColor,
+                            size: 30,
+                          )
+                        ],
+                      ),
+                    ),
                   ),
           ),
           MaterialButton(
@@ -253,7 +252,7 @@ class QuestionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<QuizStateModel>(context);
+    var model = Provider.of<QuizStateModel>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(

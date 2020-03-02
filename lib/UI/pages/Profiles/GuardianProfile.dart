@@ -54,11 +54,6 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
     return picked;
   }
 
-  // setColors(BuildContext context) {
-  //   selectedButtonColor = Theme.of(context).primaryColor;
-  //   buttonBackGroundColor = Theme.of(context).canvasColor;
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -76,7 +71,8 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  floatingButtonPressed(var model, UserType userType) async {
+  floatingButtonPressed(
+      var model, UserType userType, FirebaseUser firebaseUser) async {
     bool res = false;
 
     if (_bloodGroup.isEmpty ||
@@ -128,7 +124,8 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    userType = Provider.of<UserType>(context);
+    userType = Provider.of<UserType>(context, listen: false);
+    var firebaseUser = Provider.of<FirebaseUser>(context, listen: true);
     print("In Guardian ProfilePage " + UserTypeHelper.getValue(userType));
     if (userType == UserType.PARENT || userType == UserType.TEACHER) {
       isEditable = true;
@@ -140,14 +137,16 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
         if (model.state == ViewState.Idle) {
           isEditable = true;
           if (a == 0) {
-            User user = model.userProfile;
-            _name = user.displayName;
-            _childrenNameName = user.guardianName;
-            _bloodGroup = user.bloodGroup;
-            _dob = user.dob;
-            _mobileNo = user.mobileNo;
-            path = user.photoUrl;
-            a++;
+            if (model.userProfile != null) {
+              User user = model.userProfile;
+              _name = user.displayName;
+              _childrenNameName = user.guardianName;
+              _bloodGroup = user.bloodGroup;
+              _dob = user.dob;
+              _mobileNo = user.mobileNo;
+              path = user.photoUrl;
+              a++;
+            }
           }
         } else {
           isEditable = false;
@@ -169,7 +168,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
               elevation: 20,
               backgroundColor: Colors.red,
               onPressed: () async {
-                await floatingButtonPressed(model, userType);
+                await floatingButtonPressed(model, userType, firebaseUser);
               },
               child: model.state == ViewState.Busy
                   ? SpinKitDoubleBounce(

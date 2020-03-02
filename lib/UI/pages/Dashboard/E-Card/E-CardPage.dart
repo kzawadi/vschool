@@ -21,10 +21,11 @@ class ECardPage extends StatefulWidget {
 class _ECardPageState extends State<ECardPage> {
   @override
   Widget build(BuildContext context) {
-    final double borderradius= 10;
+    final double borderradius = 10;
 
-    UserType userType =
-        widget.user == null ? Provider.of<UserType>(context) : UserType.STUDENT;
+    UserType userType = widget.user == null
+        ? Provider.of<UserType>(context, listen: false)
+        : UserType.STUDENT;
     return BaseView<ProfilePageModel>(
       onModelReady: (model) =>
           widget.user == null ? model.getUserProfileData() : model,
@@ -49,7 +50,8 @@ class _ECardPageState extends State<ECardPage> {
                         child: Card(
                           elevation: 10,
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(borderradius)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(borderradius)),
                           ),
                           child: Hero(
                             tag: 'profileeee',
@@ -60,9 +62,9 @@ class _ECardPageState extends State<ECardPage> {
                               width: MediaQuery.of(context).size.width / 2,
                               height: MediaQuery.of(context).size.width / 2,
                               decoration: BoxDecoration(
-                                 shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.all(Radius.circular(borderradius)),
-
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(borderradius)),
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: user.photoUrl != 'default'

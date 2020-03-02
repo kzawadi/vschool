@@ -222,22 +222,23 @@ class _ReusableEbookBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Division(
-      style: StyleClass(useRadians: false)
-        ..alignmentChild.center()
+    return Parent(
+      style: ParentStyle()
+        //..alignmentChild.center()
         ..elevation(5)
         ..background.color(Colors.blue[300])
         ..height(_buttonHeight)
         ..ripple(true)
         ..borderRadius(all: 8),
-      gesture: GestureClass()
-        ..onTap(() => onTap()),
-        // ..onLongPress(() => onTap)
-        // ..onDoubleTap(() => onTap())
-        // ..onTapCancel(() => onTap()),
-      child: Text(
-        title,
-        style: ktitleStyle.copyWith(color: Colors.white),
+      gesture: Gestures()..onTap(() => onTap()),
+      // ..onLongPress(() => onTap)
+      // ..onDoubleTap(() => onTap())
+      // ..onTapCancel(() => onTap()),
+      child: Center(
+        child: Text(
+          title,
+          style: ktitleStyle.copyWith(color: Colors.white),
+        ),
       ),
     );
   }
