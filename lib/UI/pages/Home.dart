@@ -42,7 +42,8 @@ class _HomeState extends State<Home> with Services {
         _saveDeviceToken();
       });
 
-      cloudmesaging.requestNotificationPermissions(IosNotificationSettings());
+      cloudmesaging.requestNotificationPermissions(
+          IosNotificationSettings(sound: true, badge: true, alert: true));
     } else {
       _saveDeviceToken();
     }
@@ -50,15 +51,15 @@ class _HomeState extends State<Home> with Services {
     cloudmesaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
-        // final snackbar = SnackBar(
-        //   content: Text(message['notification']['title']),
-        //   action: SnackBarAction(
-        //     label: 'Go',
-        //     onPressed: () => null,
-        //   ),
-        // );
+        final snackbar = SnackBar(
+          content: Text(message['notification']['title']),
+          action: SnackBarAction(
+            label: 'Go',
+            onPressed: () => null,
+          ),
+        );
 
-        // Scaffold.of(context).showSnackBar(snackbar);
+        Scaffold.of(context).showSnackBar(snackbar);
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -94,18 +95,9 @@ class _HomeState extends State<Home> with Services {
   }
 
   _saveDeviceToken() async {
-    // FirebaseUser currentUser =
-    //     Provider.of<FirebaseUser>(context, listen: false);
-
-    // Get the current user
-    //String uid = 'jeffd23';
-    // FirebaseUser user = await _auth.currentUser();
-
-    // Get the token for this device
     String fcmToken = await cloudmesaging.getToken();
     if (firebaseUser == null) await getFirebaseUser();
 
-    // FirebaseUser curent = await getFirebaseUser();
     print('curent user id is $firebaseUser'.toString());
 
     // Save it to Firestore

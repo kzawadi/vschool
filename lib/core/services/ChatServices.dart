@@ -55,6 +55,7 @@ class ChatServices extends Services {
     if (standard == '' && division == '') {
       String userDataModel = await sharedPreferencesHelper.getUserDataModel();
       if (userDataModel == 'N.A') {
+        //! this is how they listen to a stream
         _profileServices.loggedInUserStream.stream.listen(_getCurrentUser);
       } else {
         _currentUser = User.fromJson(json.decode(userDataModel));
@@ -95,7 +96,7 @@ class ChatServices extends Services {
     List<User> parents = [];
 
     for (int index = 1; index < documentSnapshot.data.length; index++) {
-       parents.add(await _profileServices.getUserDataFromReference(
+      parents.add(await _profileServices.getUserDataFromReference(
           documentSnapshot[index.toString()] as DocumentReference));
     }
 
@@ -111,7 +112,6 @@ class ChatServices extends Services {
     @required User loggedIn,
     ScrollController scrollController,
   }) async* {
-    
     var ref = (await schoolRefwithCode())
         .document('Chats')
         .collection(student.standardDivision())
