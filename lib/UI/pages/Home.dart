@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
@@ -9,6 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with Services {
+  SharedPreferencesHelper _sharedPreferencesHelper =
+      locator<SharedPreferencesHelper>();
   StreamSubscription iosSubscription;
 
   var currentIndex = 0;
@@ -76,6 +79,7 @@ class _HomeState extends State<Home> with Services {
             ],
           ),
         );
+        print('RECIEVED NOTIFICATION IS $message'.toString());
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
@@ -96,7 +100,7 @@ class _HomeState extends State<Home> with Services {
 
   _saveDeviceToken() async {
     String fcmToken = await cloudmesaging.getToken();
-    if (firebaseUser == null) await getFirebaseUser();
+    String id = await _sharedPreferencesHelper.getLoggedInUserId();
 
     print('curent user id is $firebaseUser'.toString());
 
@@ -104,7 +108,7 @@ class _HomeState extends State<Home> with Services {
     if (fcmToken != null) {
       var tokens = firestore
           .collection('users')
-          .document(firebaseUser.uid)
+          .document(id)
           .collection('tokens')
           .document(fcmToken);
 

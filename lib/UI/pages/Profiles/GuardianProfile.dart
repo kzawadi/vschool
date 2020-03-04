@@ -84,7 +84,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
           context, 'You Need to fill all the details and a profile Photo'));
     } else {
       if (model.state == ViewState.Idle) {
-        var firebaseUser = Provider.of<FirebaseUser>(context);
+        var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
 
         res = await model.setUserProfileData(
           user: User(
@@ -125,7 +125,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
   @override
   Widget build(BuildContext context) {
     userType = Provider.of<UserType>(context, listen: false);
-    var firebaseUser = Provider.of<FirebaseUser>(context, listen: true);
+    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
     print("In Guardian ProfilePage " + UserTypeHelper.getValue(userType));
     if (userType == UserType.PARENT || userType == UserType.TEACHER) {
       isEditable = true;
