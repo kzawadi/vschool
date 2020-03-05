@@ -128,7 +128,7 @@ class _AssignmentsPageState extends State<AssignmentsPage> {
                             ? Container(
                                 child: Center(
                                   child: Text(
-                                    'No Assignments available....!',
+                                    string.emptyAssignment,
                                     textAlign: TextAlign.center,
                                     style:
                                         ksubtitleStyle.copyWith(fontSize: 25),

@@ -174,6 +174,8 @@ Check School posts to stay updated with school news.''';
 
 //Assignment
   static const assignment = 'Assignment';
+  static const emptyAssignment = 'No Assignments available....!';
+
   static const noAssignment =
       ''''Sorry, You Don\'t have any Class associated with you....!
 If you are a parent then go to childrens section to check assignments''';
