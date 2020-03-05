@@ -86,9 +86,8 @@ class _CreateWallState extends State<CreateWall> {
 
   @override
   Widget build(BuildContext context) {
-    // postTypeFontColor = Theme.of(context).brightness == Brightness.dark
-    //     ? Colors.white
-    //     : Colors.black;
+    double containerHeight = 100;
+    double containerWidth = 400;
     return BaseView<CreateWallModel>(
       onModelReady: (model) => model.getUserData(),
       builder: (context, model, child) {
@@ -253,25 +252,29 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 ///school name text entry
-                Container(
-                  height: 100,
-                  child: TextField(
-                    controller: _schoolNameController,
-                    enabled: !isPosting,
-                    maxLength: 60,
-                    onChanged: (schoolName) {
-                      setState(() {
-                        isReadyToPost = schoolName == '' ? false : true;
-                      });
-                    },
-                    maxLines: 50,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.your_school_name,
-                      labelText: string.school_name,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    child: TextField(
+                      controller: _schoolNameController,
+                      enabled: !isPosting,
+                      maxLength: 60,
+                      onChanged: (schoolName) {
+                        setState(() {
+                          isReadyToPost = schoolName == '' ? false : true;
+                        });
+                      },
+                      maxLines: 50,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.your_school_name,
+                        labelText: string.school_name,
+                      ),
                     ),
                   ),
                 ),
@@ -288,25 +291,29 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 ///mision text entry
-                Container(
-                  height: 100,
-                  child: TextField(
-                    controller: _missionController,
-                    enabled: !isPosting,
-                    maxLength: null,
-                    onChanged: (mission) {
-                      setState(() {
-                        isReadyToPost = mission == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_mission_here,
-                      labelText: string.mission,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    child: TextField(
+                      controller: _missionController,
+                      enabled: !isPosting,
+                      maxLength: null,
+                      onChanged: (mission) {
+                        setState(() {
+                          isReadyToPost = mission == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_mission_here,
+                        labelText: string.mission,
+                      ),
                     ),
                   ),
                 ),
@@ -324,27 +331,31 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 // beliefs text entry
-                Container(
-                  height: 100,
-                  // color: Colors.blueAccent.withOpacity(0.5),
-                  child: TextField(
-                    controller: _historyController,
-                    enabled: !isPosting,
-                    //focusNode: _focusNode,
-                    maxLength: null,
-                    onChanged: (belief) {
-                      setState(() {
-                        isReadyToPost = belief == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_history_here,
-                      labelText: string.history,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    // color: Colors.blueAccent.withOpacity(0.5),
+                    child: TextField(
+                      controller: _historyController,
+                      enabled: !isPosting,
+                      //focusNode: _focusNode,
+                      maxLength: null,
+                      onChanged: (belief) {
+                        setState(() {
+                          isReadyToPost = belief == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_history_here,
+                        labelText: string.history,
+                      ),
                     ),
                   ),
                 ),
@@ -362,27 +373,31 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 // beliefs text entry
-                Container(
-                  height: 100,
-                  // color: Colors.blueAccent.withOpacity(0.5),
-                  child: TextField(
-                    controller: _regNoController,
-                    enabled: !isPosting,
-                    //focusNode: _focusNode,
-                    maxLength: null,
-                    onChanged: (belief) {
-                      setState(() {
-                        isReadyToPost = belief == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_registration_here,
-                      labelText: string.regNo,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    // color: Colors.blueAccent.withOpacity(0.5),
+                    child: TextField(
+                      controller: _regNoController,
+                      enabled: !isPosting,
+                      //focusNode: _focusNode,
+                      maxLength: null,
+                      onChanged: (belief) {
+                        setState(() {
+                          isReadyToPost = belief == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_registration_here,
+                        labelText: string.regNo,
+                      ),
                     ),
                   ),
                 ),
@@ -400,27 +415,31 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 // beliefs text entry
-                Container(
-                  height: 100,
-                  // color: Colors.blueAccent.withOpacity(0.5),
-                  child: TextField(
-                    controller: _dirSmsController,
-                    enabled: !isPosting,
-                    //focusNode: _focusNode,
-                    maxLength: null,
-                    onChanged: (belief) {
-                      setState(() {
-                        isReadyToPost = belief == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_dirSms_here,
-                      labelText: string.dirSms,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    // color: Colors.blueAccent.withOpacity(0.5),
+                    child: TextField(
+                      controller: _dirSmsController,
+                      enabled: !isPosting,
+                      //focusNode: _focusNode,
+                      maxLength: null,
+                      onChanged: (belief) {
+                        setState(() {
+                          isReadyToPost = belief == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_dirSms_here,
+                        labelText: string.dirSms,
+                      ),
                     ),
                   ),
                 ),
@@ -429,11 +448,14 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 Center(
-                  child: Text(
-                    'Forms and important school documents feature itakuwa implemented here soon',
-                    style: isThemeCurrentlyDark(context)
-                        ? SubHeadingStylesMaterial.light
-                        : SubHeadingStylesMaterial.dark,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Forms and important school documents feature itakuwa implemented here soon',
+                      style: isThemeCurrentlyDark(context)
+                          ? SubHeadingStylesMaterial.light
+                          : SubHeadingStylesMaterial.dark,
+                    ),
                   ),
                 ),
 
