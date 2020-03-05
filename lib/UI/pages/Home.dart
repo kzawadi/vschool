@@ -10,6 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with Services {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   SharedPreferencesHelper _sharedPreferencesHelper =
       locator<SharedPreferencesHelper>();
   StreamSubscription iosSubscription;
@@ -37,7 +39,7 @@ class _HomeState extends State<Home> with Services {
 
   @override
   void initState() {
-    getFirebaseUser();
+    //getFirebaseUser();
     super.initState();
     if (Platform.isIOS) {
       iosSubscription = cloudmesaging.onIosSettingsRegistered.listen((data) {
@@ -54,15 +56,15 @@ class _HomeState extends State<Home> with Services {
     cloudmesaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
-        final snackbar = SnackBar(
-          content: Text(message['notification']['title']),
-          action: SnackBarAction(
-            label: 'Go',
-            onPressed: () => null,
-          ),
-        );
+        // final snackbar = SnackBar(
+        //   content: Text(message['notification']['title']),
+        //   action: SnackBarAction(
+        //     label: 'Go',
+        //     onPressed: () => null,
+        //   ),
+        // );
 
-        Scaffold.of(context).showSnackBar(snackbar);
+        // Scaffold.of(context).showSnackBar(snackbar);
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -144,6 +146,7 @@ class _HomeState extends State<Home> with Services {
     User user = Provider.of<User>(context, listen: false);
     return Container(
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: TopBar(
           buttonHeroTag: 'profileeee',
           title: pageName,

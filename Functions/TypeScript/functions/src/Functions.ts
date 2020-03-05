@@ -148,7 +148,11 @@ export async function notificationChat(eventSnapshot: any, context: any) {
 
     const newValue = eventSnapshot.data();
     const id = newValue.to;
-    const sms = newValue.message;
+    //const sms = newValue.message;
+    const from = newValue.from;
+
+    console.log('=========start of notification=======');
+    console.log(newValue);
 
     const querySnapshot = await db
     .collection('users')
@@ -161,13 +165,14 @@ export async function notificationChat(eventSnapshot: any, context: any) {
   const payload: admin.messaging.MessagingPayload = {
     notification: {
       title: 'New Message!',
-      body: `you have a message${sms}`,
+      body: `you have a new message from ${from}`,
       //icon: 'your-icon-url',
       click_action: 'FLUTTER_NOTIFICATION_CLICK'
     }
   };
-
+  console.log('=========thee end of notification=======');
   return fcm.sendToDevice(tokens, payload);
 
- 
+  console.log('=========start of notification=======');
+
 }
