@@ -175,8 +175,10 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                           itemBuilder: (context, index) {
                             if (index < model.postSnapshotList.length) {
                               return AnnouncementCard(
-                                  announcement: Announcement.fromSnapshot(
-                                      model.postSnapshotList[index]));
+                                announcement: Announcement.fromSnapshot(
+                                  model.postSnapshotList[index],
+                                ),
+                              );
                             } else {
                               return Center(
                                 child: new Opacity(
