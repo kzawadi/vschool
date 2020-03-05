@@ -115,9 +115,7 @@ class _AssignmentsPageState extends State<AssignmentsPage> {
                 child: stdDiv_Global == 'N.A'
                     ? Container(
                         child: Center(
-                          child: Text(
-                              '''Sorry, You Don\'t have any Class associated with you....!
-If you are a parent then go to childrens section to check assignments''',
+                          child: Text(string.noAssignment,
                               textAlign: TextAlign.center,
                               style: ksubtitleStyle.copyWith(
                                 fontSize: 25,
