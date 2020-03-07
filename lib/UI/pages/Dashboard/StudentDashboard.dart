@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -124,7 +125,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             icon: Icons.attach_money,
                             label: string.fees,
                             onPressed: () {
-                              kopenPage(context, FeesPage());
+                              kopenPage(context, FeesPageDash());
                             },
                           ),
                         ],
