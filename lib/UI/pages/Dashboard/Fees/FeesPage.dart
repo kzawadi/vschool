@@ -44,9 +44,7 @@ class _FeesPageState extends State<FeesPage>
                 child: Text(
                   'INR 21,000',
                   style: ktitleStyle.copyWith(
-                    fontSize: 30,
-                    color: Theme.of(context).primaryColor
-                  ),
+                      fontSize: 30, color: Theme.of(context).primaryColor),
                 ),
               ),
             ],
@@ -62,10 +60,8 @@ class _FeesPageState extends State<FeesPage>
               Center(
                 child: Text(
                   'INR 10,000',
-                  style: ktitleStyle.copyWith(
-                    fontSize: 30,
-                    color: Colors.green
-                  ),
+                  style:
+                      ktitleStyle.copyWith(fontSize: 30, color: Colors.green),
                 ),
               ),
             ],

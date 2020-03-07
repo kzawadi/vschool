@@ -1,3 +1,5 @@
+import 'package:ourESchool/UI/resources/colors.dart';
+
 import 'imports.dart';
 
 void main() {
@@ -44,9 +46,9 @@ class MyApp extends StatelessWidget {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           }),
           fontFamily: "Nunito",
-          primaryColor: Colors.red,
-          accentColor: Colors.redAccent,
-          primaryColorDark: Color(0xff0029cb),
+          primaryColor: MyColors.primary,
+          accentColor: MyColors.accent,
+          primaryColorDark: MyColors.primaryDark,
           brightness: brightness,
         ),
         themedWidgetBuilder: (context, theme) => new OurSchoolApp(
