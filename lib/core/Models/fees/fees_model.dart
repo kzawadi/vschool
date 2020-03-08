@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ourESchool/core/enums/fees.dart';
 
 class Fees {
-  String caption;
-  String by;
-  String forDiv;
+  String description;
+  String due;
+  String paid;
   Timestamp timestamp;
   String forClass;
   String totalFees;
@@ -15,9 +15,9 @@ class Fees {
   FeesType type;
 
   Fees({
-    this.caption = '',
-    this.by,
-    this.forDiv,
+    this.description = '',
+    this.due,
+    this.paid,
     this.timestamp,
     this.forClass,
     this.totalFees = '',
@@ -27,9 +27,9 @@ class Fees {
   });
 
   Fees.fromJson(Map<String, dynamic> json) {
-    caption = json['caption'] ?? '';
-    by = json['by'];
-    forDiv = json['forDiv'];
+    description = json['description'] ?? '';
+    due = json['due'];
+    paid = json['paid'];
     timestamp = json['timestamp'] as Timestamp;
     forClass = json['forClass'];
     totalFees = json['totalFees'] ?? '';
@@ -39,9 +39,9 @@ class Fees {
   }
 
   Fees.fromSnapshot(DocumentSnapshot snapshot) {
-    caption = snapshot['caption'].toString() ?? '';
-    by = snapshot['by'].toString();
-    forDiv = snapshot['forDiv'].toString();
+    description = snapshot['description'].toString() ?? '';
+    due = snapshot['due'].toString();
+    paid = snapshot['paid'].toString();
     timestamp = snapshot['timeStamp'] as Timestamp;
     forClass = snapshot['forClass'].toString();
     totalFees = snapshot['totalFees'].toString() ?? '';
@@ -52,9 +52,9 @@ class Fees {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['caption'] = this.caption;
-    data['by'] = this.by;
-    data['forDiv'] = this.forDiv;
+    data['description'] = this.description;
+    data['due'] = this.due;
+    data['paid'] = this.paid;
     data['timestamp'] = this.timestamp;
     data['forClass'] = this.forClass;
     data['totalFees'] = this.totalFees;
