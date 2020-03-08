@@ -21,11 +21,19 @@ class FeesPageEntry extends StatefulWidget {
 }
 
 class _FeesPageEntryState extends State<FeesPageEntry> {
+  TextEditingController _standardController;
+  TextEditingController _divisionController;
+  TextEditingController _captionController;
+
   String targeteid;
 
   @override
   void initState() {
     super.initState();
+    _standardController = TextEditingController();
+    _captionController = TextEditingController();
+    _divisionController = TextEditingController();
+
     targeteid = widget.targeteid == '' ? '' : widget.targeteid;
   }
 
@@ -33,6 +41,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
     User user = Provider.of<User>(context, listen: false);
     var fees = Fees(
       id: user.id,
+      description: _captionController.text,
       // description: _captionController.text,
     );
 
@@ -55,7 +64,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
         //User user = widget.user == null ? model.userProfile : widget.user;
         return Scaffold(
           appBar: TopBar(
-            title: string.e_card,
+            title: 'FEES',
             child: kBackBtn,
             onPressed: () {
               kbackBtn(context);
@@ -69,68 +78,54 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
           body: model.state == ViewState.Busy
               ? kBuzyPage(color: Theme.of(context).primaryColor)
               : SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(borderradius)),
-                          ),
-                          child: Hero(
-                            tag: 'profileeee',
-                            transitionOnUserGestures: true,
-                            child: Container(
-                              constraints:
-                                  BoxConstraints(maxHeight: 200, maxWidth: 200),
-                              width: MediaQuery.of(context).size.width / 2,
-                              height: MediaQuery.of(context).size.width / 2,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(borderradius)),
-                                // image: DecorationImage(
-                                //   fit: BoxFit.cover,
-                                //   image: user.photoUrl != 'default'
-                                //       ? NetworkImage(
-                                //           user.photoUrl,
-                                //         )
-                                //       : AssetImage(
-                                //           assetsString.student_welcome),
-                                // ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          child: Column(
+                            children: <Widget>[
+                              ProfileFieldsECard(
+                                width: MediaQuery.of(context).size.width,
+                                labelText: string.mobile_no,
+                                initialText: widget.user.id,
                               ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 150,
+                          // color: Colors.blueAccent.withOpacity(0.5),
+                          child: TextField(
+                            controller: _captionController,
+                            // enabled: !isPosting,
+                            // focusNode: _focusNode,
+                            maxLength: null,
+                            // onChanged: (caption) {
+                            //   setState(() {
+                            //     isReadyToPost = caption == '' ? false : true;
+                            //   });
+                            // },
+                            maxLines: 50,
+                            keyboardType: TextInputType.multiline,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            decoration: kTextFieldDecoration.copyWith(
+                              hintText: string.type_your_stuff_here,
+                              labelText: string.caption,
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        child: Column(
-                          children: <Widget>[
-                            ProfileFieldsECard(
-                              width: MediaQuery.of(context).size.width,
-                              labelText: string.student_teacher_name,
-                              //  initialText: user.displayName,
-                            ),
-                            ProfileFieldsECard(
-                              width: MediaQuery.of(context).size.width,
-                              labelText: userType == UserType.PARENT
-                                  ? "Childrens Name.."
-                                  : string.guardian_name,
-                              //initialText: user.guardianName,
-                            ),
-                            ProfileFieldsECard(
-                              width: MediaQuery.of(context).size.width,
-                              labelText: string.mobile_no,
-                              initialText: widget.user.id,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
         );
