@@ -142,6 +142,7 @@ class ProfileServices extends Services {
       ),
     );
     await _getChildrensData(childIds);
+    print('the child Ids are in this format $childIds');
   }
 
   _getChildrensData(Map<String, String> childIds) async {
@@ -149,6 +150,7 @@ class ProfileServices extends Services {
     for (String id in childIds.values) {
       childData.add(await getProfileDataById(id, UserType.STUDENT));
     }
+    print('childId value is $childData');
     childrens = childData;
   }
 

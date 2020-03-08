@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:ourESchool/core/services/wallServices/wallServices.dart';
+import 'package:ourESchool/core/viewmodel/fees/fees_entry_model.dart';
+import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
 
 import 'core/viewmodel/Wall/CreateWallModel.dart';
 import 'core/viewmodel/Wall/WallPageModel.dart';
@@ -18,6 +19,10 @@ void setupLocator() {
   locator.registerLazySingleton(() => WallServices());
   locator.registerFactory(() => CreateWallModel());
   locator.registerFactory(() => WallPageModel());
+
+  locator.registerLazySingleton(() => FeesServices());
+  locator.registerFactory(() => CreateFeesModel());
+  locator.registerFactory(() => FeesPageModel());
 
   locator.registerLazySingleton(() => SharedPreferencesHelper());
   locator.registerFactory(() => QuizStateModel());

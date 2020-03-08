@@ -5,21 +5,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/core/Models/User.dart';
+import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
-import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
+import 'package:ourESchool/core/viewmodel/fees/fees_entry_model.dart';
 import 'package:provider/provider.dart';
 
-class ECardPage extends StatefulWidget {
-  const ECardPage({Key key, this.user, this.id}) : super(key: key);
+class FeesPageEntry extends StatefulWidget {
+  const FeesPageEntry({Key key, this.user, this.targeteid}) : super(key: key);
   final User user;
-  final String id;
+  final String targeteid;
 
   @override
-  _ECardPageState createState() => _ECardPageState();
+  _FeesPageEntryState createState() => _FeesPageEntryState();
 }
 
-class _ECardPageState extends State<ECardPage> {
+class _FeesPageEntryState extends State<FeesPageEntry> {
+  String targeteid;
+
+  @override
+  void initState() {
+    super.initState();
+    targeteid = widget.targeteid == '' ? '' : widget.targeteid;
+  }
+
+  floatingButtonPressed(CreateFeesModel model, BuildContext context) async {
+    User user = Provider.of<User>(context, listen: false);
+    var fees = Fees(
+      id: user.id,
+      // description: _captionController.text,
+    );
+
+    await model.postFees(fees, targeteid);
+    kbackBtn(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final double borderradius = 10;
@@ -27,18 +47,23 @@ class _ECardPageState extends State<ECardPage> {
     UserType userType = widget.user == null
         ? Provider.of<UserType>(context, listen: false)
         : UserType.STUDENT;
-    return BaseView<ProfilePageModel>(
-      onModelReady: (model) =>
-          widget.user == null ? model.getUserProfileData() : model,
+    targeteid = widget.user.id;
+    return BaseView<CreateFeesModel>(
+      // onModelReady: (model) =>
+      //     widget.user == null ? model.getUserProfileData() : model,
       builder: (context, model, child) {
-        User user = widget.user == null ? model.userProfile : widget.user;
-
+        //User user = widget.user == null ? model.userProfile : widget.user;
         return Scaffold(
           appBar: TopBar(
             title: string.e_card,
             child: kBackBtn,
             onPressed: () {
               kbackBtn(context);
+            },
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              floatingButtonPressed(model, context);
             },
           ),
           body: model.state == ViewState.Busy
@@ -66,15 +91,15 @@ class _ECardPageState extends State<ECardPage> {
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(borderradius)),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: user.photoUrl != 'default'
-                                      ? NetworkImage(
-                                          user.photoUrl,
-                                        )
-                                      : AssetImage(
-                                          assetsString.student_welcome),
-                                ),
+                                // image: DecorationImage(
+                                //   fit: BoxFit.cover,
+                                //   image: user.photoUrl != 'default'
+                                //       ? NetworkImage(
+                                //           user.photoUrl,
+                                //         )
+                                //       : AssetImage(
+                                //           assetsString.student_welcome),
+                                // ),
                               ),
                             ),
                           ),
@@ -88,79 +113,19 @@ class _ECardPageState extends State<ECardPage> {
                             ProfileFieldsECard(
                               width: MediaQuery.of(context).size.width,
                               labelText: string.student_teacher_name,
-                              initialText: user.displayName,
+                              //  initialText: user.displayName,
                             ),
-
-                            //! this is where i a trying to put fees editing page
-                            ProfileFieldsECard(
-                              width: MediaQuery.of(context).size.width,
-                              labelText: string.student_teacher_name,
-                              initialText: user.id.toString(),
-                            ),
-                            userType == UserType.PARENT
-                                ? Container()
-                                : ProfileFieldsECard(
-                                    width: MediaQuery.of(context).size.width,
-                                    labelText: string.student_or_teacher_id,
-                                    initialText: user.enrollNo,
-                                  ),
-                            userType == UserType.PARENT
-                                ? Container()
-                                : Row(
-                                    // mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: ProfileFieldsECard(
-                                          labelText: string.standard,
-                                          initialText: user.standard,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Expanded(
-                                        child: ProfileFieldsECard(
-                                          labelText: string.division,
-                                          initialText:
-                                              user.division.toUpperCase(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                             ProfileFieldsECard(
                               width: MediaQuery.of(context).size.width,
                               labelText: userType == UserType.PARENT
                                   ? "Childrens Name.."
                                   : string.guardian_name,
-                              initialText: user.guardianName,
-                            ),
-                            Row(
-                              // mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Expanded(
-                                  child: ProfileFieldsECard(
-                                    labelText: string.dob,
-                                    initialText: user.dob,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: ProfileFieldsECard(
-                                    labelText: string.blood_group,
-                                    initialText: user.bloodGroup,
-                                  ),
-                                ),
-                              ],
+                              //initialText: user.guardianName,
                             ),
                             ProfileFieldsECard(
                               width: MediaQuery.of(context).size.width,
                               labelText: string.mobile_no,
-                              initialText: user.mobileNo,
+                              initialText: widget.user.id,
                             ),
                           ],
                         ),

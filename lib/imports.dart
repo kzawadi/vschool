@@ -35,6 +35,8 @@ export 'core/enums/UserType.dart';
 export 'core/Models/Message.dart';
 export 'core/enums/ViewState.dart';
 export 'core/services/AuthenticationServices.dart';
+export 'core/services/feesServices/feesServices.dart';
+export 'core/services/wallServices/wallServices.dart';
 export 'core/viewmodel/LoginPageModel.dart';
 export 'core/services/AuthenticationServices.dart';
 export 'core/helpers/shared_preferences_helper.dart';

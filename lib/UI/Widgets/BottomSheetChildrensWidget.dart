@@ -6,6 +6,7 @@ import 'package:ourESchool/UI/pages/Dashboard/Announcement/AnnouncementPage.dart
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Assignment/AssignmentPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/E-Card/E-CardPage.dart';
+import 'package:ourESchool/UI/pages/Dashboard/fiis/create_fees.dart';
 import 'package:ourESchool/core/Models/User.dart';
 
 class BottomSheetChildrensWidget extends StatefulWidget {
@@ -83,6 +84,22 @@ class _BottomSheetChildrensWidgetState
                         context,
                         ECardPage(
                           user: widget.user,
+                        ));
+                  },
+                  icon: Icons.perm_contact_calendar,
+                ),
+              ),
+              Expanded(
+                child: ColumnReusableCardButton(
+                  // height: 65,
+                  tileColor: Colors.deepOrangeAccent,
+                  label: 'FEES',
+                  onPressed: () {
+                    kopenPage(
+                        context,
+                        FeesPageEntry(
+                          user: widget.user,
+                          targeteid: widget.user.id,
                         ));
                   },
                   icon: Icons.perm_contact_calendar,
