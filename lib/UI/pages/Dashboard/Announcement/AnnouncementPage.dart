@@ -58,8 +58,8 @@ class _AnnouncementPageState extends State<AnnouncementPage>
 
   @override
   Widget build(BuildContext context) {
-    var userType = Provider.of<UserType>(context);
-    User currentUser = Provider.of<User>(context);
+    var userType = Provider.of<UserType>(context, listen: false);
+    User currentUser = Provider.of<User>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isTeacher = true;
     } else if (userType == UserType.PARENT) {
@@ -175,8 +175,10 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                           itemBuilder: (context, index) {
                             if (index < model.postSnapshotList.length) {
                               return AnnouncementCard(
-                                  announcement: Announcement.fromSnapshot(
-                                      model.postSnapshotList[index]));
+                                announcement: Announcement.fromSnapshot(
+                                  model.postSnapshotList[index],
+                                ),
+                              );
                             } else {
                               return Center(
                                 child: new Opacity(

@@ -170,7 +170,7 @@ class SharedPreferencesHelper {
     final SharedPreferences countryCodePrefs =
         await SharedPreferences.getInstance();
 
-    return countryCodePrefs.getString(_kCountryCodePrefs) ?? "IN";
+    return countryCodePrefs.getString(_kCountryCodePrefs) ?? "TZ";
   }
 
   // Method that saves the last selected country code
@@ -186,7 +186,7 @@ class SharedPreferencesHelper {
     final SharedPreferences countryNamePrefs =
         await SharedPreferences.getInstance();
 
-    return countryNamePrefs.getString(_kCountryNamePrefs) ?? 'India';
+    return countryNamePrefs.getString(_kCountryNamePrefs) ?? 'Tanzania';
   }
 
   // Method that saves the last selected country name

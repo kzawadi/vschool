@@ -75,16 +75,14 @@ class ProfilePageModel extends BaseModel {
 
   @override
   void dispose() {
-    if (true) {
-    } else
-      super.dispose();
+    if (true) {}
   }
 
   // Future<User> getUserProfileDataOfGuardian(UserType userType, String id) async {
   //   setState(ViewState.Busy);
   //   setState2(ViewState.Busy);
-     // String id = await _sharedPreferences.getLoggedInUserId();
-     // UserType userType = await _sharedPreferences.getUserType();
+  // String id = await _sharedPreferences.getLoggedInUserId();
+  // UserType userType = await _sharedPreferences.getUserType();
   //   userProfile = await _profileServices.getProfileData(id, userType);
   //   setState2(ViewState.Idle);
   //   setState(ViewState.Idle);

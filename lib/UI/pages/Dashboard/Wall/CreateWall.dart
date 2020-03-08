@@ -13,6 +13,7 @@ class CreateWall extends StatefulWidget {
 
 class _CreateWallState extends State<CreateWall> {
   String path = '';
+  String _fileOne = '';
 
   TextEditingController _standardController;
   TextEditingController _divisionController;
@@ -24,6 +25,7 @@ class _CreateWallState extends State<CreateWall> {
   TextEditingController _locationController;
   TextEditingController _contactsController;
   TextEditingController _dirSmsController;
+  TextEditingController _fileOnecontroller;
 
   AnnouncementType announcementType = AnnouncementType.EVENT;
 
@@ -48,10 +50,11 @@ class _CreateWallState extends State<CreateWall> {
     _locationController = TextEditingController();
     _contactsController = TextEditingController();
     _dirSmsController = TextEditingController();
+    _fileOnecontroller = TextEditingController();
   }
 
   floatingButtonPressed(CreateWallModel model, BuildContext context) async {
-    User user = Provider.of<User>(context);
+    User user = Provider.of<User>(context, listen: false);
     var wall = Wall(
       by: user.id,
       schoolName: _schoolNameController.text,
@@ -68,6 +71,7 @@ class _CreateWallState extends State<CreateWall> {
           ? _divisionController.text.toUpperCase().trim()
           : 'Global',
       photoUrl: path,
+      file1: _fileOne,
     );
     if (postType == 'SPECIFIC') {
       if (_standardController.text.trim() == '' ||
@@ -86,9 +90,8 @@ class _CreateWallState extends State<CreateWall> {
 
   @override
   Widget build(BuildContext context) {
-    // postTypeFontColor = Theme.of(context).brightness == Brightness.dark
-    //     ? Colors.white
-    //     : Colors.black;
+    double containerHeight = 100;
+    double containerWidth = 400;
     return BaseView<CreateWallModel>(
       onModelReady: (model) => model.getUserData(),
       builder: (context, model, child) {
@@ -153,7 +156,9 @@ class _CreateWallState extends State<CreateWall> {
                   ),
                 ),
                 Container(
-                  color: MyColors.dark,
+                  color: isThemeCurrentlyDark(context)
+                      ? MyColors.dark
+                      : MyColors.light,
                   constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
                   child: path == ''
                       ? Row(
@@ -253,25 +258,29 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 ///school name text entry
-                Container(
-                  height: 100,
-                  child: TextField(
-                    controller: _schoolNameController,
-                    enabled: !isPosting,
-                    maxLength: 60,
-                    onChanged: (schoolName) {
-                      setState(() {
-                        isReadyToPost = schoolName == '' ? false : true;
-                      });
-                    },
-                    maxLines: 50,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.your_school_name,
-                      labelText: string.school_name,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    child: TextField(
+                      controller: _schoolNameController,
+                      enabled: !isPosting,
+                      maxLength: 60,
+                      onChanged: (schoolName) {
+                        setState(() {
+                          isReadyToPost = schoolName == '' ? false : true;
+                        });
+                      },
+                      maxLines: 50,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.your_school_name,
+                        labelText: string.school_name,
+                      ),
                     ),
                   ),
                 ),
@@ -288,25 +297,29 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 ///mision text entry
-                Container(
-                  height: 100,
-                  child: TextField(
-                    controller: _missionController,
-                    enabled: !isPosting,
-                    maxLength: null,
-                    onChanged: (mission) {
-                      setState(() {
-                        isReadyToPost = mission == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_mission_here,
-                      labelText: string.mission,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    child: TextField(
+                      controller: _missionController,
+                      enabled: !isPosting,
+                      maxLength: null,
+                      onChanged: (mission) {
+                        setState(() {
+                          isReadyToPost = mission == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_mission_here,
+                        labelText: string.mission,
+                      ),
                     ),
                   ),
                 ),
@@ -324,27 +337,31 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 // beliefs text entry
-                Container(
-                  height: 100,
-                  // color: Colors.blueAccent.withOpacity(0.5),
-                  child: TextField(
-                    controller: _historyController,
-                    enabled: !isPosting,
-                    //focusNode: _focusNode,
-                    maxLength: null,
-                    onChanged: (belief) {
-                      setState(() {
-                        isReadyToPost = belief == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_history_here,
-                      labelText: string.history,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    // color: Colors.blueAccent.withOpacity(0.5),
+                    child: TextField(
+                      controller: _historyController,
+                      enabled: !isPosting,
+                      //focusNode: _focusNode,
+                      maxLength: null,
+                      onChanged: (belief) {
+                        setState(() {
+                          isReadyToPost = belief == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_history_here,
+                        labelText: string.history,
+                      ),
                     ),
                   ),
                 ),
@@ -362,27 +379,31 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 // beliefs text entry
-                Container(
-                  height: 100,
-                  // color: Colors.blueAccent.withOpacity(0.5),
-                  child: TextField(
-                    controller: _regNoController,
-                    enabled: !isPosting,
-                    //focusNode: _focusNode,
-                    maxLength: null,
-                    onChanged: (belief) {
-                      setState(() {
-                        isReadyToPost = belief == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_registration_here,
-                      labelText: string.regNo,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    // color: Colors.blueAccent.withOpacity(0.5),
+                    child: TextField(
+                      controller: _regNoController,
+                      enabled: !isPosting,
+                      //focusNode: _focusNode,
+                      maxLength: null,
+                      onChanged: (belief) {
+                        setState(() {
+                          isReadyToPost = belief == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_registration_here,
+                        labelText: string.regNo,
+                      ),
                     ),
                   ),
                 ),
@@ -400,27 +421,31 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 // beliefs text entry
-                Container(
-                  height: 100,
-                  // color: Colors.blueAccent.withOpacity(0.5),
-                  child: TextField(
-                    controller: _dirSmsController,
-                    enabled: !isPosting,
-                    //focusNode: _focusNode,
-                    maxLength: null,
-                    onChanged: (belief) {
-                      setState(() {
-                        isReadyToPost = belief == '' ? false : true;
-                      });
-                    },
-                    maxLines: 300,
-                    keyboardType: TextInputType.multiline,
-                    style: isThemeCurrentlyDark(context)
-                        ? BodyStylesDefault.white.copyWith(fontSize: 20)
-                        : BodyStylesDefault.black.copyWith(fontSize: 20),
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: string.type_dirSms_here,
-                      labelText: string.dirSms,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: containerHeight,
+                    width: containerWidth,
+                    // color: Colors.blueAccent.withOpacity(0.5),
+                    child: TextField(
+                      controller: _dirSmsController,
+                      enabled: !isPosting,
+                      //focusNode: _focusNode,
+                      maxLength: null,
+                      onChanged: (belief) {
+                        setState(() {
+                          isReadyToPost = belief == '' ? false : true;
+                        });
+                      },
+                      maxLines: 300,
+                      keyboardType: TextInputType.multiline,
+                      style: isThemeCurrentlyDark(context)
+                          ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                          : BodyStylesDefault.black.copyWith(fontSize: 17),
+                      decoration: kTextFieldDecoration.copyWith(
+                        hintText: string.type_dirSms_here,
+                        labelText: string.dirSms,
+                      ),
                     ),
                   ),
                 ),
@@ -429,148 +454,66 @@ class _CreateWallState extends State<CreateWall> {
                 ),
 
                 Center(
-                  child: Text(
-                    'Forms and important school documents feature itakuwa implemented here soon',
-                    style: isThemeCurrentlyDark(context)
-                        ? SubHeadingStylesMaterial.light
-                        : SubHeadingStylesMaterial.dark,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Forms and important school documents feature itakuwa implemented here soon',
+                      style: isThemeCurrentlyDark(context)
+                          ? SubHeadingStylesMaterial.light
+                          : SubHeadingStylesMaterial.dark,
+                    ),
                   ),
                 ),
 
-                // /// history text entry
-                // Container(
-                //   height: 150,
-                //   // color: Colors.blueAccent.withOpacity(0.5),
-                //   child: TextField(
-                //     controller: _historyController,
-                //     enabled: !isPosting,
-                //     focusNode: _focusNode,
-                //     maxLength: null,
-                //     onChanged: (history) {
-                //       setState(() {
-                //         isReadyToPost = history == '' ? false : true;
-                //       });
-                //     },
-                //     maxLines: 300,
-                //     keyboardType: TextInputType.multiline,
-                //     style: TextStyle(
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.w500,
-                //     ),
-                //     decoration: kTextFieldDecoration.copyWith(
-                //       hintText: string.type_mission_here,
-                //       labelText: string.mission,
-                //     ),
-                //   ),
-                // ),
+                SizedBox(
+                  height: 10,
+                ),
+                //! this will act as a file name for viewr so the admin have to be insisted on
+                //! correct file names becouse they have meaning
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _fileOnecontroller,
+                    enabled: false,
+                    style: isThemeCurrentlyDark(context)
+                        ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                        : BodyStylesDefault.black.copyWith(fontSize: 17),
+                    decoration: kTextFieldDecoration.copyWith(
+                      hintText: string.file_name,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
 
-                // /// regNo text entry
-                // Container(
-                //   height: 150,
-                //   // color: Colors.blueAccent.withOpacity(0.5),
-                //   child: TextField(
-                //     controller: _regNoController,
-                //     enabled: !isPosting,
-                //     focusNode: _focusNode,
-                //     maxLength: null,
-                //     onChanged: (regNo) {
-                //       setState(() {
-                //         isReadyToPost = regNo == '' ? false : true;
-                //       });
-                //     },
-                //     maxLines: 300,
-                //     keyboardType: TextInputType.multiline,
-                //     style: TextStyle(
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.w500,
-                //     ),
-                //     decoration: kTextFieldDecoration.copyWith(
-                //       hintText: string.type_mission_here,
-                //       labelText: string.mission,
-                //     ),
-                //   ),
-                // ),
-
-                // /// location text entry
-                // Container(
-                //   height: 150,
-                //   // color: Colors.blueAccent.withOpacity(0.5),
-                //   child: TextField(
-                //     controller: _locationController,
-                //     enabled: !isPosting,
-                //     focusNode: _focusNode,
-                //     maxLength: null,
-                //     onChanged: (location) {
-                //       setState(() {
-                //         isReadyToPost = location == '' ? false : true;
-                //       });
-                //     },
-                //     maxLines: 300,
-                //     keyboardType: TextInputType.multiline,
-                //     style: TextStyle(
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.w500,
-                //     ),
-                //     decoration: kTextFieldDecoration.copyWith(
-                //       hintText: string.type_mission_here,
-                //       labelText: string.mission,
-                //     ),
-                //   ),
-                // ),
-
-                // ///contacts text entry
-                // Container(
-                //   height: 150,
-                //   // color: Colors.blueAccent.withOpacity(0.5),
-                //   child: TextField(
-                //     controller: _contactsController,
-                //     enabled: !isPosting,
-                //     focusNode: _focusNode,
-                //     maxLength: null,
-                //     onChanged: (contact) {
-                //       setState(() {
-                //         isReadyToPost = contact == '' ? false : true;
-                //       });
-                //     },
-                //     maxLines: 300,
-                //     keyboardType: TextInputType.multiline,
-                //     style: TextStyle(
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.w500,
-                //     ),
-                //     decoration: kTextFieldDecoration.copyWith(
-                //       hintText: string.type_mission_here,
-                //       labelText: string.mission,
-                //     ),
-                //   ),
-                // ),
-
-                // /// dirSms text entry
-                // Container(
-                //   height: 150,
-                //   // color: Colors.blueAccent.withOpacity(0.5),
-                //   child: TextField(
-                //     controller: _dirSmsController,
-                //     enabled: !isPosting,
-                //     focusNode: _focusNode,
-                //     maxLength: null,
-                //     onChanged: (dirsms) {
-                //       setState(() {
-                //         isReadyToPost = dirsms == '' ? false : true;
-                //       });
-                //     },
-                //     maxLines: 300,
-                //     keyboardType: TextInputType.multiline,
-                //     style: TextStyle(
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.w500,
-                //     ),
-                //     decoration: kTextFieldDecoration.copyWith(
-                //       hintText: string.type_mission_here,
-                //       labelText: string.mission,
-                //     ),
-                //   ),
-                // ),
+                Container(
+                  color: isThemeCurrentlyDark(context)
+                      ? MyColors.dark
+                      : MyColors.light,
+                  constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
+                  child: MaterialButton(
+                    minWidth: MediaQuery.of(context).size.width / 2.2,
+                    height: 100,
+                    child: Icon(Icons.photo_library),
+                    onPressed: () async {
+                      String _path = await openFileExplorer(
+                        FileType.CUSTOM,
+                        mounted,
+                        context,
+                        extension: 'PDF',
+                      );
+                      setState(() {
+                        _fileOne =
+                            _path != null ? _path.split('/').last : '...';
+                        print(_fileOne);
+                        if (_fileOne.isNotEmpty) {
+                          _fileOnecontroller.text = _fileOne;
+                        }
+                      });
+                    },
+                  ),
+                ),
               ],
             ),
           ),

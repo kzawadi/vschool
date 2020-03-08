@@ -59,8 +59,8 @@ class _WallPageState extends State<WallPage>
 
   @override
   Widget build(BuildContext context) {
-    var userType = Provider.of<UserType>(context);
-    User currentUser = Provider.of<User>(context);
+    var userType = Provider.of<UserType>(context, listen: false);
+    User currentUser = Provider.of<User>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isTeacher = true;
     } else if (userType == UserType.PARENT) {

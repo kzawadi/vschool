@@ -16,6 +16,16 @@ class Wall {
   String location;
   String contacts;
   String dirSms;
+  String file1;
+  String file2;
+  String file3;
+  String file4;
+  String file5;
+  String file6;
+  String file7;
+  String file8;
+  String file9;
+  String file10;
 
   Wall({
     this.schoolName = '',
@@ -33,6 +43,16 @@ class Wall {
     this.location,
     this.contacts,
     this.dirSms,
+    this.file1,
+    this.file2,
+    this.file3,
+    this.file4,
+    this.file5,
+    this.file6,
+    this.file7,
+    this.file8,
+    this.file9,
+    this.file10,
   });
 
   Wall.fromJson(Map<String, dynamic> json) {
@@ -51,6 +71,16 @@ class Wall {
     location = json['location'];
     contacts = json['contacts'];
     dirSms = json['dirSms'];
+    file1 = json['file1'];
+    file2 = json['file2'];
+    file3 = json['file3'];
+    file4 = json['file4'];
+    file5 = json['file5'];
+    file6 = json['file6'];
+    file7 = json['file7'];
+    file8 = json['file8'];
+    file9 = json['file9'];
+    file10 = json['file10'];
   }
 
   Wall.fromSnapshot(DocumentSnapshot snapshot) {
@@ -69,6 +99,16 @@ class Wall {
     location = snapshot['location'].toString() ?? '';
     contacts = snapshot['contacts'].toString() ?? '';
     dirSms = snapshot['dirSms'].toString() ?? '';
+    file1 = snapshot['file1'].toString() ?? '';
+    file2 = snapshot['file2'].toString() ?? '';
+    file3 = snapshot['file3'].toString() ?? '';
+    file4 = snapshot['file4'].toString() ?? '';
+    file5 = snapshot['file5'].toString() ?? '';
+    file6 = snapshot['file6'].toString() ?? '';
+    file7 = snapshot['file7'].toString() ?? '';
+    file8 = snapshot['file8'].toString() ?? '';
+    file9 = snapshot['file9'].toString() ?? '';
+    file10 = snapshot['file10'].toString() ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -88,6 +128,16 @@ class Wall {
     data['location'] = this.location;
     data['contacts'] = this.contacts;
     data['dirSms'] = this.dirSms;
+    data['file1'] = this.file1;
+    data['file2'] = this.file2;
+    data['file3'] = this.file3;
+    data['file4'] = this.file4;
+    data['file5'] = this.file5;
+    data['file6'] = this.file6;
+    data['file7'] = this.file7;
+    data['file8'] = this.file8;
+    data['file9'] = this.file9;
+    data['file10'] = this.file10;
     return data;
   }
 }

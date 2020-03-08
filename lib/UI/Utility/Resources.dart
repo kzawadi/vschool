@@ -147,7 +147,8 @@ Check School posts to stay updated with school news.''';
   static const type_dirSms_here = 'Type headmaster message ...';
 
   static const regNo = 'REGISTRATION';
-  static const type_registration_here = 'Type School registration number ...';
+  static const type_registration_here =
+      'Type School registration information ...';
 
   static const school_name = 'NAME OF THE SCHOOL';
   static const your_school_name = 'Type the School Name ...';
@@ -174,6 +175,11 @@ Check School posts to stay updated with school news.''';
 
 //Assignment
   static const assignment = 'Assignment';
+  static const emptyAssignment = 'No Assignments available....!';
+
+  static const noAssignment =
+      ''''Sorry, You Don\'t have any Class associated with you....!
+If you are a parent then go to childrens section to check assignments''';
 
   static const upload_assignment = 'Upload Assignment';
   static const title = 'Title';

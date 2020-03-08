@@ -167,11 +167,20 @@ class AuthenticationServices extends Services {
     // await sharedPreferencesHelper.clearAllData();
     try {
       AuthErrors authErrors = AuthErrors.UNKNOWN;
-      firebaseUser = await auth.createUserWithEmailAndPassword(
+      AuthResult authResult = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      firebaseUser = authResult.user;
+      await firestore.collection('users').document(firebaseUser.uid).setData({
+        "uid": firebaseUser.uid,
+        "email": firebaseUser.email,
+        "username": firebaseUser.displayName,
+        // "roles": {"admin": true, "editor": true},
+        "active": true
+      });
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);
       print("User Regestered using Email and Password");
+      print('user collection created with $firebaseUser'.toString());
       // sharedPreferencesHelper.setUserType(userType);
       isUserLoggedIn = true;
       isUserLoggedInStream.add(isUserLoggedIn);
@@ -187,14 +196,15 @@ class AuthenticationServices extends Services {
     // await sharedPreferencesHelper.clearAllData();
     try {
       AuthErrors authErrors = AuthErrors.UNKNOWN;
-      firebaseUser = await auth.signInWithEmailAndPassword(
+      AuthResult authResult = await auth.signInWithEmailAndPassword(
           email: email, password: password);
+      firebaseUser = authResult.user;
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);
       print("User Loggedin using Email and Password");
       // sharedPreferencesHelper.setUserType(userType);
       isUserLoggedIn = true;
-      fireBaseUserStream.add(firebaseUser);
+      fireBaseUserStream.sink.add(firebaseUser);
       isUserLoggedInStream.add(isUserLoggedIn);
       return authErrors;
     } on PlatformException catch (e) {

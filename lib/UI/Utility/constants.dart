@@ -14,7 +14,9 @@ var kTextFieldDecoration = InputDecoration(
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(16),
   ),
-  hintStyle: TextStyle(height: 1.5, fontWeight: FontWeight.w300),
+  hintStyle: TextStyle(
+    height: 1.5, /* fontWeight: FontWeight.w300*/
+  ),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
 );
 
@@ -63,10 +65,9 @@ kopenPageSlide(BuildContext context, Widget page, {Duration duration}) {
   return Navigator.push(
     context,
     RouteTransition(
-      // fade: false,
-      widget: page,
-      duration: duration
-    ),
+        // fade: false,
+        widget: page,
+        duration: duration),
   );
 }
 

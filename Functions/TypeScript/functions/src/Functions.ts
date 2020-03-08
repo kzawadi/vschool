@@ -1,5 +1,6 @@
 import { UserType } from './UserType';
 import { getProfileRef, db } from './index';
+import admin = require('firebase-admin');
 
 
 export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
@@ -139,4 +140,39 @@ export async function messageIdAutoEntry(eventSnapshot: any, context: any) {
     batch2.set(ref2, map, { merge: true });
 
     return await batch2.commit();
+}
+
+
+export async function notificationChat(eventSnapshot: any, context: any) {
+    const fcm = admin.messaging();
+
+    const newValue = eventSnapshot.data();
+    const id = newValue.to;
+    //const sms = newValue.message;
+    const from = newValue.from;
+
+    console.log('=========start of notification=======');
+    console.log(newValue);
+
+    const querySnapshot = await db
+    .collection('users')
+    .doc(id)
+    .collection('tokens')
+    .get();
+
+  const tokens = querySnapshot.docs.map(snap => snap.id);
+
+  const payload: admin.messaging.MessagingPayload = {
+    notification: {
+      title: 'New Message!',
+      body: `you have a new message from ${from}`,
+      //icon: 'your-icon-url',
+      click_action: 'FLUTTER_NOTIFICATION_CLICK'
+    }
+  };
+  console.log('=========thee end of notification=======');
+  return fcm.sendToDevice(tokens, payload);
+
+  console.log('=========start of notification=======');
+
 }

@@ -1,4 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
@@ -7,7 +9,13 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with Services {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  SharedPreferencesHelper _sharedPreferencesHelper =
+      locator<SharedPreferencesHelper>();
+  StreamSubscription iosSubscription;
+
   var currentIndex = 0;
   Color background = Colors.white;
   // AuthenticationServices _auth = locator<AuthenticationServices>();
@@ -31,7 +39,94 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    //getFirebaseUser();
     super.initState();
+    if (Platform.isIOS) {
+      iosSubscription = cloudmesaging.onIosSettingsRegistered.listen((data) {
+        print(data);
+        _saveDeviceToken();
+      });
+
+      cloudmesaging.requestNotificationPermissions(
+          IosNotificationSettings(sound: true, badge: true, alert: true));
+    } else {
+      _saveDeviceToken();
+    }
+
+    cloudmesaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        // final snackbar = SnackBar(
+        //   content: Text(message['notification']['title']),
+        //   action: SnackBarAction(
+        //     label: 'Go',
+        //     onPressed: () => null,
+        //   ),
+        // );
+
+        // Scaffold.of(context).showSnackBar(snackbar);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: ListTile(
+              title: Text(message['notification']['title']),
+              subtitle: Text(message['notification']['body']),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.amber,
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+        print('RECIEVED NOTIFICATION IS $message'.toString());
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        // TODO optional
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        // TODO optional
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    if (iosSubscription != null) iosSubscription.cancel();
+    super.dispose();
+  }
+
+  _saveDeviceToken() async {
+    String fcmToken = await cloudmesaging.getToken();
+    String id = await _sharedPreferencesHelper.getLoggedInUserId();
+
+    print('curent user id is $firebaseUser'.toString());
+
+    // Save it to Firestore
+    if (fcmToken != null) {
+      var tokens = firestore
+          .collection('users')
+          .document(id)
+          .collection('tokens')
+          .document(fcmToken);
+
+      await tokens.setData({
+        'token': fcmToken,
+        'createdAt': FieldValue.serverTimestamp(), // optional
+        'platform': Platform.operatingSystem // optional
+      });
+    }
+    print('the token is $fcmToken'.toString());
+  }
+
+  /// Subscribe the user to a topic
+  _subscribeToTopic() async {
+    // Subscribe the user to a topic
+    cloudmesaging.subscribeToTopic('puppies');
   }
 
   ImageProvider<dynamic> setImage(User user) {
@@ -44,13 +139,14 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    var userType = Provider.of<UserType>(context);
+    var userType = Provider.of<UserType>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isTeacher = true;
     }
-    User user = Provider.of<User>(context);
+    User user = Provider.of<User>(context, listen: false);
     return Container(
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: TopBar(
           buttonHeroTag: 'profileeee',
           title: pageName,

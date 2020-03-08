@@ -3,7 +3,7 @@ import 'package:ourESchool/UI/Widgets/AssignmentDetailBottomSheet.dart';
 import 'package:ourESchool/imports.dart';
 
 class AssignmentsPage extends StatefulWidget with AnalyticsScreen {
-  AssignmentsPage({Key key, this.standard = ''}) : super(key: key){
+  AssignmentsPage({Key key, this.standard = ''}) : super(key: key) {
     // setCurrentScreen();
   }
 
@@ -51,8 +51,8 @@ class _AssignmentsPageState extends State<AssignmentsPage> {
   @override
   Widget build(BuildContext context) {
     if (widget.standard == '') {
-      var userType = Provider.of<UserType>(context);
-      User currentUser = Provider.of<User>(context);
+      var userType = Provider.of<UserType>(context, listen: false);
+      User currentUser = Provider.of<User>(context, listen: false);
       if (userType == UserType.TEACHER) {
         if (!isLoaded) {
           stdDiv_Global =
@@ -115,9 +115,7 @@ class _AssignmentsPageState extends State<AssignmentsPage> {
                 child: stdDiv_Global == 'N.A'
                     ? Container(
                         child: Center(
-                          child: Text(
-                              '''Sorry, You Don\'t have any Class associated with you....!
-If you are a parent then go to childrens section to check assignments''',
+                          child: Text(string.noAssignment,
                               textAlign: TextAlign.center,
                               style: ksubtitleStyle.copyWith(
                                 fontSize: 25,
@@ -130,7 +128,7 @@ If you are a parent then go to childrens section to check assignments''',
                             ? Container(
                                 child: Center(
                                   child: Text(
-                                    'No Assignments available....!',
+                                    string.emptyAssignment,
                                     textAlign: TextAlign.center,
                                     style:
                                         ksubtitleStyle.copyWith(fontSize: 25),

@@ -45,7 +45,8 @@ class _SettingPageState extends State<SettingPage> {
                   context: context,
                   icon: FontAwesomeIcons.user,
                   onTap: () {
-                    UserType userType = Provider.of<UserType>(context);
+                    UserType userType =
+                        Provider.of<UserType>(context, listen: false);
                     if (userType == UserType.PARENT) {
                       kopenPage(context, GuardianProfilePage());
                     } else {
