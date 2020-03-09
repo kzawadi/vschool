@@ -10,7 +10,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with Services {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  var _scaffoldKey;
 
   SharedPreferencesHelper _sharedPreferencesHelper =
       locator<SharedPreferencesHelper>();
@@ -41,6 +41,7 @@ class _HomeState extends State<Home> with Services {
   void initState() {
     //getFirebaseUser();
     super.initState();
+    _scaffoldKey = GlobalKey<ScaffoldState>();
     if (Platform.isIOS) {
       iosSubscription = cloudmesaging.onIosSettingsRegistered.listen((data) {
         print(data);
@@ -64,23 +65,25 @@ class _HomeState extends State<Home> with Services {
         //   ),
         // );
 
-        // Scaffold.of(context).showSnackBar(snackbar);
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            content: ListTile(
-              title: Text(message['notification']['title']),
-              subtitle: Text(message['notification']['body']),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                color: Colors.amber,
-                child: Text('Ok'),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
-          ),
+        _scaffoldKey.currentState.showSnackBar(
+          ksnackBar(context, message['notification']['title']),
         );
+        // showDialog(
+        //   context: context,
+        //   builder: (context) => AlertDialog(
+        //     content: ListTile(
+        //       title: Text(message['notification']['title']),
+        //       subtitle: Text(message['notification']['body']),
+        //     ),
+        //     actions: <Widget>[
+        //       FlatButton(
+        //         color: Colors.amber,
+        //         child: Text('Ok'),
+        //         onPressed: () => Navigator.of(context).pop(),
+        //       ),
+        //     ],
+        //   ),
+        // );
         print('RECIEVED NOTIFICATION IS $message'.toString());
       },
       onLaunch: (Map<String, dynamic> message) async {
