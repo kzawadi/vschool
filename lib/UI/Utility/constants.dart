@@ -134,7 +134,7 @@ Future openFileExplorer(
 
 SnackBar ksnackBar(BuildContext context, String message) {
   return SnackBar(
-    duration: Duration(seconds: 2),
+    duration: Duration(seconds: 5),
     content: Text(
       message,
       textAlign: TextAlign.center,

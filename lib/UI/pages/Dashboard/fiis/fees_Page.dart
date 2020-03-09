@@ -35,54 +35,33 @@ class _WallPageState extends State<FeesPage>
   String buttonLabel = 'Global';
   Fees fees;
 
-  @override
-  void initState() {
-    // controller = ScrollController()..addListener(_scrollListener);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() {
-    // controller.removeListener(_scrollListener);
-    super.dispose();
-  }
-
-  // void _scrollListener() {
-  //   if (model.state == ViewState.Idle) {
-  //     if (controller.position.pixels == controller.position.maxScrollExtent) {
-  //       // setState(() => _isLoading = true);
-  //       model.getWall(stdDiv_Global);
-  //       // scaffoldKey.currentState.widget
-  //     }
-  //   }
+  // @override
+  // void dispose() {
+  //   super.dispose();
   // }
 
   @override
   Widget build(BuildContext context) {
     var userType = Provider.of<UserType>(context, listen: false);
     targeteid = widget.user.id;
-    User currentUser = Provider.of<User>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isTeacher = true;
-    } else if (userType == UserType.PARENT) {
-    } else if (userType == UserType.STUDENT) {
-      if (!isLoaded) {
-        // stdDiv_Global =
-        //     currentUser.standard + currentUser.division.toUpperCase();
-        isLoaded = true;
-      }
-
-      print(currentUser.id);
-    }
-    return BaseView<FeesPageModel>(
-      onModelReady: (model) => model.getFees(targeteid),
-      builder: (context, model, child) {
-        this.model = model;
-        return FeesViewer(
-          fees: Fees.fromSnapshot(model.feessnapshot),
-        );
-      },
-    );
+    } else if (userType == UserType.PARENT) {}
+    if (userType == UserType.STUDENT)
+      return BaseView<FeesPageModel>(
+        onModelReady: (model) => model.getFees(targeteid),
+        builder: (context, model, child) {
+          this.model = model;
+          return FeesViewer(
+            fees: Fees.fromSnapshot(model.feessnapshot),
+          );
+        },
+      );
   }
 
   @override
