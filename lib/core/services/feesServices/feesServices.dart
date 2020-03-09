@@ -19,24 +19,36 @@ class FeesServices extends Services {
   getFees(
     String studentId,
   ) async {
-    //if (schoolCode == null) await getSchoolCode();
+    if (schoolCode == null) await getSchoolCode();
 
-    var fees =
-        (await schoolRefwithCode()).document('fees').collection(studentId);
+    // var fees = (await schoolRefwithCode())
+    //     .document('fees')
+    //     .collection(studentId)
+    //     .document('fees');
+
+    DocumentReference _feesRef = schoolRef
+        .collection(schoolCode.toUpperCase().trim())
+        .document('fees')
+        .collection(studentId)
+        .document('myfees');
+
+    DocumentSnapshot data = await _feesRef.get();
+    feessnapshot = data;
 
     //TODO remember to limit and fetch the lastest only
-    QuerySnapshot data = await fees.getDocuments();
+    // // QuerySnapshot data = await fees.getDocuments();
 
-    if (data != null && data.documents.length > 0) {
-      feessnapshot = data.documents[data.documents.length - 1];
-      //feessnapshot.addAll(data.documents);
-    } else {
-      print('no more fees');
-      //No More post Available
-    }
+    // if (data != null && data.documents.length > 0) {
+    //   // feessnapshot = data.documents[data.documents.length - 1];
+    //   //feessnapshot.addAll(data.documents);
+
+    // } else {
+    //   print('no more fees');
+    //   //No More post Available
+    // }
 
     //feessnapshot = data;
-    print('fees retrived is $fees'.toString());
+    print('fees retrived is $data'.toString());
     print('fees retrived is $feessnapshot'.toString());
   }
 
@@ -46,14 +58,15 @@ class FeesServices extends Services {
 
     fees.timestamp = Timestamp.now();
 
-    CollectionReference _feesRef = schoolRef
+    DocumentReference _feesRef = schoolRef
         .collection(schoolCode.toUpperCase().trim())
         .document('fees')
-        .collection(studentId);
+        .collection(studentId)
+        .document('myfees');
 
     Map feesMap = fees.toJson();
 
-    await _feesRef.add(feesMap);
+    await _feesRef.setData(feesMap);
     print(feesMap.toString());
   }
 }
