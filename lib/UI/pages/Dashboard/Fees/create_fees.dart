@@ -1,5 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Utility/input_formatters.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
@@ -31,6 +32,12 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
 
   String targeteid;
 
+  ///nice formatting of numbers
+  RegExp reg = new RegExp(
+    r'(\d{1,3})(?=(\d{3})+(?!\d))',
+  );
+  Function mathFunc = (Match match) => '${match[1]},';
+
   @override
   void initState() {
     super.initState();
@@ -47,9 +54,9 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
     var fees = Fees(
       id: user.id,
       description: _description.text,
-      totalFees: _totalFees.text,
-      due: _due.text,
-      paid: _paid.text,
+      totalFees: _totalFees.text.replaceAllMapped(reg, mathFunc),
+      due: _due.text.replaceAllMapped(reg, mathFunc),
+      paid: _paid.text.replaceAllMapped(reg, mathFunc),
       // description: _description.text,
     );
 
@@ -137,7 +144,8 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                             controller: _totalFees,
                             //autofocus: true,
                             inputFormatters: [
-                              WhitelistingTextInputFormatter(RegExp("[0-9.]"))
+                              WhitelistingTextInputFormatter.digitsOnly,
+                              NumericTextFormatter()
                             ],
                             keyboardType:
                                 TextInputType.numberWithOptions(decimal: true),
@@ -175,9 +183,9 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                           padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
                           child: TextFormField(
                             controller: _due,
-                            autofocus: true,
                             inputFormatters: [
-                              WhitelistingTextInputFormatter(RegExp("[0-9.]"))
+                              WhitelistingTextInputFormatter.digitsOnly,
+                              NumericTextFormatter()
                             ],
                             keyboardType:
                                 TextInputType.numberWithOptions(decimal: true),
@@ -215,9 +223,9 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                           padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
                           child: TextFormField(
                             controller: _paid,
-                            autofocus: true,
                             inputFormatters: [
-                              WhitelistingTextInputFormatter(RegExp("[0-9.]"))
+                              WhitelistingTextInputFormatter.digitsOnly,
+                              NumericTextFormatter()
                             ],
                             keyboardType:
                                 TextInputType.numberWithOptions(decimal: true),
