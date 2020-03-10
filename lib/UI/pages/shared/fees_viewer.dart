@@ -88,6 +88,37 @@ class FeesViewer extends StatelessWidget {
                     ),
                     splashColor: MyColors.accent,
                   ),
+                  GoodTile(
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            fees.description,
+                            style: HeadingStylesDefault.accent,
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            fees.description,
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white
+                                : BodyStylesDefault.black,
+                            textAlign: TextAlign.left,
+                            softWrap: true,
+                            overflow: TextOverflow.fade,
+                          ),
+                        ],
+                      ),
+                    ),
+                    splashColor: MyColors.accent,
+                  ),
                 ],
               ),
             ),

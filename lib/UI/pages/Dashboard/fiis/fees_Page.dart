@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
 import 'package:ourESchool/UI/pages/shared/fees_viewer.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
@@ -37,25 +38,13 @@ class _WallPageState extends State<FeesPage>
 
   @override
   void initState() {
-    // controller = ScrollController()..addListener(_scrollListener);
     super.initState();
   }
 
   @override
   void dispose() {
-    // controller.removeListener(_scrollListener);
     super.dispose();
   }
-
-  // void _scrollListener() {
-  //   if (model.state == ViewState.Idle) {
-  //     if (controller.position.pixels == controller.position.maxScrollExtent) {
-  //       // setState(() => _isLoading = true);
-  //       model.getWall(stdDiv_Global);
-  //       // scaffoldKey.currentState.widget
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +67,7 @@ class _WallPageState extends State<FeesPage>
       onModelReady: (model) => model.getFees(targeteid),
       builder: (context, model, child) {
         this.model = model;
-        return FeesViewer(
+        return FeesPageDash(
           fees: Fees.fromSnapshot(model.feessnapshot),
         );
       },

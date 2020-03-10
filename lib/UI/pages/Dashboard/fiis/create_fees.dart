@@ -1,9 +1,12 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
+import 'package:ourESchool/UI/resources/text_styles.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
@@ -21,18 +24,20 @@ class FeesPageEntry extends StatefulWidget {
 }
 
 class _FeesPageEntryState extends State<FeesPageEntry> {
-  TextEditingController _standardController;
-  TextEditingController _divisionController;
-  TextEditingController _captionController;
+  TextEditingController _totalFees;
+  TextEditingController _paid;
+  TextEditingController _description;
+  TextEditingController _due;
 
   String targeteid;
 
   @override
   void initState() {
     super.initState();
-    _standardController = TextEditingController();
-    _captionController = TextEditingController();
-    _divisionController = TextEditingController();
+    _totalFees = TextEditingController();
+    _description = TextEditingController();
+    _paid = TextEditingController();
+    _due = TextEditingController();
 
     targeteid = widget.targeteid == '' ? '' : widget.targeteid;
   }
@@ -41,8 +46,11 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
     User user = Provider.of<User>(context, listen: false);
     var fees = Fees(
       id: user.id,
-      description: _captionController.text,
-      // description: _captionController.text,
+      description: _description.text,
+      totalFees: _totalFees.text,
+      due: _due.text,
+      paid: _paid.text,
+      // description: _description.text,
     );
 
     await model.postFees(fees, targeteid);
@@ -83,27 +91,11 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: Column(
-                            children: <Widget>[
-                              ProfileFieldsECard(
-                                width: MediaQuery.of(context).size.width,
-                                labelText: string.mobile_no,
-                                initialText: widget.user.id,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Container(
-                          height: 150,
+                          height: 100,
                           // color: Colors.blueAccent.withOpacity(0.5),
                           child: TextField(
-                            controller: _captionController,
+                            controller: _description,
                             // enabled: !isPosting,
                             // focusNode: _focusNode,
                             maxLength: null,
@@ -119,8 +111,132 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: kTextFieldDecoration.copyWith(
-                              hintText: string.type_your_stuff_here,
-                              labelText: string.caption,
+                              hintText: string.fees_description,
+                              labelText: string.description,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text(
+                            string.total_fees,
+                            style: isThemeCurrentlyDark(context)
+                                ? SubHeadingStylesMaterial.light
+                                : SubHeadingStylesMaterial.dark,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
+                          child: TextFormField(
+                            controller: _totalFees,
+                            autofocus: true,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter(RegExp("[0-9.]"))
+                            ],
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'Please enter the amount owed';
+                              if (double.tryParse(value) == null)
+                                return "Please enter a valid number";
+                              return null;
+                            },
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                                : BodyStylesDefault.black
+                                    .copyWith(fontSize: 17),
+                            decoration: kTextFieldDecoration.copyWith(
+                              hintText: string.total_fees,
+                              labelText: string.feess,
+                              //prefixIcon: Icon(Icons.label),
+                              suffix: Icon(FontAwesomeIcons.dollarSign),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text(
+                            string.fees_due,
+                            style: isThemeCurrentlyDark(context)
+                                ? SubHeadingStylesMaterial.light
+                                : SubHeadingStylesMaterial.dark,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
+                          child: TextFormField(
+                            controller: _due,
+                            autofocus: true,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter(RegExp("[0-9.]"))
+                            ],
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'Please enter the amount owed';
+                              if (double.tryParse(value) == null)
+                                return "Please enter a valid number";
+                              return null;
+                            },
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                                : BodyStylesDefault.black
+                                    .copyWith(fontSize: 17),
+                            decoration: kTextFieldDecoration.copyWith(
+                              hintText: string.fees_due,
+                              labelText: string.fees_due,
+                              //prefixIcon: Icon(Icons.label),
+                              suffix: Icon(FontAwesomeIcons.dollarSign),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text(
+                            string.fees_paid,
+                            style: isThemeCurrentlyDark(context)
+                                ? SubHeadingStylesMaterial.light
+                                : SubHeadingStylesMaterial.dark,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
+                          child: TextFormField(
+                            controller: _paid,
+                            autofocus: true,
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter(RegExp("[0-9.]"))
+                            ],
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'Please enter the amount owed';
+                              if (double.tryParse(value) == null)
+                                return "Please enter a valid number";
+                              return null;
+                            },
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white.copyWith(fontSize: 17)
+                                : BodyStylesDefault.black
+                                    .copyWith(fontSize: 17),
+                            decoration: kTextFieldDecoration.copyWith(
+                              hintText: string.fees_paid_hint,
+                              labelText: string.fees_paid_hint,
+                              //prefixIcon: Icon(Icons.label),
+                              suffix: Icon(FontAwesomeIcons.dollarSign),
                             ),
                           ),
                         ),

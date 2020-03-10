@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/core/helpers/FirebaseAnalytics.dart';
 import 'package:ourESchool/imports.dart';
@@ -118,7 +119,7 @@ class _MainDashboardState extends State<MainDashboard> {
                       tileColor: Colors.grey,
                       label: string.transportation,
                       onPressed: () {
-                        kopenPage(context, TransportationPage());
+                        kopenPage(context, FeesPageDash());
                       },
                       icon: FontAwesomeIcons.bus,
                     ),

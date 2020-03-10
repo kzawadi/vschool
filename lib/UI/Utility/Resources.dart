@@ -117,8 +117,14 @@ Check School posts to stay updated with school news.''';
 
 //Fees
   static const fees = 'Fees';
+  static const fees_title = 'FEES REPORT';
   static const fees_due = 'FEES DUE';
   static const fees_paid = 'FEES PAID';
+  static const fees_paid_hint = 'PAID';
+  static const total_fees = 'TOTAL FEES';
+  static const feess = 'School Fees';
+  static const description = 'description';
+  static const fees_description = 'A Short Desciption About Fees';
 
 //E-card
   static const e_card = 'E-Card';
