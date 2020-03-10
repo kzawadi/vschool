@@ -135,7 +135,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                           padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
                           child: TextFormField(
                             controller: _totalFees,
-                            autofocus: true,
+                            //autofocus: true,
                             inputFormatters: [
                               WhitelistingTextInputFormatter(RegExp("[0-9.]"))
                             ],

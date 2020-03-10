@@ -125,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     userType = Provider.of<UserType>(context, listen: false);
-    var firebaseUser = Provider.of<FirebaseUser>(context, listen: true);
+    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
 
     if (userType == UserType.STUDENT) {
       guardiansPanel = false;

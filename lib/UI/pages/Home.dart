@@ -153,10 +153,14 @@ class _HomeState extends State<Home> with Services {
         appBar: TopBar(
           buttonHeroTag: 'profileeee',
           title: pageName,
-          child: Image(
-            height: 30,
-            width: 30,
-            image: setImage(user),
+          child: CircleAvatar(
+            radius: 22,
+            child: ClipOval(
+              child: Image(
+                fit: BoxFit.fill,
+                image: setImage(user),
+              ),
+            ),
           ),
           onPressed: () {
             if (userType == UserType.PARENT) {
