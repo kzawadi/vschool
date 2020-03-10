@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
@@ -83,8 +82,8 @@ class _FeesPageState extends State<FeesPageDash> {
                       ),
                       Text(fees.totalFees,
                           style: isThemeCurrentlyDark(context)
-                              ? SubHeadingStylesMaterial.light
-                              : SubHeadingStylesMaterial.dark),
+                              ? HeadingStylesMaterial.light
+                              : HeadingStylesMaterial.dark),
                     ],
                   ),
                   Material(
@@ -129,8 +128,8 @@ class _FeesPageState extends State<FeesPageDash> {
                   Text(
                     fees.paid,
                     style: isThemeCurrentlyDark(context)
-                        ? SubHeadingStylesMaterial.light
-                        : SubHeadingStylesMaterial.dark,
+                        ? HeadingStylesMaterial.light
+                        : HeadingStylesMaterial.dark,
                   ),
                 ],
               ),
@@ -162,8 +161,8 @@ class _FeesPageState extends State<FeesPageDash> {
                   Text(
                     fees.due,
                     style: isThemeCurrentlyDark(context)
-                        ? SubHeadingStylesMaterial.light
-                        : SubHeadingStylesMaterial.dark,
+                        ? HeadingStylesMaterial.light
+                        : HeadingStylesMaterial.dark,
                   ),
                 ],
               ),
@@ -186,38 +185,18 @@ class _FeesPageState extends State<FeesPageDash> {
                         children: <Widget>[
                           Text(
                             'Activity',
-                            style: TextStyle(color: Colors.green),
+                            style: isThemeCurrentlyDark(context)
+                                ? BodyStylesDefault.white
+                                : BodyStylesDefault.black,
                           ),
                           Text(
                             '\$3M',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 34.0),
+                            style: isThemeCurrentlyDark(context)
+                                ? HeadingStylesMaterial.light
+                                : HeadingStylesMaterial.dark,
                           ),
                         ],
                       ),
-                      // DropdownButton(
-                      //   isDense: true,
-                      //   value: actualDropdown,
-                      //   onChanged: (String value) => setState(() {
-                      //     actualDropdown = value;
-                      //     actualChart = chartDropdownItems
-                      //         .indexOf(value); // Refresh the chart
-                      //   }),
-                      //   items: chartDropdownItems.map(
-                      //     (String title) {
-                      //       return DropdownMenuItem(
-                      //         value: title,
-                      //         child: Text(title,
-                      //             style: TextStyle(
-                      //                 color: Colors.blue,
-                      //                 fontWeight: FontWeight.w400,
-                      //                 fontSize: 14.0)),
-                      //       );
-                      //     },
-                      //   ).toList(),
-                      // )
                     ],
                   ),
                   Padding(
@@ -244,34 +223,23 @@ class _FeesPageState extends State<FeesPageDash> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Other School Payments',
-                        style: TextStyle(color: Colors.redAccent),
+                        'Other Payments',
+                        style: isThemeCurrentlyDark(context)
+                            ? BodyStylesDefault.white
+                            : BodyStylesDefault.black,
                       ),
                       Text(
                         '3',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 34.0),
+                        style: isThemeCurrentlyDark(context)
+                            ? HeadingStylesMaterial.light
+                            : HeadingStylesMaterial.dark,
                       )
                     ],
                   ),
-                  // Material(
-                  //   color: Colors.red,
-                  //   borderRadius: BorderRadius.circular(24.0),
-                  //   child: Center(
-                  //     child: Padding(
-                  //       padding: EdgeInsets.all(16.0),
-                  //       child: Icon(Icons.view_stream,
-                  //           color: Colors.white, size: 30.0),
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
             ),
             onTap: () {},
-            //=> Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
           ),
           _buildTile(
             Padding(
@@ -285,34 +253,23 @@ class _FeesPageState extends State<FeesPageDash> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Other School Payments',
-                        style: TextStyle(color: Colors.redAccent),
+                        'Other Payments',
+                        style: isThemeCurrentlyDark(context)
+                            ? BodyStylesDefault.white
+                            : BodyStylesDefault.black,
                       ),
                       Text(
                         '3',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 34.0),
+                        style: isThemeCurrentlyDark(context)
+                            ? HeadingStylesMaterial.light
+                            : HeadingStylesMaterial.dark,
                       )
                     ],
                   ),
-                  // Material(
-                  //   color: Colors.red,
-                  //   borderRadius: BorderRadius.circular(24.0),
-                  //   child: Center(
-                  //     child: Padding(
-                  //       padding: EdgeInsets.all(16.0),
-                  //       child: Icon(Icons.view_stream,
-                  //           color: Colors.white, size: 30.0),
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
             ),
             onTap: () {},
-            //=> Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
           )
         ],
         staggeredTiles: [
