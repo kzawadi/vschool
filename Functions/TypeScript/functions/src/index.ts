@@ -18,19 +18,32 @@ const app = express();
 export const db = admin.firestore();
 
 
-export const autoStudentParentEntry = functions.firestore.document('Schools/{country}/{schoolCode}/Profile/Student/{studentId}').onWrite(async (eventSnapshot, context) => {
+export const autoStudentParentEntry = functions.firestore
+.document('Schools/{country}/{schoolCode}/Profile/Student/{studentId}')
+.onWrite(async (eventSnapshot, context) => {
     return atomicFunction.studentParentAutoEntry(eventSnapshot, context);
 });
 
-export const autoTeacherEntry = functions.firestore.document('Schools/{country}/{schoolCode}/Profile/Parent-Teacher/{teacherId}').onWrite(async (eventSnapshot, context) => {
+export const autoTeacherEntry = functions.firestore
+.document('Schools/{country}/{schoolCode}/Profile/Parent-Teacher/{teacherId}')
+.onWrite(async (eventSnapshot, context) => {
     return atomicFunction.teacherAutoEntry(eventSnapshot, context);
 });
 
-export const autoMessageIdEntry = functions.firestore.document('/Schools/{country}/{schoolCode}/Chats/{standard}/Chat/{chatId}/{messageId}').onCreate(async (eventSnapshot, context) => {
+export const autoMessageIdEntry = functions.firestore
+.document('/Schools/{country}/{schoolCode}/Chats/{standard}/Chat/{chatId}/{messageId}')
+.onCreate(async (eventSnapshot, context) => {
     return atomicFunction.messageIdAutoEntry(eventSnapshot, context);
 });
-export const notifications = functions.firestore.document('/Schools/{country}/{schoolCode}/Chats/{standard}/Chat/{chatId}/{messageId}').onCreate(async (eventSnapshot, context) => {
+export const notifications = functions.firestore
+.document('/Schools/{country}/{schoolCode}/Chats/{standard}/Chat/{chatId}/{messageId}')
+.onCreate(async (eventSnapshot, context) => {
     return atomicFunction.notificationChat(eventSnapshot, context);
+});
+export const notificationsFees = functions.firestore
+.document('/Schools/{country}/{schoolCode}/fees/{studentId}/{to}')
+.onCreate(async (eventSnapshot, context) => {
+    return atomicFunction.notificationFees(eventSnapshot, context);
 });
 
 exports.webApi = functions.https.onRequest(app);

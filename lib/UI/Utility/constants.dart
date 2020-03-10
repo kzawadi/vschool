@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ourESchool/UI/Utility/SlideRoute.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'ImageCompress.dart' as CompressImage;
 
 var kTextFieldDecoration = InputDecoration(
@@ -139,7 +141,8 @@ SnackBar ksnackBar(BuildContext context, String message) {
       message,
       textAlign: TextAlign.center,
     ),
-    backgroundColor: Theme.of(context).primaryColor,
+    backgroundColor:
+        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.light,
   );
 }
 
