@@ -50,6 +50,8 @@ class FeesServices extends Services {
         .collection(studentId);
     //.document();
 
+    fees.to = studentId;
+
     Map feesMap = fees.toJson();
 
     await _feesRef.add(feesMap);

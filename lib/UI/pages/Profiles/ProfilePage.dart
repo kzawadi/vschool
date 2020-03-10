@@ -68,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
       var model, UserType userType, FirebaseUser firebaseUser) async {
     bool res = false;
 
-    // var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
+    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
 
     if (_bloodGroup.isEmpty ||
         _division.isEmpty ||

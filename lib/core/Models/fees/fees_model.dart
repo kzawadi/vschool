@@ -6,7 +6,7 @@ class Fees {
   String due;
   String paid;
   Timestamp timestamp;
-  String forClass;
+  String to;
   String totalFees;
 
   /// for now its just there fro rapid replacement
@@ -19,7 +19,7 @@ class Fees {
     this.due,
     this.paid,
     this.timestamp,
-    this.forClass,
+    this.to,
     this.totalFees = '',
     this.photoPath = '',
     this.id,
@@ -31,7 +31,7 @@ class Fees {
     due = json['due'];
     paid = json['paid'];
     timestamp = json['timestamp'] as Timestamp;
-    forClass = json['forClass'];
+    to = json['to'];
     totalFees = json['totalFees'] ?? '';
     photoPath = json['photoPath'] ?? '';
     id = json['id'];
@@ -43,7 +43,7 @@ class Fees {
     due = snapshot['due'].toString();
     paid = snapshot['paid'].toString();
     timestamp = snapshot['timeStamp'] as Timestamp;
-    forClass = snapshot['forClass'].toString();
+    to = snapshot['to'].toString();
     totalFees = snapshot['totalFees'].toString() ?? '';
     photoPath = snapshot['photoPath'].toString() ?? '';
     type = FeesTypeHelper.getEnum(snapshot['type'].toString());
@@ -56,7 +56,7 @@ class Fees {
     data['due'] = this.due;
     data['paid'] = this.paid;
     data['timestamp'] = this.timestamp;
-    data['forClass'] = this.forClass;
+    data['to'] = this.to;
     data['totalFees'] = this.totalFees;
     data['type'] = FeesTypeHelper.getValue(this.type);
     data['photoPath'] = this.photoPath;
