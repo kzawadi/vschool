@@ -4,6 +4,7 @@ import 'package:ourESchool/core/services/Services.dart';
 
 class FeesServices extends Services {
   DocumentSnapshot feessnapshot;
+  List<DocumentSnapshot> first;
 
   FeesServices() {
     getFirebaseUser();
@@ -20,16 +21,19 @@ class FeesServices extends Services {
   ) async {
     if (schoolCode == null) await getSchoolCode();
 
-    DocumentReference _feesRef = schoolRef
+    CollectionReference _feesRef = schoolRef
         .collection(schoolCode.toUpperCase().trim())
         .document('fees')
-        .collection(studentId)
-        .document('myfees');
+        .collection(studentId);
 
-    DocumentSnapshot data = await _feesRef.get();
-    feessnapshot = data;
+    /// this fetch the latest document in collection
 
-    //TODO remember to limit and fetch the lastest only
+    QuerySnapshot data = await _feesRef
+        .limit(1)
+        .orderBy('timestamp', descending: true)
+        .getDocuments();
+    first = data.documents;
+    feessnapshot = first.first;
 
     print('fees retrived is $data'.toString());
     print('fees retrived is $feessnapshot'.toString());
@@ -40,15 +44,15 @@ class FeesServices extends Services {
 
     fees.timestamp = Timestamp.now();
 
-    DocumentReference _feesRef = schoolRef
+    CollectionReference _feesRef = schoolRef
         .collection(schoolCode.toUpperCase().trim())
         .document('fees')
-        .collection(studentId)
-        .document('myfees');
+        .collection(studentId);
+    //.document();
 
     Map feesMap = fees.toJson();
 
-    await _feesRef.setData(feesMap);
+    await _feesRef.add(feesMap);
     print(feesMap.toString());
   }
 }
