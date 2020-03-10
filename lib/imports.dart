@@ -61,7 +61,6 @@ export 'core/Models/Announcement.dart';
 
 export 'UI/pages/Dashboard/E_Book/E_bookSelect.dart';
 export 'UI/pages/Dashboard/Exam/TopicSelectPage.dart';
-export 'UI/pages/Dashboard/Fees/FeesPage.dart';
 export 'UI/pages/Dashboard/Result/ResultPage.dart';
 export 'UI/Widgets/ColumnReusableCardButton.dart';
 export 'UI/Widgets/RowReusableCardButton.dart';
