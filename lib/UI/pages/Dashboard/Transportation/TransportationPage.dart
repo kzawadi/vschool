@@ -16,7 +16,11 @@ class TransportationPage extends StatelessWidget {
         },
         title: string.transportation,
       ),
-      body: Container(),
+      body: Center(
+        child: Container(
+          child: Text('transportation UI to be implemented after logic'),
+        ),
+      ),
     );
   }
 }
