@@ -1,3 +1,4 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Utility/input_formatters.dart';
@@ -29,6 +30,8 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
   TextEditingController _paid;
   TextEditingController _description;
   TextEditingController _due;
+
+  bool isReadyToPost = false;
 
   String targeteid;
 
@@ -87,8 +90,17 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              floatingButtonPressed(model, context);
+              if (isReadyToPost) floatingButtonPressed(model, context);
             },
+            backgroundColor: isReadyToPost
+                ? Theme.of(context).primaryColor
+                : Colors.blueGrey,
+            child: model.state == ViewState.Busy
+                ? SpinKitDoubleBounce(
+                    color: Colors.white,
+                    size: 20,
+                  )
+                : Icon(Icons.check),
           ),
           body: model.state == ViewState.Busy
               ? kBuzyPage(color: Theme.of(context).primaryColor)
@@ -222,6 +234,13 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
                           child: TextFormField(
+                            onChanged: (paid) {
+                              setState(
+                                () {
+                                  isReadyToPost = paid == '' ? false : true;
+                                },
+                              );
+                            },
                             controller: _paid,
                             inputFormatters: [
                               WhitelistingTextInputFormatter.digitsOnly,
