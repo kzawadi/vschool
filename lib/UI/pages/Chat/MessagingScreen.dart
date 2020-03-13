@@ -1,6 +1,7 @@
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -170,7 +171,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                       children: <Widget>[
                         model.state == ViewState.Busy
                             ? SpinKitRing(
-                                color: Colors.red,
+                                color: MyColors.accent,
                                 // size: 50,
                                 lineWidth: 4,
                               )

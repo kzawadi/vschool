@@ -57,33 +57,10 @@ class _HomeState extends State<Home> with Services {
     cloudmesaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
-        // final snackbar = SnackBar(
-        //   content: Text(message['notification']['title']),
-        //   action: SnackBarAction(
-        //     label: 'Go',
-        //     onPressed: () => null,
-        //   ),
-        // );
-
         _scaffoldKey.currentState.showSnackBar(
           ksnackBar(context, message['notification']['title']),
         );
-        // showDialog(
-        //   context: context,
-        //   builder: (context) => AlertDialog(
-        //     content: ListTile(
-        //       title: Text(message['notification']['title']),
-        //       subtitle: Text(message['notification']['body']),
-        //     ),
-        //     actions: <Widget>[
-        //       FlatButton(
-        //         color: Colors.amber,
-        //         child: Text('Ok'),
-        //         onPressed: () => Navigator.of(context).pop(),
-        //       ),
-        //     ],
-        //   ),
-        // );
+
         print('RECIEVED NOTIFICATION IS $message'.toString());
       },
       onLaunch: (Map<String, dynamic> message) async {
@@ -126,10 +103,10 @@ class _HomeState extends State<Home> with Services {
     print('the token is $fcmToken'.toString());
   }
 
-  /// Subscribe the user to a topic
+  /// Subscribe the user to a topic for notifications from firebase cloud messaging
   _subscribeToTopic() async {
     // Subscribe the user to a topic
-    cloudmesaging.subscribeToTopic('puppies');
+    cloudmesaging.subscribeToTopic('daily');
   }
 
   ImageProvider<dynamic> setImage(User user) {
