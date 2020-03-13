@@ -96,7 +96,8 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                 ? Theme.of(context).primaryColor
                 : Colors.blueGrey,
             child: model.state == ViewState.Busy
-                ? SpinKitDoubleBounce(
+                ? SpinKitThreeBounce(
+                    duration: (Duration(milliseconds: 500)),
                     color: Colors.white,
                     size: 20,
                   )

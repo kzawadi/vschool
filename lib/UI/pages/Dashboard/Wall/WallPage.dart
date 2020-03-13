@@ -77,9 +77,24 @@ class _WallPageState extends State<WallPage>
       onModelReady: (model) => model.getWall(stdDiv_Global),
       builder: (context, model, child) {
         this.model = model;
-        return WallViewer(
-          wall: Wall.fromSnapshot(model.wall),
-        );
+
+        /// checking if the school wall has data and if yes then loading screen
+        /// followed by the actual Data.
+        return !model.wall.exists
+            ? model.state == ViewState.Busy
+                ? kBuzyPage(color: Theme.of(context).accentColor)
+                : Container(
+                    child: Center(
+                      child: Text(
+                        'No Information available....!',
+                        style: ksubtitleStyle.copyWith(fontSize: 25),
+                      ),
+                    ),
+                    // color: Colors.red,
+                  )
+            : WallViewer(
+                wall: Wall.fromSnapshot(model.wall),
+              );
       },
     );
   }
