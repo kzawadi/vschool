@@ -9,11 +9,14 @@ import 'package:ourESchool/UI/pages/Dashboard/E-Card/E-CardPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/create_fees.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_Page.dart';
 import 'package:ourESchool/core/Models/User.dart';
+import 'package:ourESchool/core/Models/fees/fees_model.dart';
 
 class BottomSheetChildrensWidget extends StatefulWidget {
-  const BottomSheetChildrensWidget({Key key, this.user}) : super(key: key);
+  const BottomSheetChildrensWidget({Key key, this.user, this.fees})
+      : super(key: key);
 
   final User user;
+  final Fees fees;
 
   @override
   _BottomSheetChildrensWidgetState createState() =>
@@ -100,7 +103,7 @@ class _BottomSheetChildrensWidgetState
                         context,
                         FeesPageEntry(
                           user: widget.user,
-                          targeteid: widget.user.id,
+                          //targeteid: widget.user.id,
                         ));
                   },
                   icon: Icons.perm_contact_calendar,
@@ -115,8 +118,9 @@ class _BottomSheetChildrensWidgetState
                     kopenPage(
                         context,
                         FeesPage(
+                          fees: widget.fees,
                           user: widget.user,
-                          targetId: widget.user.id,
+                          // targetId: widget.user.id,
                         ));
                   },
                   icon: Icons.hot_tub,

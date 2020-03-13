@@ -1,5 +1,4 @@
 import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
-import 'package:ourESchool/UI/pages/shared/fees_viewer.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
 import 'package:ourESchool/imports.dart';
@@ -9,12 +8,14 @@ class FeesPage extends StatefulWidget with AnalyticsScreen {
     Key key,
     this.targetId,
     this.user,
+    this.fees,
   }) : super(key: key) {
     // setCurrentScreen();
   }
 
   final String targetId;
   final User user;
+  final Fees fees;
 
   @override
   _WallPageState createState() => _WallPageState();
@@ -34,7 +35,6 @@ class _WallPageState extends State<FeesPage>
   bool isLast = false;
   bool isLoaded = false;
   String buttonLabel = 'Global';
-  Fees fees;
 
   @override
   void initState() {
@@ -48,28 +48,17 @@ class _WallPageState extends State<FeesPage>
 
   @override
   Widget build(BuildContext context) {
-    var userType = Provider.of<UserType>(context, listen: false);
     targeteid = widget.user.id;
-    User currentUser = Provider.of<User>(context, listen: false);
-    if (userType == UserType.TEACHER) {
-      isTeacher = true;
-    } else if (userType == UserType.PARENT) {}
-    if (userType == UserType.STUDENT) {
-      if (!isLoaded) {
-        // stdDiv_Global =
-        //     currentUser.standard + currentUser.division.toUpperCase();
-        isLoaded = true;
-      }
 
-      print(currentUser.id);
-    }
     return BaseView<FeesPageModel>(
       onModelReady: (model) => model.getFees(targeteid),
       builder: (context, model, child) {
         this.model = model;
-        return FeesPageDash(
-          fees: Fees.fromSnapshot(model.feessnapshot),
-        );
+        return model.state == ViewState.Busy
+            ? kBuzyPage(color: Theme.of(context).primaryColor)
+            : FeesPageDash(
+                fees: Fees.fromSnapshot(model.feessnapshot),
+              );
       },
     );
   }
