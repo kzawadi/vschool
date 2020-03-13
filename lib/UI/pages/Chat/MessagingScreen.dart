@@ -115,47 +115,40 @@ class _MessagingScreenState extends State<MessagingScreen> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Expanded(
-          child: Container(
-            child: Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
+            child: Container(
+              constraints: BoxConstraints(
+                maxHeight: 150,
+                // maxWidth: MediaQuery.of(context).size.width - 66,
               ),
-              child: Container(
-                constraints: BoxConstraints(
-                  maxHeight: 150,
-                  // maxWidth: MediaQuery.of(context).size.width - 66,
-                ),
-                // width: MediaQuery.of(context).size.width - 65,
-                child: TextField(
-                  controller: _messageController,
-                  keyboardType: TextInputType.multiline,
-                  onChanged: (message) {
-                    if (message.trim().length > 0) {
-                      setState(() {
-                        sendButtonEnable = true;
-                      });
-                    } else {
-                      setState(() {
-                        sendButtonEnable = false;
-                      });
-                    }
-                  },
-                  // maxLength: 1000,
-                  maxLines: null,
-                  decoration: InputDecoration(
-                    hintText: 'Type here....',
-                    hintStyle: TextStyle(
-                      height: 1.5,
-                    ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0),
-                      ),
+              // width: MediaQuery.of(context).size.width - 65,
+              child: TextField(
+                controller: _messageController,
+                keyboardType: TextInputType.multiline,
+                onChanged: (message) {
+                  if (message.trim().length > 0) {
+                    setState(() {
+                      sendButtonEnable = true;
+                    });
+                  } else {
+                    setState(() {
+                      sendButtonEnable = false;
+                    });
+                  }
+                },
+                // maxLength: 1000,
+                maxLines: null,
+                decoration: InputDecoration(
+                  hintText: 'Type here....',
+                  hintStyle: TextStyle(
+                    height: 1.5,
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15.0),
                     ),
                   ),
                 ),

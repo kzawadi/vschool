@@ -112,24 +112,27 @@ class OtherMessageWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
-        ConstrainedBox(
-          constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.75),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(8),
-                bottomRight: Radius.circular(8),
-                bottomLeft: Radius.circular(8),
-                topLeft: Radius.circular(8),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 2, 0),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.75),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
+                  topLeft: Radius.circular(8),
+                ),
               ),
-            ),
-            child: Text(
-              message.message,
-              textAlign: TextAlign.start,
-              style: ktitleStyle,
+              child: Text(
+                message.message,
+                textAlign: TextAlign.start,
+                style: ktitleStyle,
+              ),
             ),
           ),
         ),
@@ -166,24 +169,27 @@ class MyMessageWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
-        ConstrainedBox(
-          constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.75),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
-            decoration: BoxDecoration(
-              color: Colors.green.shade600,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(8),
-                bottomRight: Radius.circular(8),
-                bottomLeft: Radius.circular(8),
-                topLeft: Radius.circular(8),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(2, 0, 15, 0),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.75),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.green.shade600,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
+                  topLeft: Radius.circular(8),
+                ),
               ),
-            ),
-            child: Text(
-              message.message,
-              textAlign: TextAlign.start,
-              style: ktitleStyle,
+              child: Text(
+                message.message,
+                textAlign: TextAlign.start,
+                style: ktitleStyle,
+              ),
             ),
           ),
         ),
