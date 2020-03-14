@@ -15,7 +15,7 @@ class MainDashboard extends StatefulWidget with AnalyticsScreen {
   String get screenName => 'ParentAndTeacher Dashboard';
 }
 
-class _MainDashboardState extends State<MainDashboard> {
+class _MainDashboardState extends State<MainDashboard> with Services {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -120,6 +120,8 @@ class _MainDashboardState extends State<MainDashboard> {
                       label: string.transportation,
                       onPressed: () {
                         kopenPage(context, FeesPageDash());
+                        analytics.logSelectContent(
+                            contentType: 'Fees Page Dashboard', itemId: '1');
                       },
                       icon: FontAwesomeIcons.bus,
                     ),

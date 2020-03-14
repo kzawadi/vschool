@@ -179,6 +179,9 @@ class AuthenticationServices extends Services {
       });
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);
+      analytics.setUserId(firebaseUser.uid);
+      analytics.logSignUp(signUpMethod: firebaseUser.providerId);
+
       print("User Regestered using Email and Password");
       print('user collection created with $firebaseUser'.toString());
       // sharedPreferencesHelper.setUserType(userType);
@@ -206,6 +209,8 @@ class AuthenticationServices extends Services {
       isUserLoggedIn = true;
       fireBaseUserStream.sink.add(firebaseUser);
       isUserLoggedInStream.add(isUserLoggedIn);
+      analytics.setUserId(firebaseUser.uid);
+
       return authErrors;
     } on PlatformException catch (e) {
       return catchException(e);
