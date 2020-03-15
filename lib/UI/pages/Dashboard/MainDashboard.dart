@@ -29,6 +29,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
             children: <Widget>[
               Expanded(
                 child: ListView(
+                  physics: BouncingScrollPhysics(),
                   children: [
                     ColumnReusableCardButton(
                       directionIconHeroTag: string.childrens,
@@ -119,15 +120,16 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       tileColor: Colors.grey,
                       label: string.transportation,
                       onPressed: () {
-                        kopenPage(context, FeesPageDash());
-                        analytics.logSelectContent(
-                            contentType: 'Fees Page Dashboard', itemId: null);
+                        kopenPage(context, TransportationPage());
+                        // analytics.logSelectContent(
+                        //     contentType: 'Fees Page Dashboard', itemId: null);
                       },
                       icon: FontAwesomeIcons.bus,
                     ),
                     SizedBox(
                       height: 105,
                       child: ListView(
+                        physics: BouncingScrollPhysics(),
                         shrinkWrap: false,
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[

@@ -80,7 +80,7 @@ class _WallPageState extends State<WallPage>
 
         /// checking if the school wall has data and if yes then loading screen
         /// followed by the actual Data.
-        return !model.wall.exists
+        return model.wall == null
             ? model.state == ViewState.Busy
                 ? kBuzyPage(color: Theme.of(context).accentColor)
                 : Container(

@@ -25,8 +25,8 @@ class BottomSheetChildrensWidget extends StatefulWidget {
       _BottomSheetChildrensWidgetState();
 }
 
-class _BottomSheetChildrensWidgetState
-    extends State<BottomSheetChildrensWidget> {
+class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
+    with Services {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -128,6 +128,8 @@ class _BottomSheetChildrensWidgetState
                         // targetId: widget.user.id,
                       ),
                     );
+                    analytics.logSelectContent(
+                        contentType: 'Fees Page Dashboard', itemId: null);
                   },
                   icon: Icons.equalizer,
                 ),
