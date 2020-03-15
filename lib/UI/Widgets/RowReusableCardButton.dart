@@ -7,14 +7,21 @@ class RowReusableCardButton extends StatelessWidget {
   final Color tileColor;
 
   const RowReusableCardButton(
-      {@required this.icon, @required this.label, @required this.onPressed, @required this.tileColor});
+      {@required this.icon,
+      @required this.label,
+      @required this.onPressed,
+      @required this.tileColor});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // constraints: BoxConstraints(maxWidth: 200),
       color: tileColor ?? Colors.amber,
-      child: new _ReusableMaterialButton(onPressed: onPressed, icon: icon, label: label),
+      child: new _ReusableMaterialButton(
+        onPressed: onPressed,
+        icon: icon,
+        label: label,
+      ),
     );
   }
 }
@@ -27,7 +34,11 @@ class RowReusableCardButtonBanner extends StatelessWidget {
   final double paddingTop;
 
   const RowReusableCardButtonBanner(
-      {@required this.icon, @required this.label, @required this.onPressed, @required this.tileColor, this.paddingTop = 5.0});
+      {@required this.icon,
+      @required this.label,
+      @required this.onPressed,
+      @required this.tileColor,
+      this.paddingTop = 5.0});
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +46,24 @@ class RowReusableCardButtonBanner extends StatelessWidget {
       padding: EdgeInsets.only(top: paddingTop, bottom: 0, right: 5),
       child: ClipRect(
         child: Container(
-          color: tileColor ?? Colors.blue,
+          decoration: BoxDecoration(
+            color: tileColor ?? Colors.green,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(18),
+              topRight: Radius.circular(18),
+              bottomLeft: Radius.circular(18),
+              bottomRight: Radius.circular(18),
+            ),
+          ),
+          //  color: tileColor ?? Colors.blue,
           child: Banner(
             location: BannerLocation.topStart,
             message: 'Premium',
-            child: new _ReusableMaterialButton(onPressed: onPressed, icon: icon, label: label),
+            child: new _ReusableMaterialButton(
+              onPressed: onPressed,
+              icon: icon,
+              label: label,
+            ),
           ),
         ),
       ),

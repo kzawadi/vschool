@@ -78,7 +78,7 @@ kBuzyPage({Color color = Colors.white}) {
     alignment: Alignment.center,
     child: SpinKitThreeBounce(
       color: color ?? Colors.white,
-      size: 20.0,
+      size: 35.0,
     ),
   );
 }

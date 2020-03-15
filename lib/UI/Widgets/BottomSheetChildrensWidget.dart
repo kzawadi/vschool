@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'package:ourESchool/UI/Utility/custom_icons.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/ColumnReusableCardButton.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Announcement/AnnouncementPage.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
@@ -8,8 +8,10 @@ import 'package:ourESchool/UI/pages/Dashboard/Assignment/AssignmentPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/E-Card/E-CardPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/create_fees.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_Page.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
+import 'package:ourESchool/imports.dart';
 
 class BottomSheetChildrensWidget extends StatefulWidget {
   const BottomSheetChildrensWidget({Key key, this.user, this.fees})
@@ -29,17 +31,20 @@ class _BottomSheetChildrensWidgetState
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: const EdgeInsets.only(top: 5, left: 8, right: 8, bottom: 10),
-        height: 200,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-          decoration: BoxDecoration(
-            color: Theme.of(context).canvasColor,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(blurRadius: 15, color: Colors.red[300], spreadRadius: 5)
-            ],
+        height: 300,
+        margin: EdgeInsets.only(left: 18, right: 18),
+        decoration: BoxDecoration(
+          color:
+              isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.accent,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(18),
+            topRight: Radius.circular(18),
+            bottomRight: Radius.circular(5),
+            bottomLeft: Radius.circular(5),
           ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(7.0),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -48,7 +53,7 @@ class _BottomSheetChildrensWidgetState
                   // height: 65,
                   tileColor: Colors.orangeAccent,
                   label: string.announcement,
-                  icon: CustomIcons.megaphone,
+                  icon: FontAwesomeIcons.speakap,
                   onPressed: () {
                     kopenPage(
                       context,
@@ -81,7 +86,7 @@ class _BottomSheetChildrensWidgetState
               Expanded(
                 child: ColumnReusableCardButton(
                   // height: 65,
-                  tileColor: Colors.deepOrangeAccent,
+                  tileColor: MyColors.twitter,
                   label: string.e_card,
                   onPressed: () {
                     kopenPage(
@@ -97,7 +102,7 @@ class _BottomSheetChildrensWidgetState
                 child: ColumnReusableCardButton(
                   // height: 65,
                   tileColor: Colors.deepOrangeAccent,
-                  label: 'FEES',
+                  label: 'Fees',
                   onPressed: () {
                     kopenPage(
                         context,
@@ -106,7 +111,7 @@ class _BottomSheetChildrensWidgetState
                           //targeteid: widget.user.id,
                         ));
                   },
-                  icon: Icons.perm_contact_calendar,
+                  icon: Icons.payment,
                 ),
               ),
               Expanded(
@@ -116,14 +121,15 @@ class _BottomSheetChildrensWidgetState
                   label: 'Fees View',
                   onPressed: () {
                     kopenPage(
-                        context,
-                        FeesPage(
-                          fees: widget.fees,
-                          user: widget.user,
-                          // targetId: widget.user.id,
-                        ));
+                      context,
+                      FeesPage(
+                        fees: widget.fees,
+                        user: widget.user,
+                        // targetId: widget.user.id,
+                      ),
+                    );
                   },
-                  icon: Icons.hot_tub,
+                  icon: Icons.equalizer,
                 ),
               ),
             ],

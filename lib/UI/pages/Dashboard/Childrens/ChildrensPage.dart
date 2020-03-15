@@ -41,12 +41,14 @@ class ChildrensPage extends StatelessWidget {
                         itemCount: model.childrens.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            constraints: BoxConstraints(maxHeight: 200, maxWidth: 200),
+                            constraints:
+                                BoxConstraints(maxHeight: 200, maxWidth: 200),
                             child: ChildrenGridViewCard(
                               user: model.childrens[index],
                               onTap: () {
                                 if (model.childrens[index].displayName != '')
-                                  showBottomSheet(
+                                  showModalBottomSheet(
+                                    backgroundColor: Colors.transparent,
                                     elevation: 10,
                                     context: context,
                                     builder: (context) =>

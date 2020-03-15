@@ -25,10 +25,19 @@ class ColumnReusableCardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.all(3.0),
       child: Container(
+        decoration: BoxDecoration(
+          color: tileColor ?? Colors.green,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(18),
+            topRight: Radius.circular(18),
+            bottomLeft: Radius.circular(18),
+            bottomRight: Radius.circular(18),
+          ),
+        ),
         // constraints: BoxConstraints(maxWidth: 400),
-        color: tileColor ?? Colors.green,
+        //color: tileColor ?? Colors.green,
         // elevation: elevation ?? 4,
         child: MaterialButton(
           minWidth: MediaQuery.of(context).size.width,

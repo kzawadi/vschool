@@ -121,7 +121,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       onPressed: () {
                         kopenPage(context, FeesPageDash());
                         analytics.logSelectContent(
-                            contentType: 'Fees Page Dashboard', itemId: '1');
+                            contentType: 'Fees Page Dashboard', itemId: null);
                       },
                       icon: FontAwesomeIcons.bus,
                     ),
