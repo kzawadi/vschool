@@ -1,4 +1,5 @@
 import 'package:ourESchool/UI/pages/shared/wall_viewer.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/viewmodel/Wall/WallPageModel.dart';
 import 'package:ourESchool/imports.dart';
@@ -85,9 +86,17 @@ class _WallPageState extends State<WallPage>
                 ? kBuzyPage(color: Theme.of(context).accentColor)
                 : Container(
                     child: Center(
-                      child: Text(
-                        'No Information available....!',
-                        style: ksubtitleStyle.copyWith(fontSize: 25),
+                      child: Container(
+                        color: MaterialColors.teal,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'No Information available....!',
+                            style: ksubtitleStyle.copyWith(
+                              fontSize: 25,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     // color: Colors.red,
