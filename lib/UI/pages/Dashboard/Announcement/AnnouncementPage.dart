@@ -1,3 +1,5 @@
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
 
 class AnnouncementPage extends StatefulWidget with AnalyticsScreen {
@@ -99,7 +101,9 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                             duration: Duration(milliseconds: 200));
                       },
                       child: Icon(Icons.add),
-                      backgroundColor: Colors.red,
+                      backgroundColor: isThemeCurrentlyDark(context)
+                          ? MyColors.accent
+                          : MyColors.accent,
                     ),
                   ),
                 ),
@@ -141,7 +145,9 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                                   filterDialogBox(context, model);
                                 },
                                 icon: Icon(Icons.filter_list),
-                                backgroundColor: Colors.red,
+                                backgroundColor: isThemeCurrentlyDark(context)
+                                    ? MyColors.accent
+                                    : MyColors.accent,
                               )
                             : Container(),
                   ),
