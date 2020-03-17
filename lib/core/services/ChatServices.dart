@@ -106,6 +106,7 @@ class ChatServices extends Services {
     return parents;
   }
 
+  /// this is where all the messages get fetched
   Stream<List<Message>> getMessages({
     @required User other,
     @required User student,

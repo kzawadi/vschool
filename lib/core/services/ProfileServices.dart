@@ -15,6 +15,9 @@ class ProfileServices extends Services {
     getFirebaseUser();
   }
 
+  /// this function sets the Profile Data of the User using a restful api in
+  /// firebase function and after that it caches the data with shared preferences
+  /// and also add the data to a stream (loggedInUserStream)
   setProfileData({
     User user,
     UserType userType,
@@ -59,6 +62,10 @@ class ProfileServices extends Services {
       print("Data Upload error");
     }
   }
+
+  /// this funtion return a future of loged in user profiles Data
+  /// it will retrive from shared preferences(LOCALY)
+  /// and then it put the data to a stream (loggedInUserStream)
 
   Future<User> getLoggedInUserProfileData() async {
     // if (schoolCode == null)

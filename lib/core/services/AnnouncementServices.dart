@@ -23,6 +23,9 @@ class AnnouncementServices extends Services {
     if (schoolCode == null) await getSchoolCode();
   }
 
+  /// This function retrive the post either global or class
+  /// and it limits to 10 if no anything and limit to 5 if
+  /// it has already done so
   getAnnouncements(
     String stdDiv_Global,
   ) async {
@@ -54,6 +57,8 @@ class AnnouncementServices extends Services {
     }
   }
 
+  /// This function post the post either global or class
+  /// oriented it uses a cloud function to do so
   postAnnouncement(Announcement announcement) async {
     // if (firebaseUser == null) await getFirebaseUser();
     if (schoolCode == null) await getSchoolCode();
