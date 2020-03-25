@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,18 +66,28 @@ class WallViewer extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Container(
-                              width: 180,
-                              height: 180,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    wall.photoUrl,
-                                  ),
-                                ),
-                              ),
+                            CachedNetworkImage(
+                              fit: BoxFit.contain,
+                              imageUrl: wall.photoUrl,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              fadeOutDuration: const Duration(seconds: 1),
+                              fadeInDuration: const Duration(seconds: 1),
                             ),
+                            // Container(
+                            //   width: 180,
+                            //   height: 180,
+                            //   decoration: BoxDecoration(
+                            //     shape: BoxShape.rectangle,
+                            //     image: DecorationImage(
+                            //       image: NetworkImage(
+                            //         wall.photoUrl,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

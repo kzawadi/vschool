@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/swipedetector.dart';
@@ -28,11 +29,15 @@ class AnnouncementViewer extends StatelessWidget {
                     Hero(
                       transitionOnUserGestures: true,
                       tag: announcement.id + 'photo',
-                      child: Image(
+                      child: CachedNetworkImage(
                         fit: BoxFit.contain,
-                        image: NetworkImage(
-                          announcement.photoUrl,
-                        ),
+                        imageUrl: announcement.photoUrl,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        fadeOutDuration: const Duration(seconds: 1),
+                        fadeInDuration: const Duration(seconds: 3),
                       ),
                     ),
                     Padding(
