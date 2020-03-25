@@ -180,10 +180,51 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                           itemCount: model.postSnapshotList.length + 1,
                           itemBuilder: (context, index) {
                             if (index < model.postSnapshotList.length) {
-                              return AnnouncementCard(
-                                announcement: Announcement.fromSnapshot(
-                                  model.postSnapshotList[index],
-                                ),
+                              return Stack(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 6),
+                                    child: AnnouncementCard(
+                                      announcement: Announcement.fromSnapshot(
+                                        model.postSnapshotList[index],
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 0.0,
+                                    bottom: 0.0,
+                                    left: 3.0,
+                                    child: new Container(
+                                      height: double.infinity,
+                                      width: 5.0,
+                                      color: isThemeCurrentlyDark(context)
+                                          ? MyColors.accent
+                                          : MyColors.dark,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 100.0,
+                                    bottom: 15.0,
+                                    left: 0.0,
+                                    child: new Container(
+                                      height: 15,
+                                      width: 15,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: MyColors.white,
+                                      ),
+                                      child: new Container(
+                                        margin: new EdgeInsets.all(5.0),
+                                        height: 30.0,
+                                        width: 30.0,
+                                        decoration: new BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: MyColors.github,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               );
                             } else {
                               return Center(
