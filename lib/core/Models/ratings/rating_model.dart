@@ -3,11 +3,11 @@ import 'package:ourESchool/core/enums/fees.dart';
 
 class Fees {
   String description;
-  String bookName;
-  String bookId;
+  String fordiv;
+  String ratings;
   Timestamp timestamp;
   String subject;
-  String bookIsForStandard;
+  String forclass;
 
   /// for now its just there fro rapid replacement
   String bookCover;
@@ -16,11 +16,11 @@ class Fees {
 
   Fees({
     this.description = '',
-    this.bookName,
-    this.bookId,
+    this.fordiv,
+    this.ratings,
     this.timestamp,
     this.subject,
-    this.bookIsForStandard = '',
+    this.forclass = '',
     this.bookCover = '',
     this.isbn,
     this.type,
@@ -28,11 +28,11 @@ class Fees {
 
   Fees.fromJson(Map<String, dynamic> json) {
     description = json['description'] ?? '';
-    bookName = json['bookName'];
-    bookId = json['bookId'];
+    fordiv = json['fordiv'];
+    ratings = json['ratings'];
     timestamp = json['timestamp'] as Timestamp;
     subject = json['subject'];
-    bookIsForStandard = json['bookIsForStandard'] ?? '';
+    forclass = json['forclass'] ?? '';
     bookCover = json['bookCover'] ?? '';
     isbn = json['isbn'];
     type = FeesTypeHelper.getEnum(json['type']);
@@ -40,11 +40,11 @@ class Fees {
 
   Fees.fromSnapshot(DocumentSnapshot snapshot) {
     description = snapshot['description'].toString() ?? '';
-    bookName = snapshot['bookName'].toString();
-    bookId = snapshot['bookId'].toString();
+    fordiv = snapshot['fordiv'].toString();
+    ratings = snapshot['ratings'].toString();
     timestamp = snapshot['timeStamp'] as Timestamp;
     subject = snapshot['subject'].toString();
-    bookIsForStandard = snapshot['bookIsForStandard'].toString() ?? '';
+    forclass = snapshot['forclass'].toString() ?? '';
     bookCover = snapshot['bookCover'].toString() ?? '';
     type = FeesTypeHelper.getEnum(snapshot['type'].toString());
     isbn = snapshot['isbn'].toString() ?? '';
@@ -53,11 +53,11 @@ class Fees {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['description'] = this.description;
-    data['bookName'] = this.bookName;
-    data['bookId'] = this.bookId;
+    data['fordiv'] = this.fordiv;
+    data['ratings'] = this.ratings;
     data['timestamp'] = this.timestamp;
     data['subject'] = this.subject;
-    data['bookIsForStandard'] = this.bookIsForStandard;
+    data['forclass'] = this.forclass;
     data['type'] = FeesTypeHelper.getValue(this.type);
     data['bookCover'] = this.bookCover;
     data['isbn'] = this.isbn;
