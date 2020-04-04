@@ -60,6 +60,7 @@ class ChatServices extends Services {
       } else {
         _currentUser = User.fromJson(json.decode(userDataModel));
       }
+      print('The student in getStudents are  $_currentUser');
 
       _standard = _currentUser.standardDivision();
       if (_standard == '') {
