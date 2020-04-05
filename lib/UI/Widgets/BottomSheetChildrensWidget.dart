@@ -27,8 +27,15 @@ class BottomSheetChildrensWidget extends StatefulWidget {
 
 class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
     with Services {
+  bool isTeacher = false;
+
   @override
   Widget build(BuildContext context) {
+    var userType = Provider.of<UserType>(context, listen: false);
+    if (userType == UserType.TEACHER) {
+      isTeacher = true;
+    }
+
     return SafeArea(
       child: Container(
         height: 300,
@@ -98,20 +105,23 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                   icon: Icons.perm_contact_calendar,
                 ),
               ),
-              Expanded(
-                child: ColumnReusableCardButton(
-                  // height: 65,
-                  tileColor: Colors.deepOrangeAccent,
-                  label: 'Fees',
-                  onPressed: () {
-                    kopenPage(
-                        context,
-                        FeesPageEntry(
-                          user: widget.user,
-                          //targeteid: widget.user.id,
-                        ));
-                  },
-                  icon: Icons.payment,
+              Visibility(
+                visible: isTeacher,
+                child: Expanded(
+                  child: ColumnReusableCardButton(
+                    // height: 65,
+                    tileColor: Colors.deepOrangeAccent,
+                    label: 'Fees',
+                    onPressed: () {
+                      kopenPage(
+                          context,
+                          FeesPageEntry(
+                            user: widget.user,
+                            //targeteid: widget.user.id,
+                          ));
+                    },
+                    icon: Icons.payment,
+                  ),
                 ),
               ),
               Expanded(

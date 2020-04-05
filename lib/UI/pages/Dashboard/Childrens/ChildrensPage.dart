@@ -49,7 +49,7 @@ class ChildrensPage extends StatelessWidget {
                               if (model.childrens[index].displayName != '')
                                 showModalBottomSheet(
                                   backgroundColor: Colors.transparent,
-                                  elevation: 10,
+                                  elevation: 5,
                                   context: context,
                                   builder: (context) =>
                                       BottomSheetChildrensWidget(
