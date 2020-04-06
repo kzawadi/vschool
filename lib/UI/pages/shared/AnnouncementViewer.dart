@@ -32,12 +32,11 @@ class AnnouncementViewer extends StatelessWidget {
                       child: CachedNetworkImage(
                         fit: BoxFit.contain,
                         imageUrl: announcement.photoUrl,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
+                        placeholder: (context, url) => kBuzyPage(),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
-                        fadeOutDuration: const Duration(seconds: 1),
-                        fadeInDuration: const Duration(seconds: 3),
+                        fadeOutDuration: const Duration(microseconds: 400),
+                        fadeInDuration: const Duration(microseconds: 400),
                       ),
                     ),
                     Padding(

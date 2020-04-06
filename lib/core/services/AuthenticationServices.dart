@@ -32,8 +32,8 @@ class AuthenticationServices extends Services {
 
   AuthenticationServices() {
     firestore.settings(
-      persistenceEnabled: false,
-    );
+        // persistenceEnabled: false,
+        );
     isLoggedIn().then((onValue) => isUserLoggedIn = onValue);
     _userType().then((onValue) => userType = onValue);
   }
