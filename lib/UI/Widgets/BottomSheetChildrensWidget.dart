@@ -68,6 +68,7 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         announcementFor: widget.user.standard +
                             widget.user.division.toUpperCase(),
                       ),
+                      'Announcement_Page',
                     );
                   },
                 ),
@@ -82,7 +83,8 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         AssignmentsPage(
                           standard: widget.user.standard +
                               widget.user.division.toUpperCase(),
-                        ));
+                        ),
+                        'Assignments_Page');
                   },
                   icon: Icons.assignment,
                 ),
@@ -100,7 +102,8 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         context,
                         ECardPage(
                           user: widget.user,
-                        ));
+                        ),
+                        'ECard_Page');
                   },
                   icon: Icons.perm_contact_calendar,
                 ),
@@ -114,11 +117,13 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                     label: 'Fees',
                     onPressed: () {
                       kopenPage(
-                          context,
-                          FeesPageEntry(
-                            user: widget.user,
-                            //targeteid: widget.user.id,
-                          ));
+                        context,
+                        FeesPageEntry(
+                          user: widget.user,
+                          //targeteid: widget.user.id,
+                        ),
+                        'Fees_Page_Entry',
+                      );
                     },
                     icon: Icons.payment,
                   ),
@@ -137,9 +142,10 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         user: widget.user,
                         // targetId: widget.user.id,
                       ),
+                      'Fees_Page',
                     );
-                    analytics.logSelectContent(
-                        contentType: 'Fees Page Dashboard', itemId: null);
+                    // analytics.logSelectContent(
+                    //     contentType: 'Fees Page Dashboard', itemId: null);
                   },
                   icon: Icons.equalizer,
                 ),

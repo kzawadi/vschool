@@ -48,9 +48,10 @@ class _SettingPageState extends State<SettingPage> {
                     UserType userType =
                         Provider.of<UserType>(context, listen: false);
                     if (userType == UserType.PARENT) {
-                      kopenPage(context, GuardianProfilePage());
+                      kopenPage(context, GuardianProfilePage(),
+                          'Guardian_Profile_Page');
                     } else {
-                      kopenPage(context, ProfilePage());
+                      kopenPage(context, ProfilePage(), 'Profile_page');
                     }
                   },
                   subtitle: string.profile_subtitle,
@@ -79,7 +80,8 @@ class _SettingPageState extends State<SettingPage> {
                   context: context,
                   icon: Icons.restore,
                   onTap: () {
-                    kopenPage(context, ForgotPasswordPage());
+                    kopenPage(
+                        context, ForgotPasswordPage(), 'Forgot_Password_Page');
                   },
                   subtitle: string.send_recovery_mail,
                   title: 'Forgot Password'),
@@ -88,7 +90,7 @@ class _SettingPageState extends State<SettingPage> {
                   icon: Icons.contact_mail,
                   onTap: () async {
                     print((await preferencesHelper.getParentsIds()).toString());
-                    kopenPage(context, CreateWall());
+                    kopenPage(context, CreateWall(), 'Create_Wall');
                   },
                   subtitle: string.about_subtitle,
                   title: string.about),

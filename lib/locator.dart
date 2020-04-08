@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_entry_model.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
 
@@ -44,4 +45,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => ChatServices());
   locator.registerFactory(() => ChatUsersListPageModel());
   locator.registerFactory(() => MessagingScreenPageModel());
+
+  locator.registerLazySingleton(() => AnalyticsService());
 }

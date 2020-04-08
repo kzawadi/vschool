@@ -1,9 +1,13 @@
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/core/services/analytics_service.dart';
 
 import 'imports.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   // debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
   timeDilation = 2;
   Provider.debugCheckInvalidValueType = null;
@@ -83,7 +87,7 @@ class OurSchoolApp extends StatelessWidget with Services {
       },
       home: getHome(context),
       navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: analytics),
+        locator<AnalyticsService>().getAnalyticsObserver(),
       ],
     );
   }

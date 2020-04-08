@@ -161,6 +161,7 @@ class EBookInfo extends StatelessWidget {
                           title: eBook.bookName,
                           url: eBook.pdfUrl,
                         ),
+                        'PDFOpener',
                       ),
                       title: 'Read',
                     ),

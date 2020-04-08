@@ -214,7 +214,11 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   onPressed: () {
                                     //Forget Password Logic
-                                    kopenPage(context, ForgotPasswordPage());
+                                    kopenPage(
+                                      context,
+                                      ForgotPasswordPage(),
+                                      'Forgot_Password_Page',
+                                    );
                                   },
                                   height: 40,
                                 ),
