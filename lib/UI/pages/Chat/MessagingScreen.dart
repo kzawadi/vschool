@@ -141,7 +141,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                 // maxLength: 1000,
                 maxLines: null,
                 decoration: InputDecoration(
-                  hintText: 'Type here....',
+                  hintText: 'Type a message....',
                   hintStyle: TextStyle(
                     height: 1.5,
                   ),
