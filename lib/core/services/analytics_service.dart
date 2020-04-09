@@ -27,4 +27,11 @@ class AnalyticsService extends Services {
       parameters: {'has_image': hasImage},
     );
   }
+
+  Future logWallCreated({bool hasImage}) async {
+    await analytics.logEvent(
+      name: 'Wall_Created',
+      parameters: {'has_image': hasImage},
+    );
+  }
 }
