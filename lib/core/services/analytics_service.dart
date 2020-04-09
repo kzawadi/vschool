@@ -23,7 +23,7 @@ class AnalyticsService extends Services {
 
   Future logPostCreated({bool hasImage}) async {
     await analytics.logEvent(
-      name: 'create_post',
+      name: 'Announcemt_Created',
       parameters: {'has_image': hasImage},
     );
   }
