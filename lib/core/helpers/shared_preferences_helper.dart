@@ -62,49 +62,49 @@ class SharedPreferencesHelper {
 
   //Method that saves the _loggedInUserPhotoUrl
   Future<bool> setLoggedInUserPhotoUrl(String url) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool res = await prefs.setString(_photoUrl, url);
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool res = await preferences.setString(_photoUrl, url);
     print('User Id Saved' + res.toString());
     return res;
   }
 
   //Method that return the _loggedInUserPhotoUrl
   Future<String> getLoggedInUserPhotoUrl() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String res = prefs.getString(_photoUrl) ?? 'default';
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    String res = preferences.getString(_photoUrl) ?? 'default';
     print('User photo url Retrived' + res.toString());
     return res;
   }
 
   //Method that saves the _loggedInUserId
   Future<bool> setLoggedInUserId(String id) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool res = await prefs.setString(_loggedInUserId, id);
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool res = await preferences.setString(_loggedInUserId, id);
     print('User Id Saved' + res.toString());
     return res;
   }
 
   //Method that return the _loggedInUserId
   Future<String> getLoggedInUserId() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String res = prefs.getString(_loggedInUserId);
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    String res = preferences.getString(_loggedInUserId);
     print('User Id Retrived' + res.toString());
     return res;
   }
 
   // Method to remove userType when logging out
   // Future<bool> _removeLoggedInUserId() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   bool res = await prefs.remove(_loggedInUserId);
+  //   final SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   bool res = await preferences.remove(_loggedInUserId);
   //   print('LoggedInUserId Removed : ' + res.toString());
   //   return res;
   // }
 
   //Method that saves the user logged in type
   Future<bool> setUserType(UserType userType) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool res =
-        await prefs.setString(_userType, UserTypeHelper.getValue(userType));
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool res = await preferences.setString(
+        _userType, UserTypeHelper.getValue(userType));
     print('User Type Saved' +
         UserTypeHelper.getValue(userType) +
         ' ' +
@@ -114,18 +114,18 @@ class SharedPreferencesHelper {
 
   //Method that return the user logged in type
   Future<UserType> getUserType() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    String userType =
-        prefs.getString(_userType) ?? UserTypeHelper.getValue(UserType.UNKNOWN);
+    String userType = preferences.getString(_userType) ??
+        UserTypeHelper.getValue(UserType.UNKNOWN);
     print('User Type Returned' + userType);
     return UserTypeHelper.getEnum(userType);
   }
 
   // Method to remove userType when logging out
   // Future<bool> _removeUserType() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   bool res = await prefs.remove(_userType);
+  //   final SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   bool res = await preferences.remove(_userType);
   //   print('UserType Removed : ' + res.toString());
   //   return res;
   // }
