@@ -40,6 +40,7 @@ class AnnouncementServices extends Services {
     if (lastPostSnapshot == null)
       data = await _postRef
           .orderBy('timeStamp', descending: true)
+          //todo add the limit to 20
           .limit(10)
           .getDocuments();
     else
