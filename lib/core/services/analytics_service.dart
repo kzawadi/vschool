@@ -34,4 +34,8 @@ class AnalyticsService extends Services {
       parameters: {'has_image': hasImage},
     );
   }
+
+  Future logScreen({String screenName}) async {
+    await analytics.setCurrentScreen(screenName: 'screenName');
+  }
 }

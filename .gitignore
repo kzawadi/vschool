@@ -49,8 +49,8 @@ unlinked.ds
 unlinked_spec.ds
 
 # Firebase Related
-GoogleService-Info.plist
-google-services.json
+# GoogleService-Info.plist
+# google-services.json  
 
 # Android related
 **/android/**/gradle-wrapper.jar
