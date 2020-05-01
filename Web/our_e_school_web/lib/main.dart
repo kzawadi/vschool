@@ -4,10 +4,8 @@ import 'package:oureschoolweb/pages/HomePage.dart';
 import 'package:oureschoolweb/pages/LoginPage.dart';
 import 'package:oureschoolweb/pages/RegisterPage.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -17,11 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget),
-          maxWidth: 1200,
+          maxWidth: 1300,
           minWidth: 450,
           defaultScale: true,
           breakpoints: [
             ResponsiveBreakpoint(breakpoint: 450, name: MOBILE),
+            ResponsiveBreakpoint(
+                breakpoint: 600, name: MOBILE, autoScale: true),
             ResponsiveBreakpoint(
                 breakpoint: 800, name: TABLET, autoScale: true),
             ResponsiveBreakpoint(
@@ -37,7 +37,10 @@ class MyApp extends StatelessWidget {
         "/login": (context) => LoginPage(),
         "/register": (context) => RegisterPage(),
       },
-      theme: Theme.of(context).copyWith(platform: TargetPlatform.android),
+      theme: Theme.of(context).copyWith(
+          platform: TargetPlatform.android,
+          accentColor: Colors.black,
+          primaryColor: Colors.white),
       debugShowCheckedModeBanner: false,
     );
   }

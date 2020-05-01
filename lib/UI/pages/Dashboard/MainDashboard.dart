@@ -1,8 +1,7 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
-import 'package:ourESchool/core/helpers/FirebaseAnalytics.dart';
 import 'package:ourESchool/imports.dart';
 
-class MainDashboard extends StatefulWidget with AnalyticsScreen {
+class MainDashboard extends StatefulWidget {
   MainDashboard({Key key}) : super(key: key) {
     // setCurrentScreen();
   }

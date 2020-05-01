@@ -3,7 +3,7 @@ import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
 import 'package:ourESchool/imports.dart';
 
-class FeesPage extends StatefulWidget with AnalyticsScreen {
+class FeesPage extends StatefulWidget {
   FeesPage({
     Key key,
     this.targetId,

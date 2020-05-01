@@ -4,7 +4,7 @@ import 'package:oureschoolweb/components/footer.dart';
 import 'package:oureschoolweb/components/menuBar.dart';
 import 'package:oureschoolweb/components/Resources.dart';
 import 'package:oureschoolweb/components/spacing.dart';
-import 'package:oureschoolweb/components/typography.dart';
+import 'package:oureschoolweb/components/text.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -26,22 +26,22 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   MenuBar(),
                   Features(
-                    imagePath: assetsString.parents_welcome,
+                    imagePath: ImageAssets.parents_welcome,
                     backgroundColor: kmainColorParents,
-                    text: parent_welcome_text,
+                    text: StringConstants.parent_welcome_text,
                   ),
                   divider,
                   Features(
-                    imagePath: assetsString.student_welcome,
+                    imagePath: ImageAssets.student_welcome,
                     backgroundColor: kmainColorStudents,
-                    text: student_welcome_text,
+                    text: StringConstants.student_welcome_text,
                     reversed: true,
                   ),
                   divider,
                   Features(
-                    imagePath: assetsString.teacher_welcome,
+                    imagePath: ImageAssets.teacher_welcome,
                     backgroundColor: kmainColorTeacher,
-                    text: teacher_welcome_text,
+                    text: StringConstants.teacher_welcome_text,
                   ),
                   divider,
                   Footer()
@@ -87,12 +87,7 @@ class Features extends StatelessWidget {
       Expanded(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 24),
-          child: Text(
-            text,
-            style: headlineTextStyle.copyWith(
-              color: textWithTransparency,
-            ),
-          ),
+          child: TextHeadline(text: text,color: textWithTransparency,),
         ),
       ),
     ];

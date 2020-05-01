@@ -2,7 +2,7 @@ import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
 
-class AnnouncementPage extends StatefulWidget with AnalyticsScreen {
+class AnnouncementPage extends StatefulWidget {
   AnnouncementPage({
     Key key,
     this.announcementFor = '',

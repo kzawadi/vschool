@@ -2,7 +2,7 @@ import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/imports.dart';
 
-class StudentDashboard extends StatefulWidget with AnalyticsScreen {
+class StudentDashboard extends StatefulWidget {
   StudentDashboard({Key key}) : super(key: key) {
     // setCurrentScreen();
   }
