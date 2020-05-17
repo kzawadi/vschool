@@ -19,7 +19,8 @@ class AssignmentPageModel extends BaseModel {
   addAssignment(Assignment assignment) async {
     setState(ViewState.Busy);
     await _assignmentServices.uploadAssignment(assignment);
-    await Future.delayed(const Duration(seconds: 3), () {});
+    // todo why a delay
+    // await Future.delayed(const Duration(seconds: 3), () {});
     setState(ViewState.Idle);
   }
 

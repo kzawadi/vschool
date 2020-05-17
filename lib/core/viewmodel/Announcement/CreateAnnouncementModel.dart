@@ -6,18 +6,18 @@ import 'package:ourESchool/core/viewmodel/BaseModel.dart';
 import 'package:ourESchool/locator.dart';
 
 class CreateAnnouncementModel extends BaseModel {
-  AnnouncementServices announcementServices = locator<AnnouncementServices>();
+  AnnouncementServices _announcementServices = locator<AnnouncementServices>();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
   getUserData() async {
     setState(ViewState.Busy);
-    await announcementServices.init();
+    await _announcementServices.init();
     setState(ViewState.Idle);
   }
 
   Future postAnnouncement(Announcement announcement) async {
     setState(ViewState.Busy);
-    await announcementServices.postAnnouncement(announcement);
+    await _announcementServices.postAnnouncement(announcement);
     await _analyticsService.logPostCreated(
         hasImage: announcement.photoPath != null);
     setState(ViewState.Idle);
