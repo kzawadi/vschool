@@ -18,6 +18,12 @@ class AnnouncementPageModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
+  deleteAnnouncements(String id, String stdDivGlobal) async {
+    setState(ViewState.Busy);
+    await _announcementServices.deleteAnnouncement(id, stdDivGlobal);
+    setState(ViewState.Idle);
+  }
+
   onRefresh(String stdDivGlobal) async {
     _announcementServices.postDocumentSnapshots.clear();
     _announcementServices.lastPostSnapshot = null;
