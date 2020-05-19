@@ -14,7 +14,7 @@ class StudentDashboard extends StatefulWidget {
   String get screenName => 'Students Dashboard';
 }
 
-class _StudentDashboardState extends State<StudentDashboard> {
+class _StudentDashboardState extends State<StudentDashboard> with Services {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -98,6 +98,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             label: string.results,
                             onPressed: () {
                               kopenPage(context, ResultPage(), 'Result_Page');
+                              //todo better implementation of the in app messaging events
+                              fiam.triggerEvent('result_page');
+                              Scaffold.of(context).showSnackBar(const SnackBar(
+                                  content:
+                                      Text("Triggering event: result_page")));
                             },
                           ),
                         ],
