@@ -81,6 +81,7 @@ class MessagesListViewBuilder extends StatelessWidget {
 
         // print(messageDates);
         // print(showDate);
+        print(messagesList[index].id);
 
         if (messagesList[index].from == user.id) {
           return MyMessageWidget(

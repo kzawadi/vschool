@@ -124,7 +124,7 @@ class ChatServices extends Services {
     String chatRef = 'N.A';
     //todo change source to server and cache
     await ref
-        .get(source: Source.server)
+        .get()
         .then((snapShot) => {chatRef = snapShot[student.id].toString()});
 
     await for (QuerySnapshot snap in firestore
