@@ -3,6 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/UserDataLogin.dart';
 import 'package:ourESchool/core/Server.dart';
@@ -21,6 +22,8 @@ class Services {
   static final FirebaseMessaging _fcm = FirebaseMessaging();
   static final FirebaseAnalytics _analytics = FirebaseAnalytics();
   static final FirebaseInAppMessaging _fiam = FirebaseInAppMessaging();
+  static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   FirebaseUser firebaseUser;
 
@@ -64,6 +67,8 @@ class Services {
   FirebaseAuth get auth => _auth;
   User get loggedInUser => _user;
   FirebaseMessaging get cloudmesaging => _fcm;
+  FlutterLocalNotificationsPlugin get localNotifications =>
+      flutterLocalNotificationsPlugin;
   FirebaseAnalytics get analytics => _analytics;
   FirebaseInAppMessaging get fiam => _fiam;
 

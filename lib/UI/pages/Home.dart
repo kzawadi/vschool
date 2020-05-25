@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 
@@ -56,12 +57,17 @@ class _HomeState extends State<Home> with Services {
 
     cloudmesaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print("onMessage: $message");
-        _scaffoldKey.currentState.showSnackBar(
-          ksnackBar(context, message['notification']['title']),
-        );
+        // print("onMessage: $message");
+        // _scaffoldKey.currentState.showSnackBar(
+        //   ksnackBar(context, message['notification']['title']),
+        // );
 
-        print('RECIEVED NOTIFICATION IS $message'.toString());
+        // print('RECIEVED NOTIFICATION IS $message'.toString());
+        print('onMessage: $message');
+        Platform.isAndroid
+            ? showNotification(message['notification'])
+            : showNotification(message['aps']['alert']);
+        return;
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
@@ -72,6 +78,7 @@ class _HomeState extends State<Home> with Services {
         // TODO optional
       },
     );
+    configLocalNotification();
   }
 
   @override
@@ -88,7 +95,7 @@ class _HomeState extends State<Home> with Services {
 
     // Save it to Firestore
     if (fcmToken != null) {
-      var tokens = firestore
+      DocumentReference tokens = firestore
           .collection('users')
           .document(id)
           .collection('tokens')
@@ -107,6 +114,45 @@ class _HomeState extends State<Home> with Services {
   _subscribeToTopic() async {
     // Subscribe the user to a topic
     cloudmesaging.subscribeToTopic('daily');
+  }
+
+  void configLocalNotification() {
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    localNotifications.initialize(initializationSettings);
+  }
+
+  void showNotification(message) async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      Platform.isAndroid
+          ? 'com.mappdeveloper.usa.our_e_school'
+          // todo be replaced by ios project id
+          : 'com.mappdeveloper.usa.our_e_school',
+      'e school chat demo',
+      'General notifications channel descriptions',
+      playSound: true,
+      enableVibration: true,
+      importance: Importance.Max,
+      priority: Priority.High,
+    );
+    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    print(message);
+//    print(message['body'].toString());
+//    print(json.encode(message));
+
+    await localNotifications.show(0, message['title'].toString(),
+        message['body'].toString(), platformChannelSpecifics,
+        payload: json.encode(message));
+
+//    await flutterLocalNotificationsPlugin.show(
+//        0, 'plain title', 'plain body', platformChannelSpecifics,
+//        payload: 'item x');
   }
 
   ImageProvider<dynamic> setImage(User user) {
