@@ -169,7 +169,8 @@ export async function notificationChat(eventSnapshot: any, context: any) {
       title: 'New Message!',
       body: `you have a new message from ${from}`,
       //icon: 'your-icon-url',
-      click_action: 'FLUTTER_NOTIFICATION_CLICK'
+      click_action: 'FLUTTER_NOTIFICATION_CLICK',
+      sound: 'default',
     }
   };
   console.log('=========thee end of notification=======');
@@ -201,7 +202,8 @@ export async function notificationFees(eventSnapshot: any, context: any) {
       title: 'Fees Updates',
       body: `Some Payments Changes`,
       //icon: 'your-icon-url',
-      click_action: 'FLUTTER_NOTIFICATION_CLICK'
+      click_action: 'FLUTTER_NOTIFICATION_CLICK',
+      sound: 'default',
     }
   };
   console.log('=========thee end of notification=======');
