@@ -57,24 +57,30 @@ class _MessagingScreenState extends State<MessagingScreen> {
               children: <Widget>[
                 Flexible(
                   child: StreamBuilder<List<Message>>(
-                      stream: model.chatServices.getMessages(
-                        loggedIn: user,
-                        other: widget.parentORteacher,
-                        student: widget.student,
-                        scrollController: _scrollController,
-                      ),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData || snapshot.data == null) {
-                          return Center(
-                            child: kBuzyPage(
-                                color: Theme.of(context).primaryColor),
-                          );
-                        }
-                        return MessagesListViewBuilder(
-                          messagesList: snapshot.data,
-                          scrollController: _scrollController,
+                    stream: model.chatServices.getMessages(
+                      loggedIn: user,
+                      other: widget.parentORteacher,
+                      student: widget.student,
+                      scrollController: _scrollController,
+                    ),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData || snapshot.data == null) {
+                        return Center(
+                          child:
+                              kBuzyPage(color: Theme.of(context).primaryColor),
                         );
-                      }),
+                      }
+                      return MessagesListViewBuilder(
+                        messagesList: snapshot.data,
+                        scrollController: _scrollController,
+                        read: model.delivery(
+                          messagesList: snapshot.data,
+                          student: widget.student,
+                          user: user,
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Hero(
                   transitionOnUserGestures: true,
@@ -87,6 +93,22 @@ class _MessagingScreenState extends State<MessagingScreen> {
         );
       },
     );
+  }
+
+  delivery({
+    List<Message> messagesList,
+    // Message message,
+    User student,
+    MessagingScreenPageModel model,
+    User user,
+  }) async {
+    // var snapshot;
+    await model.delivery(
+      messagesList: messagesList,
+      student: widget.student,
+      user: user,
+    );
+    // print(messagesList.toString());
   }
 
   sendButtonTapped(MessagingScreenPageModel model, User user) async {

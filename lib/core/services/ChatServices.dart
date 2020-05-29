@@ -158,4 +158,32 @@ class ChatServices extends Services {
 
     print('Message Sent');
   }
+
+  /// This will take in a filtered list of messages from the
+  /// viewModel and call the references to change a property
+  /// `readReceipt` from `false` to `true`
+  delivery(
+    List<Message> messagesList,
+    User student,
+  ) async {
+    for (var i = 0; i < messagesList.length; i++) {
+      String to = messagesList[i].to;
+      String forr = messagesList[i].for_;
+      String from = messagesList[i].from;
+      String id = messagesList[i].id;
+      var ref = (await schoolRefwithCode())
+          .document('Chats')
+          .collection(student.standardDivision())
+          .document('Chat')
+          .collection(getChatId([to, forr, from]))
+          .document(id);
+
+      await ref.updateData(
+        {'readReceipt': true},
+      );
+      break;
+    }
+
+    print('Message Delivered');
+  }
 }

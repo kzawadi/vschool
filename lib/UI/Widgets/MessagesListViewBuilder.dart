@@ -2,14 +2,19 @@ import '../../imports.dart';
 import 'package:intl/intl.dart';
 
 // List<String> messageDates = [];
-
+// typedef void Read();
 class MessagesListViewBuilder extends StatelessWidget {
-  MessagesListViewBuilder({this.messagesList, this.scrollController});
+  MessagesListViewBuilder({
+    this.messagesList,
+    this.scrollController,
+    void read,
+  });
 
   // List<String> messageDates = [];
   final List<Message> messagesList;
   String previusDate = '';
   final ScrollController scrollController;
+  VoidCallback read;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +86,9 @@ class MessagesListViewBuilder extends StatelessWidget {
 
         // print(messageDates);
         // print(showDate);
-        print(messagesList[index].id);
+        ///to do a list of id to be updated  for read receipts
+        // print(messagesList[index].from);
+        // print(user.id.toString());
 
         if (messagesList[index].from == user.id) {
           return MyMessageWidget(
@@ -119,7 +126,7 @@ class OtherMessageWidget extends StatelessWidget {
             constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width * 0.75),
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+              padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.only(
@@ -129,10 +136,16 @@ class OtherMessageWidget extends StatelessWidget {
                   topLeft: Radius.circular(8),
                 ),
               ),
-              child: Text(
-                message.message,
-                textAlign: TextAlign.start,
-                style: kchatStyle.copyWith(fontSize: 16, color: Colors.white),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    message.message,
+                    textAlign: TextAlign.start,
+                    style:
+                        kchatStyle.copyWith(fontSize: 16, color: Colors.white),
+                  ),
+                ],
               ),
             ),
           ),
@@ -176,7 +189,7 @@ class MyMessageWidget extends StatelessWidget {
             constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width * 0.75),
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 9, horizontal: 12),
+              padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
               decoration: BoxDecoration(
                 color: Colors.green.shade600,
                 borderRadius: BorderRadius.only(
@@ -186,10 +199,24 @@ class MyMessageWidget extends StatelessWidget {
                   topLeft: Radius.circular(8),
                 ),
               ),
-              child: Text(
-                message.message,
-                textAlign: TextAlign.start,
-                style: kchatStyle.copyWith(fontSize: 16, color: Colors.white),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    message.message,
+                    textAlign: TextAlign.start,
+                    style:
+                        kchatStyle.copyWith(fontSize: 16, color: Colors.white),
+                  ),
+                  Visibility(
+                    child: Icon(
+                      Icons.check_circle,
+                      size: 15,
+                      color: Colors.white,
+                    ),
+                    visible: message.readReceipt,
+                  ),
+                ],
               ),
             ),
           ),
