@@ -166,24 +166,22 @@ class ChatServices extends Services {
     List<Message> messagesList,
     User student,
   ) async {
-    for (var i = 0; i < messagesList.length; i++) {
+    WriteBatch batch = firestore.batch();
+    for (int i = 0; i < messagesList.length; i++) {
       String to = messagesList[i].to;
       String forr = messagesList[i].for_;
       String from = messagesList[i].from;
       String id = messagesList[i].id;
-      var ref = (await schoolRefwithCode())
+      DocumentReference ref = (await schoolRefwithCode())
           .document('Chats')
           .collection(student.standardDivision())
           .document('Chat')
           .collection(getChatId([to, forr, from]))
           .document(id);
-
-      await ref.updateData(
-        {'readReceipt': true},
-      );
+      batch.updateData(ref, {'readReceipt': true});
+      batch.commit();
+      print('Messages Delivered the batch has been commited');
       break;
     }
-
-    print('Message Delivered');
   }
 }
