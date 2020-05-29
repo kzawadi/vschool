@@ -138,14 +138,13 @@ Future openFileExplorer(
 
 SnackBar ksnackBar(BuildContext context, String message) {
   return SnackBar(
-    behavior: SnackBarBehavior.floating,
-    duration: Duration(seconds: 5),
+    duration: Duration(seconds: 4),
     content: Text(
       message,
       textAlign: TextAlign.center,
     ),
     backgroundColor:
-        isThemeCurrentlyDark(context) ? MyColors.light : MyColors.dark,
+        isThemeCurrentlyDark(context) ? MyColors.accent : MyColors.dark,
   );
 }
 
