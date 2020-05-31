@@ -84,7 +84,8 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
           context, 'You Need to fill all the details and a profile Photo'));
     } else {
       if (model.state == ViewState.Idle) {
-        var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
+        FirebaseUser firebaseUser =
+            Provider.of<FirebaseUser>(context, listen: false);
 
         res = await model.setUserProfileData(
           user: User(

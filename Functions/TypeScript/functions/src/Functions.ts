@@ -145,6 +145,14 @@ export async function messageIdAutoEntry(eventSnapshot: any, context: any) {
 }
 
 
+
+
+const notification_options = {
+  priority: "high",
+  timeToLive: 60 * 60 * 24
+};
+
+
 export async function notificationChat(eventSnapshot: any, context: any) {
     const fcm = admin.messaging();
 
@@ -164,6 +172,8 @@ export async function notificationChat(eventSnapshot: any, context: any) {
 
   const tokens = querySnapshot.docs.map(snap => snap.id);
 
+  const options =  notification_options
+
   const payload: admin.messaging.MessagingPayload = {
     notification: {
       title: 'New Message!',
@@ -171,10 +181,11 @@ export async function notificationChat(eventSnapshot: any, context: any) {
       //icon: 'your-icon-url',
       click_action: 'FLUTTER_NOTIFICATION_CLICK',
       sound: 'default',
+
     }
   };
   console.log('=========thee end of notification=======');
-  return fcm.sendToDevice(tokens, payload);
+  return fcm.sendToDevice(tokens, payload,options);
 
 
 }
@@ -196,6 +207,7 @@ export async function notificationFees(eventSnapshot: any, context: any) {
     .get();
 
   const tokens = querySnapshot.docs.map(snap => snap.id);
+  const options =  notification_options
 
   const payload: admin.messaging.MessagingPayload = {
     notification: {
@@ -207,7 +219,7 @@ export async function notificationFees(eventSnapshot: any, context: any) {
     }
   };
   console.log('=========thee end of notification=======');
-  return fcm.sendToDevice(tokens, payload);
+  return fcm.sendToDevice(tokens, payload, options);
 
 
 }
