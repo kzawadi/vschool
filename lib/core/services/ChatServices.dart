@@ -130,6 +130,7 @@ class ChatServices extends Services {
     await for (QuerySnapshot snap in firestore
         .collection(chatRef)
         .orderBy('timestamp', descending: true)
+        // .limit(4) // trying to limit the amount of query in firestore for devs purpose
         .snapshots()) {
       try {
         List<Message> messages =
@@ -167,21 +168,21 @@ class ChatServices extends Services {
     User student,
   ) async {
     WriteBatch batch = firestore.batch();
-    for (int i = 0; i < messagesList.length; i++) {
-      String to = messagesList[i].to;
-      String forr = messagesList[i].for_;
-      String from = messagesList[i].from;
-      String id = messagesList[i].id;
+
+    for (Message message in messagesList) {
+      String to = message.to;
+      String forr = message.for_;
+      String from = message.from;
+      String id = message.id;
       DocumentReference ref = (await schoolRefwithCode())
           .document('Chats')
           .collection(student.standardDivision())
           .document('Chat')
           .collection(getChatId([to, forr, from]))
           .document(id);
-      batch.updateData(ref, {'readReceipt': true});
-      batch.commit();
-      print('Messages Delivered the batch has been commited');
-      break;
+      batch.updateData(ref, {"readReceipt": true});
     }
+    batch.commit();
+    print('Messages Delivered the batch has been commited');
   }
 }
