@@ -7,8 +7,15 @@ class Message {
   Timestamp timeStamp;
   String id;
   String for_;
+  bool readReceipt;
 
-  Message({this.to, this.from, this.message, this.timeStamp, this.for_});
+  Message(
+      {this.to,
+      this.from,
+      this.message,
+      this.timeStamp,
+      this.for_,
+      this.readReceipt});
 
   Message.fromSnapShot(DocumentSnapshot snapshot) {
     this.id = snapshot.documentID;
@@ -25,6 +32,7 @@ class Message {
     this.from = json['from'];
     this.message = json['message'].toString();
     this.timeStamp = json['timestamp'] as Timestamp;
+    this.readReceipt = json['readReceipt'];
   }
 
   Map<String, dynamic> toJson() {
@@ -34,6 +42,7 @@ class Message {
     data['from'] = this.from;
     data['timestamp'] = this.timeStamp;
     data['message'] = this.message;
+    data['readReceipt'] = this.readReceipt;
     return data;
   }
 }

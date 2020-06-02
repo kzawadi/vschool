@@ -4,7 +4,7 @@ import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/viewmodel/Wall/WallPageModel.dart';
 import 'package:ourESchool/imports.dart';
 
-class WallPage extends StatefulWidget with AnalyticsScreen {
+class WallPage extends StatefulWidget {
   WallPage({
     Key key,
     this.announcementFor = '',

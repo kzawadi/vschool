@@ -2,7 +2,7 @@ import 'package:ourESchool/UI/Widgets/AssignmentBottomSheet.dart';
 import 'package:ourESchool/UI/Widgets/AssignmentDetailBottomSheet.dart';
 import 'package:ourESchool/imports.dart';
 
-class AssignmentsPage extends StatefulWidget with AnalyticsScreen {
+class AssignmentsPage extends StatefulWidget {
   AssignmentsPage({Key key, this.standard = ''}) : super(key: key) {
     // setCurrentScreen();
   }

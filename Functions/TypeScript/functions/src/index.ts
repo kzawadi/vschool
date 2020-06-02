@@ -20,7 +20,9 @@ export const db = admin.firestore();
 
 export const autoStudentParentEntry = functions.firestore
 .document('Schools/{country}/{schoolCode}/Profile/Student/{studentId}')
-.onWrite(async (eventSnapshot, context) => {
+// i have changed this becouse it get triggered when  a student update her profiles and 
+//create duplicates and bad behaviours
+.onCreate(async (eventSnapshot, context) => {
     return atomicFunction.studentParentAutoEntry(eventSnapshot, context);
 });
 

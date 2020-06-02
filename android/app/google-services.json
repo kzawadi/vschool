@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "388700687037",
+    "firebase_url": "https://academic-4e032.firebaseio.com",
+    "project_id": "academic-4e032",
+    "storage_bucket": "academic-4e032.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388700687037:android:d3e18d533c7a8338b505d4",
+        "android_client_info": {
+          "package_name": "com.mappdeveloper.usa.our_e_school"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388700687037-9hjt2u66j5qq7e9ftc2me8ob8bhr5quh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mappdeveloper.usa.our_e_school",
+            "certificate_hash": "f0a14f5f09af3d58a5643a5efb094d4d73f76113"
+          }
+        },
+        {
+          "client_id": "388700687037-jebak6105qo9ivgpv3040qskbb1fs9il.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2XBOD6SVokuhxbHQupShdZcQ_-fvP4EE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388700687037-jebak6105qo9ivgpv3040qskbb1fs9il.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

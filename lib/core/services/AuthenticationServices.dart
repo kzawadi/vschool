@@ -190,9 +190,7 @@ class AuthenticationServices extends Services {
       isUserLoggedIn = true;
       isUserLoggedInStream.add(isUserLoggedIn);
       fireBaseUserStream.add(firebaseUser);
-      await _analyticsService.setUserProperties(
-        userId: authResult.user.uid,
-      );
+      await _analyticsService.logSignUp();
       return authErrors;
     } catch (e) {
       return catchException(e);

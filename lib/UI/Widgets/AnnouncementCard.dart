@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
+import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/locator.dart';
 
 class AnnouncementCard extends StatefulWidget {
@@ -21,6 +22,10 @@ class AnnouncementCard extends StatefulWidget {
 
 class _AnnouncementCardState extends State<AnnouncementCard> {
   final ProfilePageModel model = locator<ProfilePageModel>();
+  final AnnouncementPageModel announcementModel =
+      locator<AnnouncementPageModel>();
+
+  bool isAteacher = false;
 
   User user = User();
   bool loading = true;
@@ -41,6 +46,10 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
 
   @override
   Widget build(BuildContext context) {
+    var userType = Provider.of<UserType>(context, listen: false);
+    if (userType == UserType.TEACHER) {
+      isAteacher = true;
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
       child: Card(
@@ -195,7 +204,36 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                   ),
                 ),
               ),
-            )
+            ),
+
+            Visibility(
+              visible: isAteacher,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  onPressed: () async {
+                    String id = widget.announcement.id;
+                    String stdDivGlobal;
+                    if (widget.announcement.forClass == 'Global') {
+                      stdDivGlobal = widget.announcement.forClass;
+                    } else
+                      stdDivGlobal = widget.announcement.forClass +
+                          widget.announcement.forDiv;
+                    // String stdDivGlobal = widget.announcement.forClass;
+                    await announcementModel.deleteAnnouncements(
+                        id, stdDivGlobal);
+                  },
+                  child: Column(
+                    // Replace with a Row for horizontal icon + text
+                    children: <Widget>[
+                      Icon(Icons.delete),
+                      Text("Delete"),
+                    ],
+                  ),
+                  color: Colors.redAccent,
+                ),
+              ),
+            ),
           ],
         ),
       ),

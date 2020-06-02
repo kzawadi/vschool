@@ -124,12 +124,13 @@ class ChatServices extends Services {
     String chatRef = 'N.A';
     //todo change source to server and cache
     await ref
-        .get(source: Source.server)
+        .get()
         .then((snapShot) => {chatRef = snapShot[student.id].toString()});
 
     await for (QuerySnapshot snap in firestore
         .collection(chatRef)
         .orderBy('timestamp', descending: true)
+        // .limit(4) // trying to limit the amount of query in firestore for devs purpose
         .snapshots()) {
       try {
         List<Message> messages =
@@ -157,5 +158,31 @@ class ChatServices extends Services {
     await ref.add(message.toJson());
 
     print('Message Sent');
+  }
+
+  /// This will take in a filtered list of messages from the
+  /// viewModel and call the references to change a property
+  /// `readReceipt` from `false` to `true`
+  delivery(
+    List<Message> messagesList,
+    User student,
+  ) async {
+    WriteBatch batch = firestore.batch();
+
+    for (Message message in messagesList) {
+      String to = message.to;
+      String forr = message.for_;
+      String from = message.from;
+      String id = message.id;
+      DocumentReference ref = (await schoolRefwithCode())
+          .document('Chats')
+          .collection(student.standardDivision())
+          .document('Chat')
+          .collection(getChatId([to, forr, from]))
+          .document(id);
+      batch.updateData(ref, {"readReceipt": true});
+    }
+    batch.commit();
+    print('Messages Delivered the batch has been commited');
   }
 }

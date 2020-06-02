@@ -101,4 +101,15 @@ class AnnouncementServices extends Services {
       print("Post posting failed");
     }
   }
+
+  deleteAnnouncement(String id, String stdDivGlobal) async {
+    // Map announcementMap = announcement.toJson();
+
+    var _postRef = (await schoolRefwithCode())
+        .document('Posts')
+        .collection(stdDivGlobal)
+        .document(id);
+
+    await _postRef.delete();
+  }
 }
