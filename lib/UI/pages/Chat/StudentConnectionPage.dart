@@ -31,8 +31,8 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
     isLoading = true;
     setState(() {});
     await widget.model.getParents(widget.documentSnapshot);
-    parent = widget
-        .model.studentsParentListMap[widget.documentSnapshot.documentID];
+    parent =
+        widget.model.studentsParentListMap[widget.documentSnapshot.documentID];
     isLoading = false;
     setState(() {});
   }
@@ -161,6 +161,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                                                 parentORteacher: parent[index],
                                                 student: student,
                                               ),
+                                              'Messaging_Screen',
                                             );
                                           },
                                         ),
@@ -183,7 +184,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
 
   Widget _buildStudentProfileImageViewer(
       BuildContext context, String url, UserType userType) {
-        final double borderradius= 10;
+    final double borderradius = 10;
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 10,

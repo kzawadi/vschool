@@ -131,19 +131,21 @@ class _HomeState extends State<Home> with Services {
           buttonHeroTag: 'profileeee',
           title: pageName,
           child: CircleAvatar(
-            radius: 22,
-            child: ClipOval(
-              child: Image(
-                fit: BoxFit.fill,
-                image: setImage(user),
-              ),
-            ),
+            backgroundImage: setImage(user),
+            radius: 20,
+            // child: ClipOval(
+            //   child: Image(
+            //     fit: BoxFit.fill,
+            //     image: setImage(user),
+            //   ),
+            // ),
           ),
           onPressed: () {
             if (userType == UserType.PARENT) {
-              kopenPage(context, GuardianProfilePage());
+              kopenPage(
+                  context, GuardianProfilePage(), 'Guardian_Profile_Page');
             } else {
-              kopenPage(context, ProfilePage());
+              kopenPage(context, ProfilePage(), 'ProfilePage');
             }
           },
         ),

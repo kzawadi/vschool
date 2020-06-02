@@ -60,6 +60,7 @@ class ChatServices extends Services {
       } else {
         _currentUser = User.fromJson(json.decode(userDataModel));
       }
+      print('The student in getStudents are  $_currentUser');
 
       _standard = _currentUser.standardDivision();
       if (_standard == '') {
@@ -106,6 +107,7 @@ class ChatServices extends Services {
     return parents;
   }
 
+  /// this is where all the messages get fetched
   Stream<List<Message>> getMessages({
     @required User other,
     @required User student,
@@ -120,7 +122,7 @@ class ChatServices extends Services {
         .document(other.id);
 
     String chatRef = 'N.A';
-
+    //todo change source to server and cache
     await ref
         .get(source: Source.server)
         .then((snapShot) => {chatRef = snapShot[student.id].toString()});

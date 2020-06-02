@@ -349,6 +349,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               GuardianProfilePage(
                                                 title: string.mother,
                                               ),
+                                              'Guardian_Profile_Page',
                                             );
                                           },
                                           backgroundColor: kmainColorParents,
@@ -371,6 +372,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               GuardianProfilePage(
                                                 title: string.father,
                                               ),
+                                              'Guardian_Profile_Page',
                                             );
                                           },
                                           backgroundColor: kmainColorParents,
@@ -393,6 +395,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               GuardianProfilePage(
                                                 title: string.other,
                                               ),
+                                              'Guardian_Profile_Page',
                                             );
                                           },
                                           backgroundColor: kmainColorParents,

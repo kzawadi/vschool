@@ -37,7 +37,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             tileColor: Colors.deepOrangeAccent,
                             label: string.e_card,
                             onPressed: () {
-                              kopenPage(context, ECardPage());
+                              kopenPage(context, ECardPage(), 'ECard_Page');
                             },
                             icon: Icons.perm_contact_calendar,
                           ),
@@ -49,7 +49,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             icon: Icons.av_timer,
                             label: string.timetable,
                             onPressed: () {
-                              kopenPage(context, TimeTablePage());
+                              kopenPage(
+                                  context, TimeTablePage(), 'Time_Table_Page');
                             },
                           ),
                         ],
@@ -61,7 +62,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       label: string.announcement,
                       icon: CustomIcons.megaphone,
                       onPressed: () {
-                        kopenPage(context, AnnouncementPage());
+                        kopenPage(
+                            context, AnnouncementPage(), 'Announcement_Page');
                       },
                     ),
                     ColumnReusableCardButton(
@@ -71,7 +73,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       label: string.wall,
                       icon: CustomIcons.megaphone,
                       onPressed: () {
-                        kopenPage(context, WallPage());
+                        kopenPage(context, WallPage(), 'Wall_Page');
                       },
                     ),
                     Container(
@@ -84,7 +86,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             icon: CustomIcons.traveler_with_a_suitcase,
                             label: string.holidays,
                             onPressed: () {
-                              kopenPage(context, HolidayPage());
+                              kopenPage(context, HolidayPage(), 'Holiday_Page');
                             },
                           ),
                           SizedBox(
@@ -95,7 +97,7 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             icon: Icons.assessment,
                             label: string.results,
                             onPressed: () {
-                              kopenPage(context, ResultPage());
+                              kopenPage(context, ResultPage(), 'Result_Page');
                             },
                           ),
                         ],
@@ -113,7 +115,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             tileColor: Colors.lightGreen,
                             label: string.assignment,
                             onPressed: () {
-                              kopenPage(context, AssignmentsPage());
+                              kopenPage(context, AssignmentsPage(),
+                                  'Assignments_Page');
                             },
                             icon: Icons.assignment,
                           ),
@@ -125,7 +128,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             icon: Icons.attach_money,
                             label: string.fees,
                             onPressed: () {
-                              kopenPage(context, FeesPageDash());
+                              kopenPage(
+                                  context, FeesPageDash(), 'Fees_Page_Dash');
                             },
                           ),
                         ],
@@ -136,7 +140,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                         tileColor: Colors.grey,
                         label: string.transportation,
                         onPressed: () {
-                          kopenPage(context, TransportationPage());
+                          kopenPage(context, TransportationPage(),
+                              'Transportation_Page');
                         },
                         icon: FontAwesomeIcons.bus),
                     SizedBox(
@@ -154,7 +159,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                                 icon: Icons.assistant_photo,
                                 label: string.exams,
                                 onPressed: () {
-                                  kopenPage(context, TopicSelectPage());
+                                  kopenPage(context, TopicSelectPage(),
+                                      'Topic_Select_Page');
                                 },
                               ),
                               RowReusableCardButtonBanner(
@@ -163,7 +169,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                                 icon: FontAwesomeIcons.book,
                                 label: string.e_book,
                                 onPressed: () {
-                                  kopenPage(context, EBookSelect());
+                                  kopenPage(
+                                      context, EBookSelect(), 'EBook_Select');
                                 },
                               ),
                               RowReusableCardButtonBanner(
@@ -192,7 +199,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                                 icon: FontAwesomeIcons.female,
                                 label: string.parenting_guide,
                                 onPressed: () {
-                                  kopenPage(context, ParentingGuidePage());
+                                  kopenPage(context, ParentingGuidePage(),
+                                      'ParentingGuide_Page');
                                 },
                               ),
                               RowReusableCardButtonBanner(

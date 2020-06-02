@@ -25,6 +25,7 @@ var kTextFieldDecoration = InputDecoration(
 String kFontFamily = 'Nunito';
 
 TextStyle ktitleStyle = TextStyle(fontWeight: FontWeight.w800);
+TextStyle kchatStyle = TextStyle();
 TextStyle ksubtitleStyle = TextStyle(fontWeight: FontWeight.w600);
 
 Color kmainColorTeacher = Color.fromRGBO(254, 198, 27, 1.0);
@@ -54,10 +55,11 @@ Widget kBackBtn = Icon(
   // color: Colors.black54,
 );
 
-kopenPage(BuildContext context, Widget page) {
+kopenPage(BuildContext context, Widget page, String pageName) {
   return Navigator.push(
     context,
     MaterialPageRoute(
+      settings: RouteSettings(name: pageName),
       builder: (BuildContext context) => page,
     ),
   );

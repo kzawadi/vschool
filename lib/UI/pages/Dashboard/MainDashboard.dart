@@ -1,4 +1,3 @@
-import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/core/helpers/FirebaseAnalytics.dart';
 import 'package:ourESchool/imports.dart';
@@ -38,7 +37,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       label: string.childrens,
                       icon: FontAwesomeIcons.child,
                       onPressed: () {
-                        kopenPage(context, ChildrensPage());
+                        kopenPage(context, ChildrensPage(), 'Childrens_Page');
                       },
                     ),
                     Container(
@@ -50,7 +49,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                             tileColor: Colors.deepOrangeAccent,
                             label: string.e_card,
                             onPressed: () {
-                              kopenPage(context, ECardPage());
+                              kopenPage(context, ECardPage(), 'ECard_Page');
                             },
                             icon: Icons.perm_contact_calendar,
                           ),
@@ -62,7 +61,8 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                             icon: Icons.av_timer,
                             label: string.timetable,
                             onPressed: () {
-                              kopenPage(context, TimeTablePage());
+                              kopenPage(
+                                  context, TimeTablePage(), 'TimeTable_Page');
                             },
                           ),
                         ],
@@ -75,7 +75,8 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       label: string.announcement,
                       icon: CustomIcons.megaphone,
                       onPressed: () {
-                        kopenPage(context, AnnouncementPage());
+                        kopenPage(
+                            context, AnnouncementPage(), 'Announcement_Page');
                       },
                     ),
                     ColumnReusableCardButton(
@@ -85,7 +86,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       label: string.wall,
                       icon: CustomIcons.megaphone,
                       onPressed: () {
-                        kopenPage(context, WallPage());
+                        kopenPage(context, WallPage(), 'Wall_Page');
                       },
                     ),
                     Container(
@@ -98,7 +99,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                             icon: CustomIcons.traveler_with_a_suitcase,
                             label: string.holidays,
                             onPressed: () {
-                              kopenPage(context, HolidayPage());
+                              kopenPage(context, HolidayPage(), 'HolidayPage');
                             },
                           ),
                           SizedBox(
@@ -108,7 +109,8 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                             tileColor: Colors.lightGreen,
                             label: string.assignment,
                             onPressed: () {
-                              kopenPage(context, AssignmentsPage());
+                              kopenPage(context, AssignmentsPage(),
+                                  'Assignments_Page');
                             },
                             icon: Icons.assignment,
                           ),
@@ -120,7 +122,8 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       tileColor: Colors.grey,
                       label: string.transportation,
                       onPressed: () {
-                        kopenPage(context, TransportationPage());
+                        kopenPage(context, TransportationPage(),
+                            'TransportationPage');
                         // analytics.logSelectContent(
                         //     contentType: 'Fees Page Dashboard', itemId: null);
                       },
@@ -142,7 +145,8 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                                 icon: FontAwesomeIcons.female,
                                 label: string.parenting_guide,
                                 onPressed: () {
-                                  kopenPage(context, ParentingGuidePage());
+                                  kopenPage(context, ParentingGuidePage(),
+                                      'ParentingGuide_Page');
                                 },
                               ),
                               RowReusableCardButtonBanner(

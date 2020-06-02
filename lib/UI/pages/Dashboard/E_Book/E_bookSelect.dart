@@ -29,16 +29,17 @@ class EBookSelect extends StatelessWidget {
         ),
         itemCount: ebooks.length,
         itemBuilder: (context, index) => BookGridViewCard(
-              eBook: ebooks[index],
-              onTap: () {
-                kopenPage(
-                  context,
-                  EBookInfo(
-                    eBook: ebooks[index],
-                  ),
-                );
-              },
-            ),
+          eBook: ebooks[index],
+          onTap: () {
+            kopenPage(
+              context,
+              EBookInfo(
+                eBook: ebooks[index],
+              ),
+              'EBook_Info',
+            );
+          },
+        ),
       ),
     );
   }

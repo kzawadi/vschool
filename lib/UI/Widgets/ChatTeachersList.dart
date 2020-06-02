@@ -61,13 +61,13 @@ class _ChatTeachersListWidgetState extends State<ChatTeachersListWidget> {
             minWidth: MediaQuery.of(context).size.width,
             onPressed: () {
               kopenPage(
-                context,
-                MessagingScreen(
-                  student: widget.model.selectedChild,
-                  parentORteacher:
-                      widget.model.teachersListMap[widget.snapshot.documentID],
-                ),
-              );
+                  context,
+                  MessagingScreen(
+                    student: widget.model.selectedChild,
+                    parentORteacher: widget
+                        .model.teachersListMap[widget.snapshot.documentID],
+                  ),
+                  'Messaging_Screen');
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

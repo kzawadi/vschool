@@ -27,8 +27,15 @@ class BottomSheetChildrensWidget extends StatefulWidget {
 
 class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
     with Services {
+  bool isTeacher = false;
+
   @override
   Widget build(BuildContext context) {
+    var userType = Provider.of<UserType>(context, listen: false);
+    if (userType == UserType.TEACHER) {
+      isTeacher = true;
+    }
+
     return SafeArea(
       child: Container(
         height: 300,
@@ -61,6 +68,7 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         announcementFor: widget.user.standard +
                             widget.user.division.toUpperCase(),
                       ),
+                      'Announcement_Page',
                     );
                   },
                 ),
@@ -75,7 +83,8 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         AssignmentsPage(
                           standard: widget.user.standard +
                               widget.user.division.toUpperCase(),
-                        ));
+                        ),
+                        'Assignments_Page');
                   },
                   icon: Icons.assignment,
                 ),
@@ -93,25 +102,31 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         context,
                         ECardPage(
                           user: widget.user,
-                        ));
+                        ),
+                        'ECard_Page');
                   },
                   icon: Icons.perm_contact_calendar,
                 ),
               ),
-              Expanded(
-                child: ColumnReusableCardButton(
-                  // height: 65,
-                  tileColor: Colors.deepOrangeAccent,
-                  label: 'Fees',
-                  onPressed: () {
-                    kopenPage(
+              Visibility(
+                visible: isTeacher,
+                child: Expanded(
+                  child: ColumnReusableCardButton(
+                    // height: 65,
+                    tileColor: Colors.deepOrangeAccent,
+                    label: 'Fees',
+                    onPressed: () {
+                      kopenPage(
                         context,
                         FeesPageEntry(
                           user: widget.user,
                           //targeteid: widget.user.id,
-                        ));
-                  },
-                  icon: Icons.payment,
+                        ),
+                        'Fees_Page_Entry',
+                      );
+                    },
+                    icon: Icons.payment,
+                  ),
                 ),
               ),
               Expanded(
@@ -127,9 +142,10 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                         user: widget.user,
                         // targetId: widget.user.id,
                       ),
+                      'Fees_Page',
                     );
-                    analytics.logSelectContent(
-                        contentType: 'Fees Page Dashboard', itemId: null);
+                    // analytics.logSelectContent(
+                    //     contentType: 'Fees Page Dashboard', itemId: null);
                   },
                   icon: Icons.equalizer,
                 ),

@@ -35,6 +35,7 @@ class _AssignmentDetailBottomSheetState
                     url: widget.assignment.url,
                     title: widget.assignment.title,
                   ),
+                  'PDFOpener',
                 );
               } else {
                 kopenPage(
@@ -42,6 +43,7 @@ class _AssignmentDetailBottomSheetState
                   AssignmentImageViewer(
                     assignment: widget.assignment,
                   ),
+                  'Assignment_Image_Viewer',
                 );
               }
             },

@@ -151,76 +151,76 @@ class _WallCardState extends State<WallCard> {
   }
 }
 
-Future buildShowDialogBox(BuildContext context) {
-  return showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("Announcement Type"),
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Card(
-                  shape: kCardCircularShape,
-                  elevation: 4,
-                  child: CircleAvatar(
-                    backgroundColor: ThemeData().canvasColor,
-                    child: Text(
-                      'C',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Text('CIRCULAR')
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Card(
-                  shape: kCardCircularShape,
-                  elevation: 4,
-                  child: CircleAvatar(
-                    backgroundColor: ThemeData().canvasColor,
-                    child: Text(
-                      'E',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Text('EVENT')
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Card(
-                  shape: kCardCircularShape,
-                  elevation: 4,
-                  child: CircleAvatar(
-                    backgroundColor: ThemeData().canvasColor,
-                    child: Text(
-                      'A',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Text('ACTIVITY')
-              ],
-            ),
-          ],
-        ),
-        actions: <Widget>[],
-      );
-    },
-  );
-}
+// Future buildShowDialogBox(BuildContext context) {
+//   return showDialog(
+//     context: context,
+//     builder: (context) {
+//       return AlertDialog(
+//         title: Text("Announcement Type"),
+//         content: Column(
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           mainAxisSize: MainAxisSize.min,
+//           children: <Widget>[
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               children: <Widget>[
+//                 Card(
+//                   shape: kCardCircularShape,
+//                   elevation: 4,
+//                   child: CircleAvatar(
+//                     backgroundColor: ThemeData().canvasColor,
+//                     child: Text(
+//                       'C',
+//                       style:
+//                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+//                     ),
+//                   ),
+//                 ),
+//                 Text('CIRCULAR')
+//               ],
+//             ),
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               // crossAxisAlignment: CrossAxisAlignment.start,
+//               children: <Widget>[
+//                 Card(
+//                   shape: kCardCircularShape,
+//                   elevation: 4,
+//                   child: CircleAvatar(
+//                     backgroundColor: ThemeData().canvasColor,
+//                     child: Text(
+//                       'E',
+//                       style:
+//                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+//                     ),
+//                   ),
+//                 ),
+//                 Text('EVENT')
+//               ],
+//             ),
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               children: <Widget>[
+//                 Card(
+//                   shape: kCardCircularShape,
+//                   elevation: 4,
+//                   child: CircleAvatar(
+//                     backgroundColor: ThemeData().canvasColor,
+//                     child: Text(
+//                       'A',
+//                       style:
+//                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+//                     ),
+//                   ),
+//                 ),
+//                 Text('ACTIVITY')
+//               ],
+//             ),
+//           ],
+//         ),
+//         actions: <Widget>[],
+//       );
+//     },
+//   );
+// }

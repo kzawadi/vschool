@@ -5,15 +5,17 @@ import 'package:ourESchool/core/enums/LoginScreenReturnType.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/services/AuthenticationServices.dart';
+import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/viewmodel/BaseModel.dart';
 import 'package:ourESchool/locator.dart';
 
 class LoginPageModel extends BaseModel {
   final _authenticationService = locator<AuthenticationServices>();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
   User _loggedInUser;
-  String currentLoggingStatus = 'Please wait'; 
+  String currentLoggingStatus = 'Please wait';
   User get loggedInUser => _loggedInUser;
-  
 
   // googleLogin() async {
   //   setState(ViewState.Busy);
@@ -56,6 +58,7 @@ class LoginPageModel extends BaseModel {
             await _loginUser(email, password, userType, schoolCode);
         setState(ViewState.Idle);
         if (res == AuthErrors.SUCCESS) {
+          await _analyticsService.logLogin();
           return true;
         } else {
           return false;
@@ -70,6 +73,7 @@ class LoginPageModel extends BaseModel {
             await _registerUser(email, password, userType, schoolCode);
         setState(ViewState.Idle);
         if (res == AuthErrors.SUCCESS) {
+          await _analyticsService.logSignUp();
           return true;
         } else {
           return false;

@@ -138,6 +138,8 @@ export async function messageIdAutoEntry(eventSnapshot: any, context: any) {
 
     batch2.set(ref1, map, { merge: true });
     batch2.set(ref2, map, { merge: true });
+    console.log('chat link created');
+
 
     return await batch2.commit();
 }

@@ -131,7 +131,7 @@ class OtherMessageWidget extends StatelessWidget {
               child: Text(
                 message.message,
                 textAlign: TextAlign.start,
-                style: ktitleStyle,
+                style: kchatStyle.copyWith(fontSize: 16, color: Colors.white),
               ),
             ),
           ),
@@ -188,13 +188,13 @@ class MyMessageWidget extends StatelessWidget {
               child: Text(
                 message.message,
                 textAlign: TextAlign.start,
-                style: ktitleStyle,
+                style: kchatStyle.copyWith(fontSize: 16, color: Colors.white),
               ),
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 15),
+          padding: const EdgeInsets.only(right: 15),
           child: Text(
             DateFormat("E").add_jm().format(
                   DateTime.parse(

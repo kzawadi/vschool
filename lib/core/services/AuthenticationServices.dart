@@ -1,3 +1,4 @@
+import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/imports.dart';
 
 class AuthenticationServices extends Services {
@@ -29,11 +30,12 @@ class AuthenticationServices extends Services {
   StreamController<UserType> userTypeStream = StreamController<UserType>();
 
   ProfileServices _profileServices = locator<ProfileServices>();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
   AuthenticationServices() {
     firestore.settings(
-      persistenceEnabled: false,
-    );
+        // persistenceEnabled: false,
+        );
     isLoggedIn().then((onValue) => isUserLoggedIn = onValue);
     _userType().then((onValue) => userType = onValue);
   }
@@ -179,8 +181,8 @@ class AuthenticationServices extends Services {
       });
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);
-      analytics.setUserId(firebaseUser.uid);
-      analytics.logSignUp(signUpMethod: firebaseUser.providerId);
+      // analytics.setUserId(firebaseUser.uid);
+      // analytics.logSignUp(signUpMethod: firebaseUser.providerId);
 
       print("User Regestered using Email and Password");
       print('user collection created with $firebaseUser'.toString());
@@ -188,6 +190,9 @@ class AuthenticationServices extends Services {
       isUserLoggedIn = true;
       isUserLoggedInStream.add(isUserLoggedIn);
       fireBaseUserStream.add(firebaseUser);
+      await _analyticsService.setUserProperties(
+        userId: authResult.user.uid,
+      );
       return authErrors;
     } catch (e) {
       return catchException(e);
@@ -205,11 +210,13 @@ class AuthenticationServices extends Services {
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);
       print("User Loggedin using Email and Password");
-      // sharedPreferencesHelper.setUserType(userType);
+      //  sharedPreferencesHelper.setUserType(userType);
       isUserLoggedIn = true;
       fireBaseUserStream.sink.add(firebaseUser);
       isUserLoggedInStream.add(isUserLoggedIn);
-      analytics.setUserId(firebaseUser.uid);
+      await _analyticsService.setUserProperties(
+        userId: authResult.user.uid,
+      );
 
       return authErrors;
     } on PlatformException catch (e) {

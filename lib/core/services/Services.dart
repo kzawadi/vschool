@@ -16,9 +16,9 @@ class Services {
       "India"; //Get this from firstScreen(UI Not developed yet)
   static FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static Firestore _firestore = Firestore.instance;
-  static FirebaseMessaging _fcm = FirebaseMessaging();
-  static FirebaseAnalytics _analytics = FirebaseAnalytics();
+  static final Firestore _firestore = Firestore.instance;
+  static final FirebaseMessaging _fcm = FirebaseMessaging();
+  static final FirebaseAnalytics _analytics = FirebaseAnalytics();
 
   FirebaseUser firebaseUser;
 
