@@ -18,7 +18,7 @@ const app = express();
 export const db = admin.firestore();
 
 
-export const autoStudentParentEntry = functions.firestore
+export const autoStudentParentEntry = functions.region("europe-west2").firestore
 .document('Schools/{country}/{schoolCode}/Profile/Student/{studentId}')
 // i have changed this becouse it get triggered when  a student update her profiles and 
 //create duplicates and bad behaviours
@@ -26,29 +26,29 @@ export const autoStudentParentEntry = functions.firestore
     return atomicFunction.studentParentAutoEntry(eventSnapshot, context);
 });
 
-export const autoTeacherEntry = functions.firestore
+export const autoTeacherEntry = functions.region("europe-west2").firestore
 .document('Schools/{country}/{schoolCode}/Profile/Parent-Teacher/{teacherId}')
 .onWrite(async (eventSnapshot, context) => {
     return atomicFunction.teacherAutoEntry(eventSnapshot, context);
 });
 
-export const autoMessageIdEntry = functions.firestore
+export const autoMessageIdEntry = functions.region("europe-west2").firestore
 .document('/Schools/{country}/{schoolCode}/Chats/{standard}/Chat/{chatId}/{messageId}')
 .onCreate(async (eventSnapshot, context) => {
     return atomicFunction.messageIdAutoEntry(eventSnapshot, context);
 });
-export const notifications = functions.firestore
+export const notifications = functions.region("europe-west2").firestore
 .document('/Schools/{country}/{schoolCode}/Chats/{standard}/Chat/{chatId}/{messageId}')
 .onCreate(async (eventSnapshot, context) => {
     return atomicFunction.notificationChat(eventSnapshot, context);
 });
-export const notificationsFees = functions.firestore
+export const notificationsFees = functions.region("europe-west2").firestore
 .document('/Schools/{country}/{schoolCode}/fees/{studentId}/{to}')
 .onCreate(async (eventSnapshot, context) => {
     return atomicFunction.notificationFees(eventSnapshot, context);
 });
 
-exports.webApi = functions.https.onRequest(app);
+exports.webApi = functions.region("europe-west2").https.onRequest(app);
 // exports.loginApi = functions.https.onRequest(loginCredentialsCheck);
 
 //To Check if user is authenticated or not
