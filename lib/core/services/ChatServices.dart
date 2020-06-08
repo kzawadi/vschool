@@ -135,6 +135,8 @@ class ChatServices extends Services {
       try {
         List<Message> messages =
             snap.documents.map((doc) => Message.fromSnapShot(doc)).toList();
+        int smsno = messages.length;
+        print('the number of sms fetched is $smsno');
         yield messages;
         Future.delayed(Duration(milliseconds: 200));
         scrollController.animateTo(
