@@ -168,7 +168,9 @@ export async function notificationChat(eventSnapshot: any, context: any) {
     .collection('users')
     .doc(id)
     .collection('tokens')
-    .get();
+    .limit(3)
+    .orderBy('createdAt', "desc")
+    .get()
 
   const tokens = querySnapshot.docs.map(snap => snap.id);
 

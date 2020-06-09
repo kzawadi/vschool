@@ -90,8 +90,6 @@ class _ECardPageState extends State<ECardPage> {
                               labelText: string.student_teacher_name,
                               initialText: user.displayName,
                             ),
-
-                            //! this is where i a trying to put fees editing page
                             ProfileFieldsECard(
                               width: MediaQuery.of(context).size.width,
                               labelText: string.student_teacher_name,
