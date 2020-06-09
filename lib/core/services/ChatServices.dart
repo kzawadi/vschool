@@ -130,7 +130,7 @@ class ChatServices extends Services {
     await for (QuerySnapshot snap in firestore
         .collection(chatRef)
         .orderBy('timestamp', descending: true)
-        // .limit(4) // trying to limit the amount of query in firestore for devs purpose
+        .limit(60) //trying to limit the amount of query in firestore
         .snapshots()) {
       try {
         List<Message> messages =
