@@ -176,16 +176,27 @@ class _HomeState extends State<Home> with Services {
         appBar: TopBar(
           buttonHeroTag: 'profileeee',
           title: pageName,
-          child: CircleAvatar(
-            backgroundImage: setImage(user),
-            radius: 20,
-            // child: ClipOval(
-            //   child: Image(
-            //     fit: BoxFit.fill,
-            //     image: setImage(user),
-            //   ),
-            // ),
+          child: Container(
+            height: 45,
+            width: 45,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image(
+                  image: setImage(user),
+                  fit: BoxFit.cover,
+                )),
           ),
+          //  CircleAvatar(
+          //   backgroundImage: setImage(user),
+          //   // radius: 20,
+          //   // child: ClipOval(
+          //   //   child: Image(
+          //   //     fit: BoxFit.fill,
+          //   //     image: setImage(user),
+          //   //   ),
+          //   // ),
+          // ),
           onPressed: () {
             if (userType == UserType.PARENT) {
               kopenPage(

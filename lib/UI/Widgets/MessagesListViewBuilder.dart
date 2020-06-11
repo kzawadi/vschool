@@ -120,50 +120,45 @@ class OtherMessageWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 2, 0),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.75),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
-                  bottomLeft: Radius.circular(8),
-                  topLeft: Radius.circular(8),
-                ),
+        Container(
+          margin: EdgeInsets.only(left: 20, right: 20, top: 2),
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 5),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+              color: Color.fromARGB(0xff, 33, 40, 42)), //rgb(32,70,81)
+          child: Wrap(
+            alignment: WrapAlignment.end,
+            crossAxisAlignment: WrapCrossAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 12, bottom: 2),
+                child: Text(message.message, style: TextStyle(fontSize: 16)),
+              ),
+              SizedBox(width: 4),
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    message.message,
-                    textAlign: TextAlign.start,
-                    style:
-                        kchatStyle.copyWith(fontSize: 16, color: Colors.white),
+                  Opacity(
+                    opacity: 0.6,
+                    child: Text(
+                      DateFormat("E").add_jm().format(
+                            DateTime.parse(
+                              message.timeStamp.toDate().toLocal().toString(),
+                            ),
+                          ),
+                      style: ksubtitleStyle.copyWith(fontSize: 11),
+                    ),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Text(
-            DateFormat("E").add_jm().format(
-                  DateTime.parse(
-                    message.timeStamp.toDate().toLocal().toString(),
-                  ),
-                ),
-            style: ksubtitleStyle.copyWith(fontSize: 10),
-          ),
-        ),
-        SizedBox(
-          height: 4,
-        )
       ],
     );
   }
@@ -183,58 +178,47 @@ class MyMessageWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         showDate ? _buildDateHeader(message.timeStamp) : SizedBox(),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(2, 0, 15, 0),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.75),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-              decoration: BoxDecoration(
-                color: Colors.green.shade600,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
-                  bottomLeft: Radius.circular(8),
-                  topLeft: Radius.circular(8),
-                ),
+        Container(
+          margin: EdgeInsets.only(left: 20, right: 20, top: 2),
+          padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 5),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+              color: Color.fromARGB(0xff, 7, 94, 84)),
+          child: Wrap(
+            alignment: WrapAlignment.end,
+            crossAxisAlignment: WrapCrossAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 12, bottom: 2),
+                child: Text(message.message, style: TextStyle(fontSize: 16)),
+              ),
+              SizedBox(width: 4),
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    message.message,
-                    textAlign: TextAlign.start,
-                    style:
-                        kchatStyle.copyWith(fontSize: 16, color: Colors.white),
-                  ),
-                  Visibility(
-                    child: Icon(
-                      Icons.check_circle,
-                      size: 15,
-                      color: Colors.white,
+                  Opacity(
+                    opacity: 0.6,
+                    child: Text(
+                      DateFormat("E").add_jm().format(
+                            DateTime.parse(
+                              message.timeStamp.toDate().toLocal().toString(),
+                            ),
+                          ),
+                      style: ksubtitleStyle.copyWith(fontSize: 11),
                     ),
-                    visible: message.readReceipt,
                   ),
+                  SizedBox(width: 5),
+                  Chatdecorations.doubleCheck(message.readReceipt, true),
                 ],
               ),
-            ),
+            ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 15),
-          child: Text(
-            DateFormat("E").add_jm().format(
-                  DateTime.parse(
-                    message.timeStamp.toDate().toLocal().toString(),
-                  ),
-                ),
-            style: ksubtitleStyle.copyWith(fontSize: 10),
-          ),
-        ),
-        SizedBox(
-          height: 4,
-        )
       ],
     );
   }
@@ -264,4 +248,48 @@ Widget _buildDateHeader(Timestamp timeStamp) {
       ),
     ],
   );
+}
+
+class Chatdecorations {
+  static Widget doubleCheck(bool read, bool small) {
+    return Container(
+      width: 25,
+      height: small ? 12 : 14,
+      child: Stack(
+        children: [
+          Icon(Icons.check,
+              size: small ? 14 : 18,
+              color: read ? Colors.blue[400] : Colors.grey[500]),
+          Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: ClipPath(
+              clipper: ClipCheck(small),
+              child: Icon(Icons.check,
+                  size: small ? 14 : 18,
+                  color: read ? Colors.blue[400] : Colors.grey[500]),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ClipCheck extends CustomClipper<Path> {
+  final small;
+
+  ClipCheck(this.small);
+
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(small ? 4 : 5.5, 0);
+    path.lineTo(small ? 4 : 5.5, size.height);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
