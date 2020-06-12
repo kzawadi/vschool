@@ -80,14 +80,47 @@ class _AnnouncementPageState extends State<AnnouncementPage>
           this.model = model;
           return Scaffold(
             key: scaffoldKey,
-            appBar: TopBar(
+            appBar:
+                //AppBar(
+                //   title: Text(stdDiv_Global + 'Posts', style: ktitleStyle),
+                //   centerTitle: true,
+                //   elevation: 0,
+                //   backgroundColor:
+                //       Colors.red, // status bar and navigation bar color
+                //   brightness: Brightness.light, // status bar brightness
+                //   primary: true,
+                // ),
+
+                PreferredSize(
+              preferredSize: Size.fromHeight(48),
+              child: TopBar(
                 buttonHeroTag: string.announcement,
                 title: stdDiv_Global + " Posts",
-                child: kBackBtn,
-                onPressed: () {
-                  kbackBtn(context);
-                }),
-            // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+                child: Row(
+                  children: [
+                    isThemeCurrentlyDark(context)
+                        ? Image.asset(
+                            'assets/logowhite.png',
+                            fit: BoxFit.fill,
+                            height: 40,
+                            color: Colors.tealAccent,
+                          )
+                        : Image.asset(
+                            'assets/logowhite.png',
+                            fit: BoxFit.fill,
+                            height: 40,
+                            color: Colors.teal,
+                          ),
+                    Text(
+                      'VSCHOOL',
+                      style: ktitleStyle.copyWith(fontSize: 13),
+                    ),
+                  ],
+                ),
+                onPressed: null,
+              ),
+            ),
+            floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
             floatingActionButton: Stack(
               children: <Widget>[
                 Visibility(
@@ -102,8 +135,8 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                       },
                       child: Icon(Icons.add),
                       backgroundColor: isThemeCurrentlyDark(context)
-                          ? MyColors.accent
-                          : MyColors.accent,
+                          ? Colors.tealAccent
+                          : Colors.teal[300],
                     ),
                   ),
                 ),
@@ -133,7 +166,7 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                               await model.onRefresh(stdDiv_Global);
                             },
                             icon: Icon(FontAwesomeIcons.globe),
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.teal[300],
                           )
                         : userType == UserType.TEACHER
                             ? FloatingActionButton.extended(
@@ -146,8 +179,8 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                                 },
                                 icon: Icon(Icons.filter_list),
                                 backgroundColor: isThemeCurrentlyDark(context)
-                                    ? MyColors.accent
-                                    : MyColors.accent,
+                                    ? Colors.tealAccent
+                                    : Colors.teal[300],
                               )
                             : Container(),
                   ),
@@ -198,8 +231,8 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                                       height: double.infinity,
                                       width: 5.0,
                                       color: isThemeCurrentlyDark(context)
-                                          ? MyColors.accent
-                                          : MyColors.dark,
+                                          ? Colors.teal
+                                          : Colors.teal[300],
                                     ),
                                   ),
                                   Positioned(
