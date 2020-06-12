@@ -123,7 +123,7 @@ class AnnouncementViewer extends StatelessWidget {
                       },
                       child: Icon(
                         Icons.close,
-                        size: 18,
+                        size: 14,
                       ),
                     ),
                   ),
