@@ -170,64 +170,62 @@ class _HomeState extends State<Home> with Services {
       isTeacher = true;
     }
     User user = Provider.of<User>(context, listen: false);
-    return Container(
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: TopBar(
-          buttonHeroTag: 'profileeee',
-          title: pageName,
-          child: Container(
-            height: 45,
-            width: 45,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image(
-                  image: setImage(user),
-                  fit: BoxFit.cover,
-                )),
-          ),
-          //  CircleAvatar(
-          //   backgroundImage: setImage(user),
-          //   // radius: 20,
-          //   // child: ClipOval(
-          //   //   child: Image(
-          //   //     fit: BoxFit.fill,
-          //   //     image: setImage(user),
-          //   //   ),
-          //   // ),
-          // ),
-          onPressed: () {
-            if (userType == UserType.PARENT) {
-              kopenPage(
-                  context, GuardianProfilePage(), 'Guardian_Profile_Page');
-            } else {
-              kopenPage(context, ProfilePage(), 'ProfilePage');
-            }
-          },
-        ),
-        floatingActionButton: Visibility(
-          visible: isTeacher,
-          child: FloatingActionButton(
-            onPressed: () {
-              kopenPageSlide(context, CreateAnnouncement());
-            },
-            child: Icon(Icons.add),
-            backgroundColor: Colors.red,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        bottomNavigationBar: buildBubbleBottomBar(userType),
-        body: userType == UserType.STUDENT
-            ? IndexedStack(
-                index: currentIndex,
-                children: studentPages,
-              )
-            : IndexedStack(
-                index: currentIndex,
-                children: pages,
-              ),
-      ),
+    return Scaffold(
+      key: _scaffoldKey,
+      // appBar: TopBar(
+      //   buttonHeroTag: 'profileeee',
+      //   title: pageName,
+      //   child: Container(
+      //     height: 45,
+      //     width: 45,
+      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+      //     child: ClipRRect(
+      //         borderRadius: BorderRadius.circular(20),
+      //         child: Image(
+      //           image: setImage(user),
+      //           fit: BoxFit.cover,
+      //         )),
+      //   ),
+      //   //  CircleAvatar(
+      //   //   backgroundImage: setImage(user),
+      //   //   // radius: 20,
+      //   //   // child: ClipOval(
+      //   //   //   child: Image(
+      //   //   //     fit: BoxFit.fill,
+      //   //   //     image: setImage(user),
+      //   //   //   ),
+      //   //   // ),
+      //   // ),
+      //   onPressed: () {
+      //     if (userType == UserType.PARENT) {
+      //       kopenPage(
+      //           context, GuardianProfilePage(), 'Guardian_Profile_Page');
+      //     } else {
+      //       kopenPage(context, ProfilePage(), 'ProfilePage');
+      //     }
+      //   },
+      // ),
+      // floatingActionButton: Visibility(
+      //   visible: isTeacher,
+      //   child: FloatingActionButton(
+      //     onPressed: () {
+      //       kopenPageSlide(context, CreateAnnouncement());
+      //     },
+      //     child: Icon(Icons.add),
+      //     backgroundColor: Colors.red,
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      bottomNavigationBar: buildBubbleBottomBar(userType),
+      body: userType == UserType.STUDENT
+          ? IndexedStack(
+              index: currentIndex,
+              children: studentPages,
+            )
+          : IndexedStack(
+              index: currentIndex,
+              children: pages,
+            ),
     );
   }
 
@@ -235,10 +233,10 @@ class _HomeState extends State<Home> with Services {
     BubbleBottomBarItem(
       backgroundColor: Colors.red,
       icon: Icon(
-        Icons.dashboard,
+        Icons.home,
       ),
       activeIcon: Icon(
-        Icons.dashboard,
+        Icons.home,
         color: Colors.red,
       ),
       title: Text(string.dashboard),
@@ -262,10 +260,10 @@ class _HomeState extends State<Home> with Services {
     BubbleBottomBarItem(
       backgroundColor: Colors.red,
       icon: Icon(
-        Icons.dashboard,
+        Icons.home,
       ),
       activeIcon: Icon(
-        Icons.dashboard,
+        Icons.home,
         color: Colors.red,
       ),
       title: Text(string.dashboard),
