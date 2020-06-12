@@ -1,4 +1,5 @@
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
@@ -43,14 +44,19 @@ class _MessagingScreenState extends State<MessagingScreen> {
       onModelReady: (model) => model.setState2(ViewState.Busy),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor:
+              isThemeCurrentlyDark(context) ? MyColors.github : Colors.red[50],
           extendBody: true,
-          appBar: TopBar(
-            onTitleTapped: () {},
-            title: widget.parentORteacher.displayName,
-            child: kBackBtn,
-            onPressed: () {
-              Navigator.pop(context);
-            },
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(48),
+            child: TopBar(
+              onTitleTapped: () {},
+              title: widget.parentORteacher.displayName,
+              child: kBackBtn,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
           body: SafeArea(
             child: Column(
@@ -142,38 +148,40 @@ class _MessagingScreenState extends State<MessagingScreen> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
-            child: Container(
-              constraints: BoxConstraints(
-                maxHeight: 150,
-                // maxWidth: MediaQuery.of(context).size.width - 66,
-              ),
-              // width: MediaQuery.of(context).size.width - 65,
-              child: TextField(
-                controller: _messageController,
-                keyboardType: TextInputType.multiline,
-                onChanged: (message) {
-                  if (message.trim().length > 0) {
-                    setState(() {
-                      sendButtonEnable = true;
-                    });
-                  } else {
-                    setState(() {
-                      sendButtonEnable = false;
-                    });
-                  }
-                },
-                // maxLength: 1000,
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintText: 'Type a message....',
-                  hintStyle: TextStyle(
-                    height: 1.5,
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
+            child: Material(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: 150,
+                  // maxWidth: MediaQuery.of(context).size.width - 66,
+                ),
+                // width: MediaQuery.of(context).size.width - 65,
+                child: TextField(
+                  controller: _messageController,
+                  keyboardType: TextInputType.multiline,
+                  onChanged: (message) {
+                    if (message.trim().length > 0) {
+                      setState(() {
+                        sendButtonEnable = true;
+                      });
+                    } else {
+                      setState(() {
+                        sendButtonEnable = false;
+                      });
+                    }
+                  },
+                  // maxLength: 1000,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    hintText: 'Type a message....',
+                    hintStyle: TextStyle(
+                      height: 1.5,
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15.0),
+                      ),
                     ),
                   ),
                 ),

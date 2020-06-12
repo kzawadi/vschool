@@ -1,3 +1,5 @@
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+
 import '../../imports.dart';
 import 'package:intl/intl.dart';
 
@@ -124,13 +126,16 @@ class OtherMessageWidget extends StatelessWidget {
           margin: EdgeInsets.only(left: 20, right: 20, top: 2),
           padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 5),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-                bottomRight: Radius.circular(8),
-                bottomLeft: Radius.circular(8),
-              ),
-              color: Color.fromARGB(0xff, 33, 40, 42)), //rgb(32,70,81)
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+            ),
+            color: isThemeCurrentlyDark(context)
+                ? Color.fromARGB(0xff, 33, 40, 42)
+                : Color.fromARGB(0xff, 249, 248, 240), //249, 248, 240
+          ),
           child: Wrap(
             alignment: WrapAlignment.end,
             crossAxisAlignment: WrapCrossAlignment.end,
@@ -188,7 +193,9 @@ class MyMessageWidget extends StatelessWidget {
                 bottomRight: Radius.circular(8),
                 bottomLeft: Radius.circular(8),
               ),
-              color: Color.fromARGB(0xff, 7, 94, 84)),
+              color: isThemeCurrentlyDark(context)
+                  ? Color.fromARGB(0xff, 7, 94, 84)
+                  : Colors.greenAccent),
           child: Wrap(
             alignment: WrapAlignment.end,
             crossAxisAlignment: WrapCrossAlignment.end,

@@ -42,7 +42,7 @@ class _TopBarState extends State<TopBar> {
                   // elevation: 10,
                   // shape: kBackButtonShape,
                   child: MaterialButton(
-                    height: 50,
+                    height: 40,
                     minWidth: 50,
                     elevation: 10,
                     shape: kBackButtonShape,
@@ -61,14 +61,14 @@ class _TopBarState extends State<TopBar> {
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                        // bottomLeft: Radius.circular(30),
-                        ),
+                      bottomLeft: Radius.circular(30),
+                    ),
                   ),
                   child: InkWell(
                     onTap: widget.onTitleTapped,
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      height: 50,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      height: 40,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
@@ -79,7 +79,7 @@ class _TopBarState extends State<TopBar> {
                               widget.title,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 25,
+                                fontSize: 20,
                                 // color: Colors.black54,
                               ),
                             ),
