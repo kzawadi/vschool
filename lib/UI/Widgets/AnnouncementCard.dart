@@ -53,13 +53,13 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
       child: Card(
-        elevation: 4,
+        elevation: 1,
         child: Column(
           children: <Widget>[
             Container(
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               // color: Colors.red[200],
-              height: 60,
+              height: 55,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +128,7 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                       child: Card(
                         shape: kCardCircularShape,
                         // color: Colors.redAccent,
-                        elevation: 4,
+                        elevation: 1,
                         child: CircleAvatar(
                           backgroundColor: ThemeData().canvasColor,
                           child: Text(
@@ -151,7 +151,7 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
             ),
             //Announcemnet image Section
             Card(
-              elevation: 4,
+              elevation: 0,
               child: Container(
                 constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
                 width: MediaQuery.of(context).size.width,
@@ -179,8 +179,8 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                               errorWidget: (context, url, error) =>
                                   const Icon(Icons.error),
                               fadeOutDuration:
-                                  const Duration(microseconds: 400),
-                              fadeInDuration: const Duration(microseconds: 400),
+                                  const Duration(microseconds: 200),
+                              fadeInDuration: const Duration(microseconds: 200),
                             ),
                     ),
                   ),
