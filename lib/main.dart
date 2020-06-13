@@ -1,6 +1,7 @@
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 
+import 'UI/pages/Splash/splashScreen.dart';
 import 'imports.dart';
 
 void main() {
@@ -9,11 +10,11 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   // debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-  timeDilation = 2;
+
   Provider.debugCheckInvalidValueType = null;
   setupLocator();
   runApp(
-    MyApp(),
+    Splashscreen(),
   );
 }
 
@@ -43,24 +44,21 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) => ThemeData(
-          pageTransitionsTheme: PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-            },
-          ),
-          fontFamily: "Nunito",
-          primaryColor: MyColors.primary,
-          accentColor: MyColors.accent,
-          primaryColorDark: MyColors.primaryDark,
-          brightness: brightness,
-        ),
-        themedWidgetBuilder: (context, theme) => new OurSchoolApp(
-          theme: theme,
-        ),
-      ),
+          defaultBrightness: Brightness.light,
+          data: (brightness) => ThemeData(
+                pageTransitionsTheme: PageTransitionsTheme(
+                  builders: {
+                    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+                    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+                  },
+                ),
+                fontFamily: "Nunito",
+                primaryColor: MyColors.primary,
+                accentColor: MyColors.accent,
+                primaryColorDark: MyColors.primaryDark,
+                brightness: brightness,
+              ),
+          themedWidgetBuilder: (context, theme) => OurSchoolApp(theme: theme)),
     );
   }
 }
@@ -117,5 +115,3 @@ class OurSchoolApp extends StatelessWidget with Services {
     }
   }
 }
-
-//! a new repo
