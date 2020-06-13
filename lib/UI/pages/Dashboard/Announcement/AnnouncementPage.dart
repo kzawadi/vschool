@@ -11,6 +11,7 @@ class AnnouncementPage extends StatefulWidget {
   }
 
   final String announcementFor;
+  static String pageName = string.announcement;
 
   @override
   _AnnouncementPageState createState() => _AnnouncementPageState();

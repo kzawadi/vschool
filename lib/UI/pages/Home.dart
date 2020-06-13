@@ -27,6 +27,7 @@ class _HomeState extends State<Home> with Services {
   String pageName = string.home;
 
   List<Widget> pages = [
+    AnnouncementPage(),
     MainDashboard(),
     ChatPage(),
     // NotificationPage(),
@@ -172,50 +173,6 @@ class _HomeState extends State<Home> with Services {
     User user = Provider.of<User>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: TopBar(
-      //   buttonHeroTag: 'profileeee',
-      //   title: pageName,
-      //   child: Container(
-      //     height: 45,
-      //     width: 45,
-      //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      //     child: ClipRRect(
-      //         borderRadius: BorderRadius.circular(20),
-      //         child: Image(
-      //           image: setImage(user),
-      //           fit: BoxFit.cover,
-      //         )),
-      //   ),
-      //   //  CircleAvatar(
-      //   //   backgroundImage: setImage(user),
-      //   //   // radius: 20,
-      //   //   // child: ClipOval(
-      //   //   //   child: Image(
-      //   //   //     fit: BoxFit.fill,
-      //   //   //     image: setImage(user),
-      //   //   //   ),
-      //   //   // ),
-      //   // ),
-      //   onPressed: () {
-      //     if (userType == UserType.PARENT) {
-      //       kopenPage(
-      //           context, GuardianProfilePage(), 'Guardian_Profile_Page');
-      //     } else {
-      //       kopenPage(context, ProfilePage(), 'ProfilePage');
-      //     }
-      //   },
-      // ),
-      // floatingActionButton: Visibility(
-      //   visible: isTeacher,
-      //   child: FloatingActionButton(
-      //     onPressed: () {
-      //       kopenPageSlide(context, CreateAnnouncement());
-      //     },
-      //     child: Icon(Icons.add),
-      //     backgroundColor: Colors.red,
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: buildBubbleBottomBar(userType),
       body: userType == UserType.STUDENT
           ? IndexedStack(
@@ -242,6 +199,17 @@ class _HomeState extends State<Home> with Services {
       title: Text(string.dashboard),
     ),
     BubbleBottomBarItem(
+      backgroundColor: Colors.red,
+      icon: Icon(
+        Icons.dashboard,
+      ),
+      activeIcon: Icon(
+        Icons.home,
+        color: Colors.red,
+      ),
+      title: Text(string.dashboard),
+    ),
+    BubbleBottomBarItem(
       backgroundColor: Colors.orange,
       icon: Icon(
         Icons.settings,
@@ -258,12 +226,23 @@ class _HomeState extends State<Home> with Services {
 
   List<BubbleBottomBarItem> bottomBarItems = [
     BubbleBottomBarItem(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.teal,
       icon: Icon(
         Icons.home,
       ),
       activeIcon: Icon(
         Icons.home,
+        color: Colors.teal,
+      ),
+      title: Text(string.dashboard),
+    ),
+    BubbleBottomBarItem(
+      backgroundColor: Colors.red,
+      icon: Icon(
+        Icons.dashboard,
+      ),
+      activeIcon: Icon(
+        Icons.dashboard,
         color: Colors.red,
       ),
       title: Text(string.dashboard),
@@ -313,10 +292,12 @@ class _HomeState extends State<Home> with Services {
         } else {
           setState(() {
             if (v == 0) {
-              pageName = MainDashboard.pageName;
+              pageName = AnnouncementPage.pageName;
             } else if (v == 1) {
-              pageName = ChatPage.pageName;
+              pageName = MainDashboard.pageName;
             } else if (v == 2) {
+              pageName = ChatPage.pageName;
+            } else if (v == 3) {
               pageName = SettingPage.pageName;
             }
             currentIndex = v;
