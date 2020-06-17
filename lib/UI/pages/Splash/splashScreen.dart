@@ -22,6 +22,7 @@ class _SplashState extends State<Splashscreen> {
         until: () => _appEngineStarted(),
         //Future.delayed(Duration(microseconds: 500)),
         startAnimation: 'Alarm',
+        // todo theme is not reloading so this below code is kinder lame will work on it
         backgroundColor:
             isThemeCurrentlyDark(context) ? Colors.pink[50] : Colors.black,
         //Colors.pink[100] : Colors.black,
