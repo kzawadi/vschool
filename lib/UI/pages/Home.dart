@@ -170,7 +170,7 @@ class _HomeState extends State<Home> with Services {
     if (userType == UserType.TEACHER) {
       isTeacher = true;
     }
-    User user = Provider.of<User>(context, listen: false);
+    // User user = Provider.of<User>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
       bottomNavigationBar: buildBubbleBottomBar(userType),

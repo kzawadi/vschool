@@ -17,12 +17,14 @@ class _SplashState extends State<Splashscreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen.navigate(
+        alignment: Alignment.center,
         name: 'assets/flare_anim/Loading.flr',
         until: () => _appEngineStarted(),
         //Future.delayed(Duration(microseconds: 500)),
         startAnimation: 'Alarm',
-        backgroundColor: //todo figure out why it doesnt change with theme
-            isThemeCurrentlyDark(context) ? Colors.pink[100] : Colors.black,
+        backgroundColor:
+            isThemeCurrentlyDark(context) ? Colors.pink[50] : Colors.black,
+        //Colors.pink[100] : Colors.black,
         next: (_) => MyApp(),
       ),
     );
