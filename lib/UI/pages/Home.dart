@@ -1,7 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
@@ -17,8 +20,9 @@ class _HomeState extends State<Home> with Services {
       locator<SharedPreferencesHelper>();
   StreamSubscription iosSubscription;
 
-  var currentIndex = 0;
+  int _currentIndex = 0;
   Color background = Colors.white;
+  static Color inactiveColor = Color(0xff4B4743); //0xffdd2c00
   // AuthenticationServices _auth = locator<AuthenticationServices>();
   bool isTeacher = false;
   // MainPageModel mainPageModel;
@@ -173,14 +177,14 @@ class _HomeState extends State<Home> with Services {
     // User user = Provider.of<User>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: buildBubbleBottomBar(userType),
+      bottomNavigationBar: bnb(userType),
       body: userType == UserType.STUDENT
           ? IndexedStack(
-              index: currentIndex,
+              index: _currentIndex,
               children: studentPages,
             )
           : IndexedStack(
-              index: currentIndex,
+              index: _currentIndex,
               children: pages,
             ),
     );
@@ -218,6 +222,34 @@ class _HomeState extends State<Home> with Services {
         Icons.settings,
         color: Colors.orange,
       ),
+      title: Text(
+        string.setting,
+      ),
+    )
+  ];
+  List<BottomNavyBarItem> studentItemsNew = [
+    BottomNavyBarItem(
+      activeColor: Colors.red,
+      icon: Icon(
+        Icons.home,
+      ),
+      inactiveColor: inactiveColor,
+      title: Text(string.dashboard),
+    ),
+    BottomNavyBarItem(
+      activeColor: Colors.red,
+      icon: Icon(
+        Icons.dashboard,
+      ),
+      inactiveColor: inactiveColor,
+      title: Text(string.dashboard),
+    ),
+    BottomNavyBarItem(
+      activeColor: Colors.orange,
+      icon: Icon(
+        Icons.settings,
+      ),
+      inactiveColor: inactiveColor,
       title: Text(
         string.setting,
       ),
@@ -273,12 +305,50 @@ class _HomeState extends State<Home> with Services {
       ),
     )
   ];
+  List<BottomNavyBarItem> bottomBarItemsNew = [
+    BottomNavyBarItem(
+      activeColor: Colors.teal,
+      icon: Icon(
+        Icons.home,
+        // color: Colors.teal,
+      ),
+      inactiveColor: Colors.blueGrey,
+      title: Text(string.dashboard),
+    ),
+    BottomNavyBarItem(
+      activeColor: Colors.red,
+      icon: Icon(
+        Icons.dashboard,
+      ),
+      inactiveColor: inactiveColor,
+      title: Text(string.dashboard),
+    ),
+    BottomNavyBarItem(
+      activeColor: Colors.deepPurple,
+      icon: Icon(
+        CustomIcons.chat_bubble,
+        // size: 25,
+      ),
+      inactiveColor: inactiveColor,
+      title: Text(string.chat),
+    ),
+    BottomNavyBarItem(
+      inactiveColor: Colors.orange,
+      icon: Icon(
+        Icons.settings,
+      ),
+      activeColor: inactiveColor,
+      title: Text(
+        string.setting,
+      ),
+    )
+  ];
 
   BubbleBottomBar buildBubbleBottomBar(UserType userType) {
     return BubbleBottomBar(
       backgroundColor: Theme.of(context).canvasColor,
       opacity: .2,
-      currentIndex: currentIndex,
+      currentIndex: _currentIndex,
       onTap: (v) {
         if (userType == UserType.STUDENT) {
           setState(() {
@@ -287,7 +357,7 @@ class _HomeState extends State<Home> with Services {
             } else {
               pageName = SettingPage.pageName;
             }
-            currentIndex = v;
+            _currentIndex = v;
           });
         } else {
           setState(() {
@@ -300,19 +370,58 @@ class _HomeState extends State<Home> with Services {
             } else if (v == 3) {
               pageName = SettingPage.pageName;
             }
-            currentIndex = v;
+            _currentIndex = v;
           });
         }
       },
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(16),
-      ),
+      borderRadius: BorderRadius.circular(16),
+      // BorderRadius.vertical(
+      //   top: Radius.circular(16),
+      // ),
       elevation: 10,
       fabLocation: isTeacher ? BubbleBottomBarFabLocation.end : null, //new
       hasNotch: isTeacher, //new
       hasInk: true, //new, gives a cute ink effect
       inkColor: Colors.black12, //optional, uses theme color if not specified
       items: userType == UserType.STUDENT ? studentItems : bottomBarItems,
+    );
+  }
+
+  BottomNavyBar bnb(UserType userType) {
+    return BottomNavyBar(
+      curve: Curves.easeIn,
+      itemCornerRadius: 25,
+      backgroundColor:
+          isThemeCurrentlyDark(context) ? MyColors.github : MyColors.lightMilky,
+      // animationDuration: Duration(milliseconds: 260), it is the default
+      selectedIndex: _currentIndex,
+      showElevation: true, // use this to remove appBar's elevation
+      onItemSelected: (v) {
+        if (userType == UserType.STUDENT) {
+          setState(() {
+            if (v == 0) {
+              pageName = StudentDashboard.pageName;
+            } else {
+              pageName = SettingPage.pageName;
+            }
+            _currentIndex = v;
+          });
+        } else {
+          setState(() {
+            if (v == 0) {
+              pageName = AnnouncementPage.pageName;
+            } else if (v == 1) {
+              pageName = MainDashboard.pageName;
+            } else if (v == 2) {
+              pageName = ChatPage.pageName;
+            } else if (v == 3) {
+              pageName = SettingPage.pageName;
+            }
+            _currentIndex = v;
+          });
+        }
+      },
+      items: userType == UserType.STUDENT ? studentItemsNew : bottomBarItemsNew,
     );
   }
 }
