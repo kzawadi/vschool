@@ -189,7 +189,7 @@ class _CreateWallState extends State<CreateWall> {
                               child: Icon(Icons.photo_library),
                               onPressed: () async {
                                 String _path = await openFileExplorer(
-                                  FileType.IMAGE,
+                                  FileType.image,
                                   mounted,
                                   context,
                                 );
@@ -498,10 +498,10 @@ class _CreateWallState extends State<CreateWall> {
                     child: Icon(Icons.photo_library),
                     onPressed: () async {
                       String _path = await openFileExplorer(
-                        FileType.CUSTOM,
+                        FileType.custom,
                         mounted,
                         context,
-                        extension: 'PDF',
+                        extension: ['PDF'],
                       );
                       setState(() {
                         _fileOne =
