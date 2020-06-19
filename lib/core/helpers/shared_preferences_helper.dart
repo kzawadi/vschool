@@ -44,7 +44,7 @@ class SharedPreferencesHelper {
     return res;
   }
 
-  //Method to save the _childIds of Parent
+  //Method to save the ParentsId of Parent
   Future<bool> setParentsIds(String parentIds) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     bool res = await preferences.setString(_parentsIds, parentIds);
@@ -52,7 +52,7 @@ class SharedPreferencesHelper {
     return res;
   }
 
-  //Method to retrive the _childIds of Parent
+  //Method to retrive the ParentsId of Parent
   Future<String> getParentsIds() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     String res = preferences.getString(_parentsIds) ?? 'N.A';
