@@ -101,6 +101,7 @@ class AuthenticationServices extends Services {
         .snapshots()
         .first
         .then((querySnapshot) {
+      //todo here only the first is expected but why forEach
       querySnapshot.documents.forEach((documentSnapshot) {
         isUserAvailable = documentSnapshot.exists;
         print("User Data : " + documentSnapshot.data.toString());
