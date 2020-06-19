@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/swipedetector.dart';
@@ -64,9 +66,10 @@ class AnnouncementViewer extends StatelessWidget {
                                 //Announcement by section
                                 Text(
                                   announcement.by,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 15,
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ),
                                 //TimeStamp section
@@ -76,9 +79,10 @@ class AnnouncementViewer extends StatelessWidget {
                                           .toDate()
                                           .toLocal()
                                           .toString())),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(
+                                      fontSize: 12.5,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -90,18 +94,20 @@ class AnnouncementViewer extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
                         child: Padding(
                           padding: const EdgeInsets.only(
                               left: 8.0, right: 8.0, bottom: 5.0, top: 5),
                           child: Hero(
                             transitionOnUserGestures: false,
                             tag: announcement.id + 'captionn',
-                            child: Text(
+                            child: AutoSizeText(
                               announcement.caption,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(fontSize: 16.5),
                               ),
+                              maxFontSize: 18,
+                              minFontSize: 15,
                             ),
                           ),
                         ),

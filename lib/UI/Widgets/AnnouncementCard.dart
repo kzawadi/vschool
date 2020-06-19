@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
@@ -107,9 +109,10 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                                       .toDate()
                                       .toLocal()
                                       .toString())),
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  fontSize: 12.5,
+                                ),
                               ),
                             ),
                           ],
@@ -139,8 +142,11 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                                         .indexOf('.') +
                                     1)
                                 .substring(0, 1),
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                fontSize: 12.5,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -196,11 +202,17 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                 child: Hero(
                   transitionOnUserGestures: false,
                   tag: widget.announcement.id + 'caption',
-                  child: Text(
+                  child: AutoSizeText(
                     widget.announcement.caption,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 4,
-                    style: TextStyle(fontWeight: FontWeight.w400),
+                    minFontSize: 16,
+                    maxFontSize: 16,
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -262,12 +274,22 @@ Future buildShowDialogBox(BuildContext context) {
                     backgroundColor: ThemeData().canvasColor,
                     child: Text(
                       'C',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          fontSize: 12.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                Text('CIRCULAR')
+                Text(
+                  'CIRCULAR',
+                  style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                      fontSize: 12.5,
+                    ),
+                  ),
+                )
               ],
             ),
             Row(
@@ -281,12 +303,22 @@ Future buildShowDialogBox(BuildContext context) {
                     backgroundColor: ThemeData().canvasColor,
                     child: Text(
                       'E',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          fontSize: 12.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                Text('EVENT')
+                Text(
+                  'EVENT',
+                  style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                      fontSize: 12.5,
+                    ),
+                  ),
+                )
               ],
             ),
             Row(
@@ -299,12 +331,22 @@ Future buildShowDialogBox(BuildContext context) {
                     backgroundColor: ThemeData().canvasColor,
                     child: Text(
                       'A',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          fontSize: 12.5,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                Text('ACTIVITY')
+                Text(
+                  'ACTIVITY',
+                  style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                      fontSize: 12.5,
+                    ),
+                  ),
+                )
               ],
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 
@@ -85,7 +86,18 @@ class OurSchoolApp extends StatelessWidget with Services {
               title: 'Guardian Profile',
             ),
       },
-      home: getHome(context),
+      home: AnnotatedRegion<SystemUiOverlayStyle>(
+        child: getHome(context),
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent, // transparent status bar
+          systemNavigationBarColor: Colors.transparent, // navigation bar color
+          statusBarIconBrightness: isThemeCurrentlyDark(context)
+              ? Brightness.light //todo fixed theme preferences not reloading
+              : Brightness.dark, // status bar icons' color
+          systemNavigationBarIconBrightness:
+              Brightness.dark, //navigation bar icons' color
+        ),
+      ),
       navigatorObservers: [
         locator<AnalyticsService>().getAnalyticsObserver(),
       ],
