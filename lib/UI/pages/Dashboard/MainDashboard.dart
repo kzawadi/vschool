@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/Utility/data_importer.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -91,6 +92,17 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                         //     contentType: 'Fees Page Dashboard', itemId: null);
                       },
                       icon: FontAwesomeIcons.bus,
+                    ),
+                    ColumnReusableCardButton(
+                      height: 70,
+                      tileColor: Colors.grey,
+                      label: 'Data Importer',
+                      onPressed: () {
+                        kopenPage(context, DataImpoter(), 'Data_Importer');
+                        // analytics.logSelectContent(
+                        //     contentType: 'Fees Page Dashboard', itemId: null);
+                      },
+                      icon: FontAwesomeIcons.database,
                     ),
                     SizedBox(
                       height: 105,
