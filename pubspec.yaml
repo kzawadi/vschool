@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   intro_views_flutter: ^2.8.1
-  file_picker: ^1.4.3+2
+  file_picker: ^1.12.0
   camera: ^0.5.7+4
   random_color: ^1.0.3
   intl: ^0.16.1
@@ -41,6 +41,7 @@ dependencies:
   cached_network_image: ^2.0.0
   flutter_local_notifications: ^1.4.3
   flare_splash_screen: ^3.0.1
+  bottom_navy_bar: ^5.4.0
 
 
 
