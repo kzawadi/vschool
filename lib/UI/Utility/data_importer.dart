@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert'; //to convert json to maps and vice versa
 import 'package:file_picker/file_picker.dart';
+import 'package:ourESchool/UI/Widgets/TopBar.dart';
 
 class DataImpoter extends StatefulWidget {
   @override
@@ -18,11 +19,21 @@ class DataImpoterState extends State<DataImpoter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(48),
+        child: TopBar(
+          buttonHeroTag: 'data_importer',
+          title: " Data Importer",
+          onPressed: null,
+          child: null,
+        ),
+      ),
       body: Center(
         child: Container(
-          child: Row(
+          child: Column(
             children: [
               Text('Data importer'),
+              SizedBox(height: 300),
               Expanded(
                 child: Text(
                   fileContent.toString(),
