@@ -8,18 +8,17 @@ part of 'data_entry.dart';
 
 _$_UserEntryData _$_$_UserEntryDataFromJson(Map<String, dynamic> json) {
   return _$_UserEntryData(
-    name: json['name'] as String,
-    age: json['age'] as int,
-    connection: (json['connection'] as List)
-        ?.map((e) =>
-            e == null ? null : Connections.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    email: json['email'] as String,
+    id: json['id'] as String,
+    isATeacher: json['isATeacher'] as String,
+    childId: json['childId'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_UserEntryDataToJson(_$_UserEntryData instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'age': instance.age,
-      'connection': instance.connection,
+      'email': instance.email,
+      'id': instance.id,
+      'isATeacher': instance.isATeacher,
+      'childId': instance.childId,
     };

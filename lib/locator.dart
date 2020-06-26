@@ -1,7 +1,11 @@
 import 'package:get_it/get_it.dart';
+// import 'package:ourESchool/UI/Utility/data_importer.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
+import 'package:ourESchool/core/services/data_Entry/data_entry_service.dart';
+import 'package:ourESchool/core/viewmodel/Data_Entry_Vm/Data_Entry_ViewmModel.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_entry_model.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'core/viewmodel/Wall/CreateWallModel.dart';
 import 'core/viewmodel/Wall/WallPageModel.dart';
@@ -47,4 +51,9 @@ void setupLocator() {
   locator.registerFactory(() => MessagingScreenPageModel());
 
   locator.registerLazySingleton(() => AnalyticsService());
+  locator.registerLazySingleton(() => DataEntryService());
+
+  locator.registerLazySingleton(() => DataEntryViewModel());
+
+  locator.registerLazySingleton(() => DialogService());
 }

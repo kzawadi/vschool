@@ -11,32 +11,36 @@ UserEntryData _$UserEntryDataFromJson(Map<String, dynamic> json) {
 }
 
 abstract class _$UserEntryData {
-  String get name;
-  int get age;
-  List<Connections> get connection;
+  String get email;
+  String get id;
+  String get isATeacher;
+  String get childId;
 
-  UserEntryData copyWith({String name, int age, List<Connections> connection});
+  UserEntryData copyWith(
+      {String email, String id, String isATeacher, String childId});
 
   Map<String, dynamic> toJson();
 }
 
 @JsonSerializable()
 class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
-  const _$_UserEntryData({this.name, this.age, this.connection});
+  const _$_UserEntryData({this.email, this.id, this.isATeacher, this.childId});
 
   factory _$_UserEntryData.fromJson(Map<String, dynamic> json) =>
       _$_$_UserEntryDataFromJson(json);
 
   @override
-  final String name;
+  final String email;
   @override
-  final int age;
+  final String id;
   @override
-  final List<Connections> connection;
+  final String isATeacher;
+  @override
+  final String childId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
-    return 'UserEntryData(name: $name, age: $age, connection: $connection)';
+    return 'UserEntryData(email: $email, id: $id, isATeacher: $isATeacher, childId: $childId)';
   }
 
   @override
@@ -44,36 +48,43 @@ class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserEntryData'))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('age', age))
-      ..add(DiagnosticsProperty('connection', connection));
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('isATeacher', isATeacher))
+      ..add(DiagnosticsProperty('childId', childId));
   }
 
   @override
   bool operator ==(dynamic other) {
     return other is _UserEntryData &&
-        (identical(other.name, name) || other.name == name) &&
-        (identical(other.age, age) || other.age == age) &&
-        (identical(other.connection, connection) ||
-            other.connection == connection);
+        (identical(other.email, email) || other.email == email) &&
+        (identical(other.id, id) || other.id == id) &&
+        (identical(other.isATeacher, isATeacher) ||
+            other.isATeacher == isATeacher) &&
+        (identical(other.childId, childId) || other.childId == childId);
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ name.hashCode ^ age.hashCode ^ connection.hashCode;
+      runtimeType.hashCode ^
+      email.hashCode ^
+      id.hashCode ^
+      isATeacher.hashCode ^
+      childId.hashCode;
 
   @override
   _$_UserEntryData copyWith({
-    Object name = immutable,
-    Object age = immutable,
-    Object connection = immutable,
+    Object email = immutable,
+    Object id = immutable,
+    Object isATeacher = immutable,
+    Object childId = immutable,
   }) {
     return _$_UserEntryData(
-      name: name == immutable ? this.name : name as String,
-      age: age == immutable ? this.age : age as int,
-      connection: connection == immutable
-          ? this.connection
-          : connection as List<Connections>,
+      email: email == immutable ? this.email : email as String,
+      id: id == immutable ? this.id : id as String,
+      isATeacher:
+          isATeacher == immutable ? this.isATeacher : isATeacher as String,
+      childId: childId == immutable ? this.childId : childId as String,
     );
   }
 
@@ -85,18 +96,24 @@ class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
 
 abstract class _UserEntryData implements UserEntryData {
   const factory _UserEntryData(
-      {String name, int age, List<Connections> connection}) = _$_UserEntryData;
+      {String email,
+      String id,
+      String isATeacher,
+      String childId}) = _$_UserEntryData;
 
   factory _UserEntryData.fromJson(Map<String, dynamic> json) =
       _$_UserEntryData.fromJson;
 
   @override
-  String get name;
+  String get email;
   @override
-  int get age;
+  String get id;
   @override
-  List<Connections> get connection;
+  String get isATeacher;
+  @override
+  String get childId;
 
   @override
-  _UserEntryData copyWith({String name, int age, List<Connections> connection});
+  _UserEntryData copyWith(
+      {String email, String id, String isATeacher, String childId});
 }
