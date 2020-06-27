@@ -15,7 +15,7 @@ abstract class UserEntryData with _$UserEntryData {
     // bool isATeacher,
     String isATeacher,
     // Map<dynamic, String> childId,
-    String childId,
+    String childIds,
   }) = _UserEntryData;
   factory UserEntryData.fromJson(Map<String, dynamic> json) =>
       _$UserEntryDataFromJson(json);

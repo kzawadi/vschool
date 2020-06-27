@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:core';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:ourESchool/core/Models/data_entry/data_entry.dart';
+import 'package:ourESchool/core/Models/data_entry/data_entry_db.dart';
 import 'package:ourESchool/core/services/Services.dart';
 
 class DataEntryService extends Services {
@@ -11,24 +13,56 @@ class DataEntryService extends Services {
     getSchoolCode();
   }
 
-  Future<void> postData() async {
+  Future<void> postData({List<UserEntryData> userEntryData}) async {
 //Schools/India/MAMA/Login/Parent-Teacher/dZdZUa5GAlFtjblV3UVN
     var _postRefs = (await schoolRefwithCode())
         .document('Login')
-        .collection('Parent-Teacher')
-        .document('b0Rk7BjGDlilKn6ZZiod');
+        .collection('Parent-Teacher');
+    // .document('b0Rk7BjGDlilKn6ZZiod');
 
-    Map<dynamic, String> childIdss = {'1': 'tuswege'};
-    var vlue = {"1": "2nd,3rd,4th"};
-    UserEntryData data = UserEntryData(
-      email: 'newd@gmail.com',
-      id: 'newdUserId',
-      // isATeacher: false,
-      // childId: childIdss,
-    );
-    Map datta = data.toJson();
-    print(childIdss);
-    await _postRefs.setData(datta);
+    for (UserEntryData u in userEntryData) {
+      String watoto = u.childIds;
+      List toto = watoto.split(',');
+
+      Map<int, String> watotomapped = toto.asMap();
+      UserEntryDataDb x = UserEntryDataDb(
+        email: u.email,
+        id: u.id,
+        isATeacher:
+            false, //bool.fromEnvironment(u.isATeacher.trim().toLowerCase()),
+        childId: watotomapped,
+      );
+
+      Map data = x.toJson();
+      print(data);
+      print(watotomapped);
+
+      await _postRefs.add(data);
+    }
+
+    // UserEntryData student;
+
+    // userEntryData.forEach((e) {
+    //   student = e;
+    // });
+
+    // UserEntryDataDb userdb = UserEntryDataDb(
+    //   email: student.email,
+    //   id: student.id,
+    // );
+
+    // Map students = userdb.toJson();
+    // Map<dynamic, String> childIdss = {'1': 'mwamasage'};
+    // var vlue = {"1": "2nd,3rd,4th"};
+    // UserEntryData data = UserEntryData(
+    // email: 'newd@gmail.com',
+    // id: 'newdUserId',
+    // isATeacher: false,
+    // childId: childIdss,
+    // );
+    // Map datta = data.toJson();
+    // print(students);
+    // await _postRefs.add(students);
   }
 
   File _jsonFile;

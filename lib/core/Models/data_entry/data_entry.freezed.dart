@@ -14,17 +14,17 @@ abstract class _$UserEntryData {
   String get email;
   String get id;
   String get isATeacher;
-  String get childId;
+  String get childIds;
 
   UserEntryData copyWith(
-      {String email, String id, String isATeacher, String childId});
+      {String email, String id, String isATeacher, String childIds});
 
   Map<String, dynamic> toJson();
 }
 
 @JsonSerializable()
 class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
-  const _$_UserEntryData({this.email, this.id, this.isATeacher, this.childId});
+  const _$_UserEntryData({this.email, this.id, this.isATeacher, this.childIds});
 
   factory _$_UserEntryData.fromJson(Map<String, dynamic> json) =>
       _$_$_UserEntryDataFromJson(json);
@@ -36,11 +36,11 @@ class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
   @override
   final String isATeacher;
   @override
-  final String childId;
+  final String childIds;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
-    return 'UserEntryData(email: $email, id: $id, isATeacher: $isATeacher, childId: $childId)';
+    return 'UserEntryData(email: $email, id: $id, isATeacher: $isATeacher, childIds: $childIds)';
   }
 
   @override
@@ -51,7 +51,7 @@ class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('isATeacher', isATeacher))
-      ..add(DiagnosticsProperty('childId', childId));
+      ..add(DiagnosticsProperty('childIds', childIds));
   }
 
   @override
@@ -61,7 +61,7 @@ class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
         (identical(other.id, id) || other.id == id) &&
         (identical(other.isATeacher, isATeacher) ||
             other.isATeacher == isATeacher) &&
-        (identical(other.childId, childId) || other.childId == childId);
+        (identical(other.childIds, childIds) || other.childIds == childIds);
   }
 
   @override
@@ -70,21 +70,21 @@ class _$_UserEntryData with DiagnosticableTreeMixin implements _UserEntryData {
       email.hashCode ^
       id.hashCode ^
       isATeacher.hashCode ^
-      childId.hashCode;
+      childIds.hashCode;
 
   @override
   _$_UserEntryData copyWith({
     Object email = immutable,
     Object id = immutable,
     Object isATeacher = immutable,
-    Object childId = immutable,
+    Object childIds = immutable,
   }) {
     return _$_UserEntryData(
       email: email == immutable ? this.email : email as String,
       id: id == immutable ? this.id : id as String,
       isATeacher:
           isATeacher == immutable ? this.isATeacher : isATeacher as String,
-      childId: childId == immutable ? this.childId : childId as String,
+      childIds: childIds == immutable ? this.childIds : childIds as String,
     );
   }
 
@@ -99,7 +99,7 @@ abstract class _UserEntryData implements UserEntryData {
       {String email,
       String id,
       String isATeacher,
-      String childId}) = _$_UserEntryData;
+      String childIds}) = _$_UserEntryData;
 
   factory _UserEntryData.fromJson(Map<String, dynamic> json) =
       _$_UserEntryData.fromJson;
@@ -111,9 +111,9 @@ abstract class _UserEntryData implements UserEntryData {
   @override
   String get isATeacher;
   @override
-  String get childId;
+  String get childIds;
 
   @override
   _UserEntryData copyWith(
-      {String email, String id, String isATeacher, String childId});
+      {String email, String id, String isATeacher, String childIds});
 }

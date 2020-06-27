@@ -11,7 +11,7 @@ _$_UserEntryData _$_$_UserEntryDataFromJson(Map<String, dynamic> json) {
     email: json['email'] as String,
     id: json['id'] as String,
     isATeacher: json['isATeacher'] as String,
-    childId: json['childId'] as String,
+    childIds: json['childIds'] as String,
   );
 }
 
@@ -20,5 +20,5 @@ Map<String, dynamic> _$_$_UserEntryDataToJson(_$_UserEntryData instance) =>
       'email': instance.email,
       'id': instance.id,
       'isATeacher': instance.isATeacher,
-      'childId': instance.childId,
+      'childIds': instance.childIds,
     };
