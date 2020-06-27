@@ -18,88 +18,105 @@ class DataImpoterState extends State<DataImpoter> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DataEntryViewModel>.reactive(
-        viewModelBuilder: () => DataEntryViewModel(),
-        // onModelReady: (model) => null,
-        builder: (context, model, child) {
-          return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(48),
-              child: TopBar(
-                buttonHeroTag: 'data_importer',
-                title: " Data Importer",
-                onPressed: null,
-                child: null,
+      viewModelBuilder: () => DataEntryViewModel(),
+      // onModelReady: (model) => null,
+      builder: (context, model, child) {
+        return Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(48),
+            child: TopBar(
+              buttonHeroTag: 'data_importer',
+              title: " Data Importer",
+              onPressed: null,
+              child: null,
+            ),
+          ),
+          body: model.busy(model.userdata)
+              ?
+              //  kBuzyPage(color: Theme.of(context).accentColor)
+              Container(
+                  child: Center(
+                    child: Text(
+                      'No Data file Selected....!',
+                      style: ksubtitleStyle.copyWith(fontSize: 25),
+                    ),
+                  ),
+                  // color: Colors.red,
+                )
+              : ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: model.userdata.length,
+                  itemBuilder: (context, index) {
+                    UserEntryData studentData = model.userdata[index];
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 0, 20, 0),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+                            children: [
+                              AutoSizeText('NAME'),
+                              AutoSizeText(studentData.id),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Column(
+                            children: [
+                              AutoSizeText('e-MAIL'),
+                              Text(studentData.email),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Column(
+                            children: [
+                              AutoSizeText('PARENTS'),
+                              AutoSizeText(studentData.childIds),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Column(
+                            children: [
+                              AutoSizeText('TEACHER'),
+                              AutoSizeText(studentData.isATeacher),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 40,
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+          persistentFooterButtons: <Widget>[
+            RaisedButton(
+              elevation: 10.0,
+              onPressed: () => model.getData(),
+              color: Colors.green,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
               ),
             ),
-            body: model.busy(model.userdata)
-                ?
-                //  kBuzyPage(color: Theme.of(context).accentColor)
-                Container(
-                    child: Center(
-                      child: Text(
-                        'No Data file Selected....!',
-                        style: ksubtitleStyle.copyWith(fontSize: 25),
-                      ),
-                    ),
-                    // color: Colors.red,
-                  )
-                : ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: model.userdata.length,
-                    itemBuilder: (context, index) {
-                      UserEntryData studentData = model.userdata[index];
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 0, 20, 0),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Column(
-                              children: [
-                                AutoSizeText('NAME'),
-                                AutoSizeText(studentData.id),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 6,
-                            ),
-                            Column(
-                              children: [
-                                AutoSizeText('e-MAIL'),
-                                Text(studentData.email),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 6,
-                            ),
-                            Column(
-                              children: [
-                                AutoSizeText('PARENTS'),
-                                Text(studentData.childId),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 6,
-                            ),
-                            Text(studentData.isATeacher),
-                            SizedBox(
-                              height: 40,
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-            // onRefresh: () {},
-
-            floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.add),
-              backgroundColor: MyColors.accent,
-              onPressed: () => model.getData(),
-
-              // DataEntryService().postData,
+            RaisedButton(
+              elevation: 10.0,
+              onPressed: () => model.postData(userEntryData: model.userdata),
+              color: Colors.blueGrey,
+              child: Icon(
+                Icons.cloud,
+                color: Colors.white,
+              ),
             ),
-          );
-        });
+          ],
+        );
+      },
+    );
   }
 }

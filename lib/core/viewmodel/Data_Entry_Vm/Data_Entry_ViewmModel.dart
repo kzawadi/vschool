@@ -16,4 +16,10 @@ class DataEntryViewModel extends BaseViewModel {
     notifyListeners();
     setBusy(false);
   }
+
+  postData({List<UserEntryData> userEntryData}) async {
+    setBusy(true);
+    await _dataEntryService.postData(userEntryData: userEntryData);
+    setBusy(false);
+  }
 }
