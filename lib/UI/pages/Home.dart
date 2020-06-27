@@ -126,7 +126,7 @@ class _HomeState extends State<Home> with Services {
         new AndroidInitializationSettings('app_icon');
     var initializationSettingsIOS = new IOSInitializationSettings();
     var initializationSettings = new InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
     localNotifications.initialize(initializationSettings);
   }
 
@@ -140,12 +140,14 @@ class _HomeState extends State<Home> with Services {
       'General notifications channel descriptions',
       playSound: true,
       enableVibration: true,
-      importance: Importance.Max,
-      priority: Priority.High,
+      importance: Importance.max,
+      priority: Priority.high,
     );
     var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
     var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
 
     print(message);
 //    print(message['body'].toString());
