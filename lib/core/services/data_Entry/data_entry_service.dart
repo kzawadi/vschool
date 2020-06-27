@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:ourESchool/core/Models/data_entry/data_entry.dart';
 import 'package:ourESchool/core/Models/data_entry/data_entry_db.dart';
 import 'package:ourESchool/core/services/Services.dart';
+import 'package:ourESchool/imports.dart';
 
 class DataEntryService extends Services {
   DataEntryService() {
@@ -15,7 +16,7 @@ class DataEntryService extends Services {
 
   Future<void> postData({List<UserEntryData> userEntryData}) async {
 //Schools/India/MAMA/Login/Parent-Teacher/dZdZUa5GAlFtjblV3UVN
-    var _postRefs = (await schoolRefwithCode())
+    CollectionReference _postRefs = (await schoolRefwithCode())
         .document('Login')
         .collection('Parent-Teacher');
     // .document('b0Rk7BjGDlilKn6ZZiod');
@@ -39,30 +40,6 @@ class DataEntryService extends Services {
 
       await _postRefs.add(data);
     }
-
-    // UserEntryData student;
-
-    // userEntryData.forEach((e) {
-    //   student = e;
-    // });
-
-    // UserEntryDataDb userdb = UserEntryDataDb(
-    //   email: student.email,
-    //   id: student.id,
-    // );
-
-    // Map students = userdb.toJson();
-    // Map<dynamic, String> childIdss = {'1': 'mwamasage'};
-    // var vlue = {"1": "2nd,3rd,4th"};
-    // UserEntryData data = UserEntryData(
-    // email: 'newd@gmail.com',
-    // id: 'newdUserId',
-    // isATeacher: false,
-    // childId: childIdss,
-    // );
-    // Map datta = data.toJson();
-    // print(students);
-    // await _postRefs.add(students);
   }
 
   File _jsonFile;
