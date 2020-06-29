@@ -61,7 +61,7 @@ dependencies:
 
   # Icons
   cupertino_icons: ^0.1.3
-  font_awesome_flutter: ^8.7.0
+  font_awesome_flutter: ^8.8.1
 
   # Firebase Dependencies
   firebase_auth: ^0.16.1

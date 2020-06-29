@@ -19,6 +19,12 @@ class _MainDashboardState extends State<MainDashboard> with Services {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: TopBarAlternative(
+          buttonHeroTag: string.dashboard,
+          title: string.dashboard,
+          onPressed: () {},
+          child: null,
+        ),
         extendBody: true,
         body: Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0),
@@ -44,7 +50,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       },
                     ),
                     ColumnReusableCardButton(
-                      // directionIconHeroTag: string.announcement,
+                      directionIconHeroTag: string.wall,
                       height: 70,
                       tileColor: Colors.orangeAccent,
                       label: string.wall,
@@ -82,6 +88,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       ),
                     ),
                     ColumnReusableCardButton(
+                      directionIconHeroTag: string.transportation,
                       height: 70,
                       tileColor: Colors.grey,
                       label: string.transportation,
@@ -94,6 +101,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       icon: FontAwesomeIcons.bus,
                     ),
                     ColumnReusableCardButton(
+                      directionIconHeroTag: 'Data_Importer',
                       height: 70,
                       tileColor: Colors.grey,
                       label: 'Data Importer',
