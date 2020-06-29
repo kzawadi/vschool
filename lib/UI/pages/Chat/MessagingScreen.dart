@@ -47,16 +47,13 @@ class _MessagingScreenState extends State<MessagingScreen> {
           backgroundColor:
               isThemeCurrentlyDark(context) ? MyColors.github : Colors.red[50],
           extendBody: true,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(48),
-            child: TopBar(
-              onTitleTapped: () {},
-              title: widget.parentORteacher.displayName,
-              child: kBackBtn,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+          appBar: TopBar(
+            onTitleTapped: () {},
+            title: widget.parentORteacher.displayName,
+            child: kBackBtn,
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           body: SafeArea(
             child: Column(
