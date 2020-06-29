@@ -179,7 +179,7 @@ class _HomeState extends State<Home> with Services {
     // User user = Provider.of<User>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: bnb(userType),
+      bottomNavigationBar: bnb(userType: userType),
       body: userType == UserType.STUDENT
           ? IndexedStack(
               index: _currentIndex,
@@ -309,29 +309,28 @@ class _HomeState extends State<Home> with Services {
   ];
   List<BottomNavyBarItem> bottomBarItemsNew = [
     BottomNavyBarItem(
-      activeColor: Colors.teal,
+      activeColor: Colors.teal[700],
       icon: Icon(
         Icons.home,
-        // color: Colors.teal,
       ),
-      inactiveColor: Colors.blueGrey,
+      inactiveColor: Colors.teal[700],
       title: Text(string.dashboard),
     ),
     BottomNavyBarItem(
-      activeColor: Colors.red,
+      activeColor: Colors.blue,
       icon: Icon(
         Icons.dashboard,
       ),
-      inactiveColor: inactiveColor,
+      inactiveColor: Colors.blue,
       title: Text(string.dashboard),
     ),
     BottomNavyBarItem(
-      activeColor: Colors.deepPurple,
+      activeColor: Colors.pink[300],
       icon: Icon(
         CustomIcons.chat_bubble,
         // size: 25,
       ),
-      inactiveColor: inactiveColor,
+      inactiveColor: Colors.pink[300],
       title: Text(string.chat),
     ),
     BottomNavyBarItem(
@@ -339,7 +338,7 @@ class _HomeState extends State<Home> with Services {
       icon: Icon(
         Icons.settings,
       ),
-      activeColor: inactiveColor,
+      activeColor: Colors.orange,
       title: Text(
         string.setting,
       ),
@@ -389,15 +388,17 @@ class _HomeState extends State<Home> with Services {
     );
   }
 
-  BottomNavyBar bnb(UserType userType) {
+  BottomNavyBar bnb({UserType userType}) {
     return BottomNavyBar(
       curve: Curves.easeIn,
-      itemCornerRadius: 25,
+      itemCornerRadius: 50,
+      iconSize: 22,
+      containerHeight: 53,
       backgroundColor:
-          isThemeCurrentlyDark(context) ? MyColors.github : MyColors.lightMilky,
+          isThemeCurrentlyDark(context) ? MyColors.github : MyColors.white,
       // animationDuration: Duration(milliseconds: 260), it is the default
       selectedIndex: _currentIndex,
-      showElevation: true, // use this to remove appBar's elevation
+      showElevation: false, // use this to remove appBar's elevation
       onItemSelected: (v) {
         if (userType == UserType.STUDENT) {
           setState(() {
