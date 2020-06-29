@@ -21,6 +21,7 @@ class _SplashState extends State<Splashscreen> {
         alignment: Alignment.center,
         name: 'assets/flare_anim/Loading.flr',
         until: () => _appEngineStarted(),
+        loopAnimation: 'Loading.flr',
         //Future.delayed(Duration(microseconds: 500)),
         startAnimation: 'Alarm',
         // todo theme is not reloading so this below code is kinder lame will work on it
