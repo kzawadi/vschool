@@ -9,6 +9,7 @@ class ProfileServices extends Services {
   String country = Services.country;
 
   List<User> childrens = [];
+  List<String> childrensId = [];
 
   ProfileServices() {
     getSchoolCode();
@@ -150,6 +151,25 @@ class ProfileServices extends Services {
     );
     await _getChildrensData(childIds);
     print('the child Ids are in this format $childIds');
+  }
+
+  getChildUserName() async {
+    String _childrens = await sharedPreferencesHelper.getChildIds();
+    if (_childrens == 'N.A') {
+      this.childrensId = [];
+      return;
+    }
+
+    Map<String, String> childIds = Map.from(
+      jsonDecode(_childrens).map(
+        (key, values) {
+          String value = values.toString();
+          return MapEntry(key, value);
+        },
+      ),
+    );
+    childrensId = childIds.values.toList();
+    print('the childe usernames which are ID  $childrensId');
   }
 
   _getChildrensData(Map<String, String> childIds) async {

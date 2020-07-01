@@ -111,9 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<Map<String, dynamic>> getConnection(UserType userType) async {
-    String connection = userType == UserType.STUDENT
-        ? await _sharedPreferencesHelper.getParentsIds()
-        : await _sharedPreferencesHelper.getChildIds();
+    String connection = await _sharedPreferencesHelper.getChildIds();
 
     if (connection == 'N.A') {
       return null;
@@ -167,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
             floatingActionButton: FloatingActionButton(
               tooltip: 'Save',
               elevation: 20,
-              backgroundColor: Colors.green.shade300,
+              backgroundColor: Colors.green,
               onPressed: () async {
                 await floatingButoonPressed(model, userType, firebaseUser);
               },
@@ -194,6 +192,22 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            Center(
+                              child: Container(
+                                color: Colors.teal,
+                                child: new DropdownButton<String>(
+                                  items: model.childUserNames.map(
+                                    (String value) {
+                                      return new DropdownMenuItem<String>(
+                                        value: value,
+                                        child: new Text(value),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (_) {},
+                                ),
+                              ),
+                            ),
                             ProfileFields(
                               width: MediaQuery.of(context).size.width,
                               hintText: string.student_teacher_name_hint,
