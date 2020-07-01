@@ -16,10 +16,6 @@ class DataEntryService extends Services {
 
   Future<void> postData({List<UserEntryData> userEntryData}) async {
 //Schools/India/MAMA/Login/Parent-Teacher/dZdZUa5GAlFtjblV3UVN
-    CollectionReference _postRefs = (await schoolRefwithCode())
-        .document('Login')
-        .collection('Parent-Teacher');
-    // .document('b0Rk7BjGDlilKn6ZZiod');
 
     for (UserEntryData u in userEntryData) {
       String watoto = u.childIds;
@@ -37,8 +33,12 @@ class DataEntryService extends Services {
       Map data = x.toJson();
       print(data);
       print(watotomapped);
+      DocumentReference _postRefs = (await schoolRefwithCode())
+          .document('Login')
+          .collection('Parent-Teacher')
+          .document(u.id);
 
-      await _postRefs.add(data);
+      await _postRefs.setData(data, merge: true);
     }
   }
 
