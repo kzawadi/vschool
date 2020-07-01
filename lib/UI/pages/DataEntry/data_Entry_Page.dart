@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
-import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/data_entry/data_entry.dart';
 import 'package:ourESchool/core/viewmodel/Data_Entry_Vm/Data_Entry_ViewmModel.dart';
 import 'package:ourESchool/imports.dart';
@@ -22,14 +21,11 @@ class DataImpoterState extends State<DataImpoter> {
       // onModelReady: (model) => null,
       builder: (context, model, child) {
         return Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(48),
-            child: TopBar(
-              buttonHeroTag: 'data_importer',
-              title: " Data Importer",
-              onPressed: null,
-              child: null,
-            ),
+          appBar: TopBar(
+            buttonHeroTag: 'data_importer',
+            title: " Data Importer",
+            onPressed: null,
+            child: null,
           ),
           body: model.busy(model.userdata)
               ?
@@ -105,13 +101,16 @@ class DataImpoterState extends State<DataImpoter> {
                 color: Colors.white,
               ),
             ),
-            RaisedButton(
-              elevation: 10.0,
-              onPressed: () => model.postData(userEntryData: model.userdata),
-              color: Colors.blueGrey,
-              child: Icon(
-                Icons.cloud,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(200, 0, 30, 0),
+              child: RaisedButton(
+                elevation: 10.0,
+                onPressed: () => model.postData(userEntryData: model.userdata),
+                color: Colors.blueGrey,
+                child: Icon(
+                  Icons.cloud,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

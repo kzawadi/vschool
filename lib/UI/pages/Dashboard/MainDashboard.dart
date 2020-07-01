@@ -112,6 +112,18 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       },
                       icon: FontAwesomeIcons.database,
                     ),
+                    ColumnReusableCardButton(
+                      directionIconHeroTag: 'childprofile',
+                      height: 70,
+                      tileColor: Colors.blue,
+                      label: 'Child Profile',
+                      onPressed: () {
+                        kopenPage(context, ProfilePage(), 'Child_Profile');
+                        // analytics.logSelectContent(
+                        //     contentType: 'Fees Page Dashboard', itemId: null);
+                      },
+                      icon: FontAwesomeIcons.user,
+                    ),
                     SizedBox(
                       height: 105,
                       child: ListView(
