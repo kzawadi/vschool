@@ -79,7 +79,12 @@ class ChildrenGridViewCard extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          registerd ? user.displayName : "Not Registered Yet",
+                          user.displayName,
+                          //this showd Not registerd in the list of children
+                          //becouse it had a boolean which was true when
+                          //firebase uid was there but we have changed our model
+                          //.....................
+                          // registerd ? user.displayName : "Not Registered Yet",
                           textAlign: TextAlign.center,
                           style: ktitleStyle.copyWith(color: Colors.white),
                         ),
