@@ -23,13 +23,27 @@ class ProfilePageModel extends BaseModel {
     getChildrens();
   }
 
-  Future<bool> setUserProfileData({
+  Future<bool> setProfileDataforChild({
     User user,
     UserType userType,
   }) async {
     setState(ViewState.Busy);
 
-    await _profileServices.setProfileData(user: user, userType: userType);
+    await _profileServices.setProfileDataforChild(
+        user: user, userType: userType);
+    await Future.delayed(const Duration(seconds: 3), () {});
+
+    setState(ViewState.Idle);
+    return true;
+  }
+
+  Future<bool> setProfileDataParent({
+    User user,
+    UserType userType,
+  }) async {
+    setState(ViewState.Busy);
+
+    await _profileServices.setProfileDataParent(user: user, userType: userType);
     await Future.delayed(const Duration(seconds: 3), () {});
 
     setState(ViewState.Idle);

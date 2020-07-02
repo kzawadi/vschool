@@ -19,11 +19,54 @@ class ProfileServices extends Services {
   /// this function sets the Profile Data of the User using a restful api in
   /// firebase function and after that it caches the data with shared preferences
   /// and also add the data to a stream (loggedInUserStream)
-  setProfileData({
+  setProfileDataforChild({
     User user,
     UserType userType,
   }) async {
-    UserType userType = await sharedPreferencesHelper.getUserType();
+    UserType userType = UserType.STUDENT;
+    //await sharedPreferencesHelper.getUserType();
+    // String photoUrl = '';
+    // String url = await sharedPreferencesHelper.getLoggedInUserPhotoUrl();
+
+    if (user.photoUrl.contains('https')) {
+      // photoUrl = url;
+    } else if (user.photoUrl == 'default') {
+      // user.photoUrl = user.photoUrl;
+    } else {
+      user.photoUrl = await storageServices.setProfilePhoto(user.photoUrl);
+    }
+
+    // user.photoUrl = photoUrl;
+
+    Map profileDataHashMap = user.toJson();
+
+    var body = json.encode({
+      "schoolCode": schoolCode.trim().toUpperCase(),
+      "profileData": profileDataHashMap,
+      "userType": UserTypeHelper.getValue(userType),
+      "country": country
+    });
+
+    final response = await http.post(
+      profileUpdateUrl,
+      body: body,
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      print("Data Uploaded Succesfully");
+    } else {
+      print("Data Upload error");
+    }
+  }
+
+  //this function is similar to the above```setProfileData
+  //but full features reduced .or have been optimized
+  setProfileDataParent({
+    User user,
+    UserType userType,
+  }) async {
+    UserType userType = UserType.STUDENT;
+    //await sharedPreferencesHelper.getUserType();
     // String photoUrl = '';
     // String url = await sharedPreferencesHelper.getLoggedInUserPhotoUrl();
 
