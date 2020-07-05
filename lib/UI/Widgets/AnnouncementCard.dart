@@ -54,200 +54,211 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
     }
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
-      child: Card(
-        elevation: 1,
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              // color: Colors.red[200],
-              height: 55,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Hero(
-                    transitionOnUserGestures: false,
-                    tag: widget.announcement.id + 'row',
-                    child: Row(
-                      children: <Widget>[
-                        //User profile image section
-                        loading
-                            ? CircleAvatar(
-                                radius: 25.0,
-                                backgroundImage:
-                                    AssetImage(assetsString.teacher_welcome),
-                                backgroundColor: Colors.transparent,
-                              )
-                            : CircleAvatar(
-                                radius: 25.0,
-                                backgroundImage: user.photoUrl == 'default'
-                                    ? AssetImage(assetsString.teacher_welcome)
-                                    : NetworkImage(user.photoUrl),
-                                backgroundColor: Colors.transparent,
+      child: InkWell(
+        child: Card(
+          elevation: 1,
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                // color: Colors.red[200],
+                height: 60,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Hero(
+                      transitionOnUserGestures: false,
+                      tag: widget.announcement.id + 'row',
+                      child: Row(
+                        children: <Widget>[
+                          //User profile image section
+                          loading
+                              ? CircleAvatar(
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage(assetsString.teacher_welcome),
+                                  backgroundColor: Colors.transparent,
+                                )
+                              : CircleAvatar(
+                                  radius: 25.0,
+                                  backgroundImage: user.photoUrl == 'default'
+                                      ? AssetImage(assetsString.teacher_welcome)
+                                      : NetworkImage(user.photoUrl),
+                                  backgroundColor: Colors.transparent,
+                                ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              //Announcement by section
+                              Text(
+                                loading ? 'Loading...' : user.displayName,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 15,
+                                ),
                               ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            //Announcement by section
-                            Text(
-                              loading ? 'Loading...' : user.displayName,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 15,
+                              //TimeStamp section
+                              Text(
+                                // 'data',
+                                DateFormat("MMM d, E").add_jm().format(
+                                    DateTime.parse(widget.announcement.timestamp
+                                        .toDate()
+                                        .toLocal()
+                                        .toString())),
+                                style: GoogleFonts.roboto(
+                                  textStyle: TextStyle(
+                                    fontSize: 12.5,
+                                  ),
+                                ),
                               ),
-                            ),
-                            //TimeStamp section
-                            Text(
-                              // 'data',
-                              DateFormat("MMM d, E").add_jm().format(
-                                  DateTime.parse(widget.announcement.timestamp
-                                      .toDate()
-                                      .toLocal()
-                                      .toString())),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    //Announcement Type section
+                    Visibility(
+                      visible: widget.announcement.type == null ? false : true,
+                      child: InkWell(
+                        onTap: () {
+                          print(widget.announcement.timestamp.toString());
+                          buildShowDialogBox(context);
+                        },
+                        child: Card(
+                          shape: kCardCircularShape,
+                          // color: Colors.redAccent,
+                          elevation: 1,
+                          child: CircleAvatar(
+                            backgroundColor: ThemeData().canvasColor,
+                            child: Text(
+                              widget.announcement.type
+                                  .toString()
+                                  .substring(widget.announcement.type
+                                          .toString()
+                                          .indexOf('.') +
+                                      1)
+                                  .substring(0, 1),
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                   fontSize: 12.5,
                                 ),
                               ),
                             ),
-                          ],
+                          ),
                         ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              //Announcemnet image Section
+              Card(
+                elevation: 0,
+                child: Container(
+                  constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
+                  width: MediaQuery.of(context).size.width,
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: widget.announcement.id + 'photo',
+                    child: Material(
+                      child: InkWell(
+                        onTap: () {
+                          kopenPageBottom(
+                            context,
+                            AnnouncementViewer(
+                              announcement: widget.announcement,
+                            ),
+                          );
+                        },
+                        child: widget.announcement.photoUrl == ''
+                            ? Container(
+                                height: 0,
+                              )
+                            : CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                imageUrl: widget.announcement.photoUrl,
+                                placeholder: (context, url) => kBuzyPage(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                fadeOutDuration:
+                                    const Duration(microseconds: 200),
+                                fadeInDuration:
+                                    const Duration(microseconds: 200),
+                              ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              //Caption Section
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  constraints: BoxConstraints(maxHeight: 80, minHeight: 10),
+                  width: MediaQuery.of(context).size.width,
+                  child: Hero(
+                    transitionOnUserGestures: false,
+                    tag: widget.announcement.id + 'caption',
+                    child: AutoSizeText(
+                      widget.announcement.caption,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
+                      minFontSize: 16,
+                      maxFontSize: 16,
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              Visibility(
+                visible: isAteacher,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                    onPressed: () async {
+                      String id = widget.announcement.id;
+                      String stdDivGlobal;
+                      if (widget.announcement.forClass == 'Global') {
+                        stdDivGlobal = widget.announcement.forClass;
+                      } else
+                        stdDivGlobal = widget.announcement.forClass +
+                            widget.announcement.forDiv;
+                      // String stdDivGlobal = widget.announcement.forClass;
+                      await announcementModel.deleteAnnouncements(
+                          id, stdDivGlobal);
+                    },
+                    child: Column(
+                      // Replace with a Row for horizontal icon + text
+                      children: <Widget>[
+                        Icon(Icons.delete),
+                        Text("Delete"),
                       ],
                     ),
-                  ),
-                  //Announcement Type section
-                  Visibility(
-                    visible: widget.announcement.type == null ? false : true,
-                    child: InkWell(
-                      onTap: () {
-                        print(widget.announcement.timestamp.toString());
-                        buildShowDialogBox(context);
-                      },
-                      child: Card(
-                        shape: kCardCircularShape,
-                        // color: Colors.redAccent,
-                        elevation: 1,
-                        child: CircleAvatar(
-                          backgroundColor: ThemeData().canvasColor,
-                          child: Text(
-                            widget.announcement.type
-                                .toString()
-                                .substring(widget.announcement.type
-                                        .toString()
-                                        .indexOf('.') +
-                                    1)
-                                .substring(0, 1),
-                            style: GoogleFonts.roboto(
-                              textStyle: TextStyle(
-                                fontSize: 12.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            //Announcemnet image Section
-            Card(
-              elevation: 0,
-              child: Container(
-                constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
-                width: MediaQuery.of(context).size.width,
-                child: Hero(
-                  transitionOnUserGestures: true,
-                  tag: widget.announcement.id + 'photo',
-                  child: Material(
-                    child: InkWell(
-                      onTap: () {
-                        kopenPageBottom(
-                          context,
-                          AnnouncementViewer(
-                            announcement: widget.announcement,
-                          ),
-                        );
-                      },
-                      child: widget.announcement.photoUrl == ''
-                          ? Container(
-                              height: 0,
-                            )
-                          : CachedNetworkImage(
-                              fit: BoxFit.contain,
-                              imageUrl: widget.announcement.photoUrl,
-                              placeholder: (context, url) => kBuzyPage(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              fadeOutDuration:
-                                  const Duration(microseconds: 200),
-                              fadeInDuration: const Duration(microseconds: 200),
-                            ),
-                    ),
+                    color: Colors.redAccent,
                   ),
                 ),
               ),
-            ),
-            //Caption Section
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                constraints: BoxConstraints(maxHeight: 80, minHeight: 10),
-                width: MediaQuery.of(context).size.width,
-                child: Hero(
-                  transitionOnUserGestures: false,
-                  tag: widget.announcement.id + 'caption',
-                  child: AutoSizeText(
-                    widget.announcement.caption,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 4,
-                    minFontSize: 16,
-                    maxFontSize: 16,
-                    style: GoogleFonts.roboto(
-                      textStyle: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            Visibility(
-              visible: isAteacher,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: RaisedButton(
-                  onPressed: () async {
-                    String id = widget.announcement.id;
-                    String stdDivGlobal;
-                    if (widget.announcement.forClass == 'Global') {
-                      stdDivGlobal = widget.announcement.forClass;
-                    } else
-                      stdDivGlobal = widget.announcement.forClass +
-                          widget.announcement.forDiv;
-                    // String stdDivGlobal = widget.announcement.forClass;
-                    await announcementModel.deleteAnnouncements(
-                        id, stdDivGlobal);
-                  },
-                  child: Column(
-                    // Replace with a Row for horizontal icon + text
-                    children: <Widget>[
-                      Icon(Icons.delete),
-                      Text("Delete"),
-                    ],
-                  ),
-                  color: Colors.redAccent,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
+        onTap: () {
+          kopenPageBottom(
+            context,
+            AnnouncementViewer(
+              announcement: widget.announcement,
+            ),
+          );
+        },
       ),
     );
   }

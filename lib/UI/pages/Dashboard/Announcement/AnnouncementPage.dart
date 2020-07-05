@@ -81,45 +81,31 @@ class _AnnouncementPageState extends State<AnnouncementPage>
           this.model = model;
           return Scaffold(
             key: scaffoldKey,
-            appBar:
-                //AppBar(
-                //   title: Text(stdDiv_Global + 'Posts', style: ktitleStyle),
-                //   centerTitle: true,
-                //   elevation: 0,
-                //   backgroundColor:
-                //       Colors.red, // status bar and navigation bar color
-                //   brightness: Brightness.light, // status bar brightness
-                //   primary: true,
-                // ),
-
-                PreferredSize(
-              preferredSize: Size.fromHeight(48),
-              child: TopBar(
-                buttonHeroTag: string.announcement,
-                title: stdDiv_Global + " Posts",
-                child: Row(
-                  children: [
-                    isThemeCurrentlyDark(context)
-                        ? Image.asset(
-                            'assets/logowhite.png',
-                            fit: BoxFit.fill,
-                            height: 40,
-                            color: Colors.tealAccent,
-                          )
-                        : Image.asset(
-                            'assets/logowhite.png',
-                            fit: BoxFit.fill,
-                            height: 40,
-                            color: Colors.teal,
-                          ),
-                    Text(
-                      'VSCHOOL',
-                      style: ktitleStyle.copyWith(fontSize: 13),
-                    ),
-                  ],
-                ),
-                onPressed: null,
+            appBar: TopBar(
+              buttonHeroTag: string.announcement,
+              title: stdDiv_Global + " Posts",
+              child: Row(
+                children: [
+                  isThemeCurrentlyDark(context)
+                      ? Image.asset(
+                          'assets/logowhite.png',
+                          fit: BoxFit.fill,
+                          height: 40,
+                          color: Colors.tealAccent,
+                        )
+                      : Image.asset(
+                          'assets/logowhite.png',
+                          fit: BoxFit.fill,
+                          height: 40,
+                          color: Colors.teal,
+                        ),
+                  Text(
+                    'VSCHOOL',
+                    style: ktitleStyle.copyWith(fontSize: 13),
+                  ),
+                ],
               ),
+              onPressed: null,
             ),
             floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
             floatingActionButton: Stack(
