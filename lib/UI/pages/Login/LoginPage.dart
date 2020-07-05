@@ -1,4 +1,5 @@
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/imports.dart';
 import 'dart:ui' as ui;
 
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 context, GuardianProfilePage.id, (r) => false);
           } else {
             Navigator.pushNamedAndRemoveUntil(
-                context, ProfilePage.id, (r) => false);
+                context, TeacherProfilePage.id, (r) => false);
           }
         } else {
           // _scaffoldKey.currentState

@@ -10,6 +10,7 @@ class SharedPreferencesHelper {
   final String _photoUrl = 'photoUrl';
   final String _childIds = 'childIds';
   final String _parentsIds = 'parentsIds';
+  final String _parentsIdsData = 'parentsIdsData';
   final String _userModel = 'userJsonModel';
 
   //Method to save User model in json format
@@ -52,11 +53,27 @@ class SharedPreferencesHelper {
     return res;
   }
 
+  //Method to save the ParentsId of Parent
+  Future<bool> setParentsIdsData(String parentIds) async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool res = await preferences.setString(_parentsIdsData, parentIds);
+    print('Parents Id Saved ' + res.toString());
+    return res;
+  }
+
   //Method to retrive the ParentsId of Parent
   Future<String> getParentsIds() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     String res = preferences.getString(_parentsIds) ?? 'N.A';
     print('Parents Id Retrived ' + res.toString());
+    return res;
+  }
+
+  //Method to retrive the ParentsId of Parent
+  Future<String> getParentsIdsData() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    String res = preferences.getString(_parentsIdsData) ?? 'N.A';
+    print('Parents Id Retrived in Student Data ' + res.toString());
     return res;
   }
 

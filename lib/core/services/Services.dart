@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/UserDataLogin.dart';
+import 'package:ourESchool/core/Models/studentData/studentData.dart';
 import 'package:ourESchool/core/Server.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 import 'package:ourESchool/locator.dart';
@@ -30,6 +31,7 @@ class Services {
   User _user;
 
   UserDataLogin userDataLogin;
+  StudentData studentData;
 
   String schoolCode = null;
 

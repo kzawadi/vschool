@@ -21,14 +21,14 @@ import 'package:provider/provider.dart';
 
 import 'GuardianProfile.dart';
 
-class ProfilePage extends StatefulWidget {
-  static const id = 'ProfilePage';
-  ProfilePage({Key key}) : super(key: key);
+class TeacherProfilePage extends StatefulWidget {
+  static const id = 'TeacherProfilePage';
+  TeacherProfilePage({Key key}) : super(key: key);
 
-  _ProfilePageState createState() => _ProfilePageState();
+  _TeacherProfilePage createState() => _TeacherProfilePage();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _TeacherProfilePage extends State<TeacherProfilePage> {
   DateTime dateOfBirth;
   UserType userType = UserType.UNKNOWN;
   bool guardiansPanel = false;
@@ -63,19 +63,17 @@ class _ProfilePageState extends State<ProfilePage> {
   String _dob = '';
   String _mobileNo = '';
   int a = 0;
-  String _childUserNameId;
-  String shownvalue;
 
   floatingButoonPressed(var model, FirebaseUser firebaseUser) async {
     bool res = false;
 
-    // var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
+    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
 
     if (_bloodGroup.isEmpty ||
         _division.isEmpty ||
         _name.isEmpty ||
         _dob.isEmpty ||
-        // _guardianName.isEmpty ||
+        _guardianName.isEmpty ||
         _mobileNo.isEmpty ||
         _standard.isEmpty ||
         _enrollNo.isEmpty) {
@@ -83,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
           context, 'You Need to fill all the details and a profile Photo'));
     } else {
       if (model.state == ViewState.Idle) {
-        res = await model.setProfileDataforChild(
+        res = await model.setProfileDataTeacher(
           user: User(
             bloodGroup: _bloodGroup.trim(),
             displayName: _name.trim(),
@@ -93,14 +91,13 @@ class _ProfilePageState extends State<ProfilePage> {
             mobileNo: _mobileNo.trim(),
             standard: _standard.trim(),
             enrollNo: _enrollNo.trim(),
-            // email: firebaseUser.email,
-            // firebaseUuid: firebaseUser.uid,
-            id: _childUserNameId,
-            //  await _sharedPreferencesHelper.getLoggedInUserId(),
-            isTeacher: false,
-            // isVerified: firebaseUser.isEmailVerified,
+            email: firebaseUser.email,
+            firebaseUuid: firebaseUser.uid,
+            id: await _sharedPreferencesHelper.getLoggedInUserId(),
+            isTeacher: userType == UserType.TEACHER ? true : false,
+            isVerified: firebaseUser.isEmailVerified,
             photoUrl: path,
-            connection: await getConnection(),
+            connection: await getConnection(userType),
           ),
         );
       }
@@ -111,17 +108,8 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  // Future<Map<String, dynamic>> getConnection(UserType userType) async {
-  //   String connection = await _sharedPreferencesHelper.getParentsIds();
-
-  //   if (connection == 'N.A') {
-  //     return null;
-  //   }
-
-  //   return jsonDecode(connection);
-  // }
-  Future<Map<String, dynamic>> getConnection() async {
-    String connection = await _sharedPreferencesHelper.getParentsIdsData();
+  Future<Map<String, dynamic>> getConnection(UserType userType) async {
+    String connection = await _sharedPreferencesHelper.getChildIds();
 
     if (connection == 'N.A') {
       return null;
@@ -143,24 +131,23 @@ class _ProfilePageState extends State<ProfilePage> {
     return BaseView<ProfilePageModel>(
         onModelReady: (model) => model.getUserProfileData(),
         builder: (context, model, child) {
-          //todo implement a way to render current child details
-          // if (model.state == ViewState.Idle) {
-          //   if (a == 0) {
-          //     if (model.userProfile != null) {
-          //       User user = model.userProfile;
-          //       _name = user.displayName;
-          //       _enrollNo = user.enrollNo;
-          //       _standard = user.standard;
-          //       _division = user.division.toUpperCase();
-          //       _guardianName = user.guardianName;
-          //       _bloodGroup = user.bloodGroup;
-          //       _dob = user.dob;
-          //       _mobileNo = user.mobileNo;
-          //       path = user.photoUrl;
-          //       a++;
-          //     }
-          //   }
-          // }
+          if (model.state == ViewState.Idle) {
+            if (a == 0) {
+              if (model.userProfile != null) {
+                User user = model.userProfile;
+                _name = user.displayName;
+                _enrollNo = user.enrollNo;
+                _standard = user.standard;
+                _division = user.division.toUpperCase();
+                _guardianName = user.guardianName;
+                _bloodGroup = user.bloodGroup;
+                _dob = user.dob;
+                _mobileNo = user.mobileNo;
+                path = user.photoUrl;
+                a++;
+              }
+            }
+          }
 
           return Scaffold(
             key: _scaffoldKey,
@@ -203,27 +190,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Center(
-                              child: new DropdownButton<String>(
-                                value: shownvalue,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _childUserNameId = newValue;
-                                    shownvalue = newValue;
-                                    model.getChildParentId(childId: newValue);
-                                  });
-                                },
-                                items: model.childUserNames
-                                    .map<DropdownMenuItem<String>>(
-                                  (String v) {
-                                    return new DropdownMenuItem<String>(
-                                      value: v,
-                                      child: new Text(v),
-                                    );
-                                  },
-                                ).toList(),
-                              ),
-                            ),
                             ProfileFields(
                               width: MediaQuery.of(context).size.width,
                               hintText: string.student_teacher_name_hint,
@@ -275,16 +241,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ],
                             ),
-                            // ProfileFields(
-                            //   width: MediaQuery.of(context).size.width,
-                            //   hintText: string.father_mother_name,
-                            //   labelText: string.guardian_name,
-                            //   onChanged: (guardianName) {
-                            //     _guardianName = guardianName;
-                            //   },
-                            //   controller:
-                            //       TextEditingController(text: _guardianName),
-                            // ),
+                            ProfileFields(
+                              width: MediaQuery.of(context).size.width,
+                              hintText: string.father_mother_name,
+                              labelText: string.guardian_name,
+                              onChanged: (guardianName) {
+                                _guardianName = guardianName;
+                              },
+                              controller:
+                                  TextEditingController(text: _guardianName),
+                            ),
                             Row(
                               // mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -87,7 +87,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
         FirebaseUser firebaseUser =
             Provider.of<FirebaseUser>(context, listen: false);
 
-        res = await model.setUserProfileData(
+        res = await model.setProfileDataParent(
           user: User(
               bloodGroup: _bloodGroup.trim(),
               displayName: _name.trim(),

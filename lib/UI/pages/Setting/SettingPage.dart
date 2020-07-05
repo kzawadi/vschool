@@ -6,6 +6,7 @@ import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/UI/pages/Login/ForgotPassword.dart';
 import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
 import 'package:ourESchool/UI/pages/Profiles/ProfilePage.dart';
+import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/pages/WelcomeScreen.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
@@ -51,7 +52,8 @@ class _SettingPageState extends State<SettingPage> {
                       kopenPage(context, GuardianProfilePage(),
                           'Guardian_Profile_Page');
                     } else {
-                      kopenPage(context, ProfilePage(), 'Profile_page');
+                      kopenPage(context, TeacherProfilePage(),
+                          'Guardian_Profile_Page');
                     }
                   },
                   subtitle: string.profile_subtitle,

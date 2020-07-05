@@ -1,4 +1,5 @@
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 
@@ -82,6 +83,7 @@ class OurSchoolApp extends StatelessWidget with Services {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         Home.id: (context) => Home(),
         ProfilePage.id: (context) => ProfilePage(),
+        TeacherProfilePage.id: (context) => TeacherProfilePage(),
         GuardianProfilePage.id: (context) => GuardianProfilePage(
               title: 'Guardian Profile',
             ),

@@ -29,8 +29,7 @@ class ProfilePageModel extends BaseModel {
   }) async {
     setState(ViewState.Busy);
 
-    await _profileServices.setProfileDataforChild(
-        user: user, userType: userType);
+    await _profileServices.setProfileDataforChild(user: user);
     await Future.delayed(const Duration(seconds: 3), () {});
 
     setState(ViewState.Idle);
@@ -43,7 +42,19 @@ class ProfilePageModel extends BaseModel {
   }) async {
     setState(ViewState.Busy);
 
-    await _profileServices.setProfileDataParent(user: user, userType: userType);
+    await _profileServices.setProfileDataParent(user: user);
+    await Future.delayed(const Duration(seconds: 3), () {});
+
+    setState(ViewState.Idle);
+    return true;
+  }
+
+  Future<bool> setProfileDataTeacher({
+    User user,
+  }) async {
+    setState(ViewState.Busy);
+
+    await _profileServices.setProfileDataTeacher(user: user);
     await Future.delayed(const Duration(seconds: 3), () {});
 
     setState(ViewState.Idle);
@@ -56,6 +67,7 @@ class ProfilePageModel extends BaseModel {
     userProfile = await _profileServices.getLoggedInUserProfileData();
     // loggedInUserStream.add(userProfile);
     getChildUserName();
+    // getChildParentId();
     setState2(ViewState.Idle);
     setState(ViewState.Idle);
     return userProfile;
@@ -93,6 +105,12 @@ class ProfilePageModel extends BaseModel {
       UserType userType, String id) async {
     userProfile = await _profileServices.getProfileDataById(id, userType);
     return userProfile;
+  }
+
+  getChildParentId({String childId}) async {
+    setState(ViewState.Busy);
+    await _profileServices.getChildParentId(childId: childId);
+    setState(ViewState.Idle);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:ourESchool/core/Models/studentData/studentData.dart';
 import 'package:ourESchool/imports.dart';
 
 class ProfileServices extends Services {
@@ -17,16 +18,10 @@ class ProfileServices extends Services {
   }
 
   /// this function sets the Profile Data of the User using a restful api in
-  /// firebase function and after that it caches the data with shared preferences
-  /// and also add the data to a stream (loggedInUserStream)
   setProfileDataforChild({
     User user,
-    UserType userType,
   }) async {
     UserType userType = UserType.STUDENT;
-    //await sharedPreferencesHelper.getUserType();
-    // String photoUrl = '';
-    // String url = await sharedPreferencesHelper.getLoggedInUserPhotoUrl();
 
     if (user.photoUrl.contains('https')) {
       // photoUrl = url;
@@ -60,15 +55,10 @@ class ProfileServices extends Services {
   }
 
   //this function is similar to the above```setProfileData
-  //but full features reduced .or have been optimized
   setProfileDataParent({
     User user,
-    UserType userType,
   }) async {
-    UserType userType = UserType.STUDENT;
-    //await sharedPreferencesHelper.getUserType();
-    // String photoUrl = '';
-    // String url = await sharedPreferencesHelper.getLoggedInUserPhotoUrl();
+    UserType userType = UserType.PARENT;
 
     if (user.photoUrl.contains('https')) {
       // photoUrl = url;
@@ -88,14 +78,54 @@ class ProfileServices extends Services {
       "userType": UserTypeHelper.getValue(userType),
       "country": country
     });
-
+    print('data of child to be updated is $profileDataHashMap');
     final response = await http.post(
       profileUpdateUrl,
       body: body,
       headers: headers,
     );
     if (response.statusCode == 200) {
-      // getProfileData(user.id, userType);
+      print("Data Uploaded Succesfully");
+      final jsonData = await json.decode(response.body);
+
+      User user = User.fromJson(jsonData);
+      sharedPreferencesHelper.setUserDataModel(response.body);
+      loggedInUserStream.add(user);
+    } else {
+      print("Data Upload error");
+    }
+  }
+
+  setProfileDataTeacher({
+    User user,
+  }) async {
+    UserType userType = UserType.TEACHER;
+
+    if (user.photoUrl.contains('https')) {
+      // photoUrl = url;
+    } else if (user.photoUrl == 'default') {
+      // user.photoUrl = user.photoUrl;
+    } else {
+      user.photoUrl = await storageServices.setProfilePhoto(user.photoUrl);
+    }
+
+    // user.photoUrl = photoUrl;
+
+    Map profileDataHashMap = user.toJson();
+
+    var body = json.encode({
+      "schoolCode": schoolCode.trim().toUpperCase(),
+      "profileData": profileDataHashMap,
+      "userType": UserTypeHelper.getValue(userType),
+      "country": country
+    });
+    print('data of Teacher to be updated is $profileDataHashMap');
+    final response = await http.post(
+      profileUpdateUrl,
+      body: body,
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
       print("Data Uploaded Succesfully");
       final jsonData = await json.decode(response.body);
 
@@ -272,5 +302,24 @@ class ProfileServices extends Services {
       print("Data Retrived failed");
       return User(id: uid);
     }
+  }
+
+  getChildParentId({String childId}) async {
+    DocumentReference docref = (await schoolRefwithCode())
+        .document('Login')
+        .collection('Student')
+        .document(childId);
+//todo chang the firestore backend to use child id as Document
+    await docref.get().then(
+      (value) {
+        studentData = StudentData(
+          email: value["email"].toString(),
+          id: value['id'].toString(),
+          parentIds: value["parentId"] as Map<dynamic, dynamic> ?? null,
+        );
+      },
+    );
+    studentData.setData();
+    print('The Parents of The Student have Been saved to the shared pref');
   }
 }
