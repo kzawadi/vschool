@@ -2,7 +2,9 @@ import 'package:get_it/get_it.dart';
 // import 'package:ourESchool/UI/Utility/data_importer.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/data_Entry/data_entry_service.dart';
+import 'package:ourESchool/core/services/student_data_Entry/student_data_entry_service.dart';
 import 'package:ourESchool/core/viewmodel/Data_Entry_Vm/Data_Entry_ViewmModel.dart';
+import 'package:ourESchool/core/viewmodel/Student_Data_Entry_Vm/student_Data_Entry_VM.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_entry_model.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -52,8 +54,10 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => AnalyticsService());
   locator.registerLazySingleton(() => DataEntryService());
+  locator.registerLazySingleton(() => StudentDataEntryService());
 
   locator.registerLazySingleton(() => DataEntryViewModel());
+  locator.registerLazySingleton(() => StudentDataEntryViewModel());
 
   locator.registerLazySingleton(() => DialogService());
 }

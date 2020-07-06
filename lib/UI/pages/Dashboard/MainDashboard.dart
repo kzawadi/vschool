@@ -1,5 +1,6 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/UI/pages/DataEntry/data_Entry_Page.dart';
+import 'package:ourESchool/UI/pages/student_Data_Entry/student_data_Entry_Page.dart';
 import 'package:ourESchool/imports.dart';
 
 class MainDashboard extends StatefulWidget {
@@ -107,6 +108,19 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       label: 'Data Importer',
                       onPressed: () {
                         kopenPage(context, DataImpoter(), 'Data_Importer');
+                        // analytics.logSelectContent(
+                        //     contentType: 'Fees Page Dashboard', itemId: null);
+                      },
+                      icon: FontAwesomeIcons.database,
+                    ),
+                    ColumnReusableCardButton(
+                      directionIconHeroTag: 'Data_Importer_student',
+                      height: 70,
+                      tileColor: Colors.grey,
+                      label: 'Student Data Importer',
+                      onPressed: () {
+                        kopenPage(context, StudentDataImpoter(),
+                            'Student_Data_Importer');
                         // analytics.logSelectContent(
                         //     contentType: 'Fees Page Dashboard', itemId: null);
                       },
