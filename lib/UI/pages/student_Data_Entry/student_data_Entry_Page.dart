@@ -77,12 +77,6 @@ class DataImpoterState extends State<StudentDataImpoter> {
                           SizedBox(
                             height: 6,
                           ),
-                          Column(
-                            children: [
-                              AutoSizeText('TEACHER'),
-                              AutoSizeText(studentData.isATeacher),
-                            ],
-                          ),
                           SizedBox(
                             height: 40,
                           )

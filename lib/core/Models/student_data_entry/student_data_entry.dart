@@ -13,7 +13,7 @@ abstract class StudentEntryData with _$StudentEntryData {
     String email,
     String id,
     // bool isATeacher,
-    String isATeacher,
+    // String isATeacher,
     // Map<dynamic, String> childId,
     String parentId,
   }) = _StudentEntryData;

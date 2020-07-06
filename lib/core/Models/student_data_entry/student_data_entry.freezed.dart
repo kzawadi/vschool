@@ -15,12 +15,10 @@ StudentEntryData _$StudentEntryDataFromJson(Map<String, dynamic> json) {
 class _$StudentEntryDataTearOff {
   const _$StudentEntryDataTearOff();
 
-  _StudentEntryData call(
-      {String email, String id, String isATeacher, String parentId}) {
+  _StudentEntryData call({String email, String id, String parentId}) {
     return _StudentEntryData(
       email: email,
       id: id,
-      isATeacher: isATeacher,
       parentId: parentId,
     );
   }
@@ -32,7 +30,6 @@ const $StudentEntryData = _$StudentEntryDataTearOff();
 mixin _$StudentEntryData {
   String get email;
   String get id;
-  String get isATeacher;
   String get parentId;
 
   Map<String, dynamic> toJson();
@@ -43,7 +40,7 @@ abstract class $StudentEntryDataCopyWith<$Res> {
   factory $StudentEntryDataCopyWith(
           StudentEntryData value, $Res Function(StudentEntryData) then) =
       _$StudentEntryDataCopyWithImpl<$Res>;
-  $Res call({String email, String id, String isATeacher, String parentId});
+  $Res call({String email, String id, String parentId});
 }
 
 class _$StudentEntryDataCopyWithImpl<$Res>
@@ -58,14 +55,11 @@ class _$StudentEntryDataCopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object id = freezed,
-    Object isATeacher = freezed,
     Object parentId = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed ? _value.email : email as String,
       id: id == freezed ? _value.id : id as String,
-      isATeacher:
-          isATeacher == freezed ? _value.isATeacher : isATeacher as String,
       parentId: parentId == freezed ? _value.parentId : parentId as String,
     ));
   }
@@ -77,7 +71,7 @@ abstract class _$StudentEntryDataCopyWith<$Res>
           _StudentEntryData value, $Res Function(_StudentEntryData) then) =
       __$StudentEntryDataCopyWithImpl<$Res>;
   @override
-  $Res call({String email, String id, String isATeacher, String parentId});
+  $Res call({String email, String id, String parentId});
 }
 
 class __$StudentEntryDataCopyWithImpl<$Res>
@@ -94,14 +88,11 @@ class __$StudentEntryDataCopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object id = freezed,
-    Object isATeacher = freezed,
     Object parentId = freezed,
   }) {
     return _then(_StudentEntryData(
       email: email == freezed ? _value.email : email as String,
       id: id == freezed ? _value.id : id as String,
-      isATeacher:
-          isATeacher == freezed ? _value.isATeacher : isATeacher as String,
       parentId: parentId == freezed ? _value.parentId : parentId as String,
     ));
   }
@@ -111,8 +102,7 @@ class __$StudentEntryDataCopyWithImpl<$Res>
 class _$_StudentEntryData
     with DiagnosticableTreeMixin
     implements _StudentEntryData {
-  const _$_StudentEntryData(
-      {this.email, this.id, this.isATeacher, this.parentId});
+  const _$_StudentEntryData({this.email, this.id, this.parentId});
 
   factory _$_StudentEntryData.fromJson(Map<String, dynamic> json) =>
       _$_$_StudentEntryDataFromJson(json);
@@ -122,13 +112,11 @@ class _$_StudentEntryData
   @override
   final String id;
   @override
-  final String isATeacher;
-  @override
   final String parentId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'StudentEntryData(email: $email, id: $id, isATeacher: $isATeacher, parentId: $parentId)';
+    return 'StudentEntryData(email: $email, id: $id, parentId: $parentId)';
   }
 
   @override
@@ -138,7 +126,6 @@ class _$_StudentEntryData
       ..add(DiagnosticsProperty('type', 'StudentEntryData'))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('isATeacher', isATeacher))
       ..add(DiagnosticsProperty('parentId', parentId));
   }
 
@@ -150,9 +137,6 @@ class _$_StudentEntryData
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.isATeacher, isATeacher) ||
-                const DeepCollectionEquality()
-                    .equals(other.isATeacher, isATeacher)) &&
             (identical(other.parentId, parentId) ||
                 const DeepCollectionEquality()
                     .equals(other.parentId, parentId)));
@@ -163,7 +147,6 @@ class _$_StudentEntryData
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(isATeacher) ^
       const DeepCollectionEquality().hash(parentId);
 
   @override
@@ -177,11 +160,8 @@ class _$_StudentEntryData
 }
 
 abstract class _StudentEntryData implements StudentEntryData {
-  const factory _StudentEntryData(
-      {String email,
-      String id,
-      String isATeacher,
-      String parentId}) = _$_StudentEntryData;
+  const factory _StudentEntryData({String email, String id, String parentId}) =
+      _$_StudentEntryData;
 
   factory _StudentEntryData.fromJson(Map<String, dynamic> json) =
       _$_StudentEntryData.fromJson;
@@ -190,8 +170,6 @@ abstract class _StudentEntryData implements StudentEntryData {
   String get email;
   @override
   String get id;
-  @override
-  String get isATeacher;
   @override
   String get parentId;
   @override
