@@ -15,11 +15,11 @@ class StudentDataEntryService extends Services {
   }
 
   Future<void> postData({List<StudentEntryData> userEntryData}) async {
-//Schools/India/MAMA/Login/Parent-Teacher/dZdZUa5GAlFtjblV3UVN
+//Schools/India/MAMA/Login/Student/dZdZUa5GAlFtjblV3UVN
 
     for (StudentEntryData u in userEntryData) {
-      String wazazi = u.parentId;
-      List mzazi = wazazi.split(',');
+      // String wazazi = u.parentId;
+      List mzazi = u.parentId.split(',');
 
       Map<int, String> wazazimapped = mzazi.asMap();
       StudentEntryDataDb x = StudentEntryDataDb(

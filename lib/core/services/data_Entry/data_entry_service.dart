@@ -18,8 +18,8 @@ class DataEntryService extends Services {
 //Schools/India/MAMA/Login/Parent-Teacher/dZdZUa5GAlFtjblV3UVN
 
     for (UserEntryData u in userEntryData) {
-      String watoto = u.childIds;
-      List toto = watoto.split(',');
+      // String watoto = u.childIds;
+      List toto = u.childIds.split(',');
 
       Map<int, String> watotomapped = toto.asMap();
       UserEntryDataDb x = UserEntryDataDb(
