@@ -25,7 +25,6 @@ class ProfilePageModel extends BaseModel {
 
   Future<bool> setProfileDataforChild({
     User user,
-    UserType userType,
   }) async {
     setState(ViewState.Busy);
 
