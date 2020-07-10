@@ -22,7 +22,7 @@ export const autoStudentParentEntry = functions.region("europe-west2").firestore
 .document('Schools/{country}/{schoolCode}/Profile/Student/{studentId}')
 // i have changed this becouse it get triggered when  a student update her profiles and 
 //create duplicates and bad behaviours
-.onCreate(async (eventSnapshot, context) => {
+.onWrite(async (eventSnapshot, context) => {
     return atomicFunction.studentParentAutoEntry(eventSnapshot, context);
 });
 

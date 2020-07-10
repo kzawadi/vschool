@@ -16,11 +16,10 @@ class _$StudentEntryDataDbTearOff {
   const _$StudentEntryDataDbTearOff();
 
   _StudentEntryDataDb call(
-      {String email, String id, bool isATeacher, Map<int, String> parentId}) {
+      {String email, String id, Map<int, String> parentId}) {
     return _StudentEntryDataDb(
       email: email,
       id: id,
-      isATeacher: isATeacher,
       parentId: parentId,
     );
   }
@@ -32,7 +31,6 @@ const $StudentEntryDataDb = _$StudentEntryDataDbTearOff();
 mixin _$StudentEntryDataDb {
   String get email;
   String get id;
-  bool get isATeacher;
   Map<int, String> get parentId;
 
   Map<String, dynamic> toJson();
@@ -43,8 +41,7 @@ abstract class $StudentEntryDataDbCopyWith<$Res> {
   factory $StudentEntryDataDbCopyWith(
           StudentEntryDataDb value, $Res Function(StudentEntryDataDb) then) =
       _$StudentEntryDataDbCopyWithImpl<$Res>;
-  $Res call(
-      {String email, String id, bool isATeacher, Map<int, String> parentId});
+  $Res call({String email, String id, Map<int, String> parentId});
 }
 
 class _$StudentEntryDataDbCopyWithImpl<$Res>
@@ -59,14 +56,11 @@ class _$StudentEntryDataDbCopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object id = freezed,
-    Object isATeacher = freezed,
     Object parentId = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed ? _value.email : email as String,
       id: id == freezed ? _value.id : id as String,
-      isATeacher:
-          isATeacher == freezed ? _value.isATeacher : isATeacher as bool,
       parentId:
           parentId == freezed ? _value.parentId : parentId as Map<int, String>,
     ));
@@ -79,8 +73,7 @@ abstract class _$StudentEntryDataDbCopyWith<$Res>
           _StudentEntryDataDb value, $Res Function(_StudentEntryDataDb) then) =
       __$StudentEntryDataDbCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String email, String id, bool isATeacher, Map<int, String> parentId});
+  $Res call({String email, String id, Map<int, String> parentId});
 }
 
 class __$StudentEntryDataDbCopyWithImpl<$Res>
@@ -97,14 +90,11 @@ class __$StudentEntryDataDbCopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object id = freezed,
-    Object isATeacher = freezed,
     Object parentId = freezed,
   }) {
     return _then(_StudentEntryDataDb(
       email: email == freezed ? _value.email : email as String,
       id: id == freezed ? _value.id : id as String,
-      isATeacher:
-          isATeacher == freezed ? _value.isATeacher : isATeacher as bool,
       parentId:
           parentId == freezed ? _value.parentId : parentId as Map<int, String>,
     ));
@@ -115,8 +105,7 @@ class __$StudentEntryDataDbCopyWithImpl<$Res>
 class _$_StudentEntryDataDb
     with DiagnosticableTreeMixin
     implements _StudentEntryDataDb {
-  const _$_StudentEntryDataDb(
-      {this.email, this.id, this.isATeacher, this.parentId});
+  const _$_StudentEntryDataDb({this.email, this.id, this.parentId});
 
   factory _$_StudentEntryDataDb.fromJson(Map<String, dynamic> json) =>
       _$_$_StudentEntryDataDbFromJson(json);
@@ -126,13 +115,11 @@ class _$_StudentEntryDataDb
   @override
   final String id;
   @override
-  final bool isATeacher;
-  @override
   final Map<int, String> parentId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'StudentEntryDataDb(email: $email, id: $id, isATeacher: $isATeacher, parentId: $parentId)';
+    return 'StudentEntryDataDb(email: $email, id: $id, parentId: $parentId)';
   }
 
   @override
@@ -142,7 +129,6 @@ class _$_StudentEntryDataDb
       ..add(DiagnosticsProperty('type', 'StudentEntryDataDb'))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('isATeacher', isATeacher))
       ..add(DiagnosticsProperty('parentId', parentId));
   }
 
@@ -154,9 +140,6 @@ class _$_StudentEntryDataDb
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.isATeacher, isATeacher) ||
-                const DeepCollectionEquality()
-                    .equals(other.isATeacher, isATeacher)) &&
             (identical(other.parentId, parentId) ||
                 const DeepCollectionEquality()
                     .equals(other.parentId, parentId)));
@@ -167,7 +150,6 @@ class _$_StudentEntryDataDb
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(isATeacher) ^
       const DeepCollectionEquality().hash(parentId);
 
   @override
@@ -184,7 +166,6 @@ abstract class _StudentEntryDataDb implements StudentEntryDataDb {
   const factory _StudentEntryDataDb(
       {String email,
       String id,
-      bool isATeacher,
       Map<int, String> parentId}) = _$_StudentEntryDataDb;
 
   factory _StudentEntryDataDb.fromJson(Map<String, dynamic> json) =
@@ -194,8 +175,6 @@ abstract class _StudentEntryDataDb implements StudentEntryDataDb {
   String get email;
   @override
   String get id;
-  @override
-  bool get isATeacher;
   @override
   Map<int, String> get parentId;
   @override

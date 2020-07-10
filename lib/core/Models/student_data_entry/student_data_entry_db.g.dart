@@ -11,7 +11,6 @@ _$_StudentEntryDataDb _$_$_StudentEntryDataDbFromJson(
   return _$_StudentEntryDataDb(
     email: json['email'] as String,
     id: json['id'] as String,
-    isATeacher: json['isATeacher'] as bool,
     parentId: (json['parentId'] as Map<String, dynamic>)?.map(
       (k, e) => MapEntry(int.parse(k), e as String),
     ),
@@ -23,6 +22,5 @@ Map<String, dynamic> _$_$_StudentEntryDataDbToJson(
     <String, dynamic>{
       'email': instance.email,
       'id': instance.id,
-      'isATeacher': instance.isATeacher,
       'parentId': instance.parentId?.map((k, e) => MapEntry(k.toString(), e)),
     };

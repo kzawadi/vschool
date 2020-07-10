@@ -25,8 +25,6 @@ class StudentDataEntryService extends Services {
       StudentEntryDataDb x = StudentEntryDataDb(
         email: u.email,
         id: u.id,
-        isATeacher:
-            false, //bool.fromEnvironment(u.isATeacher.trim().toLowerCase()),
         parentId: wazazimapped,
       );
 

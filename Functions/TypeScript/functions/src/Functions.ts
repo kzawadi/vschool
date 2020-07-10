@@ -15,6 +15,8 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
 
     const newValue = eventSnapshot.after!.data();
     const studentProfileRef = eventSnapshot.after.ref;
+    // const newValue = eventSnapshot.data();
+    // const studentProfileRef = eventSnapshot.ref;
 
     const standard = newValue!.standard;
     const division = newValue!.division;

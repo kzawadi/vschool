@@ -78,7 +78,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
     if (_bloodGroup.isEmpty ||
         _name.isEmpty ||
         _dob.isEmpty ||
-        _childrenNameName.isEmpty ||
+        // _childrenNameName.isEmpty ||
         _mobileNo.isEmpty) {
       _scaffoldKey.currentState.showSnackBar(ksnackBar(
           context, 'You Need to fill all the details and a profile Photo'));

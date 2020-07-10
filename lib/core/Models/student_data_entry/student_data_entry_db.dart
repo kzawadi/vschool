@@ -12,7 +12,7 @@ abstract class StudentEntryDataDb with _$StudentEntryDataDb {
   const factory StudentEntryDataDb({
     String email,
     String id,
-    bool isATeacher,
+    // bool isATeacher,
     // String isATeachers,
     Map<int, String> parentId,
     // String childIds,
