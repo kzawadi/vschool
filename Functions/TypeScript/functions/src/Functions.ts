@@ -28,6 +28,7 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
 
     let map = {
         id: studentProfileRef,
+        userId:studentId,    //trying to put/store an id to help in query of specific doc in chats
     }
 
     //var batch = db.batch();
@@ -63,6 +64,7 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
 
             const connectionMap = {
                 id: connectionProfileRef,
+                userId:value,
             }
             return db.collection('Schools').doc(country)
             .collection(schoolCode).doc('Parents').collection(standard + division).doc(value)
