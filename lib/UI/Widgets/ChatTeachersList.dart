@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -72,11 +73,25 @@ class _ChatTeachersListWidgetState extends State<ChatTeachersListWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Image.asset(
-                  assetsString.teacher_welcome,
-                  height: 50,
-                  width: 50,
-                ),
+                widget.model.teachersListMap
+                        .containsKey(widget.snapshot.documentID)
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl: widget
+                              .model
+                              .teachersListMap[widget.snapshot.documentID]
+                              .photoUrl,
+                          height: 50,
+                          width: 50,
+                        ),
+                      )
+                    : Image.asset(
+                        assetsString.teacher_welcome,
+                        height: 50,
+                        width: 50,
+                      ),
                 Text(
                   widget.model.teachersListMap
                           .containsKey(widget.snapshot.documentID)
