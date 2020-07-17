@@ -17,6 +17,10 @@ class ChatServices extends Services {
   Map<String, List<User>> studentsParentListMap = Map();
 
   List<User> get childrens => _profileServices.childrens;
+  // SharedPreferencesHelper _sharedPreferencesHelper =
+  //     locator<SharedPreferencesHelper>();
+  List<String> childrensId = [];
+  List<String> parentsId = [];
 
   ChatServices() {
     getSchoolCode();
@@ -31,6 +35,24 @@ class ChatServices extends Services {
     teachersDocumentSnapshots.clear();
     teachersListMap.clear();
     String _standard = standard + division.toUpperCase();
+
+    // String _parents = await sharedPreferencesHelper.getParentsIds();
+    // if (_parents == 'N.A') {
+    //   this.parentsId = [];
+    //   return;
+    // }
+
+    // Map<String, String> parentIds = Map.from(
+    //   jsonDecode(_parents).map(
+    //     (key, values) {
+    //       String value = values.toString();
+    //       return MapEntry(key, value);
+    //     },
+    //   ),
+    // );
+    // childrensId = parentIds.values.toList();
+    // print('the parente usernames which are ID  $childrensId');
+
     var ref =
         (await schoolRefwithCode()).document('Teachers').collection(_standard);
 
@@ -39,10 +61,13 @@ class ChatServices extends Services {
     if (data != null && data.documents.length > 0) {
       print('Data Added');
       print(data.documents.first.documentID);
-      data.documents.forEach((document) => {
-            teachersDocumentSnapshots.putIfAbsent(
-                document.documentID, () => document)
-          });
+
+      data.documents.forEach(
+        (document) => {
+          teachersDocumentSnapshots.putIfAbsent(
+              document.documentID, () => document)
+        },
+      );
     }
   }
 
@@ -71,16 +96,37 @@ class ChatServices extends Services {
       _standard = standard + division.toUpperCase();
     }
 
-    CollectionReference _studentsRef =
-        (await schoolRefwithCode()).document("Students").collection(_standard);
+    String _childrens = await sharedPreferencesHelper.getChildIds();
+    if (_childrens == 'N.A') {
+      this.childrensId = [];
+      return;
+    }
 
-    QuerySnapshot data = await _studentsRef.getDocuments();
+    Map<String, String> childIds = Map.from(
+      jsonDecode(_childrens).map(
+        (key, values) {
+          String value = values.toString();
+          return MapEntry(key, value);
+        },
+      ),
+    );
+    childrensId = childIds.values.toList();
+    print('the childe usernames which are ID  $childrensId');
 
-    if (data != null && data.documents.length > 0) {
-      data.documents.forEach((document) => {
-            studentsDocumentSnapshots.putIfAbsent(
-                document.documentID, () => document)
-          });
+    for (String id in childrensId) {
+      final Query _studentsRef = (await schoolRefwithCode())
+          .document("Students")
+          .collection(_standard)
+          .where("userId", isEqualTo: id);
+
+      QuerySnapshot data = await _studentsRef.getDocuments();
+
+      if (data != null && data.documents.length > 0) {
+        data.documents.forEach((document) => {
+              studentsDocumentSnapshots.putIfAbsent(
+                  document.documentID, () => document)
+            });
+      }
     }
   }
 
