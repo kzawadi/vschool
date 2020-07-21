@@ -141,8 +141,11 @@ class ChatServices extends Services {
 
   Future<List<User>> getParents(DocumentSnapshot documentSnapshot) async {
     List<User> parents = [];
-
-    for (int index = 1; index < documentSnapshot.data.length; index++) {
+// the index is being checked and compared to documentsnapshot length -1 so to
+//eliminated the field [userId] when iterating this function
+//todo change a firebase function to make sure the field [userId] is always the
+//todo last either by renaming it to [z_userId]
+    for (int index = 1; index < documentSnapshot.data.length - 1; index++) {
       parents.add(await _profileServices.getUserDataFromReference(
           documentSnapshot[index.toString()] as DocumentReference));
     }
