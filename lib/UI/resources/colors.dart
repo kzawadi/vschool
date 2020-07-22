@@ -13,6 +13,11 @@ class MyColors {
   static const heart = Color(0xfff50057);
   static const twitter = Color(0xff00b0ff);
   static const github = Color(0xff212121);
+  static const okay = Color(0xffB5EAD7);
+  static const kinderGreen = Color(0xffB5EAD7);
+  static const magicMint = Color(0xffB3FFCD);
+  static const kinderMellow = Color(0xffE2F0CB);
+  static const welcomeTeacherColor = Color(0xffffB7B2);
 } //main app colors
 
 class MaterialColors {

@@ -16,6 +16,7 @@ class LoginRoundedButton extends StatelessWidget {
         tag: heroTag ?? 'login',
         transitionOnUserGestures: true,
         child: ReusableRoundedButton(
+          elevation: 2,
           child: Text(
             label ?? 'Login',
             style: TextStyle(
@@ -26,7 +27,7 @@ class LoginRoundedButton extends StatelessWidget {
           ),
           // text: 'Login',
           onPressed: onPressed,
-          height: 50,
+          height: 25,
           backgroundColor: Colors.greenAccent,
         ),
       ),

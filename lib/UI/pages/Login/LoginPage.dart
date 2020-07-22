@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // String idHint = string.student_id;
-  UserType loginTypeSelected = UserType.STUDENT;
+  UserType loginTypeSelected = UserType.TEACHER;
   bool isRegistered = false;
   String notYetRegisteringText = string.not_registered;
   ButtonType buttonType = ButtonType.LOGIN;
@@ -79,76 +79,119 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.pop(context);
             },
           ),
-          floatingActionButton: LoginRoundedButton(
-            label:
-                buttonType == ButtonType.LOGIN ? string.login : string.register,
-            onPressed: () async {
-              if (model.state == ViewState.Idle)
-                await loginRegisterBtnTap(model, context);
-            },
-          ),
+          // floatingActionButton: LoginRoundedButton(
+          //   label:
+          //       buttonType == ButtonType.LOGIN ? string.login : string.register,
+          //   onPressed: () async {
+          //     if (model.state == ViewState.Idle)
+          //       await loginRegisterBtnTap(model, context);
+          //   },
+          // ),
           body: Stack(
+            fit: StackFit.expand,
             children: <Widget>[
-              Container(
-                child: SafeArea(
+              SafeArea(
+                child: Container(
                   child: Padding(
                     padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                     child: Column(
                       children: <Widget>[
-                        TextField(
-                          onChanged: (id) {},
-                          controller: schoolNameController,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: string.school_name_code_hint,
-                            labelText: string.school_name_code,
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Container(
+                          // padding: EdgeInsets.symmetric(horizontal: 24),
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: Color(0xffEFEFEF),
+                              borderRadius: BorderRadius.circular(14)),
+                          child: TextFormField(
+                            onChanged: (id) {},
+                            controller: schoolNameController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context).nextFocus();
+                            },
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                            decoration: InputDecoration(
+                              hintText: string.school_name_code_hint,
+                              labelText: string.school_name_code,
+                              prefixIcon: Icon(Icons.school),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        // CustomLoginTypeBtn(),
-                        CustomRadioButton(
-                          // horizontal: true,
-                          buttonColor: Theme.of(context).canvasColor,
-                          buttonLables: ['Student', 'Parent/Teacher'],
-                          buttonValues: [UserType.STUDENT, UserType.TEACHER],
-                          radioButtonValue: (value) {
-                            loginTypeSelected = value;
-                            print(value);
-                          },
-                          selectedColor: Theme.of(context).accentColor,
-                        ),
                         SizedBox(
                           height: 10,
                         ),
-                        TextField(
-                          onChanged: (email) {},
-                          keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: string.email_hint,
-                            labelText: string.email,
+                        Container(
+                          // padding: EdgeInsets.symmetric(horizontal: 24),
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: Color(0xffEFEFEF),
+                              borderRadius: BorderRadius.circular(14)),
+                          child: TextFormField(
+                            onChanged: (email) {},
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.next,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                            decoration: InputDecoration(
+                              hintText: string.email_hint,
+                              labelText: string.email,
+                              prefixIcon: Icon(Icons.email),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
+                            controller: emailController,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context).nextFocus();
+                            },
                           ),
-                          controller: emailController,
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        TextField(
-                          obscureText: true,
-                          onChanged: (password) {},
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: string.password_hint,
-                            labelText: string.password,
+                        Container(
+                          // padding: EdgeInsets.symmetric(horizontal: 24),
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: Color(0xffEFEFEF),
+                              borderRadius: BorderRadius.circular(14)),
+                          child: TextFormField(
+                            obscureText: true,
+                            onChanged: (password) {},
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                            decoration: InputDecoration(
+                              hintText: string.password_hint,
+                              labelText: string.password,
+                              prefixIcon: Icon(Icons.lock),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
+                            controller: passwordController,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context).nextFocus();
+                            },
                           ),
-                          controller: passwordController,
                         ),
                         isRegistered
                             ? SizedBox(
@@ -156,21 +199,37 @@ class _LoginPageState extends State<LoginPage> {
                               )
                             : Container(),
                         isRegistered
-                            ? TextField(
-                                obscureText: true,
-                                onChanged: (password) {},
-                                keyboardType: TextInputType.text,
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                                decoration: kTextFieldDecoration.copyWith(
-                                  hintText: string.password_hint,
-                                  labelText: string.confirm_password,
+                            ? Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: Color(0xffEFEFEF),
+                                    borderRadius: BorderRadius.circular(14)),
+                                child: TextFormField(
+                                  obscureText: true,
+                                  onChanged: (password) {},
+                                  keyboardType: TextInputType.text,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                  decoration: InputDecoration(
+                                    hintText: string.password_hint,
+                                    labelText: string.confirm_password,
+                                    prefixIcon: Icon(Icons.lock),
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                  ),
+                                  controller: confirmPasswordController,
+                                  onFieldSubmitted: (v) {
+                                    FocusScope.of(context).nextFocus();
+                                  },
                                 ),
-                                controller: confirmPasswordController,
                               )
                             : Container(),
                         SizedBox(
-                          height: 15,
+                          height: 5,
                         ),
                         Hero(
                           tag: 'otpForget',
@@ -228,7 +287,23 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(
-                          height: 100,
+                          height: 25,
+                        ),
+                        LoginRoundedButton(
+                          label: buttonType == ButtonType.LOGIN
+                              ? string.login
+                              : string.register,
+                          onPressed: () async {
+                            if (model.state == ViewState.Idle)
+                              await loginRegisterBtnTap(model, context);
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Image(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/welcome.png"),
                         ),
                       ],
                     ),

@@ -89,6 +89,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/images/
     - assets/flare_anim/Loading.flr
 
   fonts:
