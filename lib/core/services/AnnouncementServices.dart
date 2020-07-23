@@ -12,7 +12,6 @@ class AnnouncementServices extends Services {
   StorageServices _storageServices = locator<StorageServices>();
   DocumentSnapshot lastPostSnapshot = null;
   List<DocumentSnapshot> postDocumentSnapshots = new List<DocumentSnapshot>();
-
   AnnouncementServices() {
     // getFirebaseUser();
     // getSchoolCode();
@@ -31,7 +30,7 @@ class AnnouncementServices extends Services {
   ) async {
     // List<DocumentSnapshot> _data = new List<DocumentSnapshot>();
 
-    if (schoolCode == null) await getSchoolCode();
+    // if (schoolCode == null) await getSchoolCode();
 
     var _postRef =
         (await schoolRefwithCode()).document('Posts').collection(stdDiv_Global);

@@ -49,7 +49,8 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
 
   void _scrollListener() {
     if (model.state == ViewState.Idle) {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
+      if (controller.position.pixels ==
+          controller.position.maxScrollExtent - 5) {
         // setState(() => _isLoading = true);
         model.getAnnouncements(stdDiv_Global);
         // scaffoldKey.currentState.widget
@@ -76,200 +77,200 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
       print(stdDiv_Global);
     }
     return BaseView<AnnouncementPageModel>(
-        onModelReady: (model) => model.getAnnouncements(stdDiv_Global),
-        builder: (context, model, child) {
-          this.model = model;
-          return Scaffold(
-            key: scaffoldKey,
-            appBar: TopBar(
-              buttonHeroTag: string.announcement,
-              title: stdDiv_Global + " Posts",
-              child: Row(
-                children: [
-                  isThemeCurrentlyDark(context)
-                      ? Image.asset(
-                          'assets/logowhite.png',
-                          fit: BoxFit.fill,
-                          height: 40,
-                          color: Colors.tealAccent,
-                        )
-                      : Image.asset(
-                          'assets/logowhite.png',
-                          fit: BoxFit.fill,
-                          height: 40,
-                          color: Colors.teal,
-                        ),
-                  Text(
-                    'VSCHOOL',
-                    style: ktitleStyle.copyWith(fontSize: 13),
-                  ),
-                ],
-              ),
-              onPressed: null,
-            ),
-            floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-            floatingActionButton: Stack(
-              children: <Widget>[
-                Visibility(
-                  visible: isTeacher,
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: FloatingActionButton(
-                      elevation: 12,
-                      onPressed: () {
-                        kopenPageSlide(context, CreateAnnouncement(),
-                            duration: Duration(milliseconds: 200));
-                      },
-                      child: Icon(Icons.add),
-                      backgroundColor: isThemeCurrentlyDark(context)
-                          ? Colors.tealAccent
-                          : Colors.teal[300],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 31),
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: userType == UserType.STUDENT
-                        ? FloatingActionButton.extended(
-                            label: Text(buttonLabel),
-                            heroTag: 'abc',
-                            elevation: 12,
-                            onPressed: () async {
-                              if (stdDiv_Global == 'Global') {
-                                setState(() {
-                                  buttonLabel = stdDiv_Global;
-                                  stdDiv_Global = currentUser.standard +
-                                      currentUser.division.toUpperCase();
-                                });
-                              } else {
-                                setState(() {
-                                  buttonLabel = stdDiv_Global;
-                                  stdDiv_Global = 'Global';
-                                });
-                              }
-
-                              await model.onRefresh(stdDiv_Global);
-                            },
-                            icon: Icon(FontAwesomeIcons.globe),
-                            backgroundColor: Colors.teal[300],
-                          )
-                        : userType == UserType.TEACHER
-                            ? FloatingActionButton.extended(
-                                label: Text('Filter'),
-                                heroTag: 'abc',
-                                elevation: 12,
-                                onPressed: () {
-                                  //Filter Posts Code Here
-                                  filterDialogBox(context, model);
-                                },
-                                icon: Icon(Icons.filter_list),
-                                backgroundColor: isThemeCurrentlyDark(context)
-                                    ? Colors.tealAccent
-                                    : Colors.teal[300],
-                              )
-                            : Container(),
-                  ),
+      onModelReady: (model) => model.getAnnouncements(stdDiv_Global),
+      builder: (context, model, child) {
+        this.model = model;
+        return Scaffold(
+          key: scaffoldKey,
+          appBar: TopBar(
+            buttonHeroTag: string.announcement,
+            title: stdDiv_Global + " Posts",
+            child: Row(
+              children: [
+                isThemeCurrentlyDark(context)
+                    ? Image.asset(
+                        'assets/logowhite.png',
+                        fit: BoxFit.fill,
+                        height: 40,
+                        color: Colors.tealAccent,
+                      )
+                    : Image.asset(
+                        'assets/logowhite.png',
+                        fit: BoxFit.fill,
+                        height: 40,
+                        color: Colors.teal,
+                      ),
+                Text(
+                  'VSCHOOL',
+                  style: ktitleStyle.copyWith(fontSize: 13),
                 ),
               ],
             ),
-            body: Center(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxWidth: 700,
-                ),
-                child: RefreshIndicator(
-                  child: model.postSnapshotList.length == 0
-                      ? model.state == ViewState.Busy
-                          ? kBuzyPage(color: Theme.of(context).accentColor)
-                          : Container(
-                              child: Center(
-                                child: Text(
-                                  'No Posts available....!',
-                                  style: ksubtitleStyle.copyWith(fontSize: 25),
-                                ),
-                              ),
-                              // color: Colors.red,
-                            )
-                      : ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          addAutomaticKeepAlives: true,
-                          cacheExtent: 30,
-                          controller: controller,
-                          itemCount: model.postSnapshotList.length + 1,
-                          itemBuilder: (context, index) {
-                            if (index < model.postSnapshotList.length) {
-                              return Stack(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 6),
-                                    child: AnnouncementCard(
-                                      announcement: Announcement.fromSnapshot(
-                                        model.postSnapshotList[index],
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 0.0,
-                                    bottom: 0.0,
-                                    left: 3.0,
-                                    child: new Container(
-                                      height: double.infinity,
-                                      width: 5.0,
-                                      color: isThemeCurrentlyDark(context)
-                                          ? Colors.teal
-                                          : Colors.teal[300],
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 100.0,
-                                    bottom: 15.0,
-                                    left: 0.0,
-                                    child: new Container(
-                                      height: 15,
-                                      width: 15,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: MyColors.white,
-                                      ),
-                                      child: new Container(
-                                        margin: new EdgeInsets.all(5.0),
-                                        height: 30.0,
-                                        width: 30.0,
-                                        decoration: new BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: MyColors.github,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return Center(
-                                child: new Opacity(
-                                  opacity:
-                                      model.state == ViewState.Busy ? 1.0 : 0.0,
-                                  child: new SizedBox(
-                                      width: 32.0,
-                                      height: 32.0,
-                                      child: kBuzyPage(
-                                          color:
-                                              Theme.of(context).accentColor)),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                  onRefresh: () async {
-                    await model.onRefresh(stdDiv_Global);
-                  },
+            onPressed: null,
+          ),
+          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+          floatingActionButton: Stack(
+            children: <Widget>[
+              Visibility(
+                visible: isTeacher,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: FloatingActionButton(
+                    elevation: 12,
+                    onPressed: () {
+                      kopenPageSlide(context, CreateAnnouncement(),
+                          duration: Duration(milliseconds: 200));
+                    },
+                    child: Icon(Icons.add),
+                    backgroundColor: isThemeCurrentlyDark(context)
+                        ? Colors.tealAccent
+                        : Colors.teal[300],
+                  ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(left: 31),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: userType == UserType.STUDENT
+                      ? FloatingActionButton.extended(
+                          label: Text(buttonLabel),
+                          heroTag: 'abc',
+                          elevation: 12,
+                          onPressed: () async {
+                            if (stdDiv_Global == 'Global') {
+                              setState(() {
+                                buttonLabel = stdDiv_Global;
+                                stdDiv_Global = currentUser.standard +
+                                    currentUser.division.toUpperCase();
+                              });
+                            } else {
+                              setState(() {
+                                buttonLabel = stdDiv_Global;
+                                stdDiv_Global = 'Global';
+                              });
+                            }
+
+                            await model.onRefresh(stdDiv_Global);
+                          },
+                          icon: Icon(FontAwesomeIcons.globe),
+                          backgroundColor: Colors.teal[300],
+                        )
+                      : userType == UserType.TEACHER
+                          ? FloatingActionButton.extended(
+                              label: Text('Filter'),
+                              heroTag: 'abc',
+                              elevation: 12,
+                              onPressed: () {
+                                //Filter Posts Code Here
+                                filterDialogBox(context, model);
+                              },
+                              icon: Icon(Icons.filter_list),
+                              backgroundColor: isThemeCurrentlyDark(context)
+                                  ? Colors.tealAccent
+                                  : Colors.teal[300],
+                            )
+                          : Container(),
+                ),
+              ),
+            ],
+          ),
+          body: Center(
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: 700,
+              ),
+              child: RefreshIndicator(
+                child: model.postSnapshotList.length == 0
+                    ? model.state == ViewState.Busy
+                        ? kBuzyPage(color: Theme.of(context).accentColor)
+                        : Container(
+                            child: Center(
+                              child: Text(
+                                'No Posts available....!',
+                                style: ksubtitleStyle.copyWith(fontSize: 25),
+                              ),
+                            ),
+                            // color: Colors.red,
+                          )
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        addAutomaticKeepAlives: true,
+                        cacheExtent: 50,
+                        controller: controller,
+                        itemCount: model.postSnapshotList.length,
+                        itemBuilder: (context, index) {
+                          if (index < model.postSnapshotList.length) {
+                            return Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 6),
+                                  child: AnnouncementCard(
+                                    announcement: Announcement.fromSnapshot(
+                                      model.postSnapshotList[index],
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0.0,
+                                  bottom: 0.0,
+                                  left: 3.0,
+                                  child: new Container(
+                                    height: double.infinity,
+                                    width: 5.0,
+                                    color: isThemeCurrentlyDark(context)
+                                        ? Colors.teal
+                                        : Colors.teal[300],
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 100.0,
+                                  bottom: 15.0,
+                                  left: 0.0,
+                                  child: new Container(
+                                    height: 15,
+                                    width: 15,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: MyColors.white,
+                                    ),
+                                    child: new Container(
+                                      margin: new EdgeInsets.all(5.0),
+                                      height: 30.0,
+                                      width: 30.0,
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: MyColors.github,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return Center(
+                              child: new Opacity(
+                                opacity:
+                                    model.state == ViewState.Busy ? 1.0 : 0.0,
+                                child: new SizedBox(
+                                    width: 32.0,
+                                    height: 32.0,
+                                    child: kBuzyPage(
+                                        color: Theme.of(context).accentColor)),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                onRefresh: () async {
+                  await model.onRefresh(stdDiv_Global);
+                },
+              ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   Future filterDialogBox(BuildContext context, AnnouncementPageModel model) {
