@@ -64,18 +64,19 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
     User currentUser = Provider.of<User>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isTeacher = true;
-    } else
-    // if (userType == UserType.PARENT) {
-    // } else if (userType == UserType.STUDENT)
-    {
-      if (!isLoaded) {
-        stdDiv_Global =
-            currentUser.standard + currentUser.division.toUpperCase();
-        isLoaded = true;
-      }
-
-      print(stdDiv_Global);
     }
+    //  else
+    // // if (userType == UserType.PARENT) {
+    // // } else if (userType == UserType.STUDENT)
+    // {
+    //   if (!isLoaded) {
+    //     stdDiv_Global =
+    //         currentUser.standard + currentUser.division.toUpperCase();
+    //     isLoaded = true;
+    //   }
+
+    //   print(stdDiv_Global);
+    // }
     return BaseView<AnnouncementPageModel>(
       onModelReady: (model) => model.getAnnouncements(stdDiv_Global),
       builder: (context, model, child) {
