@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/UI/pages/Home.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
@@ -304,6 +305,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                               textInputType: TextInputType.number,
                               hintText: string.your_parents,
                               labelText: string.mobile_no,
+                              // prefixIcon: Icon(Icons.person),
                               onChanged: (mobile_no) {
                                 _mobileNo = mobile_no;
                               },
@@ -499,6 +501,7 @@ class ProfileFields extends StatelessWidget {
   final TextInputType textInputType;
   final TextEditingController controller;
   final bool isEditable;
+  final Widget prefixIcon;
 
   const ProfileFields(
       {@required this.labelText,
@@ -508,27 +511,44 @@ class ProfileFields extends StatelessWidget {
       this.onTap,
       this.textInputType,
       this.isEditable = true,
-      this.width});
+      this.width,
+      this.prefixIcon});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      // width: width == null ? MediaQuery.of(context).size.width / 2.5 : width,
-      child: TextField(
-        enabled: isEditable,
-        onTap: onTap,
-        controller: controller,
-        // controller: TextEditingController(text: initialText),
-        onChanged: onChanged,
-        keyboardType: textInputType ?? TextInputType.text,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        ),
-        decoration: kTextFieldDecoration.copyWith(
-          hintText: hintText,
-          labelText: labelText,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(
+            color: MyColors.lightMilky,
+            borderRadius: BorderRadius.circular(14)),
+        // width: width == null ? MediaQuery.of(context).size.width / 2.5 : width,
+        child: TextFormField(
+          enabled: isEditable,
+          onTap: onTap,
+          controller: controller,
+          // controller: TextEditingController(text: initialText),
+          onChanged: onChanged,
+          keyboardType: textInputType ?? TextInputType.text,
+          textInputAction: TextInputAction.next,
+          onFieldSubmitted: (v) {
+            FocusScope.of(context).nextFocus();
+          },
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+          decoration: InputDecoration(
+            hintText: hintText,
+            labelText: labelText,
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+            prefix: prefixIcon,
+          ),
         ),
       ),
     );

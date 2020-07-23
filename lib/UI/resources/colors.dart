@@ -18,6 +18,7 @@ class MyColors {
   static const magicMint = Color(0xffB3FFCD);
   static const kinderMellow = Color(0xffE2F0CB);
   static const welcomeTeacherColor = Color(0xffffB7B2);
+  static const kindePeach = Color(0xffffDAC1);
 } //main app colors
 
 class MaterialColors {
