@@ -25,27 +25,10 @@ class FeesPage extends StatefulWidget {
   String get screenName => string.fees + 'Page';
 }
 
-class _WallPageState extends State<FeesPage>
-    with AutomaticKeepAliveClientMixin {
+class _WallPageState extends State<FeesPage> {
   String targeteid;
-  bool isTeacher = false;
-
   ScrollController controller;
   FeesPageModel model = FeesPageModel();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isLast = false;
-  bool isLoaded = false;
-  String buttonLabel = 'Global';
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +47,4 @@ class _WallPageState extends State<FeesPage>
       },
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

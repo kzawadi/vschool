@@ -7,14 +7,12 @@ import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/UI/resources/text_styles.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
-import 'package:ourESchool/core/enums/UserType.dart';
-import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_entry_model.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
 
 class FeesPageEntry extends StatefulWidget {
   const FeesPageEntry({Key key, this.user, this.targeteid}) : super(key: key);
@@ -44,11 +42,6 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
   @override
   void initState() {
     super.initState();
-    _totalFees = TextEditingController();
-    _description = TextEditingController();
-    _paid = TextEditingController();
-    _due = TextEditingController();
-
     targeteid = widget.targeteid == '' ? '' : widget.targeteid;
   }
 
@@ -69,17 +62,9 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
 
   @override
   Widget build(BuildContext context) {
-    final double borderradius = 10;
-
-    UserType userType = widget.user == null
-        ? Provider.of<UserType>(context, listen: false)
-        : UserType.STUDENT;
-    targeteid = widget.user.id;
-    return BaseView<CreateFeesModel>(
-      // onModelReady: (model) =>
-      //     widget.user == null ? model.getUserProfileData() : model,
+    return ViewModelBuilder<CreateFeesModel>.nonReactive(
+      viewModelBuilder: () => CreateFeesModel(),
       builder: (context, model, child) {
-        //User user = widget.user == null ? model.userProfile : widget.user;
         return Scaffold(
           appBar: TopBar(
             title: 'FEES',
@@ -95,7 +80,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
             backgroundColor: isReadyToPost
                 ? Theme.of(context).primaryColor
                 : Colors.blueGrey,
-            child: model.state == ViewState.Busy
+            child: model.isBusy
                 ? SpinKitThreeBounce(
                     duration: (Duration(milliseconds: 500)),
                     color: Colors.white,
@@ -103,7 +88,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                   )
                 : Icon(Icons.check),
           ),
-          body: model.state == ViewState.Busy
+          body: model.isBusy
               ? kBuzyPage(color: Theme.of(context).primaryColor)
               : SingleChildScrollView(
                   child: Padding(
@@ -113,17 +98,9 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                       children: <Widget>[
                         Container(
                           height: 100,
-                          // color: Colors.blueAccent.withOpacity(0.5),
                           child: TextField(
                             controller: _description,
-                            // enabled: !isPosting,
-                            // focusNode: _focusNode,
                             maxLength: null,
-                            // onChanged: (caption) {
-                            //   setState(() {
-                            //     isReadyToPost = caption == '' ? false : true;
-                            //   });
-                            // },
                             maxLines: 50,
                             keyboardType: TextInputType.multiline,
                             style: TextStyle(
@@ -155,9 +132,9 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                           padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
                           child: TextFormField(
                             controller: _totalFees,
-                            //autofocus: true,
                             inputFormatters: [
-                              WhitelistingTextInputFormatter.digitsOnly,
+                              // WhitelistingTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.digitsOnly,
                               NumericTextFormatter()
                             ],
                             keyboardType:
@@ -197,7 +174,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                           child: TextFormField(
                             controller: _due,
                             inputFormatters: [
-                              WhitelistingTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.digitsOnly,
                               NumericTextFormatter()
                             ],
                             keyboardType:
@@ -244,7 +221,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                             },
                             controller: _paid,
                             inputFormatters: [
-                              WhitelistingTextInputFormatter.digitsOnly,
+                              FilteringTextInputFormatter.digitsOnly,
                               NumericTextFormatter()
                             ],
                             keyboardType:
@@ -274,41 +251,6 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
                 ),
         );
       },
-    );
-  }
-}
-
-class ProfileFieldsECard extends StatelessWidget {
-  final String initialText;
-  final String labelText;
-  final double width;
-
-  const ProfileFieldsECard(
-      {this.initialText, @required this.labelText, this.width});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      // width: width == null ? MediaQuery.of(context).size.width / 2.5 : width,
-      child: TextField(
-        enabled: false,
-        controller: TextEditingController(text: initialText),
-        keyboardType: TextInputType.text,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        ),
-        decoration: InputDecoration(
-          labelText: labelText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          hintStyle: TextStyle(height: 2.0, fontWeight: FontWeight.w300),
-          contentPadding:
-              EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-        ),
-      ),
     );
   }
 }
