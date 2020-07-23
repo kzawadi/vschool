@@ -49,13 +49,13 @@ class AnnouncementViewer extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             //User profile image section
-                            CircleAvatar(
-                              radius: 25.0,
-                              backgroundImage: NetworkImage(
-                                'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png',
-                              ),
-                              backgroundColor: Colors.transparent,
-                            ),
+                            // CircleAvatar(
+                            //   radius: 25.0,
+                            //   backgroundImage: user.photoUrl == 'default'
+                            //           ? AssetImage(assetsString.teacher_welcome)
+                            //           : NetworkImage(user.photoUrl),
+                            //   backgroundColor: Colors.transparent,
+                            // ),
                             SizedBox(
                               width: 5,
                             ),
