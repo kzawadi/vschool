@@ -6,15 +6,15 @@ class FeesServices extends Services {
   DocumentSnapshot feessnapshot;
   List<DocumentSnapshot> first;
 
-  FeesServices() {
-    getFirebaseUser();
-    getSchoolCode();
-  }
+  // FeesServices() {
+  //   getFirebaseUser();
+  //   getSchoolCode();
+  // }
 
-  init() async {
-    if (firebaseUser == null) await getFirebaseUser();
-    if (schoolCode == null) await getSchoolCode();
-  }
+  // init() async {
+  //   if (firebaseUser == null) await getFirebaseUser();
+  //   if (schoolCode == null) await getSchoolCode();
+  // }
 
   getFees(
     String studentId,
