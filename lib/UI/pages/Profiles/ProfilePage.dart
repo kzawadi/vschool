@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/UI/pages/Home.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
@@ -546,23 +547,40 @@ class ProfileFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      // width: width == null ? MediaQuery.of(context).size.width / 2.5 : width,
-      child: TextField(
-        enabled: isEditable,
-        onTap: onTap,
-        controller: controller,
-        // controller: TextEditingController(text: initialText),
-        onChanged: onChanged,
-        keyboardType: textInputType ?? TextInputType.text,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
+    final Color fieldBackGround = MyColors.blakwhitish;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(
+          color: fieldBackGround,
+          borderRadius: BorderRadius.circular(14),
         ),
-        decoration: kTextFieldDecoration.copyWith(
-          hintText: hintText,
-          labelText: labelText,
+        // width: width == null ? MediaQuery.of(context).size.width / 2.5 : width,
+        child: TextFormField(
+          enabled: isEditable,
+          onTap: onTap,
+          controller: controller,
+          // controller: TextEditingController(text: initialText),
+          onChanged: onChanged,
+          keyboardType: textInputType ?? TextInputType.text,
+          textInputAction: TextInputAction.next,
+          onFieldSubmitted: (v) {
+            FocusScope.of(context).nextFocus();
+          },
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+          decoration: InputDecoration(
+            hintText: hintText,
+            labelText: labelText,
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+          ),
         ),
       ),
     );

@@ -211,23 +211,23 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
                           },
                           borderRadius: BorderRadius.circular(16),
                           child: IgnorePointer(
-                            child: ProfileFields(
-                              isEditable: isEditable,
-                              width: MediaQuery.of(context).size.width,
-                              labelText: string.anniversary_date,
-                              textInputType: TextInputType.number,
-                              onChanged: (anniversary) {},
-                              hintText: '',
-                              controller: TextEditingController(
-                                text: anniversaryDate == null
-                                    ? ''
-                                    : anniversaryDate
-                                        .toLocal()
-                                        .toString()
-                                        .substring(0, 10),
+                              // child: ProfileFields(
+                              //   isEditable: isEditable,
+                              //   width: MediaQuery.of(context).size.width,
+                              //   labelText: string.anniversary_date,
+                              //   textInputType: TextInputType.number,
+                              //   onChanged: (anniversary) {},
+                              //   hintText: '',
+                              //   controller: TextEditingController(
+                              //     text: anniversaryDate == null
+                              //         ? ''
+                              //         : anniversaryDate
+                              //             .toLocal()
+                              //             .toString()
+                              //             .substring(0, 10),
+                              //   ),
+                              // ),
                               ),
-                            ),
-                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -260,21 +260,21 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: ProfileFields(
-                                  isEditable: isEditable,
-                                  hintText: string.blood_group_hint,
-                                  labelText: string.blood_group,
-                                  onChanged: (bg) {
-                                    _bloodGroup = bg;
-                                  },
-                                  controller: TextEditingController(
-                                    text: _bloodGroup,
-                                  )),
-                            ),
+                            // SizedBox(
+                            //   width: 10,
+                            // ),
+                            // Expanded(
+                            //   child: ProfileFields(
+                            //       isEditable: isEditable,
+                            //       hintText: string.blood_group_hint,
+                            //       labelText: string.blood_group,
+                            //       onChanged: (bg) {
+                            //         _bloodGroup = bg;
+                            //       },
+                            //       controller: TextEditingController(
+                            //         text: _bloodGroup,
+                            //       )),
+                            // ),
                           ],
                         ),
                         ProfileFields(
@@ -310,59 +310,59 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            ReusableRoundedButton(
-                              elevation: 5,
-                              height: 50,
-                              onPressed: () {},
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  'Mother',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ),
-                            ),
-                            ReusableRoundedButton(
-                              height: 50,
-                              onPressed: () {},
-                              elevation: 5,
-                              backgroundColor: Theme.of(context).canvasColor,
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  'Father',
-                                  style: TextStyle(
-                                      // color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ),
-                            ),
-                            ReusableRoundedButton(
-                              height: 50,
-                              elevation: 5,
-                              onPressed: () {},
-                              backgroundColor: Theme.of(context).canvasColor,
-                              child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  'Other',
-                                  style: TextStyle(
-                                      // color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: <Widget>[
+                        //     ReusableRoundedButton(
+                        //       elevation: 5,
+                        //       height: 50,
+                        //       onPressed: () {},
+                        //       backgroundColor: Theme.of(context).primaryColor,
+                        //       child: FittedBox(
+                        //         fit: BoxFit.fitWidth,
+                        //         child: Text(
+                        //           'Mother',
+                        //           style: TextStyle(
+                        //               color: Colors.white,
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.w800),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     ReusableRoundedButton(
+                        //       height: 50,
+                        //       onPressed: () {},
+                        //       elevation: 5,
+                        //       backgroundColor: Theme.of(context).canvasColor,
+                        //       child: FittedBox(
+                        //         fit: BoxFit.fitWidth,
+                        //         child: Text(
+                        //           'Father',
+                        //           style: TextStyle(
+                        //               // color: Colors.white,
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.w800),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     ReusableRoundedButton(
+                        //       height: 50,
+                        //       elevation: 5,
+                        //       onPressed: () {},
+                        //       backgroundColor: Theme.of(context).canvasColor,
+                        //       child: FittedBox(
+                        //         fit: BoxFit.fitWidth,
+                        //         child: Text(
+                        //           'Other',
+                        //           style: TextStyle(
+                        //               // color: Colors.white,
+                        //               fontSize: 15,
+                        //               fontWeight: FontWeight.w800),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(
                           height: 50,
                         )

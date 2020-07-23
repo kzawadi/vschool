@@ -516,13 +516,13 @@ class ProfileFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color fieldBackGround = MyColors.blakwhitish;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
         height: 60,
         decoration: BoxDecoration(
-            color: MyColors.lightMilky,
-            borderRadius: BorderRadius.circular(14)),
+            color: fieldBackGround, borderRadius: BorderRadius.circular(14)),
         // width: width == null ? MediaQuery.of(context).size.width / 2.5 : width,
         child: TextFormField(
           enabled: isEditable,

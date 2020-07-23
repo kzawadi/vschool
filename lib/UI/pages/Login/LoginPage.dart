@@ -67,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Color fieldBackGround = MyColors.blakwhitish;
     return BaseView<LoginPageModel>(
       onModelReady: (model) => model,
       builder: (context, model, child) {
@@ -104,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                           // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
-                              color: MyColors.kinderMellow,
+                              color: fieldBackGround,
                               borderRadius: BorderRadius.circular(14)),
                           child: TextFormField(
                             onChanged: (id) {},
@@ -138,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                           // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
-                              color: MyColors.kinderMellow,
+                              color: fieldBackGround,
                               borderRadius: BorderRadius.circular(14)),
                           child: TextFormField(
                             onChanged: (email) {},
@@ -169,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                           // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
-                              color: MyColors.kinderMellow,
+                              color: fieldBackGround,
                               borderRadius: BorderRadius.circular(14)),
                           child: TextFormField(
                             obscureText: true,
@@ -203,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                             ? Container(
                                 height: 60,
                                 decoration: BoxDecoration(
-                                    color: MyColors.kinderMellow,
+                                    color: fieldBackGround,
                                     borderRadius: BorderRadius.circular(14)),
                                 child: TextFormField(
                                   obscureText: true,

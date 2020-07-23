@@ -14,6 +14,7 @@ class MyColors {
   static const twitter = Color(0xff00b0ff);
   static const github = Color(0xff212121);
   static const okay = Color(0xffB5EAD7);
+  static const blakwhitish = Color(0xffEFEFEF);
   static const kinderGreen = Color(0xffB5EAD7);
   static const magicMint = Color(0xffB3FFCD);
   static const kinderMellow = Color(0xffE2F0CB);
