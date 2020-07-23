@@ -58,10 +58,11 @@ class _TopBarState extends State<TopBar> {
                 tag: 'title',
                 transitionOnUserGestures: true,
                 child: Card(
-                  elevation: 10,
+                  elevation: 1,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
+                      bottomLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                   ),
                   child: InkWell(
@@ -159,7 +160,8 @@ class _TopBarAlternativeState extends State<TopBarAlternative> {
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
+                      bottomLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                   ),
                   child: InkWell(

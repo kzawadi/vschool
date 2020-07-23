@@ -1,5 +1,6 @@
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
 import 'dart:ui' as ui;
 
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                           // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
-                              color: Color(0xffEFEFEF),
+                              color: MyColors.kinderMellow,
                               borderRadius: BorderRadius.circular(14)),
                           child: TextFormField(
                             onChanged: (id) {},
@@ -137,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                           // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
-                              color: Color(0xffEFEFEF),
+                              color: MyColors.kinderMellow,
                               borderRadius: BorderRadius.circular(14)),
                           child: TextFormField(
                             onChanged: (email) {},
@@ -168,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                           // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
-                              color: Color(0xffEFEFEF),
+                              color: MyColors.kinderMellow,
                               borderRadius: BorderRadius.circular(14)),
                           child: TextFormField(
                             obscureText: true,
@@ -202,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                             ? Container(
                                 height: 60,
                                 decoration: BoxDecoration(
-                                    color: Color(0xffEFEFEF),
+                                    color: MyColors.kinderMellow,
                                     borderRadius: BorderRadius.circular(14)),
                                 child: TextFormField(
                                   obscureText: true,
@@ -240,6 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 ReusableRoundedButton(
+                                  elevation: 1,
                                   child: Text(
                                     notYetRegisteringText,
                                     style: TextStyle(
@@ -265,6 +267,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 40,
                                 ),
                                 ReusableRoundedButton(
+                                  elevation: 1,
                                   child: Text(
                                     string.need_help,
                                     style: TextStyle(
