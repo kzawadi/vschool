@@ -16,19 +16,17 @@ class AnnouncementPage extends StatefulWidget {
   @override
   _AnnouncementPageState createState() => _AnnouncementPageState();
 
-  @override
   String get screenName => string.announcement + 'Page';
 }
 
-class _AnnouncementPageState extends State<AnnouncementPage>
-    with AutomaticKeepAliveClientMixin {
+class _AnnouncementPageState extends State<AnnouncementPage> {
   bool isTeacher = false;
 
   ScrollController controller;
   AnnouncementPageModel model = AnnouncementPageModel();
   String stdDiv_Global = 'Global';
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isLast = false;
+  // bool isLast = false;
   bool isLoaded = false;
   String buttonLabel = 'Global';
 
@@ -39,8 +37,8 @@ class _AnnouncementPageState extends State<AnnouncementPage>
   void initState() {
     controller = ScrollController()..addListener(_scrollListener);
     super.initState();
-    stdDiv_Global =
-        widget.announcementFor == '' ? 'Global' : widget.announcementFor;
+    // stdDiv_Global =
+    //     widget.announcementFor == '' ? 'Global' : widget.announcementFor;
   }
 
   @override
@@ -65,8 +63,10 @@ class _AnnouncementPageState extends State<AnnouncementPage>
     User currentUser = Provider.of<User>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isTeacher = true;
-    } else if (userType == UserType.PARENT) {
-    } else if (userType == UserType.STUDENT) {
+    } else
+    // if (userType == UserType.PARENT) {
+    // } else if (userType == UserType.STUDENT)
+    {
       if (!isLoaded) {
         stdDiv_Global =
             currentUser.standard + currentUser.division.toUpperCase();
@@ -195,7 +195,7 @@ class _AnnouncementPageState extends State<AnnouncementPage>
                       : ListView.builder(
                           physics: BouncingScrollPhysics(),
                           addAutomaticKeepAlives: true,
-                          cacheExtent: 10,
+                          cacheExtent: 30,
                           controller: controller,
                           itemCount: model.postSnapshotList.length + 1,
                           itemBuilder: (context, index) {

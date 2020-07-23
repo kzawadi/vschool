@@ -8,8 +8,8 @@ class AssignmentServices extends Services {
   List<DocumentSnapshot> assignmnetDocumentSnapshots = List<DocumentSnapshot>();
 
   AssignmentServices() {
-    getFirebaseUser();
-    getSchoolCode();
+    // getFirebaseUser();
+    // getSchoolCode();
   }
 
   uploadAssignment(Assignment assignment) async {

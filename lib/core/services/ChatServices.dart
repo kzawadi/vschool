@@ -23,7 +23,7 @@ class ChatServices extends Services {
   List<String> parentsId = [];
 
   ChatServices() {
-    getSchoolCode();
+    // getSchoolCode();
     getFirebaseUser();
   }
 

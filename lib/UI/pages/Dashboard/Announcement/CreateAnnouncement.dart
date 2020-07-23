@@ -66,7 +66,7 @@ class _CreateAnnouncementState extends State<CreateAnnouncement> {
         ? Colors.white
         : Colors.black;
     return BaseView<CreateAnnouncementModel>(
-      onModelReady: (model) => model.getUserData(),
+      // onModelReady: (model) => model.getUserData(),
       builder: (context, model, child) {
         isPosting = model.state == ViewState.Idle ? false : true;
         return Scaffold(

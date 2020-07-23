@@ -13,7 +13,7 @@ class ProfileServices extends Services {
   List<String> childrensId = [];
 
   ProfileServices() {
-    getSchoolCode();
+    // getSchoolCode();
     getFirebaseUser();
   }
 
