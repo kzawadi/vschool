@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
@@ -66,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Color fieldBackGround = MyColors.blakwhitish;
+    final Color fieldBackGround =
+        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.blakwhitish;
     return BaseView<LoginPageModel>(
       onModelReady: (model) => model,
       builder: (context, model, child) {

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/ReusableRoundedButton.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:file_picker/file_picker.dart';
@@ -516,7 +517,9 @@ class ProfileFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color fieldBackGround = MyColors.blakwhitish;
+    final Color fieldBackGround =
+        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.blakwhitish;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(

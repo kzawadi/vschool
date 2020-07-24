@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/ReusableRoundedButton.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:file_picker/file_picker.dart';
@@ -67,16 +68,13 @@ class _ProfilePageState extends State<ProfilePage> {
   String _childUserNameId;
   String shownvalue;
 
-  floatingButoonPressed(var model, FirebaseUser firebaseUser) async {
+  floatingButoonPressed(var model) async {
     bool res = false;
-
-    // var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
 
     if (_bloodGroup.isEmpty ||
         _division.isEmpty ||
         _name.isEmpty ||
         _dob.isEmpty ||
-        // _guardianName.isEmpty ||
         _mobileNo.isEmpty ||
         _standard.isEmpty ||
         _enrollNo.isEmpty) {
@@ -112,15 +110,6 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  // Future<Map<String, dynamic>> getConnection(UserType userType) async {
-  //   String connection = await _sharedPreferencesHelper.getParentsIds();
-
-  //   if (connection == 'N.A') {
-  //     return null;
-  //   }
-
-  //   return jsonDecode(connection);
-  // }
   Future<Map<String, dynamic>> getConnection() async {
     String connection = await _sharedPreferencesHelper.getParentsIdsData();
 
@@ -133,9 +122,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    userType = Provider.of<UserType>(context, listen: false);
-    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
-
     if (userType == UserType.STUDENT) {
       guardiansPanel = false;
     } else {
@@ -144,25 +130,6 @@ class _ProfilePageState extends State<ProfilePage> {
     return BaseView<ProfilePageModel>(
         onModelReady: (model) => model.getUserProfileData(),
         builder: (context, model, child) {
-          //todo implement a way to render current child details
-          // if (model.state == ViewState.Idle) {
-          //   if (a == 0) {
-          //     if (model.userProfile != null) {
-          //       User user = model.userProfile;
-          //       _name = user.displayName;
-          //       _enrollNo = user.enrollNo;
-          //       _standard = user.standard;
-          //       _division = user.division.toUpperCase();
-          //       _guardianName = user.guardianName;
-          //       _bloodGroup = user.bloodGroup;
-          //       _dob = user.dob;
-          //       _mobileNo = user.mobileNo;
-          //       path = user.photoUrl;
-          //       a++;
-          //     }
-          //   }
-          // }
-
           return Scaffold(
             key: _scaffoldKey,
             appBar: TopBar(
@@ -179,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
               elevation: 20,
               backgroundColor: Colors.green,
               onPressed: () async {
-                await floatingButoonPressed(model, firebaseUser);
+                await floatingButoonPressed(model);
               },
               child: model.state == ViewState.Busy
                   ? SpinKitDoubleBounce(
@@ -276,16 +243,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ],
                             ),
-                            // ProfileFields(
-                            //   width: MediaQuery.of(context).size.width,
-                            //   hintText: string.father_mother_name,
-                            //   labelText: string.guardian_name,
-                            //   onChanged: (guardianName) {
-                            //     _guardianName = guardianName;
-                            //   },
-                            //   controller:
-                            //       TextEditingController(text: _guardianName),
-                            // ),
                             Row(
                               // mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -306,14 +263,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           hintText: '',
                                           controller: TextEditingController(
                                             text: _dob,
-                                          )
-                                          // initialText: dateOfBirth == null
-                                          //     ? ''
-                                          //     : dateOfBirth
-                                          //         .toLocal()
-                                          //         .toString()
-                                          //         .substring(0, 10),
-                                          ),
+                                          )),
                                     ),
                                   ),
                                 ),
@@ -547,7 +497,8 @@ class ProfileFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color fieldBackGround = MyColors.blakwhitish;
+    final Color fieldBackGround =
+        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.blakwhitish;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(

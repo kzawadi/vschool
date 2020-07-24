@@ -137,7 +137,8 @@ class _MessagingScreenState extends State<MessagingScreen> {
   }
 
   Widget _buildMessageSender(MessagingScreenPageModel model, User user) {
-    final Color fieldBackGround = MyColors.kindePeach;
+    final Color fieldBackGround =
+        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.kinderGreen;
 
     return Row(
       mainAxisSize: MainAxisSize.max,
