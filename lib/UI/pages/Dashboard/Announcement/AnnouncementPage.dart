@@ -1,6 +1,7 @@
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:stacked/stacked.dart';
 
 class AnnouncementPage extends StatefulWidget {
   AnnouncementPage({
@@ -24,9 +25,8 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
 
   ScrollController controller;
   AnnouncementPageModel model = AnnouncementPageModel();
-  String stdDiv_Global = 'Global';
+  String stdDivGlobal = 'Global';
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  // bool isLast = false;
   bool isLoaded = false;
   String buttonLabel = 'Global';
 
@@ -37,8 +37,6 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
   void initState() {
     controller = ScrollController()..addListener(_scrollListener);
     super.initState();
-    // stdDiv_Global =
-    //     widget.announcementFor == '' ? 'Global' : widget.announcementFor;
   }
 
   @override
@@ -48,12 +46,9 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
   }
 
   void _scrollListener() {
-    if (model.state == ViewState.Idle) {
-      if (controller.position.pixels ==
-          controller.position.maxScrollExtent - 5) {
-        // setState(() => _isLoading = true);
-        model.getAnnouncements(stdDiv_Global);
-        // scaffoldKey.currentState.widget
+    if (model.isBusy) {
+      if (controller.position.pixels == controller.position.maxScrollExtent) {
+        model.getAnnouncements(stdDivGlobal);
       }
     }
   }
@@ -65,27 +60,16 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
     if (userType == UserType.TEACHER) {
       isTeacher = true;
     }
-    //  else
-    // // if (userType == UserType.PARENT) {
-    // // } else if (userType == UserType.STUDENT)
-    // {
-    //   if (!isLoaded) {
-    //     stdDiv_Global =
-    //         currentUser.standard + currentUser.division.toUpperCase();
-    //     isLoaded = true;
-    //   }
-
-    //   print(stdDiv_Global);
-    // }
-    return BaseView<AnnouncementPageModel>(
-      onModelReady: (model) => model.getAnnouncements(stdDiv_Global),
+    return ViewModelBuilder<AnnouncementPageModel>.reactive(
+      viewModelBuilder: () => AnnouncementPageModel(),
+      onModelReady: (model) => model.getAnnouncements(stdDivGlobal),
       builder: (context, model, child) {
         this.model = model;
         return Scaffold(
           key: scaffoldKey,
           appBar: TopBar(
             buttonHeroTag: string.announcement,
-            title: stdDiv_Global + " Posts",
+            title: stdDivGlobal + " Posts",
             child: Row(
               children: [
                 isThemeCurrentlyDark(context)
@@ -139,20 +123,20 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                           heroTag: 'abc',
                           elevation: 12,
                           onPressed: () async {
-                            if (stdDiv_Global == 'Global') {
+                            if (stdDivGlobal == 'Global') {
                               setState(() {
-                                buttonLabel = stdDiv_Global;
-                                stdDiv_Global = currentUser.standard +
+                                buttonLabel = stdDivGlobal;
+                                stdDivGlobal = currentUser.standard +
                                     currentUser.division.toUpperCase();
                               });
                             } else {
                               setState(() {
-                                buttonLabel = stdDiv_Global;
-                                stdDiv_Global = 'Global';
+                                buttonLabel = stdDivGlobal;
+                                stdDivGlobal = 'Global';
                               });
                             }
 
-                            await model.onRefresh(stdDiv_Global);
+                            await model.onRefresh(stdDivGlobal);
                           },
                           icon: Icon(FontAwesomeIcons.globe),
                           backgroundColor: Colors.teal[300],
@@ -183,7 +167,7 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
               ),
               child: RefreshIndicator(
                 child: model.postSnapshotList.length == 0
-                    ? model.state == ViewState.Busy
+                    ? model.isBusy
                         ? kBuzyPage(color: Theme.of(context).accentColor)
                         : Container(
                             child: Center(
@@ -251,8 +235,7 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                           } else {
                             return Center(
                               child: new Opacity(
-                                opacity:
-                                    model.state == ViewState.Busy ? 1.0 : 0.0,
+                                opacity: model.isBusy ? 1.0 : 0.0,
                                 child: new SizedBox(
                                     width: 32.0,
                                     height: 32.0,
@@ -264,7 +247,7 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                         },
                       ),
                 onRefresh: () async {
-                  await model.onRefresh(stdDiv_Global);
+                  await model.onRefresh(stdDivGlobal);
                 },
               ),
             ),
@@ -357,9 +340,9 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                   child: Text('Global'.toUpperCase()),
                   onPressed: () async {
                     setState(() {
-                      stdDiv_Global = 'Global';
+                      stdDivGlobal = 'Global';
                     });
-                    await model.onRefresh(stdDiv_Global);
+                    await model.onRefresh(stdDivGlobal);
                     Navigator.pop(context);
                   },
                 ),
@@ -370,10 +353,10 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                   child: Text(string.filter),
                   onPressed: () async {
                     setState(() {
-                      stdDiv_Global = _standardController.text.trim() +
+                      stdDivGlobal = _standardController.text.trim() +
                           _divisionController.text.trim().toUpperCase();
                     });
-                    await model.onRefresh(stdDiv_Global);
+                    await model.onRefresh(stdDivGlobal);
                     Navigator.pop(context);
                   },
                 ),

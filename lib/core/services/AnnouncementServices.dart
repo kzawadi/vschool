@@ -12,15 +12,6 @@ class AnnouncementServices extends Services {
   StorageServices _storageServices = locator<StorageServices>();
   DocumentSnapshot lastPostSnapshot = null;
   List<DocumentSnapshot> postDocumentSnapshots = new List<DocumentSnapshot>();
-  AnnouncementServices() {
-    // getFirebaseUser();
-    // getSchoolCode();
-  }
-
-  // init() async {
-  //   // if (firebaseUser == null) await getFirebaseUser();
-  //   if (schoolCode == null) await getSchoolCode();
-  // }
 
   /// This function retrive the post either global or class
   /// and it limits to 10 if no anything and limit to 5 if
@@ -28,10 +19,6 @@ class AnnouncementServices extends Services {
   getAnnouncements(
     String stdDiv_Global,
   ) async {
-    // List<DocumentSnapshot> _data = new List<DocumentSnapshot>();
-
-    // if (schoolCode == null) await getSchoolCode();
-
     var _postRef =
         (await schoolRefwithCode()).document('Posts').collection(stdDiv_Global);
     QuerySnapshot data;
