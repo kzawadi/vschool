@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
@@ -19,7 +18,6 @@ import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
 import 'package:ourESchool/locator.dart';
-import 'package:provider/provider.dart';
 
 import 'GuardianProfile.dart';
 
@@ -32,10 +30,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   DateTime dateOfBirth;
-  UserType userType = UserType.UNKNOWN;
-  bool guardiansPanel = false;
   String path = 'default';
-  // String tempPath = '';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<Null> _selectDate(BuildContext context) async {
@@ -122,11 +117,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (userType == UserType.STUDENT) {
-      guardiansPanel = false;
-    } else {
-      guardiansPanel = true;
-    }
     return BaseView<ProfilePageModel>(
         onModelReady: (model) => model.getUserProfileData(),
         builder: (context, model, child) {
@@ -171,6 +161,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            Center(
+                                child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(string.select_child),
+                            )),
                             Center(
                               child: new DropdownButton<String>(
                                 value: shownvalue,

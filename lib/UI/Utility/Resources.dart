@@ -95,6 +95,7 @@ Check School posts to stay updated with school news.''';
   static const name_hint = 'One which your parents gave';
 
   static const anniversary_date = 'Anniversary Date';
+  static const select_child = 'Select a Child';
 
 //Result
   static const results = 'Results';
