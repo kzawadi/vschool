@@ -1,6 +1,7 @@
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/DynamicThemeChanger.dart';
+import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/pages/About/About.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/UI/pages/Login/ForgotPassword.dart';
@@ -38,6 +39,13 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     LoginPageModel model = locator<LoginPageModel>();
     return Scaffold(
+      // appBar: TopBarAlternative(
+      //   title: 'Settings',
+      //   child: kBackBtn,
+      //   onPressed: () {
+      //     if (Navigator.canPop(context)) Navigator.pop(context);
+      //   },
+      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

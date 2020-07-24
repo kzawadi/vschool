@@ -137,6 +137,8 @@ class _MessagingScreenState extends State<MessagingScreen> {
   }
 
   Widget _buildMessageSender(MessagingScreenPageModel model, User user) {
+    final Color fieldBackGround = MyColors.kindePeach;
+
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -144,15 +146,19 @@ class _MessagingScreenState extends State<MessagingScreen> {
       children: <Widget>[
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
+            padding: const EdgeInsets.all(14),
             child: Material(
+              borderRadius: BorderRadius.circular(14),
               child: Container(
+                decoration: BoxDecoration(
+                    color: fieldBackGround,
+                    borderRadius: BorderRadius.circular(14)),
                 constraints: BoxConstraints(
                   maxHeight: 150,
                   // maxWidth: MediaQuery.of(context).size.width - 66,
                 ),
                 // width: MediaQuery.of(context).size.width - 65,
-                child: TextField(
+                child: TextFormField(
                   controller: _messageController,
                   keyboardType: TextInputType.multiline,
                   onChanged: (message) {
@@ -174,12 +180,13 @@ class _MessagingScreenState extends State<MessagingScreen> {
                       height: 1.5,
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0),
-                      ),
-                    ),
+                        EdgeInsets.symmetric(vertical: 14.0, horizontal: 14.0),
+                    prefixIcon: Icon(Icons.chat),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
                 ),
               ),
@@ -190,8 +197,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
             ? Align(
                 alignment: Alignment.center,
                 child: Card(
+                  color: Colors.greenAccent,
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                  elevation: 5,
+                  elevation: 1,
                   shape: kCardCircularShape,
                   child: Container(
                     width: 50,
