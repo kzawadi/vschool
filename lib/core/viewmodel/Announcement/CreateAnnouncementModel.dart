@@ -9,12 +9,6 @@ class CreateAnnouncementModel extends BaseModel {
   AnnouncementServices _announcementServices = locator<AnnouncementServices>();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
-  // getUserData() async {
-  //   setState(ViewState.Busy);
-  //   await _announcementServices.init();
-  //   setState(ViewState.Idle);
-  // }
-
   Future postAnnouncement(Announcement announcement) async {
     setState(ViewState.Busy);
     await _announcementServices.postAnnouncement(announcement);
@@ -22,11 +16,4 @@ class CreateAnnouncementModel extends BaseModel {
         hasImage: announcement.photoPath != null);
     setState(ViewState.Idle);
   }
-
-  // @override
-  // void dispose() {
-  //   if (state == ViewState.Idle && state2 == ViewState.Idle) {
-  //     super.dispose();
-  //   }
-  // }
 }

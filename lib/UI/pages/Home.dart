@@ -411,6 +411,9 @@ class _HomeState extends State<Home> with Services {
           });
         } else {
           setState(() {
+            HapticFeedback.selectionClick();
+
+            // performSelectionHaptic();
             if (v == 0) {
               pageName = AnnouncementPage.pageName;
             } else if (v == 1) {
@@ -426,5 +429,15 @@ class _HomeState extends State<Home> with Services {
       },
       items: userType == UserType.STUDENT ? studentItemsNew : bottomBarItemsNew,
     );
+  }
+}
+
+performSelectionHaptic({BuildContext context, bool iOSOnly = true}) async {
+  if (iOSOnly && Theme.of(context).platform != TargetPlatform.iOS) {
+    return;
+  }
+
+  if (true) {
+    HapticFeedback.selectionClick();
   }
 }

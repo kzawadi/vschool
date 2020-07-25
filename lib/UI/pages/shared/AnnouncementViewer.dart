@@ -1,19 +1,35 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:ourESchool/core/viewmodel/Announcement/AnnouncementPageModel.dart';
+import 'package:provider/provider.dart';
+
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/swipedetector.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
-import 'package:flutter/material.dart';
+import 'package:ourESchool/core/enums/UserType.dart';
+
+import '../../../locator.dart';
 
 class AnnouncementViewer extends StatelessWidget {
   final Announcement announcement;
 
-  const AnnouncementViewer({Key key, this.announcement}) : super(key: key);
+  AnnouncementViewer({
+    Key key,
+    this.announcement,
+  }) : super(key: key);
+  bool isAteacher = false;
+  final AnnouncementPageModel announcementModel =
+      locator<AnnouncementPageModel>();
 
   @override
   Widget build(BuildContext context) {
+    var userType = Provider.of<UserType>(context, listen: false);
+    if (userType == UserType.TEACHER) {
+      isAteacher = true;
+    }
     return SwipeDetector(
       onSwipeDown: () {
         Navigator.pop(context);
@@ -110,6 +126,34 @@ class AnnouncementViewer extends StatelessWidget {
                               minFontSize: 15,
                             ),
                           ),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: isAteacher,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: RaisedButton(
+                          onPressed: () async {
+                            String id = announcement.id;
+                            String stdDivGlobal;
+                            if (announcement.forClass == 'Global') {
+                              stdDivGlobal = announcement.forClass;
+                            } else
+                              stdDivGlobal =
+                                  announcement.forClass + announcement.forDiv;
+                            // String stdDivGlobal = announcement.forClass;
+                            await announcementModel.deleteAnnouncements(
+                                id, stdDivGlobal);
+                          },
+                          child: Column(
+                            // Replace with a Row for horizontal icon + text
+                            children: <Widget>[
+                              Icon(Icons.delete),
+                              Text("Delete"),
+                            ],
+                          ),
+                          color: Colors.redAccent,
                         ),
                       ),
                     ),

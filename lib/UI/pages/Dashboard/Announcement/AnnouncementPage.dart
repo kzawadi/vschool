@@ -182,8 +182,8 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                           )
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        addAutomaticKeepAlives: true,
-                        cacheExtent: 50,
+                        // addAutomaticKeepAlives: true,
+                        // cacheExtent: 50,
                         controller: controller,
                         itemCount: model.postSnapshotList.length,
                         itemBuilder: (context, index) {

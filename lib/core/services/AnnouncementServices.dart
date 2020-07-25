@@ -17,16 +17,16 @@ class AnnouncementServices extends Services {
   /// and it limits to 10 if no anything and limit to 5 if
   /// it has already done so
   getAnnouncements(
-    String stdDiv_Global,
+    String stdDivGlobal,
   ) async {
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(stdDiv_Global);
+        (await schoolRefwithCode()).document('Posts').collection(stdDivGlobal);
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();
     if (lastPostSnapshot == null)
       data = await _postRef
           .orderBy('timeStamp', descending: true)
-          .limit(50)
+          .limit(40)
           .getDocuments();
     else
       data = await _postRef
