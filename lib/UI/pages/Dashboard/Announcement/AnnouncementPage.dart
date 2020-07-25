@@ -62,6 +62,8 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
     }
     return ViewModelBuilder<AnnouncementPageModel>.reactive(
       viewModelBuilder: () => AnnouncementPageModel(),
+      createNewModelOnInsert: false,
+      disposeViewModel: false,
       onModelReady: (model) => model.getAnnouncements(stdDivGlobal),
       builder: (context, model, child) {
         this.model = model;

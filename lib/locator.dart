@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:ourESchool/UI/pages/Dashboard/Announcement/announcement_owner.dart';
 // import 'package:ourESchool/UI/Utility/data_importer.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/data_Entry/data_entry_service.dart';
@@ -60,4 +61,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => StudentDataEntryViewModel());
 
   locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton(() => OwnerViewModel());
 }
