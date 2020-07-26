@@ -273,14 +273,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                                           hintText: '',
                                           controller: TextEditingController(
                                             text: _dob,
-                                          )
-                                          // initialText: dateOfBirth == null
-                                          //     ? ''
-                                          //     : dateOfBirth
-                                          //         .toLocal()
-                                          //         .toString()
-                                          //         .substring(0, 10),
-                                          ),
+                                          )),
                                     ),
                                   ),
                                 ),
@@ -427,18 +420,11 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
           constraints: BoxConstraints(maxHeight: 200, maxWidth: 200),
           child: Stack(
             children: <Widget>[
-              Card(
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Hero(
-                  tag: 'profileeee',
-                  transitionOnUserGestures: true,
-                  child: Image(
-                      height: MediaQuery.of(context).size.width / 2.5,
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      image: setImage()),
+              Container(
+                constraints: BoxConstraints(maxHeight: 200, maxWidth: 200),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image(fit: BoxFit.scaleDown, image: setImage()),
                 ),
               ),
               Positioned(

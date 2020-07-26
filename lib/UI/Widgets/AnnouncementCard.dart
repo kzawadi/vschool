@@ -13,7 +13,6 @@ import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/imports.dart';
-import 'package:ourESchool/locator.dart';
 import 'package:stacked/stacked.dart';
 
 class AnnouncementCard extends StatelessWidget {
@@ -23,16 +22,10 @@ class AnnouncementCard extends StatelessWidget {
   }) : super(key: key);
 
   final Announcement announcement;
-
-  final AnnouncementPageModel announcementModel =
-      locator<AnnouncementPageModel>();
-
-  // bool isAteacher = false;
+  bool isAteacher = false;
 
   @override
   Widget build(BuildContext context) {
-    bool isAteacher = false;
-
     var userType = Provider.of<UserType>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isAteacher = true;

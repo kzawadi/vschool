@@ -195,39 +195,16 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         ProfileFields(
-                            isEditable: isEditable,
-                            // width: MediaQuery.of(context).size.width,
-                            hintText: string.name_hint,
-                            labelText: string.name,
-                            onChanged: (name) {
-                              _name = name;
-                            },
-                            controller: TextEditingController(
-                              text: _name,
-                            )),
-                        InkWell(
-                          onTap: () async {
-                            await _selectDate(context, anniversaryDate);
+                          isEditable: isEditable,
+                          // width: MediaQuery.of(context).size.width,
+                          hintText: string.name_hint,
+                          labelText: string.name,
+                          onChanged: (name) {
+                            _name = name;
                           },
-                          borderRadius: BorderRadius.circular(16),
-                          child: IgnorePointer(
-                              // child: ProfileFields(
-                              //   isEditable: isEditable,
-                              //   width: MediaQuery.of(context).size.width,
-                              //   labelText: string.anniversary_date,
-                              //   textInputType: TextInputType.number,
-                              //   onChanged: (anniversary) {},
-                              //   hintText: '',
-                              //   controller: TextEditingController(
-                              //     text: anniversaryDate == null
-                              //         ? ''
-                              //         : anniversaryDate
-                              //             .toLocal()
-                              //             .toString()
-                              //             .substring(0, 10),
-                              //   ),
-                              // ),
-                              ),
+                          controller: TextEditingController(
+                            text: _name,
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -260,109 +237,21 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
                                 ),
                               ),
                             ),
-                            // SizedBox(
-                            //   width: 10,
-                            // ),
-                            // Expanded(
-                            //   child: ProfileFields(
-                            //       isEditable: isEditable,
-                            //       hintText: string.blood_group_hint,
-                            //       labelText: string.blood_group,
-                            //       onChanged: (bg) {
-                            //         _bloodGroup = bg;
-                            //       },
-                            //       controller: TextEditingController(
-                            //         text: _bloodGroup,
-                            //       )),
-                            // ),
                           ],
                         ),
                         ProfileFields(
-                            isEditable: isEditable,
-                            // width: MediaQuery.of(context).size.width,
-                            textInputType: TextInputType.number,
-                            hintText: '',
-                            labelText: string.mobile_no,
-                            onChanged: (mobileNo) {
-                              _mobileNo = mobileNo;
-                            },
-                            controller: TextEditingController(
-                              text: _mobileNo,
-                            )),
-                        // ProfileFields(
-                        //     isEditable: isEditable,
-                        //     // width: MediaQuery.of(context).size.width,
-                        //     textInputType: TextInputType.text,
-                        //     hintText: "use ',' to seprate name",
-                        //     labelText: 'Childrens Name..',
-                        //     onChanged: (names) {
-                        //       _childrenNameName = names;
-                        //     },
-                        //     controller: TextEditingController(
-                        //       text: _childrenNameName,
-                        //     )),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'You Are....',
-                            style: ktitleStyle.copyWith(
-                              fontSize: 18,
-                            ),
+                          isEditable: isEditable,
+                          // width: MediaQuery.of(context).size.width,
+                          textInputType: TextInputType.number,
+                          hintText: '',
+                          labelText: string.mobile_no,
+                          onChanged: (mobileNo) {
+                            _mobileNo = mobileNo;
+                          },
+                          controller: TextEditingController(
+                            text: _mobileNo,
                           ),
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: <Widget>[
-                        //     ReusableRoundedButton(
-                        //       elevation: 5,
-                        //       height: 50,
-                        //       onPressed: () {},
-                        //       backgroundColor: Theme.of(context).primaryColor,
-                        //       child: FittedBox(
-                        //         fit: BoxFit.fitWidth,
-                        //         child: Text(
-                        //           'Mother',
-                        //           style: TextStyle(
-                        //               color: Colors.white,
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.w800),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     ReusableRoundedButton(
-                        //       height: 50,
-                        //       onPressed: () {},
-                        //       elevation: 5,
-                        //       backgroundColor: Theme.of(context).canvasColor,
-                        //       child: FittedBox(
-                        //         fit: BoxFit.fitWidth,
-                        //         child: Text(
-                        //           'Father',
-                        //           style: TextStyle(
-                        //               // color: Colors.white,
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.w800),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     ReusableRoundedButton(
-                        //       height: 50,
-                        //       elevation: 5,
-                        //       onPressed: () {},
-                        //       backgroundColor: Theme.of(context).canvasColor,
-                        //       child: FittedBox(
-                        //         fit: BoxFit.fitWidth,
-                        //         child: Text(
-                        //           'Other',
-                        //           style: TextStyle(
-                        //               // color: Colors.white,
-                        //               fontSize: 15,
-                        //               fontWeight: FontWeight.w800),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
                         SizedBox(
                           height: 50,
                         )
@@ -379,59 +268,44 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
   }
 
   Widget buildProfilePhotoWidget(BuildContext context, ProfilePageModel model) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      // crossAxisAlignment: CrossAxisAlignment.center,
+    return Stack(
       children: <Widget>[
         Container(
           constraints: BoxConstraints(maxHeight: 200, maxWidth: 200),
-          child: Stack(
-            children: <Widget>[
-              Card(
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Image(
-                    height: MediaQuery.of(context).size.width / 2.5,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    image: setImage()),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image(fit: BoxFit.scaleDown, image: setImage()),
+          ),
+        ),
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: Container(
+            height: 45,
+            width: 45,
+            child: Card(
+              elevation: 5,
+              color: Colors.white70,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  height: 45,
-                  width: 45,
-                  child: Card(
-                    elevation: 5,
-                    color: Colors.white70,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(10),
-                      ),
-                    ),
-                    child: IconButton(
-                      color: Colors.white,
-                      icon: Icon(
-                        Icons.camera_alt,
-                        color: Colors.black38,
-                        size: 25,
-                      ),
-                      onPressed: () async {
-                        String _path = await openFileExplorer(
-                            FileType.image, mounted, context);
-                        setState(() {
-                          path = _path;
-                          // tempPath = _path;
-                        });
-                      },
-                    ),
-                  ),
+              child: IconButton(
+                color: Colors.white,
+                icon: Icon(
+                  Icons.camera_alt,
+                  color: Colors.black38,
+                  size: 25,
                 ),
+                onPressed: () async {
+                  String _path =
+                      await openFileExplorer(FileType.image, mounted, context);
+                  setState(() {
+                    path = _path;
+                    // tempPath = _path;
+                  });
+                },
               ),
-            ],
+            ),
           ),
         ),
       ],

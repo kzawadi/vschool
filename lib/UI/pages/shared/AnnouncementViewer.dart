@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/viewmodel/Announcement/AnnouncementPageModel.dart';
 import 'package:provider/provider.dart';
 
@@ -58,22 +59,14 @@ class AnnouncementViewer extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(0.0),
                       child: Hero(
                         transitionOnUserGestures: false,
                         tag: announcement.id + 'roww',
                         child: Row(
                           children: <Widget>[
-                            //User profile image section
-                            // CircleAvatar(
-                            //   radius: 25.0,
-                            //   backgroundImage: user.photoUrl == 'default'
-                            //           ? AssetImage(assetsString.teacher_welcome)
-                            //           : NetworkImage(user.photoUrl),
-                            //   backgroundColor: Colors.transparent,
-                            // ),
                             SizedBox(
-                              width: 5,
+                              width: 10,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -82,9 +75,9 @@ class AnnouncementViewer extends StatelessWidget {
                                 //Announcement by section
                                 Text(
                                   announcement.by,
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     textStyle: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 18,
                                     ),
                                   ),
                                 ),
@@ -102,6 +95,30 @@ class AnnouncementViewer extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width - 172,
+                            ),
+                            Visibility(
+                              visible: isAteacher,
+                              child: IconButton(
+                                tooltip: 'Delete post',
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red[200],
+                                ),
+                                onPressed: () async {
+                                  String id = announcement.id;
+                                  String stdDivGlobal;
+                                  if (announcement.forClass == 'Global') {
+                                    stdDivGlobal = announcement.forClass;
+                                  } else
+                                    stdDivGlobal = announcement.forClass +
+                                        announcement.forDiv;
+                                  await announcementModel.deleteAnnouncements(
+                                      id, stdDivGlobal);
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -126,34 +143,6 @@ class AnnouncementViewer extends StatelessWidget {
                               minFontSize: 15,
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: isAteacher,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: RaisedButton(
-                          onPressed: () async {
-                            String id = announcement.id;
-                            String stdDivGlobal;
-                            if (announcement.forClass == 'Global') {
-                              stdDivGlobal = announcement.forClass;
-                            } else
-                              stdDivGlobal =
-                                  announcement.forClass + announcement.forDiv;
-                            // String stdDivGlobal = announcement.forClass;
-                            await announcementModel.deleteAnnouncements(
-                                id, stdDivGlobal);
-                          },
-                          child: Column(
-                            // Replace with a Row for horizontal icon + text
-                            children: <Widget>[
-                              Icon(Icons.delete),
-                              Text("Delete"),
-                            ],
-                          ),
-                          color: Colors.redAccent,
                         ),
                       ),
                     ),
