@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
@@ -31,7 +32,7 @@ class _HomeState extends State<Home> with Services {
   String pageName = string.home;
 
   List<Widget> pages = [
-    AnnouncementPage(),
+    FeedPage(),
     MainDashboard(),
     ChatPage(),
     // NotificationPage(),
@@ -363,7 +364,7 @@ class _HomeState extends State<Home> with Services {
         } else {
           setState(() {
             if (v == 0) {
-              pageName = AnnouncementPage.pageName;
+              pageName = FeedPage.pageName;
             } else if (v == 1) {
               pageName = MainDashboard.pageName;
             } else if (v == 2) {
@@ -415,7 +416,7 @@ class _HomeState extends State<Home> with Services {
 
             // performSelectionHaptic();
             if (v == 0) {
-              pageName = AnnouncementPage.pageName;
+              pageName = FeedPage.pageName;
             } else if (v == 1) {
               pageName = MainDashboard.pageName;
             } else if (v == 2) {

@@ -3,6 +3,7 @@ import 'package:ourESchool/UI/pages/Dashboard/Announcement/announcement_owner.da
 // import 'package:ourESchool/UI/Utility/data_importer.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/data_Entry/data_entry_service.dart';
+import 'package:ourESchool/core/services/feed_services/feed_services.dart';
 import 'package:ourESchool/core/services/student_data_Entry/student_data_entry_service.dart';
 import 'package:ourESchool/core/viewmodel/Data_Entry_Vm/Data_Entry_ViewmModel.dart';
 import 'package:ourESchool/core/viewmodel/Student_Data_Entry_Vm/student_Data_Entry_VM.dart';
@@ -62,4 +63,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => OwnerViewModel());
+
+  locator.registerLazySingleton(() => FeedServices());
 }
