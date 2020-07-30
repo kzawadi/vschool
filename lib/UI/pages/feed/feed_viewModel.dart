@@ -11,45 +11,21 @@ class FeedViewModel extends BaseViewModel {
 
   void listenToPosts({String stdDivGlobal}) {
     setBusy(true);
-    // final subscription = _feedServices.listenToPostsRealTime().connect();
-    final source =
-        _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal).listen(
+    _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal).listen(
       (postsData) {
         List<Announcement> updatedPosts = postsData;
         if (updatedPosts != null && updatedPosts.length > 0) {
           _feeds = updatedPosts;
           notifyListeners();
         }
-        String f = updatedPosts.last.caption.toString();
-        // print('the feed fetched is $f');
         setBusy(false);
       },
     );
-    // final subscription = source.cancel();
   }
 
   void requestMoreData({String stdDivGlobal}) {
     _feedServices.requestMoreData(stdDivGlobal: stdDivGlobal);
   }
-
-  // void listenToPostss({String stdDivGlobal}) {
-  //   setBusy(true);
-  //   _feedServices.allPagedResults.clear();
-  //   _feedServices.lastDocument = null;
-  //   _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal).listen(
-  //     (postsDatas) {
-  //       List<Announcement> updatedPosts = postsDatas;
-  //       if (updatedPosts != null && updatedPosts.length > 0) {
-  //         _feeds = updatedPosts;
-  //         notifyListeners();
-  //       }
-  //       String f = updatedPosts.last.caption.toString();
-  //       print('the feed fetched is $f');
-
-  //       setBusy(false);
-  //     },
-  //   );
-  // }
 
   void clear({String std}) {
     setBusy(true);
