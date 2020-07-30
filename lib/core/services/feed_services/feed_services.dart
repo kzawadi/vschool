@@ -10,11 +10,12 @@ class FeedServices extends Services {
   // final CollectionReference _postsCollectionReference =
   //     Firestore.instance.collection('feed');
 
-  final BehaviorSubject<List<Announcement>> postsController =
-      BehaviorSubject<List<Announcement>>();
+  final PublishSubject<List<Announcement>> postsController =
+      PublishSubject<List<Announcement>>();
 
   // #6: Create a list that will keep the paged results
   List<List<Announcement>> allPagedResults = List<List<Announcement>>();
+  List<Announcement> feed = List<Announcement>();
 
   static const int PostsLimit = 6;
 
@@ -23,7 +24,7 @@ class FeedServices extends Services {
   List<Announcement> allPosts = List<Announcement>();
   // CollectionReference schoolRefs;
 
-  Observable listenToPostsRealTime({String stdDivGlobal}) {
+  Stream listenToPostsRealTime({String stdDivGlobal}) {
     _requestPosts(stdDivGlobal: stdDivGlobal);
     return postsController.stream;
   }
@@ -45,14 +46,14 @@ class FeedServices extends Services {
       pagePostsQuery = pagePostsQuery.startAfterDocument(lastDocument);
     }
 
-    if (!_hasMorePosts) return;
+    // if (!_hasMorePosts) return;
 
     // #7: Get and store the page index that the results belong to
     var currentRequestIndex = allPagedResults.length;
 
     pagePostsQuery.snapshots().listen((postsSnapshot) {
       if (postsSnapshot.documents.isNotEmpty) {
-        List<Announcement> feed = postsSnapshot.documents
+        feed = postsSnapshot.documents
             .map((snapshot) => Announcement.fromSnapshot(snapshot))
             // .where((mappedItem) => mappedItem.caption != null)
             .toList();
@@ -66,6 +67,7 @@ class FeedServices extends Services {
         // #10: If the page doesn't exist add the page data
         else {
           allPagedResults.add(feed);
+          print('the last feed fetched ' + feed.last.caption.toString());
         }
 
         // #11: Concatenate the full list to be shown

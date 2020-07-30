@@ -98,54 +98,54 @@ class _FeedPageState extends State<FeedPage> {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(left: 31),
-              //   child: Align(
-              //       alignment: Alignment.bottomLeft,
-              //       child:
-              //           // userType == UserType.STUDENT
-              //           //     ? FloatingActionButton.extended(
-              //           //         label: Text(buttonLabel),
-              //           //         heroTag: 'abc',
-              //           //         elevation: 12,
-              //           //         onPressed: () async {
-              //           //           if (stdDivGlobal == 'Global') {
-              //           //             setState(() {
-              //           //               buttonLabel = stdDivGlobal;
-              //           //               stdDivGlobal = currentUser.standard +
-              //           //                   currentUser.division.toUpperCase();
-              //           //             });
-              //           //           } else {
-              //           //             setState(() {
-              //           //               buttonLabel = stdDivGlobal;
-              //           //               stdDivGlobal = 'Global';
-              //           //             });
-              //           //           }
-              //           //           model.clear(std: stdDivGlobal);
+              Padding(
+                padding: EdgeInsets.only(left: 31),
+                child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child:
+                        // userType == UserType.STUDENT
+                        //     ? FloatingActionButton.extended(
+                        //         label: Text(buttonLabel),
+                        //         heroTag: 'abc',
+                        //         elevation: 12,
+                        //         onPressed: () async {
+                        //           if (stdDivGlobal == 'Global') {
+                        //             setState(() {
+                        //               buttonLabel = stdDivGlobal;
+                        //               stdDivGlobal = currentUser.standard +
+                        //                   currentUser.division.toUpperCase();
+                        //             });
+                        //           } else {
+                        //             setState(() {
+                        //               buttonLabel = stdDivGlobal;
+                        //               stdDivGlobal = 'Global';
+                        //             });
+                        //           }
+                        //           model.clear(std: stdDivGlobal);
 
-              //           //           // model.listenToPosts(stdDivGlobal: stdDivGlobal);
-              //           //         },
-              //           //         icon: Icon(FontAwesomeIcons.globe),
-              //           //         backgroundColor: Colors.teal[300],
-              //           //       )
-              //           //     : userType == UserType.TEACHER
-              //           //         ?
-              //           FloatingActionButton.extended(
-              //         label: Text('Filter'),
-              //         heroTag: 'abc',
-              //         elevation: 12,
-              //         onPressed: () {
-              //           //Filter Posts Code Here
-              //           filterDialogBox(context, model);
-              //         },
-              //         icon: Icon(Icons.filter_list),
-              //         backgroundColor: isThemeCurrentlyDark(context)
-              //             ? Colors.tealAccent
-              //             : Colors.teal[300],
-              //       )
-              //       // : Container(),
-              //       ),
-              // ),
+                        //           // model.listenToPosts(stdDivGlobal: stdDivGlobal);
+                        //         },
+                        //         icon: Icon(FontAwesomeIcons.globe),
+                        //         backgroundColor: Colors.teal[300],
+                        //       )
+                        //     : userType == UserType.TEACHER
+                        //         ?
+                        FloatingActionButton.extended(
+                      label: Text('Filter'),
+                      heroTag: 'abc',
+                      elevation: 12,
+                      onPressed: () {
+                        //Filter Posts Code Here
+                        filterDialogBox(context, model);
+                      },
+                      icon: Icon(Icons.filter_list),
+                      backgroundColor: isThemeCurrentlyDark(context)
+                          ? Colors.tealAccent
+                          : Colors.teal[300],
+                    )
+                    // : Container(),
+                    ),
+              ),
             ],
           ),
           body: Center(
@@ -247,116 +247,116 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 
-  // Future filterDialogBox(BuildContext context, FeedViewModel model) {
-  //   return showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //         title: Text(
-  //           string.show_announcement_of,
-  //           style: TextStyle(fontWeight: FontWeight.w700),
-  //         ),
-  //         content: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           children: <Widget>[
-  //             Text(
-  //               string.filter_announcement,
-  //               // style: TextStyle(fontFamily: 'Subtitle'),
-  //             ),
-  //             SizedBox(
-  //               height: 8,
-  //             ),
-  //             Container(
-  //               width: MediaQuery.of(context).size.width,
-  //               child: TextField(
-  //                 controller: _standardController,
-  //                 onChanged: (standard) {},
-  //                 keyboardType: TextInputType.number,
-  //                 style: TextStyle(
-  //                   fontSize: 20,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //                 // decoration: InputDecoration(
-  //                 //     hintText: "Master Pass",
-  //                 //     hintStyle: TextStyle(fontFamily: "Subtitle"),
-  //                 //     ),
-  //                 decoration: kTextFieldDecoration.copyWith(
-  //                   hintText: string.standard_hint,
-  //                   labelText: string.standard,
-  //                   border: OutlineInputBorder(
-  //                     borderRadius: BorderRadius.circular(16),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             SizedBox(
-  //               height: 10,
-  //             ),
-  //             Container(
-  //               width: MediaQuery.of(context).size.width,
-  //               child: TextField(
-  //                 controller: _divisionController,
-  //                 onChanged: (division) {},
-  //                 keyboardType: TextInputType.text,
-  //                 style: TextStyle(
-  //                   fontSize: 20,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //                 decoration: kTextFieldDecoration.copyWith(
-  //                   hintText: string.division_hint,
-  //                   labelText: string.division,
-  //                   border: OutlineInputBorder(
-  //                     borderRadius: BorderRadius.circular(16),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //         actions: <Widget>[
-  //           Row(
-  //             children: <Widget>[
-  //               FlatButton(
-  //                 child: Text(string.cancel),
-  //                 onPressed: () {
-  //                   Navigator.pop(context);
-  //                 },
-  //               ),
-  //               SizedBox(
-  //                 width: 10,
-  //               ),
-  //               FlatButton(
-  //                 child: Text('Global'.toUpperCase()),
-  //                 onPressed: () async {
-  //                   setState(() {
-  //                     stdDivGlobal = 'Global';
-  //                   });
-  //                   model.listenToPostss(stdDivGlobal: stdDivGlobal);
-  //                   // model.listenToPosts(stdDivGlobal: stdDivGlobal);
-  //                   Navigator.pop(context);
-  //                 },
-  //               ),
-  //               SizedBox(
-  //                 width: 10,
-  //               ),
-  //               FlatButton(
-  //                 child: Text(string.filter),
-  //                 onPressed: () async {
-  //                   setState(() {
-  //                     stdDivGlobal = _standardController.text.trim() +
-  //                         _divisionController.text.trim().toUpperCase();
-  //                   });
-  //                   model.clear(std: stdDivGlobal);
-  //                   // model.requestMoreData();
-  //                   Navigator.pop(context);
-  //                 },
-  //               ),
-  //             ],
-  //           )
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+  Future filterDialogBox(BuildContext context, FeedViewModel model) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            string.show_announcement_of,
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text(
+                string.filter_announcement,
+                // style: TextStyle(fontFamily: 'Subtitle'),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: TextField(
+                  controller: _standardController,
+                  onChanged: (standard) {},
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  // decoration: InputDecoration(
+                  //     hintText: "Master Pass",
+                  //     hintStyle: TextStyle(fontFamily: "Subtitle"),
+                  //     ),
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: string.standard_hint,
+                    labelText: string.standard,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: TextField(
+                  controller: _divisionController,
+                  onChanged: (division) {},
+                  keyboardType: TextInputType.text,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: string.division_hint,
+                    labelText: string.division,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            Row(
+              children: <Widget>[
+                FlatButton(
+                  child: Text(string.cancel),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                FlatButton(
+                  child: Text('Global'.toUpperCase()),
+                  onPressed: () async {
+                    setState(() {
+                      stdDivGlobal = 'Global';
+                    });
+                    model.clear(std: stdDivGlobal);
+                    // model.listenToPosts(stdDivGlobal: stdDivGlobal);
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                FlatButton(
+                  child: Text(string.filter),
+                  onPressed: () async {
+                    setState(() {
+                      stdDivGlobal = _standardController.text.trim() +
+                          _divisionController.text.trim().toUpperCase();
+                    });
+                    model.clear(std: stdDivGlobal);
+                    // model.requestMoreData();
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
 }

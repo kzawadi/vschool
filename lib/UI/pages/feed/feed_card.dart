@@ -33,7 +33,7 @@ class FeedCard extends StatelessWidget {
     return ViewModelBuilder<OwnerViewModel>.reactive(
       disposeViewModel: false,
       createNewModelOnInsert: false,
-      onModelReady: (model) => model.futureToRun(),
+      // onModelReady: (model) => model.futureToRun(),
       viewModelBuilder: () => OwnerViewModel(UserType.TEACHER, feed.by),
       builder: (context, model, child) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 3),
