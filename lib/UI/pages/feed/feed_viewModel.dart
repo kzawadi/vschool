@@ -55,8 +55,8 @@ class FeedViewModel extends BaseViewModel {
     setBusy(true);
     // _feedServices.listenToPostsRealTime();
     // _feedServices.listenToPosts();
-    final source = _feedServices.listenToPostsRealTime();
-    final subscription = source.listen((_) {})?.cancel();
+    // final source = _feedServices.listenToPostsRealTime();
+    // final subscription = source.listen((_) {})?.cancel();
     // _feedServices.postsController?.drain();
     _feedServices.allPagedResults.clear();
     // _feedServices.feed.clear();
