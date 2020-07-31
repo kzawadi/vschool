@@ -4,10 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:http/http.dart' as http;
+import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:path/path.dart' as p;
 
 class FeedServices extends Services {
   // final CollectionReference _postsCollectionReference =
   //     Firestore.instance.collection('feed');
+
+  StorageServices _storageServices = locator<StorageServices>();
 
   final PublishSubject<List<Announcement>> postsController =
       PublishSubject<List<Announcement>>();
@@ -96,5 +101,61 @@ class FeedServices extends Services {
     _allPagedResults.clear();
     _lastDocument = null;
     requestMoreData(stdDivGlobal: std);
+  }
+
+  /// this will delete in firestore a given feed by its Id
+  deletefeed(String id, String stdDivGlobal) async {
+    // Map announcementMap = announcement.toJson();
+
+    var _postRef = (await schoolRefwithCode())
+        .document('Posts')
+        .collection(stdDivGlobal)
+        .document(id);
+
+    await _postRef.delete();
+  }
+
+  /// This function post the post either global or class
+  /// oriented it uses a cloud function to do so
+  postAnnouncement(Announcement announcement) async {
+    // if (firebaseUser == null) await getFirebaseUser();
+    if (schoolCode == null) await getSchoolCode();
+
+    //Timestmap will be directly set by Firebase Functions(througn REST Api)
+    // announcement.timestamp = Timestamp.now();
+
+    String fileName = "";
+    String filePath = "";
+
+    if (announcement.photoUrl != '') {
+      fileName = createCryptoRandomString(8) +
+          createCryptoRandomString(8) +
+          p.extension(announcement.photoUrl);
+
+      announcement.photoUrl = await _storageServices.uploadAnnouncemantPhoto(
+          announcement.photoUrl, fileName);
+
+      filePath = '${Services.country}/$schoolCode/Posts/$fileName';
+    }
+    announcement.photoPath = filePath;
+    Map announcementMap = announcement.toJson();
+
+    var body = json.encode({
+      "schoolCode": schoolCode.toUpperCase(),
+      "country": Services.country,
+      "announcement": announcementMap
+    });
+
+    print(body.toString());
+
+    final response =
+        await http.post(postAnnouncemnetUrl, body: body, headers: headers);
+
+    if (response.statusCode == 200) {
+      print("Post posted Succesfully");
+      print(json.decode(response.body).toString());
+    } else {
+      print("Post posting failed");
+    }
   }
 }

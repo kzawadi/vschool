@@ -32,4 +32,11 @@ class FeedViewModel extends BaseViewModel {
     notifyListeners();
     setBusy(false);
   }
+
+  deleteFeed(String id, String stdDivGlobal) async {
+    setBusy(true);
+    await _feedServices.deletefeed(id, stdDivGlobal);
+    notifyListeners();
+    setBusy(false);
+  }
 }
