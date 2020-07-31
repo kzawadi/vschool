@@ -102,35 +102,7 @@ class _FeedPageState extends State<FeedPage> {
                 padding: EdgeInsets.only(left: 31),
                 child: Align(
                     alignment: Alignment.bottomLeft,
-                    child:
-                        // userType == UserType.STUDENT
-                        //     ? FloatingActionButton.extended(
-                        //         label: Text(buttonLabel),
-                        //         heroTag: 'abc',
-                        //         elevation: 12,
-                        //         onPressed: () async {
-                        //           if (stdDivGlobal == 'Global') {
-                        //             setState(() {
-                        //               buttonLabel = stdDivGlobal;
-                        //               stdDivGlobal = currentUser.standard +
-                        //                   currentUser.division.toUpperCase();
-                        //             });
-                        //           } else {
-                        //             setState(() {
-                        //               buttonLabel = stdDivGlobal;
-                        //               stdDivGlobal = 'Global';
-                        //             });
-                        //           }
-                        //           model.clear(std: stdDivGlobal);
-
-                        //           // model.listenToPosts(stdDivGlobal: stdDivGlobal);
-                        //         },
-                        //         icon: Icon(FontAwesomeIcons.globe),
-                        //         backgroundColor: Colors.teal[300],
-                        //       )
-                        //     : userType == UserType.TEACHER
-                        //         ?
-                        FloatingActionButton.extended(
+                    child: FloatingActionButton.extended(
                       label: Text('Filter'),
                       heroTag: 'abc',
                       elevation: 12,
@@ -332,7 +304,7 @@ class _FeedPageState extends State<FeedPage> {
                     setState(() {
                       stdDivGlobal = 'Global';
                     });
-                    model.clear(std: stdDivGlobal);
+                    model.filteredFeed(std: stdDivGlobal);
                     // model.listenToPosts(stdDivGlobal: stdDivGlobal);
                     Navigator.pop(context);
                   },
@@ -347,7 +319,7 @@ class _FeedPageState extends State<FeedPage> {
                       stdDivGlobal = _standardController.text.trim() +
                           _divisionController.text.trim().toUpperCase();
                     });
-                    model.clear(std: stdDivGlobal);
+                    model.filteredFeed(std: stdDivGlobal);
                     // model.requestMoreData();
                     Navigator.pop(context);
                   },

@@ -26,17 +26,9 @@ class FeedViewModel extends BaseViewModel {
     _feedServices.requestMoreData(stdDivGlobal: stdDivGlobal);
   }
 
-  void clear({String std}) {
+  void filteredFeed({String std}) {
     setBusy(true);
-    // _feedServices.listenToPostsRealTime();
-    // _feedServices.listenToPosts();
-    // final source = _feedServices.listenToPostsRealTime();
-    // final subscription = source.listen((_) {})?.cancel();
-    // _feedServices.postsController?.drain();
-    _feedServices.allPagedResults.clear();
-    // _feedServices.feed.clear();
-    _feedServices.lastDocument = null;
-    _feedServices.requestMoreData(stdDivGlobal: std);
+    _feedServices.filteredFeed(std: std);
     notifyListeners();
     setBusy(false);
   }
