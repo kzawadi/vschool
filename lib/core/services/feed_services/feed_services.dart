@@ -117,7 +117,7 @@ class FeedServices extends Services {
 
   /// This function post the post either global or class
   /// oriented it uses a cloud function to do so
-  postFeed({Announcement feed}) async {
+  Future postFeed({Announcement feed}) async {
     // if (firebaseUser == null) await getFirebaseUser();
     if (schoolCode == null) await getSchoolCode();
 

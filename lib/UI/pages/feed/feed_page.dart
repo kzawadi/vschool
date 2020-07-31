@@ -40,7 +40,7 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     var userType = Provider.of<UserType>(context, listen: false);
-    User currentUser = Provider.of<User>(context, listen: false);
+    // User currentUser = Provider.of<User>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isTeacher = true;
     }

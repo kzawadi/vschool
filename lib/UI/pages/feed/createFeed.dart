@@ -1,5 +1,4 @@
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
-import 'package:ourESchool/core/Models/feed/feed.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
 
