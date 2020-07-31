@@ -8,6 +8,7 @@ import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Announcement/announcement_owner.dart';
+import 'package:ourESchool/UI/pages/feed/feed_Viewer.dart';
 import 'package:ourESchool/UI/pages/shared/AnnouncementViewer.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
@@ -154,12 +155,12 @@ class FeedCard extends StatelessWidget {
                   child: Material(
                     child: InkWell(
                       onTap: () {
-                        // kopenPageBottom(
-                        //   context,
-                        //   AnnouncementViewer(
-                        //     feed: feed,
-                        //   ),
-                        // );
+                        kopenPageBottom(
+                          context,
+                          FeedViewer(
+                            feed: feed,
+                          ),
+                        );
                       },
                       child: feed.photoUrl == ''
                           ? Container(
@@ -205,12 +206,12 @@ class FeedCard extends StatelessWidget {
             ],
           ),
           onTap: () {
-            // kopenPageBottom(
-            //   context,
-            //   AnnouncementViewer(
-            //     feed: feed,
-            //   ),
-            // );
+            kopenPageBottom(
+              context,
+              FeedViewer(
+                feed: feed,
+              ),
+            );
           },
         ),
       ),

@@ -86,15 +86,16 @@ class _FeedPageState extends State<FeedPage> {
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
-                    elevation: 12,
+                    elevation: 5,
                     onPressed: () {
                       kopenPageSlide(context, CreateAnnouncement(),
                           duration: Duration(milliseconds: 200));
                     },
                     child: Icon(Icons.add),
-                    backgroundColor: isThemeCurrentlyDark(context)
-                        ? Colors.tealAccent
-                        : Colors.teal[300],
+                    backgroundColor: MyColors.okay,
+                    // isThemeCurrentlyDark(context)
+                    //     ? MyColors.okay
+                    //     : Colors.teal[300],
                   ),
                 ),
               ),
@@ -111,9 +112,10 @@ class _FeedPageState extends State<FeedPage> {
                         filterDialogBox(context, model);
                       },
                       icon: Icon(Icons.filter_list),
-                      backgroundColor: isThemeCurrentlyDark(context)
-                          ? Colors.tealAccent
-                          : Colors.teal[300],
+                      backgroundColor: MyColors.okay,
+                      //  isThemeCurrentlyDark(context)
+                      //     ? Colors.tealAccent
+                      //     : Colors.teal[300],
                     )
                     // : Container(),
                     ),
