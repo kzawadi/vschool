@@ -40,7 +40,7 @@ class FeedViewModel extends BaseViewModel {
 
   /// this takes in an id and standard for reference in firestore so to delete a
   /// specific fee identified by its Id
-  void deleteFeed(String id, String stdDivGlobal) async {
+  Future deleteFeed(String id, String stdDivGlobal) async {
     setBusy(true);
     await _feedServices.deletefeed(id, stdDivGlobal);
     notifyListeners();

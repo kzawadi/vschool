@@ -104,14 +104,14 @@ class FeedServices extends Services {
   }
 
   /// this will delete in firestore a given feed by its Id
-  deletefeed(String id, String stdDivGlobal) async {
+  Future deletefeed(String id, String stdDivGlobal) async {
     // Map feedMap = feed.toJson();
 
     var _postRef = (await schoolRefwithCode())
         .document('Posts')
         .collection(stdDivGlobal)
         .document(id);
-
+    print('Feed with Id $id' + 'has been deleted succeful');
     await _postRef.delete();
   }
 

@@ -111,15 +111,7 @@ class FeedViewer extends StatelessWidget {
                                   Icons.delete,
                                   color: Colors.red[200],
                                 ),
-                                onPressed: () async {
-                                  String id = feed.id;
-                                  String stdDivGlobal;
-                                  if (feed.forClass == 'Global') {
-                                    stdDivGlobal = feed.forClass;
-                                  } else
-                                    stdDivGlobal = feed.forClass + feed.forDiv;
-                                  await feedModel.deleteFeed(id, stdDivGlobal);
-                                },
+                                onPressed: () => filterDialogBox(context),
                               ),
                             ),
                           ],
@@ -155,6 +147,47 @@ class FeedViewer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future filterDialogBox(BuildContext context) {
+    return
+        // flutter defined function
+        showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Text("Delete A Feed"),
+          content: Text(
+            "Your about to DELETE  a Feed, Are you Sure You Want to DELETE",
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              child: Text('Delete'),
+              onPressed: () async {
+                String id = feed.id;
+                String stdDivGlobal;
+                if (feed.forClass == 'Global') {
+                  stdDivGlobal = feed.forClass;
+                } else
+                  stdDivGlobal = feed.forClass + feed.forDiv;
+                await feedModel.deleteFeed(id, stdDivGlobal);
+
+                Navigator.of(context).pop();
+              },
+            ),
+            SizedBox(width: 100),
+            // usually buttons at the bottom of the dialog
+            FlatButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
