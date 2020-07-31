@@ -80,6 +80,7 @@ class _CreateAnnouncementState extends State<CreateAnnouncement> {
             title: string.create_post,
           ),
           floatingActionButton: FloatingActionButton(
+            heroTag: 'abc',
             onPressed: () {
               if (isReadyToPost) floatingButtonPressed(model, context);
             },

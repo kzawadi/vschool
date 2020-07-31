@@ -287,44 +287,47 @@ class _FeedPageState extends State<FeedPage> {
             ],
           ),
           actions: <Widget>[
-            Row(
-              children: <Widget>[
-                FlatButton(
-                  child: Text(string.cancel),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                FlatButton(
-                  child: Text('Global'.toUpperCase()),
-                  onPressed: () async {
-                    setState(() {
-                      stdDivGlobal = 'Global';
-                    });
-                    model.filteredFeed(std: stdDivGlobal);
-                    // model.listenToPosts(stdDivGlobal: stdDivGlobal);
-                    Navigator.pop(context);
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                FlatButton(
-                  child: Text(string.filter),
-                  onPressed: () async {
-                    setState(() {
-                      stdDivGlobal = _standardController.text.trim() +
-                          _divisionController.text.trim().toUpperCase();
-                    });
-                    model.filteredFeed(std: stdDivGlobal);
-                    // model.requestMoreData();
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
+            Hero(
+              tag: 'abc',
+              child: Row(
+                children: <Widget>[
+                  FlatButton(
+                    child: Text(string.cancel),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  FlatButton(
+                    child: Text('Global'.toUpperCase()),
+                    onPressed: () async {
+                      setState(() {
+                        stdDivGlobal = 'Global';
+                      });
+                      model.filteredFeed(std: stdDivGlobal);
+                      // model.listenToPosts(stdDivGlobal: stdDivGlobal);
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  FlatButton(
+                    child: Text(string.filter),
+                    onPressed: () async {
+                      setState(() {
+                        stdDivGlobal = _standardController.text.trim() +
+                            _divisionController.text.trim().toUpperCase();
+                      });
+                      model.filteredFeed(std: stdDivGlobal);
+                      // model.requestMoreData();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
             )
           ],
         );
