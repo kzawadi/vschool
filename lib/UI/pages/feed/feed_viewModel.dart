@@ -1,9 +1,11 @@
+import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/feed_services/feed_services.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedViewModel extends BaseViewModel {
   final FeedServices _feedServices = locator<FeedServices>();
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
   List<Announcement> _feeds;
   List<Announcement> get feed => _feeds;
@@ -33,10 +35,17 @@ class FeedViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  deleteFeed(String id, String stdDivGlobal) async {
+  void deleteFeed(String id, String stdDivGlobal) async {
     setBusy(true);
     await _feedServices.deletefeed(id, stdDivGlobal);
     notifyListeners();
+    setBusy(false);
+  }
+
+  Future postFeed({Announcement feed}) async {
+    setBusy(true);
+    await _feedServices.postFeed(feed: feed);
+    await _analyticsService.logPostCreated(hasImage: feed.photoPath != null);
     setBusy(false);
   }
 }

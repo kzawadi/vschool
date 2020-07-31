@@ -105,7 +105,7 @@ class FeedServices extends Services {
 
   /// this will delete in firestore a given feed by its Id
   deletefeed(String id, String stdDivGlobal) async {
-    // Map announcementMap = announcement.toJson();
+    // Map feedMap = feed.toJson();
 
     var _postRef = (await schoolRefwithCode())
         .document('Posts')
@@ -117,33 +117,33 @@ class FeedServices extends Services {
 
   /// This function post the post either global or class
   /// oriented it uses a cloud function to do so
-  postAnnouncement(Announcement announcement) async {
+  postFeed({Announcement feed}) async {
     // if (firebaseUser == null) await getFirebaseUser();
     if (schoolCode == null) await getSchoolCode();
 
     //Timestmap will be directly set by Firebase Functions(througn REST Api)
-    // announcement.timestamp = Timestamp.now();
+    // feed.timestamp = Timestamp.now();
 
     String fileName = "";
     String filePath = "";
 
-    if (announcement.photoUrl != '') {
+    if (feed.photoUrl != '') {
       fileName = createCryptoRandomString(8) +
           createCryptoRandomString(8) +
-          p.extension(announcement.photoUrl);
+          p.extension(feed.photoUrl);
 
-      announcement.photoUrl = await _storageServices.uploadAnnouncemantPhoto(
-          announcement.photoUrl, fileName);
+      feed.photoUrl = await _storageServices.uploadAnnouncemantPhoto(
+          feed.photoUrl, fileName);
 
       filePath = '${Services.country}/$schoolCode/Posts/$fileName';
     }
-    announcement.photoPath = filePath;
-    Map announcementMap = announcement.toJson();
+    feed.photoPath = filePath;
+    Map feedMap = feed.toJson();
 
     var body = json.encode({
       "schoolCode": schoolCode.toUpperCase(),
       "country": Services.country,
-      "announcement": announcementMap
+      "feed": feedMap
     });
 
     print(body.toString());

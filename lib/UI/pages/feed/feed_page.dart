@@ -1,5 +1,6 @@
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
+import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/feed/feed_card.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
@@ -88,7 +89,7 @@ class _FeedPageState extends State<FeedPage> {
                   child: FloatingActionButton(
                     elevation: 5,
                     onPressed: () {
-                      kopenPageSlide(context, CreateAnnouncement(),
+                      kopenPageSlide(context, CreateFeed(),
                           duration: Duration(milliseconds: 200));
                     },
                     child: Icon(Icons.add),

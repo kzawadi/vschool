@@ -1,4 +1,7 @@
+import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
+import 'package:ourESchool/core/Models/feed/feed.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:stacked/stacked.dart';
 
 class CreateFeed extends StatefulWidget {
   CreateFeed({Key key}) : super(key: key);
@@ -31,10 +34,9 @@ class _CreateFeedState extends State<CreateFeed> {
     _divisionController = TextEditingController();
   }
 
-  floatingButtonPressed(
-      CreateAnnouncementModel model, BuildContext context) async {
+  floatingButtonPressed(FeedViewModel model, BuildContext context) async {
     User user = Provider.of<User>(context, listen: false);
-    var announcement = Announcement(
+    Announcement feed = Announcement(
       by: user.id,
       caption: _captionController.text,
       forClass:
@@ -51,11 +53,11 @@ class _CreateFeedState extends State<CreateFeed> {
         _scaffoldKey.currentState.showSnackBar(
             ksnackBar(context, 'Please Specify Class and Division'));
       } else {
-        await model.postAnnouncement(announcement);
+        await model.postFeed(feed: feed);
         kbackBtn(context);
       }
     } else {
-      await model.postAnnouncement(announcement);
+      await model.postFeed(feed: feed);
       kbackBtn(context);
     }
   }
@@ -65,10 +67,11 @@ class _CreateFeedState extends State<CreateFeed> {
     postTypeFontColor = Theme.of(context).brightness == Brightness.dark
         ? Colors.white
         : Colors.black;
-    return BaseView<CreateAnnouncementModel>(
+    return ViewModelBuilder<FeedViewModel>.reactive(
+      viewModelBuilder: () => FeedViewModel(),
       // onModelReady: (model) => model.getUserData(),
       builder: (context, model, child) {
-        isPosting = model.state == ViewState.Idle ? false : true;
+        isPosting = !model.isBusy ? false : true;
         return Scaffold(
           key: _scaffoldKey,
           appBar: TopBar(
@@ -87,7 +90,7 @@ class _CreateFeedState extends State<CreateFeed> {
             backgroundColor: isReadyToPost
                 ? Theme.of(context).primaryColor
                 : Colors.blueGrey,
-            child: model.state == ViewState.Busy
+            child: model.isBusy
                 ? SpinKitDoubleBounce(
                     color: Colors.white,
                     size: 20,
@@ -255,7 +258,7 @@ class _CreateFeedState extends State<CreateFeed> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  if (model.state == ViewState.Idle)
+                                  if (!model.isBusy)
                                     announcementType = AnnouncementType.EVENT;
                                 });
                               },
@@ -278,7 +281,7 @@ class _CreateFeedState extends State<CreateFeed> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  if (model.state == ViewState.Idle)
+                                  if (!model.isBusy)
                                     announcementType =
                                         AnnouncementType.CIRCULAR;
                                 });
@@ -303,7 +306,7 @@ class _CreateFeedState extends State<CreateFeed> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  if (model.state == ViewState.Idle)
+                                  if (!model.isBusy)
                                     announcementType =
                                         AnnouncementType.ACTIVITY;
                                 });
