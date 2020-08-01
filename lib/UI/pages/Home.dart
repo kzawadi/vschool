@@ -265,7 +265,7 @@ class _HomeState extends State<Home> with Services {
       curve: Curves.easeIn,
       itemCornerRadius: 50,
       iconSize: 22,
-      containerHeight: 53,
+      containerHeight: 56,
       backgroundColor:
           isThemeCurrentlyDark(context) ? MyColors.github : MyColors.white,
       // animationDuration: Duration(milliseconds: 260), it is the default

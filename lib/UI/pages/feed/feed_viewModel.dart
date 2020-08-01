@@ -1,28 +1,31 @@
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/feed_services/feed_services.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:stacked/stacked.dart';
 
-class FeedViewModel extends BaseViewModel {
+class FeedViewModel extends StreamViewModel {
   final FeedServices _feedServices = locator<FeedServices>();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
-  List<Announcement> _feeds;
-  List<Announcement> get feed => _feeds;
+  final String stdDivGlobal;
 
-  void listenToPosts({String stdDivGlobal}) {
-    setBusy(true);
-    _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal).listen(
-      (postsData) {
-        List<Announcement> updatedPosts = postsData;
-        if (updatedPosts != null && updatedPosts.length > 0) {
-          _feeds = updatedPosts;
-          notifyListeners();
-        }
-        setBusy(false);
-      },
-    );
-  }
+  FeedViewModel({this.stdDivGlobal});
+  // List<Announcement> get feed => _feeds;
+
+  // void listenToPosts({String stdDivGlobal}) {
+  //   setBusy(true);
+  //   _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal).listen(
+  //     (postsData) {
+  //       List<Announcement> updatedPosts = postsData;
+  //       if (updatedPosts != null && updatedPosts.length > 0) {
+  //         _feeds = updatedPosts;
+  //         notifyListeners();
+  //       }
+  //       setBusy(false);
+  //     },
+  //   );
+  // }
 
   void requestMoreData({String stdDivGlobal}) {
     _feedServices.requestMoreData(stdDivGlobal: stdDivGlobal);
@@ -53,4 +56,8 @@ class FeedViewModel extends BaseViewModel {
     await _analyticsService.logPostCreated(hasImage: feed.photoPath != null);
     setBusy(false);
   }
+
+  @override
+  Stream get stream =>
+      _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal);
 }

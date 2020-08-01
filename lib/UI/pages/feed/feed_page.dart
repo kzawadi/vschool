@@ -45,10 +45,10 @@ class _FeedPageState extends State<FeedPage> {
       isTeacher = true;
     }
     return ViewModelBuilder<FeedViewModel>.reactive(
-      viewModelBuilder: () => FeedViewModel(),
+      viewModelBuilder: () => FeedViewModel(stdDivGlobal: stdDivGlobal),
       // disposeViewModel: false,
-      createNewModelOnInsert: true,
-      onModelReady: (model) => model.listenToPosts(stdDivGlobal: stdDivGlobal),
+      // createNewModelOnInsert: true,
+      onModelReady: (model) => model.stream,
       builder: (context, model, child) {
         this.model = model;
         return Scaffold(
@@ -129,7 +129,7 @@ class _FeedPageState extends State<FeedPage> {
                 maxWidth: 700,
               ),
               // child: RefreshIndicator(
-              child: model.feed == null
+              child: model.data == null
                   ? kBuzyPage(color: Theme.of(context).accentColor)
                   // : Container(
                   //     child: Center(
@@ -142,11 +142,11 @@ class _FeedPageState extends State<FeedPage> {
                   //   )
                   : ListView.builder(
                       physics: BouncingScrollPhysics(),
-                      cacheExtent: model.feed.length + 0.1,
+                      cacheExtent: model.data.length + 0.1,
                       controller: controller,
-                      itemCount: model.feed.length,
+                      itemCount: model.data.length,
                       itemBuilder: (context, index) {
-                        if (index < model.feed.length) {
+                        if (index < model.data.length) {
                           return CreationAwareListItem(
                             itemCreated: () {
                               if (index % 6 == 0)
@@ -158,7 +158,7 @@ class _FeedPageState extends State<FeedPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 6),
                                   child: FeedCard(
-                                    feed: model.feed[index],
+                                    feed: model.data[index],
                                   ),
                                 ),
                                 Positioned(
