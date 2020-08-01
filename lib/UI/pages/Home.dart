@@ -193,43 +193,6 @@ class _HomeState extends State<Home> with Services {
     );
   }
 
-  List<BubbleBottomBarItem> studentItems = [
-    BubbleBottomBarItem(
-      backgroundColor: Colors.red,
-      icon: Icon(
-        Icons.home,
-      ),
-      activeIcon: Icon(
-        Icons.home,
-        color: Colors.red,
-      ),
-      title: Text(string.dashboard),
-    ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.red,
-      icon: Icon(
-        Icons.dashboard,
-      ),
-      activeIcon: Icon(
-        Icons.home,
-        color: Colors.red,
-      ),
-      title: Text(string.dashboard),
-    ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.orange,
-      icon: Icon(
-        Icons.settings,
-      ),
-      activeIcon: Icon(
-        Icons.settings,
-        color: Colors.orange,
-      ),
-      title: Text(
-        string.setting,
-      ),
-    )
-  ];
   List<BottomNavyBarItem> studentItemsNew = [
     BottomNavyBarItem(
       activeColor: Colors.red,
@@ -259,55 +222,6 @@ class _HomeState extends State<Home> with Services {
     )
   ];
 
-  List<BubbleBottomBarItem> bottomBarItems = [
-    BubbleBottomBarItem(
-      backgroundColor: Colors.teal,
-      icon: Icon(
-        Icons.home,
-      ),
-      activeIcon: Icon(
-        Icons.home,
-        color: Colors.teal,
-      ),
-      title: Text(string.dashboard),
-    ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.red,
-      icon: Icon(
-        Icons.dashboard,
-      ),
-      activeIcon: Icon(
-        Icons.dashboard,
-        color: Colors.red,
-      ),
-      title: Text(string.dashboard),
-    ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.deepPurple,
-      icon: Icon(
-        CustomIcons.chat_bubble,
-        // size: 25,
-      ),
-      activeIcon: Icon(
-        CustomIcons.chat_bubble,
-        color: Colors.deepPurple,
-      ),
-      title: Text(string.chat),
-    ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.orange,
-      icon: Icon(
-        Icons.settings,
-      ),
-      activeIcon: Icon(
-        Icons.settings,
-        color: Colors.orange,
-      ),
-      title: Text(
-        string.setting,
-      ),
-    )
-  ];
   List<BottomNavyBarItem> bottomBarItemsNew = [
     BottomNavyBarItem(
       activeColor: Colors.teal[700],
@@ -345,49 +259,6 @@ class _HomeState extends State<Home> with Services {
       ),
     )
   ];
-
-  BubbleBottomBar buildBubbleBottomBar(UserType userType) {
-    return BubbleBottomBar(
-      backgroundColor: Theme.of(context).canvasColor,
-      opacity: .2,
-      currentIndex: _currentIndex,
-      onTap: (v) {
-        if (userType == UserType.STUDENT) {
-          setState(() {
-            if (v == 0) {
-              pageName = StudentDashboard.pageName;
-            } else {
-              pageName = SettingPage.pageName;
-            }
-            _currentIndex = v;
-          });
-        } else {
-          setState(() {
-            if (v == 0) {
-              pageName = FeedPage.pageName;
-            } else if (v == 1) {
-              pageName = MainDashboard.pageName;
-            } else if (v == 2) {
-              pageName = ChatPage.pageName;
-            } else if (v == 3) {
-              pageName = SettingPage.pageName;
-            }
-            _currentIndex = v;
-          });
-        }
-      },
-      borderRadius: BorderRadius.circular(16),
-      // BorderRadius.vertical(
-      //   top: Radius.circular(16),
-      // ),
-      elevation: 10,
-      fabLocation: isTeacher ? BubbleBottomBarFabLocation.end : null, //new
-      hasNotch: isTeacher, //new
-      hasInk: true, //new, gives a cute ink effect
-      inkColor: Colors.black12, //optional, uses theme color if not specified
-      items: userType == UserType.STUDENT ? studentItems : bottomBarItems,
-    );
-  }
 
   BottomNavyBar bnb({UserType userType}) {
     return BottomNavyBar(
