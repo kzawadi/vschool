@@ -19,7 +19,7 @@ class FeedServices extends Services {
 
   // #6: Create a list that will keep the paged results
   List<List<Announcement>> _allPagedResults = List<List<Announcement>>();
-  List<Announcement> feed = List<Announcement>();
+  List<Announcement> _feed = List<Announcement>();
 
   static const int PostsLimit = 6;
 
@@ -57,7 +57,7 @@ class FeedServices extends Services {
 
     pagePostsQuery.snapshots().listen((postsSnapshot) {
       if (postsSnapshot.documents.isNotEmpty) {
-        feed = postsSnapshot.documents
+        _feed = postsSnapshot.documents
             .map((snapshot) => Announcement.fromSnapshot(snapshot))
             // .where((mappedItem) => mappedItem.caption != null)
             .toList();
@@ -66,12 +66,12 @@ class FeedServices extends Services {
 
         // #9: If the page exists update the feed for that page
         if (pageExists) {
-          _allPagedResults[currentRequestIndex] = feed;
+          _allPagedResults[currentRequestIndex] = _feed;
         }
         // #10: If the page doesn't exist add the page data
         else {
-          _allPagedResults.add(feed);
-          print('the last feed fetched ' + feed.last.caption.toString());
+          _allPagedResults.add(_feed);
+          print('the last feed fetched ' + _feed.last.caption.toString());
         }
 
         // #11: Concatenate the full list to be shown
