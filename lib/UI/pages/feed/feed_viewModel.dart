@@ -1,7 +1,6 @@
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/feed_services/feed_services.dart';
 import 'package:ourESchool/imports.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedViewModel extends StreamViewModel {
@@ -11,21 +10,6 @@ class FeedViewModel extends StreamViewModel {
   final String stdDivGlobal;
 
   FeedViewModel({this.stdDivGlobal});
-  // List<Announcement> get feed => _feeds;
-
-  // void listenToPosts({String stdDivGlobal}) {
-  //   setBusy(true);
-  //   _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal).listen(
-  //     (postsData) {
-  //       List<Announcement> updatedPosts = postsData;
-  //       if (updatedPosts != null && updatedPosts.length > 0) {
-  //         _feeds = updatedPosts;
-  //         notifyListeners();
-  //       }
-  //       setBusy(false);
-  //     },
-  //   );
-  // }
 
   void requestMoreData({String stdDivGlobal}) {
     _feedServices.requestMoreData(stdDivGlobal: stdDivGlobal);
@@ -37,7 +21,6 @@ class FeedViewModel extends StreamViewModel {
   void filteredFeed({String std}) {
     setBusy(true);
     _feedServices.filteredFeed(std: std);
-    notifyListeners();
     setBusy(false);
   }
 

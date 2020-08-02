@@ -16,6 +16,8 @@ class FeedServices extends Services {
 
   final PublishSubject<List<Announcement>> postsController =
       PublishSubject<List<Announcement>>();
+  final PublishSubject<List<Announcement>> profileDataController =
+      PublishSubject<List<Announcement>>();
 
   // #6: Create a list that will keep the paged results
   List<List<Announcement>> _allPagedResults = List<List<Announcement>>();
