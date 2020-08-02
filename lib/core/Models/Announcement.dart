@@ -47,12 +47,15 @@ class Announcement {
     id = snapshot.documentID;
   }
 
+  /// something is not very okay with decoding and encoding of timestamp fields..
+  /// it has to be reviewed someday but keep in mind when using this data class
+  /// [timstamp] and [timeStamp]
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['caption'] = this.caption;
     data['by'] = this.by;
     data['forDiv'] = this.forDiv;
-    // data['timestamp'] = this.timestamp;
+    data['timeStamp'] = Timestamp.now();
     data['forClass'] = this.forClass;
     data['photoUrl'] = this.photoUrl;
     data['type'] = AnnouncementTypeHelper.getValue(this.type);

@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ourESchool/core/Models/feed/feed.dart';
 import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:http/http.dart' as http;
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:path/path.dart' as p;
 
@@ -128,6 +128,7 @@ class FeedServices extends Services {
 
     String fileName = "";
     String filePath = "";
+    String standard;
 
     if (feed.photoUrl != '') {
       fileName = createCryptoRandomString(8) +
@@ -140,24 +141,28 @@ class FeedServices extends Services {
       filePath = '${Services.country}/$schoolCode/Posts/$fileName';
     }
     feed.photoPath = filePath;
-    Map feedMap = feed.toJson();
 
-    var body = json.encode({
-      "schoolCode": schoolCode.toUpperCase(),
-      "country": Services.country,
-      "feed": feedMap
-    });
+    if (feed.forClass == 'Global') {
+      standard = 'Global';
+    } else
+      standard = feed.forClass + feed.forDiv;
 
-    print(body.toString());
+    var _postRef =
+        (await schoolRefwithCode()).document('Posts').collection(standard);
 
-    final response =
-        await http.post(postAnnouncemnetUrl, body: body, headers: headers);
+    await _postRef.add(feed.toJson());
+    print('feed posted succeful ${feed.toJson()}');
+    print(standard);
+  }
 
-    if (response.statusCode == 200) {
-      print("Post posted Succesfully");
-      print(json.decode(response.body).toString());
-    } else {
-      print("Post posting failed");
-    }
+  deleteAnnouncement(String id, String stdDivGlobal) async {
+    // Map announcementMap = announcement.toJson();
+
+    var _postRef = (await schoolRefwithCode())
+        .document('Posts')
+        .collection(stdDivGlobal)
+        .document(id);
+
+    await _postRef.delete();
   }
 }

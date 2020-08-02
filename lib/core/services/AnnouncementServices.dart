@@ -54,6 +54,7 @@ class AnnouncementServices extends Services {
 
     String fileName = "";
     String filePath = "";
+    String standard;
 
     if (announcement.photoUrl != '') {
       fileName = createCryptoRandomString(8) +
@@ -68,23 +69,16 @@ class AnnouncementServices extends Services {
     announcement.photoPath = filePath;
     Map announcementMap = announcement.toJson();
 
-    var body = json.encode({
-      "schoolCode": schoolCode.toUpperCase(),
-      "country": Services.country,
-      "announcement": announcementMap
-    });
+    if (announcement.forClass == 'Global') {
+      standard = 'Global';
+    } else
+      standard = announcement.forClass + announcement.forDiv;
 
-    print(body.toString());
+    var _postRef =
+        (await schoolRefwithCode()).document('Posts').collection(standard);
 
-    final response =
-        await http.post(postAnnouncemnetUrl, body: body, headers: headers);
-
-    if (response.statusCode == 200) {
-      print("Post posted Succesfully");
-      print(json.decode(response.body).toString());
-    } else {
-      print("Post posting failed");
-    }
+    _postRef.add(announcementMap);
+    print('feed posted succeful');
   }
 
   deleteAnnouncement(String id, String stdDivGlobal) async {
