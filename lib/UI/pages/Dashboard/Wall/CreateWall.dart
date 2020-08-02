@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/pages/Dashboard/Wall/camera_screen.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
 import 'package:ourESchool/core/viewmodel/Wall/CreateWallModel.dart';
 import 'package:ourESchool/UI/resources/text_styles.dart';

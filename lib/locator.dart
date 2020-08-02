@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:ourESchool/UI/pages/Dashboard/Announcement/announcement_owner.dart';
+import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 // import 'package:ourESchool/UI/Utility/data_importer.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';

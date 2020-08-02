@@ -56,16 +56,16 @@ class _StudentDashboardState extends State<StudentDashboard> with Services {
                         ],
                       ),
                     ),
-                    ColumnReusableCardButton(
-                      height: 70,
-                      tileColor: Colors.orangeAccent,
-                      label: string.announcement,
-                      icon: CustomIcons.megaphone,
-                      onPressed: () {
-                        kopenPage(
-                            context, AnnouncementPage(), 'Announcement_Page');
-                      },
-                    ),
+                    // ColumnReusableCardButton(
+                    //   height: 70,
+                    //   tileColor: Colors.orangeAccent,
+                    //   label: string.announcement,
+                    //   icon: CustomIcons.megaphone,
+                    //   onPressed: () {
+                    //     kopenPage(
+                    //         context, AnnouncementPage(), 'Announcement_Page');
+                    //   },
+                    // ),
                     ColumnReusableCardButton(
                       directionIconHeroTag: string.announcement,
                       height: 70,

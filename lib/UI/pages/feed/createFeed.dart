@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/pages/Dashboard/Wall/camera_screen.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
