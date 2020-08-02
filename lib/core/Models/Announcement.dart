@@ -8,6 +8,7 @@ class Announcement {
   Timestamp timestamp;
   String forClass;
   String photoUrl;
+  String createrPhotoUrl;
   String photoPath;
   AnnouncementType type;
   String id;
@@ -19,6 +20,7 @@ class Announcement {
       this.timestamp,
       this.forClass,
       this.photoUrl = '',
+      this.createrPhotoUrl = '',
       this.photoPath = '',
       this.type,
       this.id});
@@ -30,6 +32,7 @@ class Announcement {
     timestamp = json['timestamp'] as Timestamp;
     forClass = json['forClass'];
     photoUrl = json['photoUrl'] ?? '';
+    createrPhotoUrl = json['createrPhotoUrl'] ?? '';
     photoPath = json['photoPath'] ?? '';
     type = AnnouncementTypeHelper.getEnum(json['type']);
     id = json['id'];
@@ -42,6 +45,7 @@ class Announcement {
     timestamp = snapshot['timeStamp'] as Timestamp;
     forClass = snapshot['forClass'].toString();
     photoUrl = snapshot['photoUrl'].toString() ?? '';
+    createrPhotoUrl = snapshot['createrPhotoUrl'].toString() ?? '';
     photoPath = snapshot['photoPath'].toString() ?? '';
     type = AnnouncementTypeHelper.getEnum(snapshot['type'].toString());
     id = snapshot.documentID;
@@ -58,6 +62,7 @@ class Announcement {
     data['timeStamp'] = Timestamp.now();
     data['forClass'] = this.forClass;
     data['photoUrl'] = this.photoUrl;
+    data['createrPhotoUrl'] = this.createrPhotoUrl;
     data['type'] = AnnouncementTypeHelper.getValue(this.type);
     data['photoPath'] = this.photoPath;
     // data['id'] = this.id;

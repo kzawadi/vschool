@@ -37,7 +37,8 @@ class _CreateFeedState extends State<CreateFeed> {
   floatingButtonPressed(FeedViewModel model, BuildContext context) async {
     User user = Provider.of<User>(context, listen: false);
     Announcement feed = Announcement(
-      by: user.id,
+      by: user.displayName,
+      createrPhotoUrl: user.photoUrl,
       caption: _captionController.text,
       forClass:
           postType == 'SPECIFIC' ? _standardController.text.trim() : 'Global',
