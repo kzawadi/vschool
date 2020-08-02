@@ -16,7 +16,7 @@ void main() {
   Provider.debugCheckInvalidValueType = null;
   setupLocator();
   runApp(
-    Splashscreen(),
+    SplaScreen(),
   );
 }
 
