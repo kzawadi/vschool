@@ -87,6 +87,7 @@ class _FeedPageState extends State<FeedPage> {
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
+                    heroTag: 'abc',
                     elevation: 5,
                     onPressed: () {
                       kopenPageSlide(context, CreateFeed(),
@@ -106,7 +107,7 @@ class _FeedPageState extends State<FeedPage> {
                     alignment: Alignment.bottomLeft,
                     child: FloatingActionButton.extended(
                       label: Text('Filter'),
-                      heroTag: 'abc',
+                      // heroTag: 'abc',
                       elevation: 12,
                       onPressed: () {
                         //Filter Posts Code Here
