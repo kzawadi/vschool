@@ -76,6 +76,7 @@ class _CreateFeedState extends State<CreateFeed> {
         return Scaffold(
           key: _scaffoldKey,
           appBar: TopBar(
+            buttonHeroTag: string.announcement,
             onTitleTapped: () {},
             child: kBackBtn,
             onPressed: () {

@@ -46,7 +46,8 @@ class FeedCard extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 25.0,
-                          backgroundImage: feed.createrPhotoUrl == ''
+                          backgroundImage: feed.createrPhotoUrl == null ||
+                                  feed.createrPhotoUrl == ''
                               ? AssetImage(assetsString.teacher_welcome)
                               : NetworkImage(feed.createrPhotoUrl),
                           backgroundColor: Colors.transparent,
@@ -142,7 +143,7 @@ class FeedCard extends StatelessWidget {
                         ),
                       );
                     },
-                    child: feed.photoUrl == ''
+                    child: feed.photoUrl == null
                         ? Container(
                             height: 0,
                           )
