@@ -145,10 +145,11 @@ class _FeedPageState extends State<FeedPage>
                   //     // color: Colors.red,
                   //   )
                   : ListView.builder(
+                      // key: PageStorageKey<String>('controllerA'),
                       dragStartBehavior: DragStartBehavior.start,
                       addAutomaticKeepAlives: true,
                       physics: BouncingScrollPhysics(),
-                      cacheExtent: 1000,
+                      cacheExtent: 2000,
                       // controller: controller,
                       itemCount: model.data.length,
                       itemBuilder: (context, index) {
