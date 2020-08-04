@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
 import 'package:ourESchool/UI/pages/feed/createFeed.dart';
@@ -24,10 +25,11 @@ class FeedPage extends StatefulWidget {
   String get screenName => string.announcement + 'Page';
 }
 
-class _FeedPageState extends State<FeedPage> {
+class _FeedPageState extends State<FeedPage>
+    with AutomaticKeepAliveClientMixin {
   bool isTeacher = false;
 
-  ScrollController controller;
+  // ScrollController controller;
   FeedViewModel model = FeedViewModel();
   String stdDivGlobal = 'Global';
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -39,6 +41,7 @@ class _FeedPageState extends State<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var userType = Provider.of<UserType>(context, listen: false);
     // User currentUser = Provider.of<User>(context, listen: false);
     if (userType == UserType.TEACHER) {
@@ -142,9 +145,11 @@ class _FeedPageState extends State<FeedPage> {
                   //     // color: Colors.red,
                   //   )
                   : ListView.builder(
+                      dragStartBehavior: DragStartBehavior.start,
+                      addAutomaticKeepAlives: true,
                       physics: BouncingScrollPhysics(),
-                      cacheExtent: model.data.length + 0.1,
-                      controller: controller,
+                      cacheExtent: 1000,
+                      // controller: controller,
                       itemCount: model.data.length,
                       itemBuilder: (context, index) {
                         if (index < model.data.length) {
@@ -338,4 +343,7 @@ class _FeedPageState extends State<FeedPage> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
