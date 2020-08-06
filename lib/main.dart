@@ -110,14 +110,6 @@ class OurSchoolApp extends StatelessWidget with Services {
     User currentUser = Provider.of<User>(context, listen: false);
     UserType userType = Provider.of<UserType>(context, listen: false);
 
-    // if (Provider.of<FirebaseUser>(context,listen: false) == null) {
-    //   return WelcomeScreen();
-    // }
-
-    // if (userType == UserType.UNKNOWN) {
-    //   return WelcomeScreen();
-    // }
-
     if (Provider.of<bool>(context, listen: false)) {
       if (userType == UserType.STUDENT) {
         return currentUser.isEmpty() ? ProfilePage() : Home();

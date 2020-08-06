@@ -1,11 +1,9 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
-import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
@@ -15,20 +13,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with Services {
-  var _scaffoldKey;
-
-  SharedPreferencesHelper _sharedPreferencesHelper =
-      locator<SharedPreferencesHelper>();
-  StreamSubscription iosSubscription;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _currentIndex = 0;
   Color background = Colors.white;
   static Color inactiveColor = Color(0xff4B4743); //0xffdd2c00
-  // AuthenticationServices _auth = locator<AuthenticationServices>();
-  bool isTeacher = false;
-  // MainPageModel mainPageModel;
+  FirebaseNotifications _notifications = locator<FirebaseNotifications>();
 
-  // _auth.userType == UserType.STUDENT ? false : true;
   String pageName = string.home;
 
   List<Widget> pages = [
@@ -39,128 +30,11 @@ class _HomeState extends State<Home> with Services {
     SettingPage()
   ];
 
-  List<Widget> studentPages = [
-    StudentDashboard(),
-    SettingPage(),
-  ];
-
   @override
   void initState() {
-    //getFirebaseUser();
+    _notifications.firebaseNotificationServices();
+    _notifications.configLocalNotification();
     super.initState();
-    _scaffoldKey = GlobalKey<ScaffoldState>();
-    if (Platform.isIOS) {
-      iosSubscription = cloudmesaging.onIosSettingsRegistered.listen((data) {
-        print(data);
-        _saveDeviceToken();
-      });
-
-      cloudmesaging.requestNotificationPermissions(
-          IosNotificationSettings(sound: true, badge: true, alert: true));
-    } else {
-      _saveDeviceToken();
-    }
-
-    cloudmesaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        // print("onMessage: $message");
-        // _scaffoldKey.currentState.showSnackBar(
-        //   ksnackBar(context, message['notification']['title']),
-        // );
-
-        // print('RECIEVED NOTIFICATION IS $message'.toString());
-        print('onMessage: $message');
-        Platform.isAndroid
-            ? showNotification(message['notification'])
-            : showNotification(message['aps']['alert']);
-        return;
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
-        // TODO optional
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
-        // TODO optional
-      },
-    );
-    configLocalNotification();
-  }
-
-  @override
-  void dispose() {
-    if (iosSubscription != null) iosSubscription.cancel();
-    super.dispose();
-  }
-
-  _saveDeviceToken() async {
-    String fcmToken = await cloudmesaging.getToken();
-    String id = await _sharedPreferencesHelper.getLoggedInUserId();
-
-    print('curent user id is $firebaseUser'.toString());
-
-    // Save it to Firestore
-    if (fcmToken != null) {
-      DocumentReference tokens = firestore
-          .collection('users')
-          .document(id)
-          .collection('tokens')
-          .document(fcmToken);
-
-      await tokens.setData({
-        'token': fcmToken,
-        'createdAt': FieldValue.serverTimestamp(), // optional
-        'platform': Platform.operatingSystem // optional
-      });
-    }
-    print('the token is $fcmToken'.toString());
-  }
-
-  /// Subscribe the user to a topic for notifications from firebase cloud messaging
-  _subscribeToTopic() async {
-    // Subscribe the user to a topic
-    cloudmesaging.subscribeToTopic('daily');
-  }
-
-  void configLocalNotification() {
-    var initializationSettingsAndroid =
-        new AndroidInitializationSettings('app_icon');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    localNotifications.initialize(initializationSettings);
-  }
-
-  void showNotification(message) async {
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-      Platform.isAndroid
-          ? 'com.mappdeveloper.usa.our_e_school'
-          // todo be replaced by ios project id
-          : 'com.mappdeveloper.usa.our_e_school',
-      'e school chat demo',
-      'General notifications channel descriptions',
-      playSound: true,
-      enableVibration: true,
-      importance: Importance.max,
-      priority: Priority.high,
-    );
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-      iOS: iOSPlatformChannelSpecifics,
-    );
-
-    print(message);
-//    print(message['body'].toString());
-//    print(json.encode(message));
-
-    await localNotifications.show(0, message['title'].toString(),
-        message['body'].toString(), platformChannelSpecifics,
-        payload: json.encode(message));
-
-//    await flutterLocalNotificationsPlugin.show(
-//        0, 'plain title', 'plain body', platformChannelSpecifics,
-//        payload: 'item x');
   }
 
   ImageProvider<dynamic> setImage(User user) {
@@ -173,54 +47,15 @@ class _HomeState extends State<Home> with Services {
 
   @override
   Widget build(BuildContext context) {
-    var userType = Provider.of<UserType>(context, listen: false);
-    if (userType == UserType.TEACHER) {
-      isTeacher = true;
-    }
-    // User user = Provider.of<User>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: bnb(userType: userType),
-      body: userType == UserType.STUDENT
-          ? IndexedStack(
-              index: _currentIndex,
-              children: studentPages,
-            )
-          : IndexedStack(
-              index: _currentIndex,
-              children: pages,
-            ),
+      bottomNavigationBar: bnb(),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: pages,
+      ),
     );
   }
-
-  List<BottomNavyBarItem> studentItemsNew = [
-    BottomNavyBarItem(
-      activeColor: Colors.red,
-      icon: Icon(
-        Icons.home,
-      ),
-      inactiveColor: inactiveColor,
-      title: Text(string.dashboard),
-    ),
-    BottomNavyBarItem(
-      activeColor: Colors.red,
-      icon: Icon(
-        Icons.dashboard,
-      ),
-      inactiveColor: inactiveColor,
-      title: Text(string.dashboard),
-    ),
-    BottomNavyBarItem(
-      activeColor: Colors.orange,
-      icon: Icon(
-        Icons.settings,
-      ),
-      inactiveColor: inactiveColor,
-      title: Text(
-        string.setting,
-      ),
-    )
-  ];
 
   List<BottomNavyBarItem> bottomBarItemsNew = [
     BottomNavyBarItem(
@@ -260,11 +95,11 @@ class _HomeState extends State<Home> with Services {
     )
   ];
 
-  BottomNavyBar bnb({UserType userType}) {
+  BottomNavyBar bnb() {
     return BottomNavyBar(
       curve: Curves.easeIn,
       itemCornerRadius: 50,
-      iconSize: 22,
+      iconSize: 24,
       containerHeight: 56,
       backgroundColor:
           isThemeCurrentlyDark(context) ? MyColors.github : MyColors.white,
@@ -272,44 +107,22 @@ class _HomeState extends State<Home> with Services {
       selectedIndex: _currentIndex,
       showElevation: false, // use this to remove appBar's elevation
       onItemSelected: (v) {
-        if (userType == UserType.STUDENT) {
-          setState(() {
-            if (v == 0) {
-              pageName = StudentDashboard.pageName;
-            } else {
-              pageName = SettingPage.pageName;
-            }
-            _currentIndex = v;
-          });
-        } else {
-          setState(() {
-            HapticFeedback.selectionClick();
-
-            // performSelectionHaptic();
-            if (v == 0) {
-              pageName = FeedPage.pageName;
-            } else if (v == 1) {
-              pageName = MainDashboard.pageName;
-            } else if (v == 2) {
-              pageName = ChatPage.pageName;
-            } else if (v == 3) {
-              pageName = SettingPage.pageName;
-            }
-            _currentIndex = v;
-          });
-        }
+        setState(() {
+          // HapticFeedback.selectionClick();
+          if (v == 0) {
+            pageName = FeedPage.pageName;
+          } else if (v == 1) {
+            pageName = MainDashboard.pageName;
+          } else if (v == 2) {
+            pageName = ChatPage.pageName;
+          } else if (v == 3) {
+            pageName = SettingPage.pageName;
+          }
+          _currentIndex = v;
+        });
+        // }
       },
-      items: userType == UserType.STUDENT ? studentItemsNew : bottomBarItemsNew,
+      items: bottomBarItemsNew,
     );
-  }
-}
-
-performSelectionHaptic({BuildContext context, bool iOSOnly = true}) async {
-  if (iOSOnly && Theme.of(context).platform != TargetPlatform.iOS) {
-    return;
-  }
-
-  if (true) {
-    HapticFeedback.selectionClick();
   }
 }
