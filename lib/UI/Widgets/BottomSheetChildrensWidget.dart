@@ -140,8 +140,7 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                       context,
                       FeesPage(
                         fees: widget.fees,
-                        user: widget.user,
-                        // targetId: widget.user.id,
+                        student: widget.user,
                       ),
                       'Fees_Page',
                     );

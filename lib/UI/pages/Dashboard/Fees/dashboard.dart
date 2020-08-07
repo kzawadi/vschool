@@ -7,64 +7,47 @@ import 'package:ourESchool/UI/resources/text_styles.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/imports.dart';
 
-class FeesPageDash extends StatefulWidget {
-  final Fees fees;
+// class FeesPageDash extends StatefulWidget {
+//   final Fees fees;
 
-  const FeesPageDash({Key key, this.fees}) : super(key: key);
+//   const FeesPageDash({Key key, this.fees}) : super(key: key);
 
-  @override
-  _FeesPageState createState() => _FeesPageState(fees);
-}
+//   @override
+//   _FeesPageState createState() => _FeesPageState(fees);
+// }
 
-class _FeesPageState extends State<FeesPageDash> {
+class FeesPageDash extends StatelessWidget {
   final Fees fees;
   static final List<String> chartDropdownItems = [
     'Last 7 days',
     'Last month',
     'Last year'
   ];
-  String actualDropdown = chartDropdownItems[0];
-  int actualChart = 0;
+  final String actualDropdown = chartDropdownItems[0];
+  final int actualChart = 0;
 
-  _FeesPageState(this.fees);
+  FeesPageDash({Key key, this.fees}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        //onTitleTapped: () {},
         child: kBackBtn,
         onPressed: () {
           kbackBtn(context);
         },
         title: string.fees_title,
       ),
-      //  AppBar(
-      //   iconTheme: IconThemeData(
-      //     color: isThemeCurrentlyDark(context) ? MyColors.light : MyColors.dark,
-      //   ),
-      //   elevation: 0.0,
-      //   backgroundColor:
-      //       isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.light,
-      //   title: Padding(
-      //     padding: const EdgeInsets.fromLTRB(60, 0, 20, 0),
-      //     child: Text(
-      //       'FEES REPORT',
-      //       style: isThemeCurrentlyDark(context)
-      //           ? HeadingStylesMaterial.light
-      //           : HeadingStylesMaterial.dark,
-      //     ),
-      //   ),
-      // ),
       body: StaggeredGridView.count(
-        // physics: BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         crossAxisCount: 2,
         crossAxisSpacing: 12.0,
         mainAxisSpacing: 12.0,
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         children: <Widget>[
           _buildTile(
-            Padding(
+            context,
+            child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +85,8 @@ class _FeesPageState extends State<FeesPageDash> {
             ),
           ),
           _buildTile(
-            Padding(
+            context,
+            child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -136,7 +120,8 @@ class _FeesPageState extends State<FeesPageDash> {
             ),
           ),
           _buildTile(
-            Padding(
+            context,
+            child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -169,7 +154,8 @@ class _FeesPageState extends State<FeesPageDash> {
             ),
           ),
           _buildTile(
-            Padding(
+            context,
+            child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -212,7 +198,8 @@ class _FeesPageState extends State<FeesPageDash> {
             ),
           ),
           _buildTile(
-            Padding(
+            context,
+            child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -242,7 +229,8 @@ class _FeesPageState extends State<FeesPageDash> {
             onTap: () {},
           ),
           _buildTile(
-            Padding(
+            context,
+            child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -284,7 +272,7 @@ class _FeesPageState extends State<FeesPageDash> {
     );
   }
 
-  Widget _buildTile(Widget child, {Function() onTap}) {
+  Widget _buildTile(BuildContext context, {Widget child, Function() onTap}) {
     return Material(
       color:
           isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.lightMilky,

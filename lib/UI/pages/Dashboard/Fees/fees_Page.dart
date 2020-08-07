@@ -1,48 +1,29 @@
+import 'package:ourESchool/UI/resources/colors.dart';
+
+import 'package:stacked/stacked.dart';
+
 import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/viewmodel/fees/fees_page_model.dart';
 import 'package:ourESchool/imports.dart';
-import 'package:stacked/stacked.dart';
 
-class FeesPage extends StatefulWidget {
-  FeesPage({
-    Key key,
-    this.targetId,
-    this.user,
-    this.fees,
-  }) : super(key: key) {
-    // setCurrentScreen();
-  }
-
-  final String targetId;
-  final User user;
+class FeesPage extends StatelessWidget {
+  final User student;
   final Fees fees;
 
-  @override
-  _WallPageState createState() => _WallPageState();
-
-  @override
+  FeesPage({Key key, this.student, this.fees}) : super(key: key);
   String get screenName => string.fees + 'Page';
-}
-
-class _WallPageState extends State<FeesPage> {
-  String targeteid;
-  ScrollController controller;
-  FeesPageModel model = FeesPageModel();
 
   @override
   Widget build(BuildContext context) {
-    targeteid = widget.user.id;
-
     return ViewModelBuilder<FeesPageModel>.reactive(
-      viewModelBuilder: () => FeesPageModel(),
-      onModelReady: (model) => model.getFees(targeteid),
+      viewModelBuilder: () => FeesPageModel(studentId: student.id),
+      onModelReady: (model) => model.futureToRun(),
       builder: (context, model, child) {
-        this.model = model;
         return model.isBusy
-            ? kBuzyPage(color: Theme.of(context).primaryColor)
+            ? kBuzyPage(color: MyColors.magicMint)
             : FeesPageDash(
-                fees: Fees.fromSnapshot(model.feessnapshot),
+                fees: model.data,
               );
       },
     );
