@@ -79,21 +79,25 @@ class ProfileServices extends Services {
       "userType": UserTypeHelper.getValue(userType),
       "country": country
     });
-    print('data of child to be updated is $profileDataHashMap');
+    // print('data of child to be updated is $profileDataHashMap');
+    cprint(profileDataHashMap,
+        warningIn: 'This is tha data of profile to be written in firestore');
     final response = await http.post(
       profileUpdateUrl,
       body: body,
       headers: headers,
     );
     if (response.statusCode == 200) {
-      print("Data Uploaded Succesfully");
+      // print("Data Uploaded Succesfully");
+      cprint('Data Uploaded Succesfully');
       final jsonData = await json.decode(response.body);
 
       User user = User.fromJson(jsonData);
       sharedPreferencesHelper.setUserDataModel(response.body);
       loggedInUserStream.add(user);
     } else {
-      print("Data Upload error");
+      // print("Data Upload error");
+      cprint('Data Upload error', errorIn: 'can\'nt  upload Data');
     }
   }
 
@@ -120,21 +124,24 @@ class ProfileServices extends Services {
       "userType": UserTypeHelper.getValue(userType),
       "country": country
     });
-    print('data of Teacher to be updated is $profileDataHashMap');
+    cprint(profileDataHashMap,
+        warningIn:
+            'This is tha data of profile for Teacher to be written in firestore');
     final response = await http.post(
       profileUpdateUrl,
       body: body,
       headers: headers,
     );
     if (response.statusCode == 200) {
-      print("Data Uploaded Succesfully");
+      cprint("Data Uploaded Succesfully");
       final jsonData = await json.decode(response.body);
 
       User user = User.fromJson(jsonData);
       sharedPreferencesHelper.setUserDataModel(response.body);
       loggedInUserStream.add(user);
     } else {
-      print("Data Upload error");
+      cprint("Data Upload error",
+          errorIn: 'failed to upload data to firestore');
     }
   }
 
@@ -151,7 +158,7 @@ class ProfileServices extends Services {
     String userDataModel = await sharedPreferencesHelper.getUserDataModel();
 
     if (userDataModel != 'N.A') {
-      print("Data Retrived Succesfully (Local)");
+      cprint("Data Retrived Succesfully (Local)");
       final jsonData = await json.decode(userDataModel);
 
       User user = User.fromJson(jsonData);
@@ -167,7 +174,7 @@ class ProfileServices extends Services {
       "country": country
     });
 
-    print(body);
+    cprint(body);
 
     final response = await http.post(
       getProfileDataUrl,
@@ -175,7 +182,7 @@ class ProfileServices extends Services {
       headers: headers,
     );
     if (response.statusCode == 200) {
-      print("Data Retrived Succesfully");
+      cprint("Data Retrived Succesfully");
       final jsonData = await json.decode(response.body);
 
       User user = User.fromJson(jsonData);
@@ -184,7 +191,9 @@ class ProfileServices extends Services {
       user.toString();
       return user;
     } else {
-      print("Data Retrived failed");
+      cprint("Data Retrived failed",
+          warningIn: 'can\'nt retrive user data',
+          errorIn: 'error in retriving data');
       return User(id: id);
     }
   }
@@ -224,7 +233,8 @@ class ProfileServices extends Services {
       ),
     );
     await _getChildrensData(childIds);
-    print('the child Ids are in this format $childIds');
+    cprint('the child Ids are in this format $childIds',
+        event: 'getting child Data');
   }
 
   getChildUserName() async {
@@ -243,7 +253,8 @@ class ProfileServices extends Services {
       ),
     );
     childrensId = childIds.values.toList();
-    print('the childe usernames which are ID  $childrensId');
+    cprint('the childe usernames which are ID  $childrensId',
+        event: 'fetching username which are IDs');
   }
 
   _getChildrensData(Map<String, String> childIds) async {
@@ -251,7 +262,7 @@ class ProfileServices extends Services {
     for (String id in childIds.values) {
       childData.add(await getProfileDataById(id, UserType.STUDENT));
     }
-    print('childId value is $childData');
+    cprint('childId value is $childData', event: 'the value of child IDs');
     childrens = childData;
   }
 
@@ -285,7 +296,7 @@ class ProfileServices extends Services {
       "country": country
     });
 
-    print(body);
+    cprint(body, event: 'http request to fetch profile data by Id');
 
     final response = await http.post(
       getProfileDataUrl,
@@ -293,14 +304,15 @@ class ProfileServices extends Services {
       headers: headers,
     );
     if (response.statusCode == 200) {
-      print("Data Retrived Succesfully");
+      cprint("Data Retrived Succesfully");
       final jsonData = await json.decode(response.body);
 
       User user = User.fromJson(jsonData);
       user.toString();
       return user;
     } else {
-      print("Data Retrived failed");
+      cprint("Data Retrived failed",
+          errorIn: 'failed to retrive Data from http API');
       return User(id: uid);
     }
   }
@@ -321,6 +333,7 @@ class ProfileServices extends Services {
       },
     );
     studentData.setData();
-    print('The Parents of The Student have Been saved to the shared pref');
+    cprint('The Parents of The Student have Been saved to the shared pref',
+        event: 'saved the parents of stuents in shared preferences');
   }
 }

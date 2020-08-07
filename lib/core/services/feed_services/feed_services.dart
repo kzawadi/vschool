@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/feed/feed.dart';
 import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/imports.dart';
@@ -73,7 +74,9 @@ class FeedServices extends Services {
         // #10: If the page doesn't exist add the page data
         else {
           _allPagedResults.add(_feed);
-          print('the last feed fetched ' + _feed.last.caption.toString());
+          cprint('the last feed fetched ' + _feed.last.caption.toString(),
+              event: 'Last feed fetched and entered into stream',
+              warningIn: 'This is the last available feed localy');
         }
 
         // #11: Concatenate the full list to be shown
@@ -113,7 +116,8 @@ class FeedServices extends Services {
         .document('Posts')
         .collection(stdDivGlobal)
         .document(id);
-    print('Feed with Id $id' + 'has been deleted succeful');
+    cprint('Feed with Id $id' + 'has been deleted succeful',
+        event: 'deleted Feed');
     await _postRef.delete();
   }
 
@@ -151,18 +155,8 @@ class FeedServices extends Services {
         (await schoolRefwithCode()).document('Posts').collection(standard);
 
     await _postRef.add(feed.toJson());
-    print('feed posted succeful ${feed.toJson()}');
-    print(standard);
-  }
-
-  deleteAnnouncement(String id, String stdDivGlobal) async {
-    // Map announcementMap = announcement.toJson();
-
-    var _postRef = (await schoolRefwithCode())
-        .document('Posts')
-        .collection(stdDivGlobal)
-        .document(id);
-
-    await _postRef.delete();
+    cprint('feed posted succeful ${feed.toJson()}',
+        event: 'adding a feed in firestore');
+    cprint(standard);
   }
 }
