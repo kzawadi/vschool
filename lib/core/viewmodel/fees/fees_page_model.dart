@@ -1,18 +1,18 @@
+import 'package:ourESchool/core/Models/fees/fees_model.dart';
+import 'package:ourESchool/core/services/feesServices/feesServices.dart';
+import 'package:ourESchool/locator.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../imports.dart';
-
-class FeesPageModel extends BaseViewModel {
+class FeesPageModel extends FutureViewModel<Fees> {
+  final studentId;
   FeesServices _feesServices = locator<FeesServices>();
 
-  FeesPageModel();
+  FeesPageModel({this.studentId});
 
-  DocumentSnapshot get feessnapshot => _feesServices.feessnapshot;
-
-  void getFees(String studentId) async {
-    setBusy(true);
-    await _feesServices.getFees(studentId);
-    notifyListeners();
-    setBusy(false);
+  Future<Fees> getFees() async {
+    return _feesServices.getFees(studentId: studentId);
   }
+
+  @override
+  Future<Fees> futureToRun() => getFees();
 }

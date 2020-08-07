@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -154,7 +155,8 @@ class SharedPreferencesHelper {
 
     String res = countryCodePrefs.getString(_schoolCode) ?? "";
 
-    print('School Code Retrived : ' + res);
+    // print('School Code Retrived : ' + res);
+    cprint(res, event: 'School Code Retrived ');
 
     return res.toUpperCase();
   }

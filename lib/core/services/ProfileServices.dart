@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/studentData/studentData.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -197,7 +198,7 @@ class ProfileServices extends Services {
           await profielRef.get(source: Source.serverAndCache));
       return user;
     } catch (e) {
-      print(e);
+      cprint(e, errorIn: 'cant fetch profile data from firestore');
       return User(id: uid);
     }
   }
