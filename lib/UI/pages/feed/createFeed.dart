@@ -34,6 +34,14 @@ class _CreateFeedState extends State<CreateFeed> {
     _divisionController = TextEditingController();
   }
 
+  @override
+  void dispose() {
+    _captionController.dispose();
+    _divisionController.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
   floatingButtonPressed(FeedViewModel model, BuildContext context) async {
     User user = Provider.of<User>(context, listen: false);
     Announcement feed = Announcement(

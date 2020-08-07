@@ -1,6 +1,7 @@
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/imports.dart';
 import 'dart:ui' as ui;
 
@@ -18,34 +19,54 @@ class _LoginPageState extends State<LoginPage> {
   bool isRegistered = false;
   String notYetRegisteringText = string.not_registered;
   ButtonType buttonType = ButtonType.LOGIN;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController schoolNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController _schoolNameController;
+  TextEditingController _emailController;
+  TextEditingController _passwordController;
+  TextEditingController _confirmPasswordController;
+
+  @override
+  void initState() {
+    super.initState();
+    _schoolNameController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _schoolNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   // MainPageModel mainPageModel;
 
   loginRegisterBtnTap(LoginPageModel model, BuildContext context) async {
-    if (emailController.text == null ||
-        passwordController.text == null ||
-        schoolNameController.text == null) {
+    if (_emailController.text == null ||
+        _passwordController.text == null ||
+        _schoolNameController.text == null) {
       _scaffoldKey.currentState
           .showSnackBar(ksnackBar(context, 'Please enter details properly'));
+      cprint('Login Error', errorIn: 'Have Entered Bad Creadintials');
     } else {
-      if (emailController.text.trim().isEmpty ||
-          passwordController.text.trim().isEmpty ||
-          schoolNameController.text.trim().isEmpty) {
+      if (_emailController.text.trim().isEmpty ||
+          _passwordController.text.trim().isEmpty ||
+          _schoolNameController.text.trim().isEmpty) {
         _scaffoldKey.currentState
             .showSnackBar(ksnackBar(context, 'Please enter details properly'));
+        cprint('Login Error', errorIn: 'Have Not Entered Details Properly');
       } else {
         bool response = await model.checkUserDetails(
-          email: emailController.text,
-          password: passwordController.text,
-          schoolCode: schoolNameController.text,
+          email: _emailController.text,
+          password: _passwordController.text,
+          schoolCode: _schoolNameController.text,
           userType: loginTypeSelected,
           buttonType: buttonType,
-          confirmPassword: confirmPasswordController.text,
+          confirmPassword: _confirmPasswordController.text,
         );
         if (response) {
           if (locator<AuthenticationServices>().userType == UserType.PARENT) {
@@ -82,14 +103,6 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.pop(context);
             },
           ),
-          // floatingActionButton: LoginRoundedButton(
-          //   label:
-          //       buttonType == ButtonType.LOGIN ? string.login : string.register,
-          //   onPressed: () async {
-          //     if (model.state == ViewState.Idle)
-          //       await loginRegisterBtnTap(model, context);
-          //   },
-          // ),
           body: Stack(
             fit: StackFit.expand,
             children: <Widget>[
@@ -110,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(14)),
                           child: TextFormField(
                             onChanged: (id) {},
-                            controller: schoolNameController,
+                            controller: _schoolNameController,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.text,
                             onFieldSubmitted: (v) {
@@ -158,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                               errorBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
                             ),
-                            controller: emailController,
+                            controller: _emailController,
                             onFieldSubmitted: (v) {
                               FocusScope.of(context).nextFocus();
                             },
@@ -190,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                               errorBorder: InputBorder.none,
                               disabledBorder: InputBorder.none,
                             ),
-                            controller: passwordController,
+                            controller: _passwordController,
                             onFieldSubmitted: (v) {
                               FocusScope.of(context).nextFocus();
                             },
@@ -224,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                                     errorBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
                                   ),
-                                  controller: confirmPasswordController,
+                                  controller: _confirmPasswordController,
                                   onFieldSubmitted: (v) {
                                     FocusScope.of(context).nextFocus();
                                   },
