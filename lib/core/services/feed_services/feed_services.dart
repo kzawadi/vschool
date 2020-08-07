@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
-import 'package:ourESchool/core/Models/feed/feed.dart';
 import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:rxdart/rxdart.dart';
