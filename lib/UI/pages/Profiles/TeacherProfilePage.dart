@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/UI/pages/Home.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
@@ -197,7 +198,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                               hintText: string.student_teacher_name_hint,
                               labelText: string.student_teacher_name,
                               onChanged: (name) {
-                                print(name);
+                                cprint(name, event: 'Name of Teacher Entered');
                                 _name = name;
                               },
                               controller: TextEditingController(text: _name),
@@ -208,6 +209,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                               labelText: string.student_or_teacher_id,
                               onChanged: (id) {
                                 _enrollNo = id;
+                                cprint(id, event: 'The Id Enetred');
                               },
                               controller:
                                   TextEditingController(text: _enrollNo),
@@ -220,6 +222,8 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                                   child: ProfileFields(
                                     labelText: string.standard,
                                     onChanged: (std) {
+                                      cprint(std,
+                                          event: 'The standard choosen');
                                       _standard = std;
                                     },
                                     hintText: '',
@@ -235,6 +239,8 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                                     labelText: string.division,
                                     onChanged: (div) {
                                       _division = div;
+                                      cprint(div,
+                                          event: 'The Division choosen');
                                     },
                                     hintText: '',
                                     controller:
@@ -249,6 +255,8 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                               labelText: string.guardian_name,
                               onChanged: (guardianName) {
                                 _guardianName = guardianName;
+                                cprint(guardianName,
+                                    event: 'The Name of Guardian choosen');
                               },
                               controller:
                                   TextEditingController(text: _guardianName),
@@ -269,6 +277,8 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                                           textInputType: TextInputType.number,
                                           onChanged: (dob) {
                                             _dob = dob;
+                                            cprint(dob,
+                                                event: 'Date of Birth choosen');
                                           },
                                           hintText: '',
                                           controller: TextEditingController(
@@ -287,6 +297,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                                     labelText: string.blood_group,
                                     onChanged: (bg) {
                                       _bloodGroup = bg;
+                                      cprint(bg, event: 'Blood Group Choosen');
                                     },
                                     controller: TextEditingController(
                                         text: _bloodGroup),
@@ -300,8 +311,10 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
                               hintText: string.your_parents,
                               labelText: string.mobile_no,
                               // prefixIcon: Icon(Icons.person),
-                              onChanged: (mobile_no) {
-                                _mobileNo = mobile_no;
+                              onChanged: (mobileno) {
+                                _mobileNo = mobileno;
+                                cprint(mobileno,
+                                    event: 'Mobile number Entered');
                               },
                               controller:
                                   TextEditingController(text: _mobileNo),
