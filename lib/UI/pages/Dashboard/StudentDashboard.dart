@@ -1,4 +1,4 @@
-import 'package:ourESchool/UI/pages/Dashboard/Fees/dashboard.dart';
+import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_page_dashboard.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/imports.dart';
 

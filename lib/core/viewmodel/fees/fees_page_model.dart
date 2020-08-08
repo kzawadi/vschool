@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/services/feesServices/feesServices.dart';
 import 'package:ourESchool/locator.dart';
@@ -15,4 +16,13 @@ class FeesPageModel extends FutureViewModel<Fees> {
 
   @override
   Future<Fees> futureToRun() => getFees();
+
+  @override
+  void onError(error) {
+    cprint(error,
+        errorIn: 'cant fetch fees for this student',
+        warningIn:
+            'an error in firestore data(fees) is not available yet for this student');
+    super.onError(error);
+  }
 }

@@ -6,7 +6,7 @@ import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Assignment/AssignmentPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/E-Card/E-CardPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/create_fees.dart';
-import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_Page.dart';
+import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_page_dashboard.dart';
 import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/User.dart';
@@ -138,8 +138,7 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                   onPressed: () {
                     kopenPage(
                       context,
-                      FeesPage(
-                        fees: widget.fees,
+                      FeesPageDash(
                         student: widget.user,
                       ),
                       'Fees_Page',
