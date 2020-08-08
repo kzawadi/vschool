@@ -5,8 +5,6 @@ import 'package:ourESchool/core/Models/fees/fees_model.dart';
 import 'package:ourESchool/core/services/Services.dart';
 
 class FeesServices extends Services {
-  DocumentSnapshot feessnapshot;
-  List<DocumentSnapshot> first;
   static const _DEFAULT_TIMEOUT = Duration(seconds: 10);
 
   Future<Fees> getFees({String studentId}) async {

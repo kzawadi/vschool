@@ -49,9 +49,9 @@ class ProfileServices extends Services {
       headers: headers,
     );
     if (response.statusCode == 200) {
-      print("Data Uploaded Succesfully");
+      cprint("Data Uploaded Succesfully", event: 'Data Uploaded Succesfully');
     } else {
-      print("Data Upload error");
+      cprint("Data Upload error", errorIn: 'Failed to upload');
     }
   }
 
@@ -80,8 +80,8 @@ class ProfileServices extends Services {
       "country": country
     });
     // print('data of child to be updated is $profileDataHashMap');
-    cprint(profileDataHashMap,
-        warningIn: 'This is tha data of profile to be written in firestore');
+    // cprint(user.toString(),
+    //     warningIn: 'This is tha data of profile to be written in firestore');
     final response = await http.post(
       profileUpdateUrl,
       body: body,
@@ -124,9 +124,10 @@ class ProfileServices extends Services {
       "userType": UserTypeHelper.getValue(userType),
       "country": country
     });
-    cprint(profileDataHashMap,
-        warningIn:
-            'This is tha data of profile for Teacher to be written in firestore');
+    //this bring an error cprint cant print Map
+    // cprint(user.toString(),
+    //     warningIn:
+    //         'This is tha data of profile for Teacher to be written in firestore');
     final response = await http.post(
       profileUpdateUrl,
       body: body,

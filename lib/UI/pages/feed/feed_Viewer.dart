@@ -21,11 +21,12 @@ class FeedViewer extends StatelessWidget {
     Key key,
     this.feed,
   }) : super(key: key);
-  bool isAteacher = false;
+  // final bool isAteacher = false;
   final FeedViewModel feedModel = locator<FeedViewModel>();
 
   @override
   Widget build(BuildContext context) {
+    bool isAteacher = false;
     var userType = Provider.of<UserType>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isAteacher = true;
@@ -41,7 +42,9 @@ class FeedViewer extends StatelessWidget {
         appBar: TopBar(
           title: "Viewer",
           child: kBackBtn,
-          onPressed: () {},
+          onPressed: () {
+            kbackBtn(context);
+          },
         ),
         body: Container(
           child: SafeArea(
