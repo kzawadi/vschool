@@ -1,3 +1,4 @@
+import 'package:logging/logging.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
@@ -7,14 +8,19 @@ import 'UI/pages/Splash/splashScreen.dart';
 import 'imports.dart';
 
 void main() {
+  final _logger = Logger('VSchool');
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  // debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message}');
+  });
 
   Provider.debugCheckInvalidValueType = null;
   setupLocator();
+  _logger.info('Going into splash screen');
   runApp(
     SplaScreen(),
   );
