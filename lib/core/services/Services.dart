@@ -13,11 +13,11 @@ import 'package:ourESchool/locator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class Services {
-  SharedPreferencesHelper _sharedPreferencesHelper =
+  final SharedPreferencesHelper _sharedPreferencesHelper =
       locator<SharedPreferencesHelper>();
-  static String country =
+  static final String country =
       "India"; //Get this from firstScreen(UI Not developed yet)
-  static FirebaseAuth _auth = FirebaseAuth.instance;
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static final Firestore _firestore = Firestore.instance;
   static final FirebaseMessaging _fcm = FirebaseMessaging();
@@ -38,31 +38,31 @@ class Services {
   final StorageReference _storageReference =
       FirebaseStorage.instance.ref().child(country);
 
-  Map<String, String> headers = {
+  final Map<String, String> headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
   };
 
-  String baseUrl = Server.baseUrl;
+  final String baseUrl = Server.baseUrl;
 
-  String webApiUrl = Server.baseUrl + Server.webApi;
+  final String webApiUrl = Server.baseUrl + Server.webApi;
 
-  String profileUpdateUrl =
+  final String profileUpdateUrl =
       Server.baseUrl + Server.webApi + Server.profileUpdate;
 
-  String getProfileDataUrl =
+  final String getProfileDataUrl =
       Server.baseUrl + Server.webApi + Server.getProfileData;
 
-  String postAnnouncemnetUrl =
+  final String postAnnouncemnetUrl =
       Server.baseUrl + Server.webApi + Server.postAnnouncement;
 
-  String addAssignmentUrl =
+  final String addAssignmentUrl =
       Server.baseUrl + Server.webApi + Server.addAssignment;
 
-  DocumentReference _schoolRef =
+  final DocumentReference _schoolRef =
       _firestore.collection('Schools').document(country);
 
-  DocumentReference _wallRef =
+  final DocumentReference _wallRef =
       _firestore.collection('walls').document('websites');
 
   Firestore get firestore => _firestore;

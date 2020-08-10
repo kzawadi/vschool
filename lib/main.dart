@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class OurSchoolApp extends StatelessWidget with Services {
   OurSchoolApp({
     Key key,
