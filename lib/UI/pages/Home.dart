@@ -4,6 +4,7 @@ import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
+import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
@@ -27,7 +28,8 @@ class _HomeState extends State<Home> with Services {
     MainDashboard(),
     ChatPage(),
     // NotificationPage(),
-    SettingPage()
+    Settings()
+    // SettingPage()
   ];
 
   @override
@@ -116,7 +118,7 @@ class _HomeState extends State<Home> with Services {
           } else if (v == 2) {
             pageName = ChatPage.pageName;
           } else if (v == 3) {
-            pageName = SettingPage.pageName;
+            pageName = Settings.name;
           }
           _currentIndex = v;
         });

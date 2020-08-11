@@ -52,23 +52,7 @@ class MyApp extends StatelessWidget {
           value: locator<AuthenticationServices>().isUserLoggedInStream.stream,
         ),
       ],
-      child: DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) => ThemeData(
-          pageTransitionsTheme: PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-            },
-          ),
-          fontFamily: "Nunito",
-          primaryColor: MyColors.primary,
-          accentColor: MyColors.accent,
-          primaryColorDark: MyColors.primaryDark,
-          brightness: brightness,
-        ),
-        themedWidgetBuilder: (context, theme) => OurSchoolApp(theme: theme),
-      ),
+      child: OurSchoolApp(),
     );
   }
 }
@@ -77,41 +61,47 @@ class MyApp extends StatelessWidget {
 class OurSchoolApp extends StatelessWidget with Services {
   OurSchoolApp({
     Key key,
-    @required this.theme,
   }) : super(key: key);
-
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Vitone School App',
-      theme: theme,
-      routes: {
-        WelcomeScreen.id: (context) => WelcomeScreen(),
-        Home.id: (context) => Home(),
-        ProfilePage.id: (context) => ProfilePage(),
-        TeacherProfilePage.id: (context) => TeacherProfilePage(),
-        GuardianProfilePage.id: (context) => GuardianProfilePage(
-              title: 'Guardian Profile',
+    return ChangeNotifierProvider(
+      //Here we provide our ThemeManager to child widget tree
+      create: (_) => ThemeManager(),
+      child: Consumer<ThemeManager>(
+        builder: (context, manager, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Vitone School App',
+            theme: manager.themeData,
+            routes: {
+              WelcomeScreen.id: (context) => WelcomeScreen(),
+              Home.id: (context) => Home(),
+              ProfilePage.id: (context) => ProfilePage(),
+              TeacherProfilePage.id: (context) => TeacherProfilePage(),
+              GuardianProfilePage.id: (context) => GuardianProfilePage(
+                    title: 'Guardian Profile',
+                  ),
+            },
+            home: AnnotatedRegion<SystemUiOverlayStyle>(
+              child: getHome(context),
+              value: SystemUiOverlayStyle(
+                statusBarColor: Colors.transparent, // transparent status bar
+                systemNavigationBarColor:
+                    Colors.transparent, // navigation bar color
+                statusBarIconBrightness: isThemeCurrentlyDark(context)
+                    ? Brightness.dark
+                    : Brightness.light, // status bar icons' color
+                systemNavigationBarIconBrightness:
+                    Brightness.dark, //navigation bar icons' color
+              ),
             ),
-      },
-      home: AnnotatedRegion<SystemUiOverlayStyle>(
-        child: getHome(context),
-        value: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent, // transparent status bar
-          systemNavigationBarColor: Colors.transparent, // navigation bar color
-          statusBarIconBrightness: isThemeCurrentlyDark(context)
-              ? Brightness.light //todo fixed theme preferences not reloading
-              : Brightness.dark, // status bar icons' color
-          systemNavigationBarIconBrightness:
-              Brightness.dark, //navigation bar icons' color
-        ),
+            navigatorObservers: [
+              locator<AnalyticsService>().getAnalyticsObserver(),
+            ],
+          );
+        },
       ),
-      navigatorObservers: [
-        locator<AnalyticsService>().getAnalyticsObserver(),
-      ],
     );
   }
 
