@@ -1,4 +1,5 @@
 import 'package:logging/logging.dart';
+import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
@@ -52,21 +53,22 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: DynamicTheme(
-          defaultBrightness: Brightness.light,
-          data: (brightness) => ThemeData(
-                pageTransitionsTheme: PageTransitionsTheme(
-                  builders: {
-                    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-                    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-                  },
-                ),
-                fontFamily: "Nunito",
-                primaryColor: MyColors.primary,
-                accentColor: MyColors.accent,
-                primaryColorDark: MyColors.primaryDark,
-                brightness: brightness,
-              ),
-          themedWidgetBuilder: (context, theme) => OurSchoolApp(theme: theme)),
+        defaultBrightness: Brightness.light,
+        data: (brightness) => ThemeData(
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
+          fontFamily: "Nunito",
+          primaryColor: MyColors.primary,
+          accentColor: MyColors.accent,
+          primaryColorDark: MyColors.primaryDark,
+          brightness: brightness,
+        ),
+        themedWidgetBuilder: (context, theme) => OurSchoolApp(theme: theme),
+      ),
     );
   }
 }
