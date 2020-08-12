@@ -31,7 +31,11 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     LoginPageModel model = locator<LoginPageModel>();
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
+      appBar: AppBar(
+        title: Text('Settings'),
+        centerTitle: true,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
