@@ -1,8 +1,6 @@
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart';
-import 'package:ourESchool/UI/Widgets/DynamicThemeChanger.dart';
-import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/UI/pages/Login/ForgotPassword.dart';
 import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';

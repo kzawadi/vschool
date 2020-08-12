@@ -82,7 +82,6 @@ export 'UI/Widgets/TopBar.dart';
 export 'UI/pages/Profiles/GuardianProfile.dart';
 export 'UI/pages/Profiles/ProfilePage.dart';
 export 'UI/Utility/Resources.dart';
-export 'UI/Widgets/DynamicThemeChanger.dart';
 export 'UI/pages/WelcomeScreen.dart';
 export 'UI/Utility/constants.dart';
 export 'UI/Utility/custom_icons.dart';
