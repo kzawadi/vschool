@@ -16,7 +16,7 @@ class ChildrenGridViewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool registerd = user.firebaseUuid == '' ? false : true;
+    bool registerd = user.id == '' ? false : true;
     return SafeArea(
       // constraints: BoxConstraints(maxHeight: 100, maxWidth: 100),
       child: InkWell(
@@ -79,6 +79,11 @@ class ChildrenGridViewCard extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         Text(
+                          // user.displayName,
+                          //this showd Not registerd in the list of children
+                          //becouse it had a boolean which was true when
+                          //firebase uid was there but we have changed our model
+                          //.....................
                           registerd ? user.displayName : "Not Registered Yet",
                           textAlign: TextAlign.center,
                           style: ktitleStyle.copyWith(color: Colors.white),

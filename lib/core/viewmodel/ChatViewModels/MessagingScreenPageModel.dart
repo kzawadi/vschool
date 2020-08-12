@@ -14,6 +14,7 @@ class MessagingScreenPageModel extends BaseModel {
   /// to the user and filtered them if alread marked and also if it does not belong
   /// to a sender by comparing the`user.id`
   delivery({List<Message> messagesList, User student, User user}) async {
+    // todo shifting this logic to its service
     List<Message> filteredsms = messagesList
         .where(
           (e) => e.readReceipt == false && e.from != user.id,

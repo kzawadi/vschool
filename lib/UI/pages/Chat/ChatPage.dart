@@ -55,39 +55,39 @@ class _ChatPageState extends State<ChatPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 12,
-                      child: model.selectedChild.isEmpty()
-                          ? Container(
-                              // color: Colors.red,
-                              child: Center(
-                                child: Text(
-                                  'No Child Selected',
-                                  style: ktitleStyle.copyWith(fontSize: 20),
-                                ),
-                              ),
-                            )
-                          : model.state == ViewState.Busy
-                              ? kBuzyPage(color: Theme.of(context).primaryColor)
-                              : Container(
-                                  // color: Colors.yellow,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: ListView.builder(
-                                      itemCount: model.teachersSnapshot.length,
-                                      itemBuilder: (context, i) {
-                                        // values.keys.elementAt(index);
-                                        var key = model.teachersSnapshot.keys
-                                            .elementAt(i);
-                                        var snapshot =
-                                            model.teachersSnapshot[key];
-                                        return ChatTeachersListWidget(
-                                          heroTag: snapshot.documentID,
-                                          snapshot: snapshot,
-                                          model: model,
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
+                      // child: model.selectedChild.isEmpty()
+                      //     ? Container(
+                      //         // color: Colors.red,
+                      //         child: Center(
+                      //           child: Text(
+                      //             'No Child Selected',
+                      //             style: ktitleStyle.copyWith(fontSize: 20),
+                      //           ),
+                      //         ),
+                      //       )
+                      //     : model.state == ViewState.Busy
+                      //         ? kBuzyPage(color: Theme.of(context).primaryColor)
+                      //         :
+                      child: Container(
+                        // color: Colors.yellow,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: ListView.builder(
+                            itemCount: model.teachersSnapshot.length,
+                            itemBuilder: (context, i) {
+                              // values.keys.elementAt(index);
+                              var key =
+                                  model.teachersSnapshot.keys.elementAt(i);
+                              var snapshot = model.teachersSnapshot[key];
+                              return ChatTeachersListWidget(
+                                heroTag: snapshot.documentID,
+                                snapshot: snapshot,
+                                model: model,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                     ),
                     Expanded(
                       flex: 1,

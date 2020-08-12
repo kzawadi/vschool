@@ -12,6 +12,7 @@ class ProfilePageModel extends BaseModel {
   User userProfile;
 
   List<User> get childrens => _profileServices.childrens;
+  List<String> get childUserNames => _profileServices.childrensId;
 
   ProfilePageModel() {
     getUserProfileData();
@@ -22,13 +23,37 @@ class ProfilePageModel extends BaseModel {
     getChildrens();
   }
 
-  Future<bool> setUserProfileData({
+  Future<bool> setProfileDataforChild({
+    User user,
+  }) async {
+    setState(ViewState.Busy);
+
+    await _profileServices.setProfileDataforChild(user: user);
+    await Future.delayed(const Duration(seconds: 3), () {});
+
+    setState(ViewState.Idle);
+    return true;
+  }
+
+  Future<bool> setProfileDataParent({
     User user,
     UserType userType,
   }) async {
     setState(ViewState.Busy);
 
-    await _profileServices.setProfileData(user: user, userType: userType);
+    await _profileServices.setProfileDataParent(user: user);
+    await Future.delayed(const Duration(seconds: 3), () {});
+
+    setState(ViewState.Idle);
+    return true;
+  }
+
+  Future<bool> setProfileDataTeacher({
+    User user,
+  }) async {
+    setState(ViewState.Busy);
+
+    await _profileServices.setProfileDataTeacher(user: user);
     await Future.delayed(const Duration(seconds: 3), () {});
 
     setState(ViewState.Idle);
@@ -40,6 +65,8 @@ class ProfilePageModel extends BaseModel {
     setState2(ViewState.Busy);
     userProfile = await _profileServices.getLoggedInUserProfileData();
     // loggedInUserStream.add(userProfile);
+    getChildUserName();
+    // getChildParentId();
     setState2(ViewState.Idle);
     setState(ViewState.Idle);
     return userProfile;
@@ -48,6 +75,12 @@ class ProfilePageModel extends BaseModel {
   getChildrens() async {
     setState(ViewState.Busy);
     await _profileServices.getChildrens();
+    setState(ViewState.Idle);
+  }
+
+  getChildUserName() async {
+    setState(ViewState.Busy);
+    await _profileServices.getChildUserName();
     setState(ViewState.Idle);
   }
 
@@ -71,6 +104,12 @@ class ProfilePageModel extends BaseModel {
       UserType userType, String id) async {
     userProfile = await _profileServices.getProfileDataById(id, userType);
     return userProfile;
+  }
+
+  getChildParentId({String childId}) async {
+    setState(ViewState.Busy);
+    await _profileServices.getChildParentId(childId: childId);
+    setState(ViewState.Idle);
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +11,7 @@ class SharedPreferencesHelper {
   final String _photoUrl = 'photoUrl';
   final String _childIds = 'childIds';
   final String _parentsIds = 'parentsIds';
+  final String _parentsIdsData = 'parentsIdsData';
   final String _userModel = 'userJsonModel';
 
   //Method to save User model in json format
@@ -44,7 +46,7 @@ class SharedPreferencesHelper {
     return res;
   }
 
-  //Method to save the _childIds of Parent
+  //Method to save the ParentsId of Parent
   Future<bool> setParentsIds(String parentIds) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     bool res = await preferences.setString(_parentsIds, parentIds);
@@ -52,11 +54,27 @@ class SharedPreferencesHelper {
     return res;
   }
 
-  //Method to retrive the _childIds of Parent
+  //Method to save the ParentsId of Parent
+  Future<bool> setParentsIdsData(String parentIds) async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool res = await preferences.setString(_parentsIdsData, parentIds);
+    print('Parents Id Saved ' + res.toString());
+    return res;
+  }
+
+  //Method to retrive the ParentsId of Parent
   Future<String> getParentsIds() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     String res = preferences.getString(_parentsIds) ?? 'N.A';
     print('Parents Id Retrived ' + res.toString());
+    return res;
+  }
+
+  //Method to retrive the ParentsId of Parent
+  Future<String> getParentsIdsData() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    String res = preferences.getString(_parentsIdsData) ?? 'N.A';
+    print('Parents Id Retrived in Student Data ' + res.toString());
     return res;
   }
 
@@ -137,7 +155,8 @@ class SharedPreferencesHelper {
 
     String res = countryCodePrefs.getString(_schoolCode) ?? "";
 
-    print('School Code Retrived : ' + res);
+    // print('School Code Retrived : ' + res);
+    cprint(res, event: 'School Code Retrived ');
 
     return res.toUpperCase();
   }

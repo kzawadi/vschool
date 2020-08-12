@@ -13,35 +13,20 @@ class AnnouncementServices extends Services {
   DocumentSnapshot lastPostSnapshot = null;
   List<DocumentSnapshot> postDocumentSnapshots = new List<DocumentSnapshot>();
 
-  AnnouncementServices() {
-    getFirebaseUser();
-    getSchoolCode();
-  }
-
-  init() async {
-    if (firebaseUser == null) await getFirebaseUser();
-    if (schoolCode == null) await getSchoolCode();
-  }
-
   /// This function retrive the post either global or class
   /// and it limits to 10 if no anything and limit to 5 if
   /// it has already done so
   getAnnouncements(
-    String stdDiv_Global,
+    String stdDivGlobal,
   ) async {
-    // List<DocumentSnapshot> _data = new List<DocumentSnapshot>();
-
-    if (schoolCode == null) await getSchoolCode();
-
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(stdDiv_Global);
+        (await schoolRefwithCode()).document('Posts').collection(stdDivGlobal);
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();
     if (lastPostSnapshot == null)
       data = await _postRef
           .orderBy('timeStamp', descending: true)
-          //todo add the limit to 20
-          .limit(10)
+          .limit(40)
           .getDocuments();
     else
       data = await _postRef
@@ -69,6 +54,7 @@ class AnnouncementServices extends Services {
 
     String fileName = "";
     String filePath = "";
+    String standard;
 
     if (announcement.photoUrl != '') {
       fileName = createCryptoRandomString(8) +
@@ -83,23 +69,16 @@ class AnnouncementServices extends Services {
     announcement.photoPath = filePath;
     Map announcementMap = announcement.toJson();
 
-    var body = json.encode({
-      "schoolCode": schoolCode.toUpperCase(),
-      "country": Services.country,
-      "announcement": announcementMap
-    });
+    if (announcement.forClass == 'Global') {
+      standard = 'Global';
+    } else
+      standard = announcement.forClass + announcement.forDiv;
 
-    print(body.toString());
+    var _postRef =
+        (await schoolRefwithCode()).document('Posts').collection(standard);
 
-    final response =
-        await http.post(postAnnouncemnetUrl, body: body, headers: headers);
-
-    if (response.statusCode == 200) {
-      print("Post posted Succesfully");
-      print(json.decode(response.body).toString());
-    } else {
-      print("Post posting failed");
-    }
+    _postRef.add(announcementMap);
+    print('feed posted succeful');
   }
 
   deleteAnnouncement(String id, String stdDivGlobal) async {

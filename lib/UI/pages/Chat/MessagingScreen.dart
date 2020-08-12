@@ -1,4 +1,5 @@
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
@@ -43,6 +44,8 @@ class _MessagingScreenState extends State<MessagingScreen> {
       onModelReady: (model) => model.setState2(ViewState.Busy),
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor:
+              isThemeCurrentlyDark(context) ? MyColors.github : Colors.red[50],
           extendBody: true,
           appBar: TopBar(
             onTitleTapped: () {},
@@ -134,6 +137,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
   }
 
   Widget _buildMessageSender(MessagingScreenPageModel model, User user) {
+    final Color fieldBackGround =
+        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.kinderGreen;
+
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -141,40 +147,47 @@ class _MessagingScreenState extends State<MessagingScreen> {
       children: <Widget>[
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 10),
-            child: Container(
-              constraints: BoxConstraints(
-                maxHeight: 150,
-                // maxWidth: MediaQuery.of(context).size.width - 66,
-              ),
-              // width: MediaQuery.of(context).size.width - 65,
-              child: TextField(
-                controller: _messageController,
-                keyboardType: TextInputType.multiline,
-                onChanged: (message) {
-                  if (message.trim().length > 0) {
-                    setState(() {
-                      sendButtonEnable = true;
-                    });
-                  } else {
-                    setState(() {
-                      sendButtonEnable = false;
-                    });
-                  }
-                },
-                // maxLength: 1000,
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintText: 'Type a message....',
-                  hintStyle: TextStyle(
-                    height: 1.5,
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15.0),
+            padding: const EdgeInsets.all(14),
+            child: Material(
+              borderRadius: BorderRadius.circular(14),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: fieldBackGround,
+                    borderRadius: BorderRadius.circular(14)),
+                constraints: BoxConstraints(
+                  maxHeight: 150,
+                  // maxWidth: MediaQuery.of(context).size.width - 66,
+                ),
+                // width: MediaQuery.of(context).size.width - 65,
+                child: TextFormField(
+                  controller: _messageController,
+                  keyboardType: TextInputType.multiline,
+                  onChanged: (message) {
+                    if (message.trim().length > 0) {
+                      setState(() {
+                        sendButtonEnable = true;
+                      });
+                    } else {
+                      setState(() {
+                        sendButtonEnable = false;
+                      });
+                    }
+                  },
+                  // maxLength: 1000,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    hintText: 'Type a message....',
+                    hintStyle: TextStyle(
+                      height: 1.5,
                     ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 14.0, horizontal: 14.0),
+                    prefixIcon: Icon(Icons.chat),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
                 ),
               ),
@@ -185,8 +198,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
             ? Align(
                 alignment: Alignment.center,
                 child: Card(
+                  color: Colors.greenAccent,
                   margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                  elevation: 5,
+                  elevation: 1,
                   shape: kCardCircularShape,
                   child: Container(
                     width: 50,

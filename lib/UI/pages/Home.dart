@@ -1,7 +1,9 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/pages/feed/feed_page.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
-import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
@@ -11,148 +13,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with Services {
-  var _scaffoldKey;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  SharedPreferencesHelper _sharedPreferencesHelper =
-      locator<SharedPreferencesHelper>();
-  StreamSubscription iosSubscription;
-
-  var currentIndex = 0;
+  int _currentIndex = 0;
   Color background = Colors.white;
-  // AuthenticationServices _auth = locator<AuthenticationServices>();
-  bool isTeacher = false;
-  // MainPageModel mainPageModel;
+  FirebaseNotifications _notifications = locator<FirebaseNotifications>();
 
-  // _auth.userType == UserType.STUDENT ? false : true;
   String pageName = string.home;
 
   List<Widget> pages = [
+    FeedPage(),
     MainDashboard(),
     ChatPage(),
     // NotificationPage(),
+    // Settings()
     SettingPage()
-  ];
-
-  List<Widget> studentPages = [
-    StudentDashboard(),
-    SettingPage(),
   ];
 
   @override
   void initState() {
-    //getFirebaseUser();
+    _notifications.firebaseNotificationServices();
+    _notifications.configLocalNotification();
     super.initState();
-    _scaffoldKey = GlobalKey<ScaffoldState>();
-    if (Platform.isIOS) {
-      iosSubscription = cloudmesaging.onIosSettingsRegistered.listen((data) {
-        print(data);
-        _saveDeviceToken();
-      });
-
-      cloudmesaging.requestNotificationPermissions(
-          IosNotificationSettings(sound: true, badge: true, alert: true));
-    } else {
-      _saveDeviceToken();
-    }
-
-    cloudmesaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        // print("onMessage: $message");
-        // _scaffoldKey.currentState.showSnackBar(
-        //   ksnackBar(context, message['notification']['title']),
-        // );
-
-        // print('RECIEVED NOTIFICATION IS $message'.toString());
-        print('onMessage: $message');
-        Platform.isAndroid
-            ? showNotification(message['notification'])
-            : showNotification(message['aps']['alert']);
-        return;
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
-        // TODO optional
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
-        // TODO optional
-      },
-    );
-    configLocalNotification();
-  }
-
-  @override
-  void dispose() {
-    if (iosSubscription != null) iosSubscription.cancel();
-    super.dispose();
-  }
-
-  _saveDeviceToken() async {
-    String fcmToken = await cloudmesaging.getToken();
-    String id = await _sharedPreferencesHelper.getLoggedInUserId();
-
-    print('curent user id is $firebaseUser'.toString());
-
-    // Save it to Firestore
-    if (fcmToken != null) {
-      DocumentReference tokens = firestore
-          .collection('users')
-          .document(id)
-          .collection('tokens')
-          .document(fcmToken);
-
-      await tokens.setData({
-        'token': fcmToken,
-        'createdAt': FieldValue.serverTimestamp(), // optional
-        'platform': Platform.operatingSystem // optional
-      });
-    }
-    print('the token is $fcmToken'.toString());
-  }
-
-  /// Subscribe the user to a topic for notifications from firebase cloud messaging
-  _subscribeToTopic() async {
-    // Subscribe the user to a topic
-    cloudmesaging.subscribeToTopic('daily');
-  }
-
-  void configLocalNotification() {
-    var initializationSettingsAndroid =
-        new AndroidInitializationSettings('app_icon');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-    localNotifications.initialize(initializationSettings);
-  }
-
-  void showNotification(message) async {
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-      Platform.isAndroid
-          ? 'com.mappdeveloper.usa.our_e_school'
-          // todo be replaced by ios project id
-          : 'com.mappdeveloper.usa.our_e_school',
-      'e school chat demo',
-      'General notifications channel descriptions',
-      playSound: true,
-      enableVibration: true,
-      importance: Importance.Max,
-      priority: Priority.High,
-    );
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-
-    print(message);
-//    print(message['body'].toString());
-//    print(json.encode(message));
-
-    await localNotifications.show(0, message['title'].toString(),
-        message['body'].toString(), platformChannelSpecifics,
-        payload: json.encode(message));
-
-//    await flutterLocalNotificationsPlugin.show(
-//        0, 'plain title', 'plain body', platformChannelSpecifics,
-//        payload: 'item x');
   }
 
   ImageProvider<dynamic> setImage(User user) {
@@ -165,164 +47,82 @@ class _HomeState extends State<Home> with Services {
 
   @override
   Widget build(BuildContext context) {
-    var userType = Provider.of<UserType>(context, listen: false);
-    if (userType == UserType.TEACHER) {
-      isTeacher = true;
-    }
-    User user = Provider.of<User>(context, listen: false);
-    return Container(
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: TopBar(
-          buttonHeroTag: 'profileeee',
-          title: pageName,
-          child: CircleAvatar(
-            backgroundImage: setImage(user),
-            radius: 20,
-            // child: ClipOval(
-            //   child: Image(
-            //     fit: BoxFit.fill,
-            //     image: setImage(user),
-            //   ),
-            // ),
-          ),
-          onPressed: () {
-            if (userType == UserType.PARENT) {
-              kopenPage(
-                  context, GuardianProfilePage(), 'Guardian_Profile_Page');
-            } else {
-              kopenPage(context, ProfilePage(), 'ProfilePage');
-            }
-          },
-        ),
-        floatingActionButton: Visibility(
-          visible: isTeacher,
-          child: FloatingActionButton(
-            onPressed: () {
-              kopenPageSlide(context, CreateAnnouncement());
-            },
-            child: Icon(Icons.add),
-            backgroundColor: Colors.red,
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        bottomNavigationBar: buildBubbleBottomBar(userType),
-        body: userType == UserType.STUDENT
-            ? IndexedStack(
-                index: currentIndex,
-                children: studentPages,
-              )
-            : IndexedStack(
-                index: currentIndex,
-                children: pages,
-              ),
+    return Scaffold(
+      key: _scaffoldKey,
+      bottomNavigationBar: bnb(),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: pages,
       ),
     );
   }
 
-  List<BubbleBottomBarItem> studentItems = [
-    BubbleBottomBarItem(
-      backgroundColor: Colors.red,
+  List<BottomNavyBarItem> bottomBarItemsNew = [
+    BottomNavyBarItem(
+      activeColor: Colors.teal[700],
       icon: Icon(
-        Icons.dashboard,
+        Icons.home,
       ),
-      activeIcon: Icon(
-        Icons.dashboard,
-        color: Colors.red,
-      ),
+      inactiveColor: Colors.teal[700],
       title: Text(string.dashboard),
     ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.orange,
-      icon: Icon(
-        Icons.settings,
-      ),
-      activeIcon: Icon(
-        Icons.settings,
-        color: Colors.orange,
-      ),
-      title: Text(
-        string.setting,
-      ),
-    )
-  ];
-
-  List<BubbleBottomBarItem> bottomBarItems = [
-    BubbleBottomBarItem(
-      backgroundColor: Colors.red,
+    BottomNavyBarItem(
+      activeColor: Colors.blue,
       icon: Icon(
         Icons.dashboard,
       ),
-      activeIcon: Icon(
-        Icons.dashboard,
-        color: Colors.red,
-      ),
+      inactiveColor: Colors.blue,
       title: Text(string.dashboard),
     ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.deepPurple,
+    BottomNavyBarItem(
+      activeColor: Colors.pink[300],
       icon: Icon(
         CustomIcons.chat_bubble,
         // size: 25,
       ),
-      activeIcon: Icon(
-        CustomIcons.chat_bubble,
-        color: Colors.deepPurple,
-      ),
+      inactiveColor: Colors.pink[300],
       title: Text(string.chat),
     ),
-    BubbleBottomBarItem(
-      backgroundColor: Colors.orange,
+    BottomNavyBarItem(
+      inactiveColor: Colors.orange,
       icon: Icon(
         Icons.settings,
       ),
-      activeIcon: Icon(
-        Icons.settings,
-        color: Colors.orange,
-      ),
+      activeColor: Colors.orange,
       title: Text(
         string.setting,
       ),
     )
   ];
 
-  BubbleBottomBar buildBubbleBottomBar(UserType userType) {
-    return BubbleBottomBar(
-      backgroundColor: Theme.of(context).canvasColor,
-      opacity: .2,
-      currentIndex: currentIndex,
-      onTap: (v) {
-        if (userType == UserType.STUDENT) {
-          setState(() {
-            if (v == 0) {
-              pageName = StudentDashboard.pageName;
-            } else {
-              pageName = SettingPage.pageName;
-            }
-            currentIndex = v;
-          });
-        } else {
-          setState(() {
-            if (v == 0) {
-              pageName = MainDashboard.pageName;
-            } else if (v == 1) {
-              pageName = ChatPage.pageName;
-            } else if (v == 2) {
-              pageName = SettingPage.pageName;
-            }
-            currentIndex = v;
-          });
-        }
+  BottomNavyBar bnb() {
+    return BottomNavyBar(
+      curve: Curves.easeIn,
+      itemCornerRadius: 50,
+      iconSize: 24,
+      containerHeight: 56,
+      backgroundColor:
+          isThemeCurrentlyDark(context) ? MyColors.github : MyColors.white,
+      // animationDuration: Duration(milliseconds: 260), it is the default
+      selectedIndex: _currentIndex,
+      showElevation: false, // use this to remove appBar's elevation
+      onItemSelected: (v) {
+        setState(() {
+          // HapticFeedback.selectionClick();
+          if (v == 0) {
+            pageName = FeedPage.pageName;
+          } else if (v == 1) {
+            pageName = MainDashboard.pageName;
+          } else if (v == 2) {
+            pageName = ChatPage.pageName;
+          } else if (v == 3) {
+            pageName = SettingPage.pageName;
+          }
+          _currentIndex = v;
+        });
+        // }
       },
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(16),
-      ),
-      elevation: 10,
-      fabLocation: isTeacher ? BubbleBottomBarFabLocation.end : null, //new
-      hasNotch: isTeacher, //new
-      hasInk: true, //new, gives a cute ink effect
-      inkColor: Colors.black12, //optional, uses theme color if not specified
-      items: userType == UserType.STUDENT ? studentItems : bottomBarItems,
+      items: bottomBarItemsNew,
     );
   }
 }

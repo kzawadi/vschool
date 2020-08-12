@@ -1,4 +1,6 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
+import 'package:ourESchool/UI/pages/DataEntry/data_Entry_Page.dart';
+import 'package:ourESchool/UI/pages/student_Data_Entry/student_data_Entry_Page.dart';
 import 'package:ourESchool/imports.dart';
 
 class MainDashboard extends StatefulWidget {
@@ -18,6 +20,12 @@ class _MainDashboardState extends State<MainDashboard> with Services {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: TopBarAlternative(
+          buttonHeroTag: string.dashboard,
+          title: string.dashboard,
+          onPressed: () {},
+          child: null,
+        ),
         extendBody: true,
         body: Padding(
           padding: EdgeInsets.only(left: 10.0, right: 10.0),
@@ -29,6 +37,9 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   children: [
+                    SizedBox(
+                      height: 100,
+                    ),
                     ColumnReusableCardButton(
                       directionIconHeroTag: string.childrens,
                       height: 70,
@@ -39,47 +50,8 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                         kopenPage(context, ChildrensPage(), 'Childrens_Page');
                       },
                     ),
-                    Container(
-                      height: 110,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          RowReusableCardButton(
-                            tileColor: Colors.deepOrangeAccent,
-                            label: string.e_card,
-                            onPressed: () {
-                              kopenPage(context, ECardPage(), 'ECard_Page');
-                            },
-                            icon: Icons.perm_contact_calendar,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          RowReusableCardButton(
-                            tileColor: null,
-                            icon: Icons.av_timer,
-                            label: string.timetable,
-                            onPressed: () {
-                              kopenPage(
-                                  context, TimeTablePage(), 'TimeTable_Page');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
                     ColumnReusableCardButton(
-                      directionIconHeroTag: string.announcement,
-                      height: 70,
-                      tileColor: Colors.orangeAccent,
-                      label: string.announcement,
-                      icon: CustomIcons.megaphone,
-                      onPressed: () {
-                        kopenPage(
-                            context, AnnouncementPage(), 'Announcement_Page');
-                      },
-                    ),
-                    ColumnReusableCardButton(
-                      // directionIconHeroTag: string.announcement,
+                      directionIconHeroTag: string.wall,
                       height: 70,
                       tileColor: Colors.orangeAccent,
                       label: string.wall,
@@ -117,6 +89,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       ),
                     ),
                     ColumnReusableCardButton(
+                      directionIconHeroTag: string.transportation,
                       height: 70,
                       tileColor: Colors.grey,
                       label: string.transportation,
@@ -127,6 +100,43 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                         //     contentType: 'Fees Page Dashboard', itemId: null);
                       },
                       icon: FontAwesomeIcons.bus,
+                    ),
+                    ColumnReusableCardButton(
+                      directionIconHeroTag: 'Data_Importer',
+                      height: 70,
+                      tileColor: Colors.grey,
+                      label: 'Data Importer',
+                      onPressed: () {
+                        kopenPage(context, DataImpoter(), 'Data_Importer');
+                        // analytics.logSelectContent(
+                        //     contentType: 'Fees Page Dashboard', itemId: null);
+                      },
+                      icon: FontAwesomeIcons.database,
+                    ),
+                    ColumnReusableCardButton(
+                      directionIconHeroTag: 'Data_Importer_student',
+                      height: 70,
+                      tileColor: Colors.grey,
+                      label: 'Student Data Importer',
+                      onPressed: () {
+                        kopenPage(context, StudentDataImpoter(),
+                            'Student_Data_Importer');
+                        // analytics.logSelectContent(
+                        //     contentType: 'Fees Page Dashboard', itemId: null);
+                      },
+                      icon: FontAwesomeIcons.database,
+                    ),
+                    ColumnReusableCardButton(
+                      directionIconHeroTag: 'childprofile',
+                      height: 70,
+                      tileColor: Colors.blue,
+                      label: 'Child Profile',
+                      onPressed: () {
+                        kopenPage(context, ProfilePage(), 'Child_Profile');
+                        // analytics.logSelectContent(
+                        //     contentType: 'Fees Page Dashboard', itemId: null);
+                      },
+                      icon: FontAwesomeIcons.user,
                     ),
                     SizedBox(
                       height: 105,
@@ -166,14 +176,6 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                           ),
                         ],
                       ),
-                    ),
-                    ColumnReusableCardButton(
-                      tileColor: Colors.greenAccent,
-                      height: 70,
-                      label: string.offers,
-                      onPressed: () {},
-                      icon: Icons.receipt,
-                      directionIcon: Icons.chevron_right,
                     ),
                   ],
                 ),

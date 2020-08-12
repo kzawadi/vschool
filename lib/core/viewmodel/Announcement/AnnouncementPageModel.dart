@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/services/AnnouncementServices.dart';
-import 'package:ourESchool/core/viewmodel/BaseModel.dart';
 import 'package:ourESchool/locator.dart';
+import 'package:stacked/stacked.dart';
 
-class AnnouncementPageModel extends BaseModel {
+class AnnouncementPageModel extends BaseViewModel {
   AnnouncementServices _announcementServices = locator<AnnouncementServices>();
 
   AnnouncementPageModel();
@@ -13,15 +12,17 @@ class AnnouncementPageModel extends BaseModel {
       _announcementServices.postDocumentSnapshots;
 
   getAnnouncements(String stdDivGlobal) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     await _announcementServices.getAnnouncements(stdDivGlobal);
-    setState(ViewState.Idle);
+    notifyListeners();
+    setBusy(false);
   }
 
   deleteAnnouncements(String id, String stdDivGlobal) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     await _announcementServices.deleteAnnouncement(id, stdDivGlobal);
-    setState(ViewState.Idle);
+    notifyListeners();
+    setBusy(false);
   }
 
   onRefresh(String stdDivGlobal) async {

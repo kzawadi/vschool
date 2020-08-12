@@ -15,6 +15,8 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
 
     const newValue = eventSnapshot.after!.data();
     const studentProfileRef = eventSnapshot.after.ref;
+    // const newValue = eventSnapshot.data();
+    // const studentProfileRef = eventSnapshot.ref;
 
     const standard = newValue!.standard;
     const division = newValue!.division;
@@ -26,6 +28,7 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
 
     let map = {
         id: studentProfileRef,
+        userId:studentId,    //trying to put/store an id to help in query of specific doc in chats
     }
 
     //var batch = db.batch();
@@ -61,6 +64,7 @@ export async function studentParentAutoEntry(eventSnapshot: any, context: any) {
 
             const connectionMap = {
                 id: connectionProfileRef,
+                userId:value,
             }
             return db.collection('Schools').doc(country)
             .collection(schoolCode).doc('Parents').collection(standard + division).doc(value)
@@ -168,7 +172,9 @@ export async function notificationChat(eventSnapshot: any, context: any) {
     .collection('users')
     .doc(id)
     .collection('tokens')
-    .get();
+    .limit(3)
+    .orderBy('createdAt', "desc")
+    .get()
 
   const tokens = querySnapshot.docs.map(snap => snap.id);
 

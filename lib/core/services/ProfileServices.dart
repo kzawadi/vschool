@@ -1,4 +1,6 @@
 import 'package:http/http.dart' as http;
+import 'package:ourESchool/UI/resources/utility.dart';
+import 'package:ourESchool/core/Models/studentData/studentData.dart';
 import 'package:ourESchool/imports.dart';
 
 class ProfileServices extends Services {
@@ -9,22 +11,18 @@ class ProfileServices extends Services {
   String country = Services.country;
 
   List<User> childrens = [];
+  List<String> childrensId = [];
 
   ProfileServices() {
-    getSchoolCode();
+    // getSchoolCode();
     getFirebaseUser();
   }
 
   /// this function sets the Profile Data of the User using a restful api in
-  /// firebase function and after that it caches the data with shared preferences
-  /// and also add the data to a stream (loggedInUserStream)
-  setProfileData({
+  setProfileDataforChild({
     User user,
-    UserType userType,
   }) async {
-    UserType userType = await sharedPreferencesHelper.getUserType();
-    // String photoUrl = '';
-    // String url = await sharedPreferencesHelper.getLoggedInUserPhotoUrl();
+    UserType userType = UserType.STUDENT;
 
     if (user.photoUrl.contains('https')) {
       // photoUrl = url;
@@ -51,15 +49,100 @@ class ProfileServices extends Services {
       headers: headers,
     );
     if (response.statusCode == 200) {
-      // getProfileData(user.id, userType);
-      print("Data Uploaded Succesfully");
+      cprint("Data Uploaded Succesfully", event: 'Data Uploaded Succesfully');
+    } else {
+      cprint("Data Upload error", errorIn: 'Failed to upload');
+    }
+  }
+
+  //this function is similar to the above```setProfileData
+  setProfileDataParent({
+    User user,
+  }) async {
+    UserType userType = UserType.PARENT;
+
+    if (user.photoUrl.contains('https')) {
+      // photoUrl = url;
+    } else if (user.photoUrl == 'default') {
+      // user.photoUrl = user.photoUrl;
+    } else {
+      user.photoUrl = await storageServices.setProfilePhoto(user.photoUrl);
+    }
+
+    // user.photoUrl = photoUrl;
+
+    Map profileDataHashMap = user.toJson();
+
+    var body = json.encode({
+      "schoolCode": schoolCode.trim().toUpperCase(),
+      "profileData": profileDataHashMap,
+      "userType": UserTypeHelper.getValue(userType),
+      "country": country
+    });
+    // print('data of child to be updated is $profileDataHashMap');
+    // cprint(user.toString(),
+    //     warningIn: 'This is tha data of profile to be written in firestore');
+    final response = await http.post(
+      profileUpdateUrl,
+      body: body,
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      // print("Data Uploaded Succesfully");
+      cprint('Data Uploaded Succesfully');
       final jsonData = await json.decode(response.body);
 
       User user = User.fromJson(jsonData);
       sharedPreferencesHelper.setUserDataModel(response.body);
       loggedInUserStream.add(user);
     } else {
-      print("Data Upload error");
+      // print("Data Upload error");
+      cprint('Data Upload error', errorIn: 'can\'nt  upload Data');
+    }
+  }
+
+  setProfileDataTeacher({
+    User user,
+  }) async {
+    UserType userType = UserType.TEACHER;
+
+    if (user.photoUrl.contains('https')) {
+      // photoUrl = url;
+    } else if (user.photoUrl == 'default') {
+      // user.photoUrl = user.photoUrl;
+    } else {
+      user.photoUrl = await storageServices.setProfilePhoto(user.photoUrl);
+    }
+
+    // user.photoUrl = photoUrl;
+
+    Map profileDataHashMap = user.toJson();
+
+    var body = json.encode({
+      "schoolCode": schoolCode.trim().toUpperCase(),
+      "profileData": profileDataHashMap,
+      "userType": UserTypeHelper.getValue(userType),
+      "country": country
+    });
+    //this bring an error cprint cant print Map
+    // cprint(user.toString(),
+    //     warningIn:
+    //         'This is tha data of profile for Teacher to be written in firestore');
+    final response = await http.post(
+      profileUpdateUrl,
+      body: body,
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      cprint("Data Uploaded Succesfully");
+      final jsonData = await json.decode(response.body);
+
+      User user = User.fromJson(jsonData);
+      sharedPreferencesHelper.setUserDataModel(response.body);
+      loggedInUserStream.add(user);
+    } else {
+      cprint("Data Upload error",
+          errorIn: 'failed to upload data to firestore');
     }
   }
 
@@ -76,7 +159,7 @@ class ProfileServices extends Services {
     String userDataModel = await sharedPreferencesHelper.getUserDataModel();
 
     if (userDataModel != 'N.A') {
-      print("Data Retrived Succesfully (Local)");
+      cprint("Data Retrived Succesfully (Local)");
       final jsonData = await json.decode(userDataModel);
 
       User user = User.fromJson(jsonData);
@@ -92,7 +175,7 @@ class ProfileServices extends Services {
       "country": country
     });
 
-    print(body);
+    cprint(body);
 
     final response = await http.post(
       getProfileDataUrl,
@@ -100,7 +183,7 @@ class ProfileServices extends Services {
       headers: headers,
     );
     if (response.statusCode == 200) {
-      print("Data Retrived Succesfully");
+      cprint("Data Retrived Succesfully");
       final jsonData = await json.decode(response.body);
 
       User user = User.fromJson(jsonData);
@@ -109,7 +192,9 @@ class ProfileServices extends Services {
       user.toString();
       return user;
     } else {
-      print("Data Retrived failed");
+      cprint("Data Retrived failed",
+          warningIn: 'can\'nt retrive user data',
+          errorIn: 'error in retriving data');
       return User(id: id);
     }
   }
@@ -123,7 +208,7 @@ class ProfileServices extends Services {
           await profielRef.get(source: Source.serverAndCache));
       return user;
     } catch (e) {
-      print(e);
+      cprint(e, errorIn: 'cant fetch profile data from firestore');
       return User(id: uid);
     }
   }
@@ -149,7 +234,28 @@ class ProfileServices extends Services {
       ),
     );
     await _getChildrensData(childIds);
-    print('the child Ids are in this format $childIds');
+    cprint('the child Ids are in this format $childIds',
+        event: 'getting child Data');
+  }
+
+  getChildUserName() async {
+    String _childrens = await sharedPreferencesHelper.getChildIds();
+    if (_childrens == 'N.A') {
+      this.childrensId = [];
+      return;
+    }
+
+    Map<String, String> childIds = Map.from(
+      jsonDecode(_childrens).map(
+        (key, values) {
+          String value = values.toString();
+          return MapEntry(key, value);
+        },
+      ),
+    );
+    childrensId = childIds.values.toList();
+    cprint('the childe usernames which are ID  $childrensId',
+        event: 'fetching username which are IDs');
   }
 
   _getChildrensData(Map<String, String> childIds) async {
@@ -157,7 +263,7 @@ class ProfileServices extends Services {
     for (String id in childIds.values) {
       childData.add(await getProfileDataById(id, UserType.STUDENT));
     }
-    print('childId value is $childData');
+    cprint('childId value is $childData', event: 'the value of child IDs');
     childrens = childData;
   }
 
@@ -191,7 +297,7 @@ class ProfileServices extends Services {
       "country": country
     });
 
-    print(body);
+    cprint(body, event: 'http request to fetch profile data by Id');
 
     final response = await http.post(
       getProfileDataUrl,
@@ -199,15 +305,36 @@ class ProfileServices extends Services {
       headers: headers,
     );
     if (response.statusCode == 200) {
-      print("Data Retrived Succesfully");
+      cprint("Data Retrived Succesfully");
       final jsonData = await json.decode(response.body);
 
       User user = User.fromJson(jsonData);
       user.toString();
       return user;
     } else {
-      print("Data Retrived failed");
+      cprint("Data Retrived failed",
+          errorIn: 'failed to retrive Data from http API');
       return User(id: uid);
     }
+  }
+
+  getChildParentId({String childId}) async {
+    DocumentReference docref = (await schoolRefwithCode())
+        .document('Login')
+        .collection('Student')
+        .document(childId);
+//todo chang the firestore backend to use child id as Document
+    await docref.get().then(
+      (value) {
+        studentData = StudentData(
+          email: value["email"].toString(),
+          id: value['id'].toString(),
+          parentIds: value["parentId"] as Map<dynamic, dynamic> ?? null,
+        );
+      },
+    );
+    studentData.setData();
+    cprint('The Parents of The Student have Been saved to the shared pref',
+        event: 'saved the parents of stuents in shared preferences');
   }
 }

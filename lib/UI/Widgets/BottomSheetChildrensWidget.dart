@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/Widgets/ColumnReusableCardButton.dart';
-import 'package:ourESchool/UI/pages/Dashboard/Announcement/AnnouncementPage.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Assignment/AssignmentPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/E-Card/E-CardPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/create_fees.dart';
-import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_Page.dart';
+import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_page_dashboard.dart';
+import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
@@ -64,7 +64,8 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                   onPressed: () {
                     kopenPage(
                       context,
-                      AnnouncementPage(
+                      //todo create a good page for feed of specific student
+                      FeedPage(
                         announcementFor: widget.user.standard +
                             widget.user.division.toUpperCase(),
                       ),
@@ -137,10 +138,8 @@ class _BottomSheetChildrensWidgetState extends State<BottomSheetChildrensWidget>
                   onPressed: () {
                     kopenPage(
                       context,
-                      FeesPage(
-                        fees: widget.fees,
-                        user: widget.user,
-                        // targetId: widget.user.id,
+                      FeesPageDash(
+                        student: widget.user,
                       ),
                       'Fees_Page',
                     );

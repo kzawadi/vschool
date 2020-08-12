@@ -1,8 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
-import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/locator.dart';
 import 'Login/LoginPage.dart';
@@ -14,22 +16,18 @@ class WelcomeScreen extends StatelessWidget {
   List<PageViewModel> page(BuildContext context) {
     return [
       PageViewModel(
-        iconColor: kmainColorTeacher,
-        pageColor: kmainColorTeacher,
-        // bubbleBackgroundColor: Colors.white,
+        bubbleBackgroundColor: MyColors.black,
+        pageColor: MyColors.welcomeTeacherColor,
         title: Container(),
         body: Column(
           children: <Widget>[
-            Text(
+            AutoSizeText(
               string.teacher,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w500),
+              style: GoogleFonts.montserrat(color: Colors.black),
             ),
-            Text(
+            AutoSizeText(
               string.teacher_welcome_text,
-              style: TextStyle(
-                  color: Colors.white54,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400),
+              style: GoogleFonts.lato(color: Colors.black, fontSize: 18),
             ),
           ],
         ),
@@ -42,23 +40,17 @@ class WelcomeScreen extends StatelessWidget {
         textStyle: TextStyle(color: Colors.white),
       ),
       PageViewModel(
-        iconColor: kmainColorStudents,
-        pageColor: kmainColorStudents,
-        // bubbleBackgroundColor: Colors.white,
+        bubbleBackgroundColor: MyColors.black,
+        pageColor: MyColors.kinderGreen,
         title: Container(),
         body: Column(
           children: <Widget>[
-            Text(
+            AutoSizeText(
               string.student,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w500),
+              style: GoogleFonts.montserrat(color: Colors.black),
             ),
-            Text(
-              string.student_welcome_text,
-              style: TextStyle(
-                  color: Colors.white54,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400),
-            ),
+            AutoSizeText(string.student_welcome_text,
+                style: GoogleFonts.lato(color: Colors.black, fontSize: 18)),
           ],
         ),
         mainImage: Image.asset(
@@ -70,22 +62,18 @@ class WelcomeScreen extends StatelessWidget {
         textStyle: TextStyle(color: Colors.white),
       ),
       PageViewModel(
-        iconColor: kmainColorParents,
-        pageColor: kmainColorParents,
-        // bubbleBackgroundColor: Colors.white,
+        bubbleBackgroundColor: MyColors.black,
+        pageColor: MyColors.magicMint,
         title: Container(),
         body: Column(
           children: <Widget>[
             Text(
               string.parents,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.w500),
+              style: GoogleFonts.montserrat(color: Colors.black),
             ),
             Text(
               string.parent_welcome_text,
-              style: TextStyle(
-                  color: Colors.white54,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400),
+              style: GoogleFonts.lato(color: Colors.black, fontSize: 18),
             ),
           ],
         ),
@@ -107,57 +95,59 @@ class WelcomeScreen extends StatelessWidget {
         children: <Widget>[
           IntroViewsFlutter(
             page(context),
-            onTapDoneButton: null,
+            onTapDoneButton: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => LoginPage(),
+                ),
+              );
+              await _analyticsService.logScreen(screenName: 'Login');
+            },
             showNextButton: true,
             showBackButton: true,
             skipText: Text(
               '↠',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 30,
               ),
             ),
             backText: Text(
               '←',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 30,
               ),
             ),
             nextText: Text(
               '→',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 30,
               ),
             ),
             showSkipButton: true,
-            doneText: Container(),
-            pageButtonsColor: Color.fromARGB(100, 254, 198, 27),
-            pageButtonTextStyles: new TextStyle(
-              color: Colors.indigo,
-              fontSize: 16.0,
-            ),
+            fullTransition: 130,
+            doneButtonPersist: true,
           ),
           Positioned(
             bottom: 60.0,
-            width: MediaQuery.of(context).size.width,
-            // left: MediaQuery.of(context).size.width/2 - 40,
+            left: MediaQuery.of(context).size.width / 4,
+            width: MediaQuery.of(context).size.width / 2,
+            // left: MediaQuery.of(context).size.width / 2 - 40,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Hero(
                 tag: 'title',
                 transitionOnUserGestures: true,
                 child: MaterialButton(
-                  height: 50,
+                  height: 48,
                   minWidth: MediaQuery.of(context).size.width - 100,
-                  elevation: 10,
-                  // shape: RoundedRectangleBorder(
-                  //   borderRadius: BorderRadius.only(
-                  //     // bottomRight: Radius.elliptical(40, 1),
-                  //     topRight: Radius.circular(1000),
-                  //   ),
-                  // ),
+                  elevation: 1,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
                   onPressed: () async {
                     Navigator.push(
                       context,
@@ -167,33 +157,13 @@ class WelcomeScreen extends StatelessWidget {
                     );
                     await _analyticsService.logScreen(screenName: 'Login');
                   },
-                  color: Colors.white,
+                  color: MyColors.lightMilky,
                   child: Text(
                     string.get_started,
-                    style: TextStyle(
-                      color: kmainColorTeacher,
-                      fontSize: 20,
-                    ),
+                    style: GoogleFonts.montserrat(
+                        color: Colors.black, fontSize: 17),
                   ),
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 30.0,
-            width: MediaQuery.of(context).size.width,
-            // left: MediaQuery.of(context).size.width/2 - 40,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Icon(
-                    Icons.school,
-                    color: Colors.white,
-                    size: 100,
-                  ),
-                ],
               ),
             ),
           ),

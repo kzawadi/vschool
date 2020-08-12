@@ -7,8 +7,7 @@ class string {
       'Create posts, and notify your students and there parents to keep them updated';
   static const student = 'Students';
   static const student_welcome_text =
-      '''Check School posts to stay updated with school news.
-Take quizzes, test at home all through your phone''';
+      'Check School posts to stay updated with school news.';
   static const parents = 'Parents';
   static const parent_welcome_text = '''Stay in touch with your kid\'s teachers.
 Check School posts to stay updated with school news.''';
@@ -65,6 +64,8 @@ Check School posts to stay updated with school news.''';
   static const dark_theme_subtitle = 'Tap to change Theme';
 
   static const about = 'About!';
+  static const themeSettings = 'Themes';
+  static const theme_subtitle = 'Select Your favorite theme';
   static const about_subtitle = 'Contact us';
 
 //Chat
@@ -96,6 +97,7 @@ Check School posts to stay updated with school news.''';
   static const name_hint = 'One which your parents gave';
 
   static const anniversary_date = 'Anniversary Date';
+  static const select_child = 'Select a Child';
 
 //Result
   static const results = 'Results';
@@ -219,7 +221,7 @@ If you are a parent then go to childrens section to check assignments''';
 class assetsString {
   static const no_image_available = 'assets/no_image_available.png';
 
-  static const teacher_welcome = 'assets/teacher.png';
-  static const student_welcome = 'assets/students.png';
-  static const parents_welcome = 'assets/parent2.png';
+  static const teacher_welcome = 'assets/teacherpng.png';
+  static const student_welcome = 'assets/studentpng.png';
+  static const parents_welcome = 'assets/family.png';
 }

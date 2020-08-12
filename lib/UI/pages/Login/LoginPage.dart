@@ -1,4 +1,7 @@
-import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/imports.dart';
 import 'dart:ui' as ui;
 
@@ -12,38 +15,58 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // String idHint = string.student_id;
-  UserType loginTypeSelected = UserType.STUDENT;
+  UserType loginTypeSelected = UserType.TEACHER;
   bool isRegistered = false;
   String notYetRegisteringText = string.not_registered;
   ButtonType buttonType = ButtonType.LOGIN;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController schoolNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController _schoolNameController;
+  TextEditingController _emailController;
+  TextEditingController _passwordController;
+  TextEditingController _confirmPasswordController;
+
+  @override
+  void initState() {
+    super.initState();
+    _schoolNameController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _schoolNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   // MainPageModel mainPageModel;
 
   loginRegisterBtnTap(LoginPageModel model, BuildContext context) async {
-    if (emailController.text == null ||
-        passwordController.text == null ||
-        schoolNameController.text == null) {
+    if (_emailController.text == null ||
+        _passwordController.text == null ||
+        _schoolNameController.text == null) {
       _scaffoldKey.currentState
           .showSnackBar(ksnackBar(context, 'Please enter details properly'));
+      cprint('Login Error', errorIn: 'Have Entered Bad Creadintials');
     } else {
-      if (emailController.text.trim().isEmpty ||
-          passwordController.text.trim().isEmpty ||
-          schoolNameController.text.trim().isEmpty) {
+      if (_emailController.text.trim().isEmpty ||
+          _passwordController.text.trim().isEmpty ||
+          _schoolNameController.text.trim().isEmpty) {
         _scaffoldKey.currentState
             .showSnackBar(ksnackBar(context, 'Please enter details properly'));
+        cprint('Login Error', errorIn: 'Have Not Entered Details Properly');
       } else {
         bool response = await model.checkUserDetails(
-          email: emailController.text,
-          password: passwordController.text,
-          schoolCode: schoolNameController.text,
+          email: _emailController.text,
+          password: _passwordController.text,
+          schoolCode: _schoolNameController.text,
           userType: loginTypeSelected,
           buttonType: buttonType,
-          confirmPassword: confirmPasswordController.text,
+          confirmPassword: _confirmPasswordController.text,
         );
         if (response) {
           if (locator<AuthenticationServices>().userType == UserType.PARENT) {
@@ -51,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 context, GuardianProfilePage.id, (r) => false);
           } else {
             Navigator.pushNamedAndRemoveUntil(
-                context, ProfilePage.id, (r) => false);
+                context, TeacherProfilePage.id, (r) => false);
           }
         } else {
           // _scaffoldKey.currentState
@@ -65,6 +88,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Color fieldBackGround =
+        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.blakwhitish;
     return BaseView<LoginPageModel>(
       onModelReady: (model) => model,
       builder: (context, model, child) {
@@ -78,76 +103,111 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.pop(context);
             },
           ),
-          floatingActionButton: LoginRoundedButton(
-            label:
-                buttonType == ButtonType.LOGIN ? string.login : string.register,
-            onPressed: () async {
-              if (model.state == ViewState.Idle)
-                await loginRegisterBtnTap(model, context);
-            },
-          ),
           body: Stack(
+            fit: StackFit.expand,
             children: <Widget>[
-              Container(
-                child: SafeArea(
+              SafeArea(
+                child: Container(
                   child: Padding(
                     padding: EdgeInsets.only(left: 20, right: 20, top: 10),
                     child: Column(
                       children: <Widget>[
-                        TextField(
-                          onChanged: (id) {},
-                          controller: schoolNameController,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: string.school_name_code_hint,
-                            labelText: string.school_name_code,
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Container(
+                          // padding: EdgeInsets.symmetric(horizontal: 24),
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: fieldBackGround,
+                              borderRadius: BorderRadius.circular(14)),
+                          child: TextFormField(
+                            onChanged: (id) {},
+                            controller: _schoolNameController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context).nextFocus();
+                            },
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                            decoration: InputDecoration(
+                              hintText: string.school_name_code_hint,
+                              labelText: string.school_name_code,
+                              prefixIcon: Icon(Icons.school),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        // CustomLoginTypeBtn(),
-                        CustomRadioButton(
-                          // horizontal: true,
-                          buttonColor: Theme.of(context).canvasColor,
-                          buttonLables: ['Student', 'Parent/Teacher'],
-                          buttonValues: [UserType.STUDENT, UserType.TEACHER],
-                          radioButtonValue: (value) {
-                            loginTypeSelected = value;
-                            print(value);
-                          },
-                          selectedColor: Theme.of(context).accentColor,
-                        ),
                         SizedBox(
                           height: 10,
                         ),
-                        TextField(
-                          onChanged: (email) {},
-                          keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: string.email_hint,
-                            labelText: string.email,
+                        Container(
+                          // padding: EdgeInsets.symmetric(horizontal: 24),
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: fieldBackGround,
+                              borderRadius: BorderRadius.circular(14)),
+                          child: TextFormField(
+                            onChanged: (email) {},
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.next,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                            decoration: InputDecoration(
+                              hintText: string.email_hint,
+                              labelText: string.email,
+                              prefixIcon: Icon(Icons.email),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
+                            controller: _emailController,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context).nextFocus();
+                            },
                           ),
-                          controller: emailController,
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        TextField(
-                          obscureText: true,
-                          onChanged: (password) {},
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
-                          decoration: kTextFieldDecoration.copyWith(
-                            hintText: string.password_hint,
-                            labelText: string.password,
+                        Container(
+                          // padding: EdgeInsets.symmetric(horizontal: 24),
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: fieldBackGround,
+                              borderRadius: BorderRadius.circular(14)),
+                          child: TextFormField(
+                            obscureText: true,
+                            onChanged: (password) {},
+                            keyboardType: TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w500),
+                            decoration: InputDecoration(
+                              hintText: string.password_hint,
+                              labelText: string.password,
+                              prefixIcon: Icon(Icons.lock),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                            ),
+                            controller: _passwordController,
+                            onFieldSubmitted: (v) {
+                              FocusScope.of(context).nextFocus();
+                            },
                           ),
-                          controller: passwordController,
                         ),
                         isRegistered
                             ? SizedBox(
@@ -155,21 +215,37 @@ class _LoginPageState extends State<LoginPage> {
                               )
                             : Container(),
                         isRegistered
-                            ? TextField(
-                                obscureText: true,
-                                onChanged: (password) {},
-                                keyboardType: TextInputType.text,
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                                decoration: kTextFieldDecoration.copyWith(
-                                  hintText: string.password_hint,
-                                  labelText: string.confirm_password,
+                            ? Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: fieldBackGround,
+                                    borderRadius: BorderRadius.circular(14)),
+                                child: TextFormField(
+                                  obscureText: true,
+                                  onChanged: (password) {},
+                                  keyboardType: TextInputType.text,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                  decoration: InputDecoration(
+                                    hintText: string.password_hint,
+                                    labelText: string.confirm_password,
+                                    prefixIcon: Icon(Icons.lock),
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                  ),
+                                  controller: _confirmPasswordController,
+                                  onFieldSubmitted: (v) {
+                                    FocusScope.of(context).nextFocus();
+                                  },
                                 ),
-                                controller: confirmPasswordController,
                               )
                             : Container(),
                         SizedBox(
-                          height: 15,
+                          height: 5,
                         ),
                         Hero(
                           tag: 'otpForget',
@@ -180,6 +256,7 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 ReusableRoundedButton(
+                                  elevation: 1,
                                   child: Text(
                                     notYetRegisteringText,
                                     style: TextStyle(
@@ -205,6 +282,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 40,
                                 ),
                                 ReusableRoundedButton(
+                                  elevation: 1,
                                   child: Text(
                                     string.need_help,
                                     style: TextStyle(
@@ -227,7 +305,23 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(
-                          height: 100,
+                          height: 25,
+                        ),
+                        LoginRoundedButton(
+                          label: buttonType == ButtonType.LOGIN
+                              ? string.login
+                              : string.register,
+                          onPressed: () async {
+                            if (model.state == ViewState.Idle)
+                              await loginRegisterBtnTap(model, context);
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Image(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/welcome.png"),
                         ),
                       ],
                     ),
