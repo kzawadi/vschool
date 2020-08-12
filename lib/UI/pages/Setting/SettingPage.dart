@@ -1,12 +1,11 @@
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart';
 import 'package:ourESchool/UI/Widgets/DynamicThemeChanger.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
-import 'package:ourESchool/UI/pages/About/About.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/UI/pages/Login/ForgotPassword.dart';
 import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
-import 'package:ourESchool/UI/pages/Profiles/ProfilePage.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/pages/WelcomeScreen.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
@@ -25,13 +24,6 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  void changeBrightness() {
-    DynamicTheme.of(context).setBrightness(
-        Theme.of(context).brightness == Brightness.dark
-            ? Brightness.light
-            : Brightness.dark);
-  }
-
   SharedPreferencesHelper preferencesHelper =
       locator<SharedPreferencesHelper>();
 
@@ -39,13 +31,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     LoginPageModel model = locator<LoginPageModel>();
     return Scaffold(
-      // appBar: TopBarAlternative(
-      //   title: 'Settings',
-      //   child: kBackBtn,
-      //   onPressed: () {
-      //     if (Navigator.canPop(context)) Navigator.pop(context);
-      //   },
-      // ),
+      appBar: AppBar(title: Text('Settings')),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -82,12 +68,6 @@ class _SettingPageState extends State<SettingPage> {
                   title: string.logout),
               settingTiles(
                   context: context,
-                  icon: FontAwesomeIcons.solidMoon,
-                  onTap: changeBrightness,
-                  subtitle: string.dark_theme_subtitle,
-                  title: string.dark_theme),
-              settingTiles(
-                  context: context,
                   icon: Icons.restore,
                   onTap: () {
                     kopenPage(
@@ -99,11 +79,18 @@ class _SettingPageState extends State<SettingPage> {
                   context: context,
                   icon: Icons.contact_mail,
                   onTap: () async {
-                    print((await preferencesHelper.getParentsIds()).toString());
                     kopenPage(context, CreateWall(), 'Create_Wall');
                   },
                   subtitle: string.about_subtitle,
                   title: string.about),
+              settingTiles(
+                  context: context,
+                  icon: Icons.settings,
+                  onTap: () async {
+                    kopenPage(context, Settings(), 'Theme_Settings');
+                  },
+                  subtitle: string.theme_subtitle,
+                  title: string.themeSettings),
             ],
           ),
         ),

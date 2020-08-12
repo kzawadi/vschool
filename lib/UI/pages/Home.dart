@@ -4,7 +4,6 @@ import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
-import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
@@ -18,7 +17,6 @@ class _HomeState extends State<Home> with Services {
 
   int _currentIndex = 0;
   Color background = Colors.white;
-  static Color inactiveColor = Color(0xff4B4743); //0xffdd2c00
   FirebaseNotifications _notifications = locator<FirebaseNotifications>();
 
   String pageName = string.home;
@@ -28,8 +26,8 @@ class _HomeState extends State<Home> with Services {
     MainDashboard(),
     ChatPage(),
     // NotificationPage(),
-    Settings()
-    // SettingPage()
+    // Settings()
+    SettingPage()
   ];
 
   @override
@@ -118,7 +116,7 @@ class _HomeState extends State<Home> with Services {
           } else if (v == 2) {
             pageName = ChatPage.pageName;
           } else if (v == 3) {
-            pageName = Settings.name;
+            pageName = SettingPage.pageName;
           }
           _currentIndex = v;
         });

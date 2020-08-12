@@ -64,6 +64,8 @@ Check School posts to stay updated with school news.''';
   static const dark_theme_subtitle = 'Tap to change Theme';
 
   static const about = 'About!';
+  static const themeSettings = 'Themes';
+  static const theme_subtitle = 'Select Your favorite theme';
   static const about_subtitle = 'Contact us';
 
 //Chat
