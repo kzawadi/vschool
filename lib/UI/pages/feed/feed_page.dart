@@ -60,7 +60,7 @@ class _FeedPageState extends State<FeedPage>
               'assets/logowhite.png',
               fit: BoxFit.contain,
               height: 40,
-              color: Colors.tealAccent,
+              color: Theme.of(context).accentColor,
             ),
             onPressed: null,
           ),

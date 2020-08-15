@@ -14,11 +14,12 @@ final ThemeData newLightTheme = ThemeData(
     900: Color(0xff101d23)
   }),
   brightness: Brightness.light,
-  primaryColor: Color(0xff264553),
+  primaryColor: Color(0xff264653),
   primaryColorBrightness: Brightness.dark,
   primaryColorLight: Color(0xffdce9ef),
   primaryColorDark: Color(0xff305769),
-  accentColor: Color(0xff299e8e),
+  // accentColor: Color(0xff299e8e),
+  accentColor: Color(0xffE9C46A),
   accentColorBrightness: Brightness.dark,
   canvasColor: Color(0xfffafafa),
   scaffoldBackgroundColor: Color(0xFFFAF7F7),
@@ -40,7 +41,15 @@ final ThemeData newLightTheme = ThemeData(
   dialogBackgroundColor: Color(0xffffffff),
   indicatorColor: Color(0xff5091af),
   hintColor: Color(0x8a000000),
-  errorColor: Color(0xffd32f2f),
+  errorColor: Color(0xffE76F51), //E76F51
+  appBarTheme: AppBarTheme(
+    color: Color(0xff264553),
+    textTheme: TextTheme(
+        // center text style
+        headline6: TextStyle(color: Colors.black),
+        // Side text style
+        bodyText2: TextStyle(color: Colors.black)),
+  ),
   buttonTheme: ButtonThemeData(
     textTheme: ButtonTextTheme.normal,
     minWidth: 88.0,
@@ -66,7 +75,7 @@ final ThemeData newLightTheme = ThemeData(
       secondaryVariant: Color(0xff305769),
       surface: Color(0xffffffff),
       background: Color(0xffb9d3df),
-      error: Color(0xffd32f2f),
+      error: Color(0xffE76F51),
       onPrimary: Color(0xffffffff),
       onSecondary: Color(0xffffffff),
       onSurface: Color(0xff000000),

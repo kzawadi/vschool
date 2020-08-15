@@ -22,7 +22,7 @@ void main() {
   setupLocator();
   _logger.info('Going into splash screen');
   runApp(
-    SplaScreen(),
+    MyApp(),
   );
 }
 
