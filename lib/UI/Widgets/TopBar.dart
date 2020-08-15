@@ -1,5 +1,7 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -26,74 +28,60 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          // SizedBox(height: 30,),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Hero(
-                transitionOnUserGestures: true,
-                tag: widget.buttonHeroTag,
-                child: Container(
-                  // elevation: 10,
-                  // shape: kBackButtonShape,
-                  child: MaterialButton(
-                    height: 40,
-                    minWidth: 50,
-                    elevation: 10,
-                    shape: kBackButtonShape,
-                    onPressed: widget.onPressed,
-                    child: widget.child,
+    return AppBar(
+      actions: [
+        Hero(
+          tag: 'title',
+          transitionOnUserGestures: true,
+          child: Card(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+                bottomRight: Radius.circular(5),
+                topLeft: Radius.circular(5),
+              ),
+            ),
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: InkWell(
+                onTap: widget.onTitleTapped,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4),
+                    // child: FittedBox(
+                    //   fit: BoxFit.fitWidth,
+                    child: Text(
+                      widget.title,
+                      style: GoogleFonts.roboto(
+                        textStyle: Theme.of(context)
+                            .textTheme
+                            .subtitle2
+                            .copyWith(fontSize: 5),
+                      ),
+                    ),
+                    // ),
                   ),
                 ),
               ),
-              // SizedBox(
-              //   width: 50,
-              // ),
-              Hero(
-                tag: 'title',
-                transitionOnUserGestures: true,
-                child: Card(
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: InkWell(
-                    onTap: widget.onTitleTapped,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      height: 40,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Text(
-                              widget.title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                // color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
-        ],
+        ),
+      ],
+      leading: Hero(
+        transitionOnUserGestures: true,
+        tag: widget.buttonHeroTag,
+        child: MaterialButton(
+          color: Colors.transparent,
+          height: 40,
+          minWidth: 50,
+          elevation: 10,
+          shape: kBackButtonShape,
+          onPressed: widget.onPressed,
+          child: widget.child,
+        ),
       ),
     );
   }
@@ -114,7 +102,7 @@ class TopBarAlternative extends StatefulWidget implements PreferredSizeWidget {
       {@required this.title,
       @required this.child,
       @required this.onPressed,
-      this.buttonHeroTag = 'topBarBtn',
+      this.buttonHeroTag = 'AltTopBarBtn',
       this.onTitleTapped})
       : preferredSize = Size.fromHeight(48.0);
 

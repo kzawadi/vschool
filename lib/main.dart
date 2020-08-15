@@ -2,7 +2,6 @@ import 'package:logging/logging.dart';
 import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
-import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 
 import 'UI/pages/Splash/splashScreen.dart';
