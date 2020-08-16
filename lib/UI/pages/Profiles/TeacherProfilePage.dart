@@ -166,13 +166,13 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
             floatingActionButton: FloatingActionButton(
               tooltip: 'Save',
               elevation: 20,
-              backgroundColor: Colors.green,
+              backgroundColor: Theme.of(context).accentColor,
               onPressed: () async {
                 await floatingButoonPressed(model, firebaseUser);
               },
               child: model.state == ViewState.Busy
                   ? SpinKitDoubleBounce(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColorLight,
                       size: 20,
                     )
                   : Icon(Icons.check),

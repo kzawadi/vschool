@@ -166,13 +166,13 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
             child: FloatingActionButton(
               tooltip: 'Save',
               elevation: 20,
-              backgroundColor: Colors.red,
+              backgroundColor: Theme.of(context).accentColor,
               onPressed: () async {
                 await floatingButtonPressed(model, userType, firebaseUser);
               },
               child: model.state == ViewState.Busy
                   ? SpinKitDoubleBounce(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColorLight,
                       size: 20,
                     )
                   : Icon(Icons.check),

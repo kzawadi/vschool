@@ -119,7 +119,7 @@ class _TopBarAlternativeState extends State<TopBarAlternative> {
       // textTheme: Theme.of(context).primaryTextTheme,
       actions: [
         Hero(
-          tag: 'title',
+          tag: 'Alttitle',
           transitionOnUserGestures: true,
           child: Card(
             color: Theme.of(context).accentColor,
