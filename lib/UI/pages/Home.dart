@@ -37,14 +37,6 @@ class _HomeState extends State<Home> with Services {
     super.initState();
   }
 
-  ImageProvider<dynamic> setImage(User user) {
-    return user.photoUrl != 'default'
-        ? NetworkImage(
-            user.photoUrl,
-          )
-        : AssetImage(assetsString.student_welcome);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,8 +93,9 @@ class _HomeState extends State<Home> with Services {
       itemCornerRadius: 50,
       iconSize: 24,
       containerHeight: 56,
-      backgroundColor:
-          isThemeCurrentlyDark(context) ? MyColors.github : MyColors.white,
+      backgroundColor: isThemeCurrentlyDark(context)
+          ? Theme.of(context).primaryColor
+          : Theme.of(context).accentColor,
       // animationDuration: Duration(milliseconds: 260), it is the default
       selectedIndex: _currentIndex,
       showElevation: false, // use this to remove appBar's elevation

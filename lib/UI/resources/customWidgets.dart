@@ -7,6 +7,9 @@ import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ourESchool/UI/resources/constant.dart';
 import 'package:ourESchool/UI/resources/theme.dart';
+import 'package:ourESchool/UI/Utility/Resources.dart';
+
+import 'package:ourESchool/core/Models/User.dart';
 
 Widget customTitleText(String title, {BuildContext context}) {
   return Text(
@@ -17,6 +20,14 @@ Widget customTitleText(String title, {BuildContext context}) {
         fontWeight: FontWeight.w900,
         fontSize: 20),
   );
+}
+
+ImageProvider<dynamic> setImage(User user) {
+  return user.photoUrl != 'default'
+      ? NetworkImage(
+          user.photoUrl,
+        )
+      : AssetImage(assetsString.student_welcome);
 }
 
 Widget heading(String heading,

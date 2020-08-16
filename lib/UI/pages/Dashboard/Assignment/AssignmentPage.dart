@@ -84,7 +84,7 @@ class _AssignmentsPageState extends State<AssignmentsPage> {
           key: _scaffoldKey,
           appBar: TopBar(
               title: string.assignment,
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 kbackBtn(context);
               }),

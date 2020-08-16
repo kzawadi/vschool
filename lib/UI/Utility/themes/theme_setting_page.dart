@@ -4,7 +4,7 @@ import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
-  static final String name = 'setting';
+  static const String name = 'Settings';
 
   @override
   Widget build(BuildContext context) {

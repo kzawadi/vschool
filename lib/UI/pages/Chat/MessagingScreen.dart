@@ -50,7 +50,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
           appBar: TopBar(
             onTitleTapped: () {},
             title: widget.parentORteacher.displayName,
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               Navigator.pop(context);
             },

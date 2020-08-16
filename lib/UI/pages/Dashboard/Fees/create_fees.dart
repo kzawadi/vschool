@@ -68,7 +68,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
         return Scaffold(
           appBar: TopBar(
             title: 'FEES',
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               kbackBtn(context);
             },

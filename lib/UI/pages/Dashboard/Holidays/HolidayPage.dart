@@ -41,7 +41,7 @@ class _HolidayPageState extends State<HolidayPage> {
               onTitleTapped: () {
                 model.refreshHolidays();
               },
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 kbackBtn(context);
               },

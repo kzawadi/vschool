@@ -124,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
             key: _scaffoldKey,
             appBar: TopBar(
               title: string.profile,
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 if (model.state ==
                     ViewState.Idle) if (Navigator.canPop(context))

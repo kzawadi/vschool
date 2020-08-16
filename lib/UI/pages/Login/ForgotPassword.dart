@@ -30,7 +30,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: TopBar(
-        child: kBackBtn,
+        child: kBackBtn(context),
         onPressed: () {
           kbackBtn(context);
         },

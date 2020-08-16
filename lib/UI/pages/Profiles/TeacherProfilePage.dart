@@ -156,7 +156,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
             key: _scaffoldKey,
             appBar: TopBar(
               title: string.profile,
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 if (model.state ==
                     ViewState.Idle) if (Navigator.canPop(context))

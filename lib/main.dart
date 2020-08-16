@@ -1,11 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/pages/Home.dart';
+import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
+import 'package:ourESchool/UI/pages/Profiles/ProfilePage.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
+import 'package:ourESchool/UI/pages/WelcomeScreen.dart';
+import 'package:ourESchool/core/Models/User.dart';
+import 'package:ourESchool/core/enums/UserType.dart';
+import 'package:ourESchool/core/services/AuthenticationServices.dart';
+import 'package:ourESchool/core/services/ProfileServices.dart';
+import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
-
-import 'UI/pages/Splash/splashScreen.dart';
-import 'imports.dart';
+import 'package:ourESchool/locator.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   final _logger = Logger('VSchool');
@@ -91,8 +102,9 @@ class OurSchoolApp extends StatelessWidget with Services {
                 statusBarIconBrightness: isThemeCurrentlyDark(context)
                     ? Brightness.dark
                     : Brightness.light, // status bar icons' color
-                systemNavigationBarIconBrightness:
-                    Brightness.dark, //navigation bar icons' color
+                systemNavigationBarIconBrightness: isThemeCurrentlyDark(context)
+                    ? Brightness.light
+                    : Brightness.dark, //navigation bar icons' color
               ),
             ),
             navigatorObservers: [

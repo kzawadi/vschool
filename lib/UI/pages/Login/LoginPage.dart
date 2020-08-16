@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
           resizeToAvoidBottomPadding: false,
           appBar: TopBar(
             title: string.login,
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               Navigator.pop(context);
             },

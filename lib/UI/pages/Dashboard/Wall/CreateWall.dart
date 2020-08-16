@@ -101,7 +101,7 @@ class _CreateWallState extends State<CreateWall> {
           key: _scaffoldKey,
           appBar: TopBar(
             onTitleTapped: () {},
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               if (!isPosting) kbackBtn(context);
             },

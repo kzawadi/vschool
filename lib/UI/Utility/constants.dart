@@ -50,10 +50,13 @@ ShapeBorder kCardCircularShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.all(Radius.circular(50)),
 );
 
-Widget kBackBtn = Icon(
-  Icons.arrow_back_ios,
-  // color: Colors.black54,
-);
+Widget kBackBtn(BuildContext context) {
+  return Icon(
+    Icons.arrow_back_ios,
+    color: Theme.of(context).accentColor,
+    // color: Colors.black54,
+  );
+}
 
 kopenPage(BuildContext context, Widget page, String pageName) {
   return Navigator.push(

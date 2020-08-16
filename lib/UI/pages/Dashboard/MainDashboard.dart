@@ -11,7 +11,6 @@ class MainDashboard extends StatefulWidget {
 
   _MainDashboardState createState() => _MainDashboardState();
 
-  @override
   String get screenName => 'ParentAndTeacher Dashboard';
 }
 

@@ -156,7 +156,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
           key: _scaffoldKey,
           appBar: TopBar(
             title: widget.title,
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               if (Navigator.canPop(context)) Navigator.pop(context);
             },

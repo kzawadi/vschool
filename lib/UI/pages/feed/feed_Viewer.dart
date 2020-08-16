@@ -41,7 +41,7 @@ class FeedViewer extends StatelessWidget {
       child: Scaffold(
         appBar: TopBar(
           title: "Viewer",
-          child: kBackBtn,
+          child: kBackBtn(context),
           onPressed: () {
             kbackBtn(context);
           },

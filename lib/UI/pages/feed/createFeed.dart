@@ -86,7 +86,7 @@ class _CreateFeedState extends State<CreateFeed> {
           appBar: TopBar(
             buttonHeroTag: string.announcement,
             onTitleTapped: () {},
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               if (!isPosting) kbackBtn(context);
             },

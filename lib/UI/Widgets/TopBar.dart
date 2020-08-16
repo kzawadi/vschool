@@ -76,7 +76,6 @@ class _TopBarState extends State<TopBar> {
         transitionOnUserGestures: true,
         tag: widget.buttonHeroTag,
         child: MaterialButton(
-          color: Colors.transparent,
           height: 40,
           minWidth: 50,
           elevation: 10,

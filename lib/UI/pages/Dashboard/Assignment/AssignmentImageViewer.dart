@@ -17,7 +17,7 @@ class _AssignmentImageViewerState extends State<AssignmentImageViewer> {
     return Scaffold(
       appBar: TopBar(
         title: widget.assignment.title,
-        child: kBackBtn,
+        child: kBackBtn(context),
         onPressed: () {
           kbackBtn(context);
         },
