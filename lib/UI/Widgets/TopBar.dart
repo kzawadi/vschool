@@ -126,8 +126,8 @@ class _TopBarAlternativeState extends State<TopBarAlternative> {
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
+                bottomLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
                 bottomRight: Radius.circular(5),
                 topLeft: Radius.circular(5),
               ),

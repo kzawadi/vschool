@@ -61,6 +61,9 @@ class MyApp extends StatelessWidget {
           initialData: false,
           value: locator<AuthenticationServices>().isUserLoggedInStream.stream,
         ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeManager(),
+        )
       ],
       child: OurSchoolApp(),
     );
@@ -75,44 +78,40 @@ class OurSchoolApp extends StatelessWidget with Services {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      //Here we provide our ThemeManager to child widget tree
-      create: (_) => ThemeManager(),
-      child: Consumer<ThemeManager>(
-        builder: (context, manager, _) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Vitone School App',
-            theme: manager.themeData,
-            routes: {
-              WelcomeScreen.id: (context) => WelcomeScreen(),
-              Home.id: (context) => Home(),
-              ProfilePage.id: (context) => ProfilePage(),
-              TeacherProfilePage.id: (context) => TeacherProfilePage(),
-              GuardianProfilePage.id: (context) => GuardianProfilePage(
-                    title: 'Guardian Profile',
-                  ),
-            },
-            home: AnnotatedRegion<SystemUiOverlayStyle>(
-              child: getHome(context),
-              value: SystemUiOverlayStyle(
-                statusBarColor: Colors.transparent, // transparent status bar
-                systemNavigationBarColor:
-                    Colors.transparent, // navigation bar color
-                statusBarIconBrightness: isThemeCurrentlyDark(context)
-                    ? Brightness.dark
-                    : Brightness.light, // status bar icons' color
-                systemNavigationBarIconBrightness: isThemeCurrentlyDark(context)
-                    ? Brightness.light
-                    : Brightness.dark, //navigation bar icons' color
-              ),
+    return Consumer<ThemeManager>(
+      builder: (context, manager, _) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Vitone School App',
+          theme: manager.themeData,
+          routes: {
+            WelcomeScreen.id: (context) => WelcomeScreen(),
+            Home.id: (context) => Home(),
+            ProfilePage.id: (context) => ProfilePage(),
+            TeacherProfilePage.id: (context) => TeacherProfilePage(),
+            GuardianProfilePage.id: (context) => GuardianProfilePage(
+                  title: 'Guardian Profile',
+                ),
+          },
+          home: AnnotatedRegion<SystemUiOverlayStyle>(
+            child: getHome(context),
+            value: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent, // transparent status bar
+              systemNavigationBarColor:
+                  Colors.transparent, // navigation bar color
+              statusBarIconBrightness: isThemeCurrentlyDark(context)
+                  ? Brightness.dark
+                  : Brightness.light, // status bar icons' color
+              systemNavigationBarIconBrightness: isThemeCurrentlyDark(context)
+                  ? Brightness.light
+                  : Brightness.dark, //navigation bar icons' color
             ),
-            navigatorObservers: [
-              locator<AnalyticsService>().getAnalyticsObserver(),
-            ],
-          );
-        },
-      ),
+          ),
+          navigatorObservers: [
+            locator<AnalyticsService>().getAnalyticsObserver(),
+          ],
+        );
+      },
     );
   }
 
