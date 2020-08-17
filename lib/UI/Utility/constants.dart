@@ -68,13 +68,20 @@ kopenPage(BuildContext context, Widget page, String pageName) {
   );
 }
 
-kopenPageSlide(BuildContext context, Widget page, {Duration duration}) {
+kopenPageSlide(BuildContext context, Widget page, String pageName,
+    {Duration duration}) {
   return Navigator.push(
     context,
-    RouteTransition(
-        // fade: false,
-        widget: page,
-        duration: duration),
+    MaterialPageRoute(
+      settings: RouteSettings(name: pageName),
+      builder: (BuildContext context) {
+        RouteTransition(
+            // fade: false,
+            widget: page,
+            duration: duration);
+        return page;
+      },
+    ),
   );
 }
 

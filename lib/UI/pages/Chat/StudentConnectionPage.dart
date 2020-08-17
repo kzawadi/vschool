@@ -43,7 +43,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
     return Scaffold(
       appBar: TopBar(
         title: 'Teachers',
-        child: null,
+        child: kBackBtn(context),
         onPressed: null,
         buttonHeroTag: 'StudentConnection',
       ),

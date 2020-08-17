@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 final ThemeData newLightTheme = ThemeData(
-  primarySwatch: MaterialColor(4280698195, {
-    50: Color(0xffeef4f7),
-    100: Color(0xffdce9ef),
-    200: Color(0xffb9d3df),
-    300: Color(0xff96bdcf),
-    400: Color(0xff73a7bf),
-    500: Color(0xff5091af),
-    600: Color(0xff40748c),
-    700: Color(0xff305769),
-    800: Color(0xff203a46),
-    900: Color(0xff101d23)
-  }),
+  primarySwatch: MaterialColor(
+    4280698195,
+    {
+      50: Color(0xffeef4f7),
+      100: Color(0xffdce9ef),
+      200: Color(0xffb9d3df),
+      300: Color(0xff96bdcf),
+      400: Color(0xff73a7bf),
+      500: Color(0xff5091af),
+      600: Color(0xff40748c),
+      700: Color(0xff305769),
+      800: Color(0xff203a46),
+      900: Color(0xff101d23)
+    },
+  ),
   brightness: Brightness.light,
   primaryColor: Color(0xff264653),
   primaryColorBrightness: Brightness.dark,

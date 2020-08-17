@@ -53,9 +53,9 @@ class _ChatPageState extends State<ChatPage> {
           onModelReady: (model) => model.getChildrens(),
           builder: (context, model, child) {
             return Scaffold(
-              appBar: TopBar(
+              appBar: TopBarAlternative(
                 title: 'Chats',
-                child: null,
+                // child: null,
                 onPressed: null,
                 buttonHeroTag: 'Parent/TechersChats',
               ),

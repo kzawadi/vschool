@@ -90,7 +90,12 @@ class _SettingPageState extends State<SettingPage> {
                   context: context,
                   icon: Icons.settings,
                   onTap: () async {
-                    kopenPage(context, Settings(), 'Theme_Settings');
+                    kopenPageSlide(
+                      context,
+                      Settings(),
+                      'Theme_Settings',
+                      duration: Duration(seconds: 5),
+                    );
                   },
                   subtitle: string.theme_subtitle,
                   title: string.themeSettings),

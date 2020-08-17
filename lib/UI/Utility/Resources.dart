@@ -136,6 +136,8 @@ Check School posts to stay updated with school news.''';
 
 //Announcements
   static const announcement = 'Announcement';
+  static const feed = 'Feed';
+
 //Wall
   static const wall = 'Wall';
   static const create_wall = 'Create Wall';

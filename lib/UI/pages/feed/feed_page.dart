@@ -74,8 +74,12 @@ class _FeedPageState extends State<FeedPage>
                     heroTag: 'abc',
                     elevation: 5,
                     onPressed: () {
-                      kopenPageSlide(context, CreateFeed(),
-                          duration: Duration(milliseconds: 200));
+                      kopenPageSlide(
+                        context,
+                        CreateFeed(),
+                        'Creating_Feed',
+                        duration: Duration(milliseconds: 200),
+                      );
                     },
                     child: Icon(Icons.add),
                   ),

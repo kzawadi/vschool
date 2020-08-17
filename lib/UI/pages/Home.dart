@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with Services {
+class _HomeState extends State<Home> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _currentIndex = 0;
@@ -41,7 +41,7 @@ class _HomeState extends State<Home> with Services {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: bnb(),
+      bottomNavigationBar: bnb(context),
       body: IndexedStack(
         index: _currentIndex,
         children: pages,
@@ -51,43 +51,43 @@ class _HomeState extends State<Home> with Services {
 
   List<BottomNavyBarItem> bottomBarItemsNew = [
     BottomNavyBarItem(
-      activeColor: Colors.teal[700],
+      activeColor: MyColors.primary,
       icon: Icon(
         Icons.home,
       ),
-      inactiveColor: Colors.teal[700],
-      title: Text(string.dashboard),
+      inactiveColor: MyColors.primary,
+      title: Text(string.feed),
     ),
     BottomNavyBarItem(
-      activeColor: Colors.blue,
+      activeColor: MyColors.persian_green,
       icon: Icon(
         Icons.dashboard,
       ),
-      inactiveColor: Colors.blue,
+      inactiveColor: MyColors.persian_green,
       title: Text(string.dashboard),
     ),
     BottomNavyBarItem(
-      activeColor: Colors.pink[300],
+      activeColor: MyColors.dark,
       icon: Icon(
         CustomIcons.chat_bubble,
         // size: 25,
       ),
-      inactiveColor: Colors.pink[300],
+      inactiveColor: MyColors.dark,
       title: Text(string.chat),
     ),
     BottomNavyBarItem(
-      inactiveColor: Colors.orange,
+      inactiveColor: Colors.teal,
       icon: Icon(
         Icons.settings,
       ),
-      activeColor: Colors.orange,
+      activeColor: Colors.teal,
       title: Text(
         string.setting,
       ),
     )
   ];
 
-  BottomNavyBar bnb() {
+  BottomNavyBar bnb(context) {
     return BottomNavyBar(
       curve: Curves.easeIn,
       itemCornerRadius: 50,

@@ -13,7 +13,9 @@ class Settings extends StatelessWidget {
       appBar: TopBar(
         title: 'Settings',
         child: kBackBtn(context),
-        onPressed: null,
+        onPressed: () {
+          kbackBtn(context);
+        },
         buttonHeroTag: 'ThemeSetting',
       ),
       body: Padding(

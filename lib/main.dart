@@ -103,8 +103,8 @@ class OurSchoolApp extends StatelessWidget with Services {
                   ? Brightness.dark
                   : Brightness.light, // status bar icons' color
               systemNavigationBarIconBrightness: isThemeCurrentlyDark(context)
-                  ? Brightness.light
-                  : Brightness.dark, //navigation bar icons' color
+                  ? Brightness.dark
+                  : Brightness.light, //navigation bar icons' color
             ),
           ),
           navigatorObservers: [
