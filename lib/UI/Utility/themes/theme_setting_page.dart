@@ -38,7 +38,7 @@ class Settings extends StatelessWidget {
                 },
                 title: Text(
                   enumName(theme),
-                  style: appThemeData[theme].textTheme.bodyText2,
+                  style: appThemeData[theme].primaryTextTheme.bodyText2,
                 ),
               ),
             );

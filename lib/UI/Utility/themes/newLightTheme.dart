@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData newLightTheme = ThemeData(
   primarySwatch: MaterialColor(
@@ -138,10 +139,16 @@ final ThemeData newLightTheme = ThemeData(
     ),
     bodyText2: TextStyle(
       color: Color(0xdd000000),
-      fontSize: 16.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
+    //  GoogleFonts.lato(
+    //   fontWeight: FontWeight.normal,
+    //   fontSize: 15,
+    //   fontStyle: FontStyle.normal,
+    //   color: newLightTheme.colorScheme.primary,
+    // ),
     caption: TextStyle(
       color: Color(0x8a000000),
       fontSize: 12.0,
@@ -330,22 +337,38 @@ final ThemeData newLightTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(
       color: Color(0xdd000000),
-      fontSize: 16.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
+    // GoogleFonts.quicksand(
+    //   fontWeight: FontWeight.normal,
+    //   fontSize: 15,
+    //   fontStyle: FontStyle.normal,
+    //   color: newLightTheme.colorScheme.secondary,
+    // ),
     helperStyle: TextStyle(
       color: Color(0xdd000000),
-      fontSize: 16.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
+    // GoogleFonts.quicksand(
+    //   fontStyle: FontStyle.normal,
+    //   fontSize: 15,
+    //   color: newLightTheme.colorScheme.secondary,
+    // ),
     hintStyle: TextStyle(
       color: Color(0xdd000000),
-      fontSize: 16.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
+    // GoogleFonts.quicksand(
+    //   fontStyle: FontStyle.normal,
+    //   fontSize: 15,
+    //   color: newLightTheme.colorScheme.secondary,
+    // ),
     errorStyle: TextStyle(
       color: Color(0xdd000000),
       fontSize: 16.0,

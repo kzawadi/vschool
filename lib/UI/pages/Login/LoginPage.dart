@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
@@ -97,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
           key: _scaffoldKey,
           resizeToAvoidBottomPadding: false,
           appBar: TopBar(
+            buttonHeroTag: 'logininner',
             title: string.login,
             child: kBackBtn(context),
             onPressed: () {
@@ -129,9 +131,14 @@ class _LoginPageState extends State<LoginPage> {
                             onFieldSubmitted: (v) {
                               FocusScope.of(context).nextFocus();
                             },
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
+//                            style: Theme.of(context).textTheme.bodyText2,
                             decoration: InputDecoration(
+//                              helperStyle: Theme.of(context)
+//                                  .inputDecorationTheme
+//                                  .helperStyle,
+//                              hintStyle: Theme.of(context)
+//                                  .inputDecorationTheme
+//                                  .labelStyle,
                               hintText: string.school_name_code_hint,
                               labelText: string.school_name_code,
                               prefixIcon: Icon(Icons.school),
@@ -159,9 +166,14 @@ class _LoginPageState extends State<LoginPage> {
                             onChanged: (email) {},
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
+//                            style: Theme.of(context).textTheme.bodyText2,
                             decoration: InputDecoration(
+//                              helperStyle: Theme.of(context)
+//                                  .inputDecorationTheme
+//                                  .helperStyle,
+//                              hintStyle: Theme.of(context)
+//                                  .inputDecorationTheme
+//                                  .labelStyle,
                               hintText: string.email_hint,
                               labelText: string.email,
                               prefixIcon: Icon(Icons.email),
@@ -191,9 +203,14 @@ class _LoginPageState extends State<LoginPage> {
                             onChanged: (password) {},
                             keyboardType: TextInputType.text,
                             textInputAction: TextInputAction.next,
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
+//                            style: Theme.of(context).textTheme.bodyText2,
                             decoration: InputDecoration(
+//                              helperStyle: Theme.of(context)
+//                                  .inputDecorationTheme
+//                                  .helperStyle,
+//                              hintStyle: Theme.of(context)
+//                                  .inputDecorationTheme
+//                                  .labelStyle,
                               hintText: string.password_hint,
                               labelText: string.password,
                               prefixIcon: Icon(Icons.lock),
@@ -224,10 +241,14 @@ class _LoginPageState extends State<LoginPage> {
                                   obscureText: true,
                                   onChanged: (password) {},
                                   keyboardType: TextInputType.text,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500),
+                                  style: Theme.of(context).textTheme.bodyText2,
                                   decoration: InputDecoration(
+                                    helperStyle: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .helperStyle,
+                                    hintStyle: Theme.of(context)
+                                        .inputDecorationTheme
+                                        .labelStyle,
                                     hintText: string.password_hint,
                                     labelText: string.confirm_password,
                                     prefixIcon: Icon(Icons.lock),

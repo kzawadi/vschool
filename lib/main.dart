@@ -82,7 +82,7 @@ class OurSchoolApp extends StatelessWidget with Services {
       builder: (context, manager, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Vitone School App',
+          // title: 'Vitone School App',
           theme: manager.themeData,
           routes: {
             WelcomeScreen.id: (context) => WelcomeScreen(),
