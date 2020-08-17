@@ -166,7 +166,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
             ),
             floatingActionButton: FloatingActionButton(
               tooltip: 'Save',
-              elevation: 20,
+              elevation: 3,
               backgroundColor: Theme.of(context).accentColor,
               onPressed: () async {
                 await floatingButoonPressed(model, firebaseUser);
