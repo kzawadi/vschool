@@ -1,7 +1,7 @@
 class string {
   //WelcolcomePage
 
-  static const get_started = 'Get Started';
+  static const get_started = 'Lets Go';
   static const teacher = 'Teachers';
   static const teacher_welcome_text =
       'Create posts, and notify your students and there parents to keep them updated';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'ReusableRoundedButton.dart';
 
@@ -16,19 +17,19 @@ class LoginRoundedButton extends StatelessWidget {
         tag: heroTag ?? 'login',
         transitionOnUserGestures: true,
         child: ReusableRoundedButton(
-          elevation: 2,
+          elevation: 1,
           child: Text(
             label ?? 'Login',
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              color: Colors.white,
+            style: GoogleFonts.montserrat(
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).accentColor,
               fontSize: 15,
             ),
           ),
           // text: 'Login',
           onPressed: onPressed,
           height: 25,
-          backgroundColor: Colors.greenAccent,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
       ),
     );

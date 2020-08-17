@@ -127,6 +127,15 @@ class WelcomeScreen extends StatelessWidget {
                 fontSize: 30,
               ),
             ),
+            doneText: Text(
+              'Go',
+              style: GoogleFonts.quicksand(
+                color: Theme.of(context).primaryColor,
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            background: Theme.of(context).primaryColor,
             showSkipButton: true,
             fullTransition: 130,
             doneButtonPersist: true,
@@ -139,7 +148,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Hero(
-                tag: 'title',
+                tag: 'logininner',
                 transitionOnUserGestures: true,
                 child: MaterialButton(
                   height: 48,
@@ -157,11 +166,14 @@ class WelcomeScreen extends StatelessWidget {
                     );
                     await _analyticsService.logScreen(screenName: 'Login');
                   },
-                  color: MyColors.lightMilky,
+                  color: Theme.of(context).primaryColor,
                   child: Text(
                     string.get_started,
                     style: GoogleFonts.montserrat(
-                        color: Colors.black, fontSize: 17),
+                      color: Theme.of(context).accentColor,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),
