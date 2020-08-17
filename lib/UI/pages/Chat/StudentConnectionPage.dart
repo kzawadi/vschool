@@ -41,7 +41,14 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
   Widget build(BuildContext context) {
     // if (isLoading) getParents();
     return Scaffold(
+      appBar: TopBar(
+        title: 'Teachers',
+        child: null,
+        onPressed: null,
+        buttonHeroTag: 'StudentConnection',
+      ),
       floatingActionButton: FloatingActionButton(
+        heroTag: '123',
         // backgroundColor: widget.color,
         onPressed: () {
           kbackBtn(context);

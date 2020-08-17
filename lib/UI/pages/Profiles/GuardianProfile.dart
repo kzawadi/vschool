@@ -155,6 +155,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
         return Scaffold(
           key: _scaffoldKey,
           appBar: TopBar(
+            buttonHeroTag: 'guardianProfilePage',
             title: widget.title,
             child: kBackBtn(context),
             onPressed: () {

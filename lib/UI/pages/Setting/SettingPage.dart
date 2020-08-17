@@ -9,6 +9,7 @@ import 'package:ourESchool/UI/pages/WelcomeScreen.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 import 'package:ourESchool/core/viewmodel/LoginPageModel.dart';
+import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,10 +30,10 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     LoginPageModel model = locator<LoginPageModel>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-        centerTitle: true,
-        elevation: 0,
+      appBar: TopBarAlternative(
+        buttonHeroTag: string.setting,
+        title: 'Settings',
+        onPressed: null,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

@@ -22,22 +22,26 @@ class _ChatPageState extends State<ChatPage> {
         builder: (context, model, child) {
           return model.state == ViewState.Busy
               ? kBuzyPage(color: Theme.of(context).primaryColor)
-              : SafeArea(
-                  child: Scaffold(
-                    body: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ListView.builder(
-                        itemCount: model.studentsSnapshot.length,
-                        itemBuilder: (context, i) {
-                          var key = model.studentsSnapshot.keys.elementAt(i);
-                          var snapshot = model.studentsSnapshot[key];
-                          return ChatStudentListWidget(
-                            heroTag: snapshot.documentID,
-                            snapshot: snapshot,
-                            model: model,
-                          );
-                        },
-                      ),
+              : Scaffold(
+                  appBar: TopBar(
+                    title: 'Chats',
+                    child: null,
+                    onPressed: null,
+                    buttonHeroTag: 'studentChats',
+                  ),
+                  body: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListView.builder(
+                      itemCount: model.studentsSnapshot.length,
+                      itemBuilder: (context, i) {
+                        var key = model.studentsSnapshot.keys.elementAt(i);
+                        var snapshot = model.studentsSnapshot[key];
+                        return ChatStudentListWidget(
+                          heroTag: snapshot.documentID,
+                          snapshot: snapshot,
+                          model: model,
+                        );
+                      },
                     ),
                   ),
                 );
@@ -49,6 +53,12 @@ class _ChatPageState extends State<ChatPage> {
           onModelReady: (model) => model.getChildrens(),
           builder: (context, model, child) {
             return Scaffold(
+              appBar: TopBar(
+                title: 'Chats',
+                child: null,
+                onPressed: null,
+                buttonHeroTag: 'Parent/TechersChats',
+              ),
               body: Container(
                 // color: Colors.red,
                 child: Column(
@@ -153,6 +163,12 @@ class _ChatPageState extends State<ChatPage> {
           });
     } else {
       return Scaffold(
+        appBar: TopBar(
+          title: 'Chats',
+          child: null,
+          onPressed: null,
+          buttonHeroTag: 'nochats',
+        ),
         body: Center(
           child: Text(
             'No UserType Found',

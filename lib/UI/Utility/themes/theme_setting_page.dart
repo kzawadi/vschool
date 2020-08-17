@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/themes/app_themes.dart';
 import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
+import 'package:ourESchool/imports.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
@@ -9,8 +10,11 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
+      appBar: TopBar(
+        title: 'Settings',
+        child: kBackBtn(context),
+        onPressed: null,
+        buttonHeroTag: 'ThemeSetting',
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

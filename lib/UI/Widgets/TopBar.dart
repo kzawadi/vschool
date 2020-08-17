@@ -17,7 +17,7 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
       {@required this.title,
       @required this.child,
       @required this.onPressed,
-      this.buttonHeroTag = 'topBarBtn',
+      this.buttonHeroTag,
       this.onTitleTapped})
       : preferredSize = Size.fromHeight(40.0);
 
@@ -32,40 +32,37 @@ class _TopBarState extends State<TopBar> {
       primary: true,
       // textTheme: Theme.of(context).primaryTextTheme,
       actions: [
-        Hero(
-          tag: 'title',
-          transitionOnUserGestures: true,
-          child: Card(
-            color: Theme.of(context).accentColor,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
-              ),
+        Card(
+          color: Theme.of(context).primaryColor,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+              bottomRight: Radius.circular(5),
+              topLeft: Radius.circular(5),
             ),
-            child: Container(
-              // height: 40,
-              width: fullWidth(context) / 2.5,
-              child: InkWell(
-                onTap: widget.onTitleTapped,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 14),
-                    child: Text(
-                      widget.title,
-                      style: GoogleFonts.quicksand(
-                        textStyle: Theme.of(context).textTheme.headline4,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                      ),
+          ),
+          child: Container(
+            // height: 40,
+            width: fullWidth(context) / 2.5,
+            child: InkWell(
+              onTap: widget.onTitleTapped,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 14),
+                  child: Text(
+                    widget.title,
+                    style: GoogleFonts.quicksand(
+                      color: Theme.of(context).accentColor,
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal,
                     ),
-                    // ),
                   ),
+                  // ),
                 ),
               ),
             ),
@@ -103,7 +100,7 @@ class TopBarAlternative extends StatefulWidget implements PreferredSizeWidget {
       {@required this.title,
       // @required this.child,
       @required this.onPressed,
-      this.buttonHeroTag = 'AltTopBarBtn',
+      this.buttonHeroTag,
       this.onTitleTapped})
       : preferredSize = Size.fromHeight(40.0);
 
@@ -115,49 +112,50 @@ class _TopBarAlternativeState extends State<TopBarAlternative> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      primary: true,
-      // textTheme: Theme.of(context).primaryTextTheme,
-      actions: [
-        Hero(
-          tag: 'Alttitle',
-          transitionOnUserGestures: true,
-          child: Card(
-            color: Theme.of(context).accentColor,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-                bottomRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
-              ),
+      centerTitle: true,
+      title: Hero(
+        tag: widget.buttonHeroTag,
+        transitionOnUserGestures: true,
+        child: Card(
+          color: Theme.of(context).primaryColor,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(5),
+              topLeft: Radius.circular(5),
             ),
-            child: Container(
-              // height: 40,
-              width: fullWidth(context) / 2.5,
-              child: InkWell(
-                onTap: widget.onTitleTapped,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 14),
-                    child: Text(
-                      widget.title,
-                      style: GoogleFonts.quicksand(
-                        textStyle: Theme.of(context).textTheme.headline4,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                      ),
+          ),
+          child: Container(
+            // height: 40,
+            width: fullWidth(context) / 2.5,
+            child: InkWell(
+              onTap: widget.onTitleTapped,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 14),
+                  child: Text(
+                    widget.title,
+                    style: GoogleFonts.quicksand(
+                      color: Theme.of(context).accentColor,
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal,
                     ),
-                    // ),
                   ),
+                  // ),
                 ),
               ),
             ),
           ),
         ),
-      ],
+      ),
+      primary: true,
+      // textTheme: Theme.of(context).primaryTextTheme,
+      actions: [],
       // leading: Hero(
       //   transitionOnUserGestures: true,
       //   tag: widget.buttonHeroTag,

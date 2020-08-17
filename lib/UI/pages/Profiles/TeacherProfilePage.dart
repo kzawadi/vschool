@@ -155,6 +155,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
           return Scaffold(
             key: _scaffoldKey,
             appBar: TopBar(
+              buttonHeroTag: 'teacherProfilePage',
               title: string.profile,
               child: kBackBtn(context),
               onPressed: () {
