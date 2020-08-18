@@ -74,7 +74,7 @@ final ThemeData newLightTheme = ThemeData(
     splashColor: Color(0x1f000000),
     colorScheme: ColorScheme(
       primary: Color(0xff264553),
-      primaryVariant: Color(0xff305769),
+      primaryVariant: Color(0xff299e8e),
       secondary: Color(0xff5091af),
       secondaryVariant: Color(0xff305769),
       surface: Color(0xffffffff),

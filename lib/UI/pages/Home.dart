@@ -1,4 +1,3 @@
-import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
@@ -41,7 +40,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: bnb(context),
+      bottomNavigationBar: bnb(),
       body: IndexedStack(
         index: _currentIndex,
         children: pages,
@@ -87,7 +86,7 @@ class _HomeState extends State<Home> {
     )
   ];
 
-  BottomNavyBar bnb(context) {
+  BottomNavyBar bnb() {
     return BottomNavyBar(
       curve: Curves.easeIn,
       itemCornerRadius: 50,

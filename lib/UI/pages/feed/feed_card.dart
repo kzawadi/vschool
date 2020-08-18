@@ -224,6 +224,7 @@ class FeedCard extends StatelessWidget {
 
 Future buildShowDialogBox(BuildContext context) {
   double elavation = 1;
+  double fontSize = 15;
   return showDialog(
     context: context,
     builder: (context) {
@@ -231,15 +232,12 @@ Future buildShowDialogBox(BuildContext context) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        backgroundColor:
-            isThemeCurrentlyDark(context) ? MyColors.lightMilky : MyColors.okay,
+        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
         title: Text(
           "feed Type",
           style: TextStyle(
             fontSize: 22,
-            color: isThemeCurrentlyDark(context)
-                ? MyColors.kindePeach
-                : MyColors.dark,
+            color: Theme.of(context).accentColor,
           ),
         ),
         content: Column(
@@ -254,12 +252,11 @@ Future buildShowDialogBox(BuildContext context) {
                   shape: kCardCircularShape,
                   elevation: elavation,
                   child: CircleAvatar(
-                    backgroundColor: isThemeCurrentlyDark(context)
-                        ? MyColors.accent
-                        : MyColors.lightMilky,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Text(
                       'C',
                       style: GoogleFonts.roboto(
+                        color: Theme.of(context).primaryColor,
                         textStyle: TextStyle(
                           fontSize: 12.5,
                         ),
@@ -271,10 +268,8 @@ Future buildShowDialogBox(BuildContext context) {
                   'CIRCULAR',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                      color: isThemeCurrentlyDark(context)
-                          ? MyColors.kindePeach
-                          : MyColors.dark,
-                      fontSize: 12.5,
+                      color: Theme.of(context).accentColor,
+                      fontSize: fontSize,
                     ),
                   ),
                 )
@@ -288,13 +283,12 @@ Future buildShowDialogBox(BuildContext context) {
                   shape: kCardCircularShape,
                   elevation: elavation,
                   child: CircleAvatar(
-                    backgroundColor: isThemeCurrentlyDark(context)
-                        ? MyColors.accent
-                        : MyColors.lightMilky,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Text(
                       'E',
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontSize: 12.5,
                         ),
                       ),
@@ -305,10 +299,8 @@ Future buildShowDialogBox(BuildContext context) {
                   'EVENT',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                      fontSize: 12.5,
-                      color: isThemeCurrentlyDark(context)
-                          ? MyColors.kindePeach
-                          : MyColors.dark,
+                      fontSize: fontSize,
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 )
@@ -321,13 +313,12 @@ Future buildShowDialogBox(BuildContext context) {
                   shape: kCardCircularShape,
                   elevation: elavation,
                   child: CircleAvatar(
-                    backgroundColor: isThemeCurrentlyDark(context)
-                        ? MyColors.accent
-                        : MyColors.lightMilky,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Text(
                       'A',
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontSize: 12.5,
                         ),
                       ),
@@ -338,10 +329,8 @@ Future buildShowDialogBox(BuildContext context) {
                   'ACTIVITY',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                      fontSize: 12.5,
-                      color: isThemeCurrentlyDark(context)
-                          ? MyColors.kindePeach
-                          : MyColors.dark,
+                      fontSize: fontSize,
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 )
