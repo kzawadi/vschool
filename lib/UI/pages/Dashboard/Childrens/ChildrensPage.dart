@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'package:ourESchool/UI/Widgets/BottomSheetChildrensWidget.dart';
 import 'package:ourESchool/UI/Widgets/ChildrenGridViewCard.dart';
+import 'package:ourESchool/UI/Widgets/bottom_sheet.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
@@ -47,15 +47,19 @@ class ChildrensPage extends StatelessWidget {
                             user: model.childrens[index],
                             onTap: () {
                               if (model.childrens[index].displayName != '')
-                                showModalBottomSheet(
-                                  backgroundColor: Colors.transparent,
-                                  elevation: 5,
-                                  context: context,
-                                  builder: (context) =>
-                                      BottomSheetChildrensWidget(
-                                    user: model.childrens[index],
-                                  ),
+                                BottomSheetPanel().openRetweetbottomSheet(
+                                  context,
+                                  user: model.childrens[index],
                                 );
+                              // showModalBottomSheet(
+                              //   backgroundColor: Colors.transparent,
+                              //   elevation: 5,
+                              //   context: context,
+                              //   builder: (context) =>
+                              //       BottomSheetChildrensWidget(
+                              //     user: model.childrens[index],
+                              //   ),
+                              // );
                             },
                           ),
                         );

@@ -29,7 +29,7 @@ final ThemeData newLightTheme = ThemeData(
   scaffoldBackgroundColor: Color(0xFFFAF7F7),
   bottomAppBarColor: Color(0xffffffff),
   cardColor: Color(0xFFFAF7F7),
-  dividerColor: Color(0x1f000000),
+  dividerColor: Color(0xff299e8e),
   highlightColor: Color(0x66bcbcbc),
   splashColor: Color(0x66c8c8c8),
   selectedRowColor: Color(0xfff5f5f5),
@@ -529,4 +529,14 @@ final ThemeData newLightTheme = ThemeData(
     ),
     borderRadius: BorderRadius.all(Radius.circular(0.0)),
   )),
+  bottomSheetTheme: BottomSheetThemeData(
+    modalBackgroundColor: Color(0xffE9C46A),
+    backgroundColor: Color(0xff264653),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(20),
+      ),
+    ),
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+  ),
 );
