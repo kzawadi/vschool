@@ -7,10 +7,17 @@ import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
+import 'package:ourESchool/core/enums/UserType.dart';
+import 'package:provider/provider.dart';
 
 class ChildrensPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool isTeacher = false;
+    var userType = Provider.of<UserType>(context, listen: false);
+    if (userType == UserType.TEACHER) {
+      isTeacher = true;
+    }
     return BaseView<ProfilePageModel>(
       onModelReady: (model) => model.getChildrens(),
       builder: (context, model, child) {
@@ -50,16 +57,8 @@ class ChildrensPage extends StatelessWidget {
                                 BottomSheetPanel().openRetweetbottomSheet(
                                   context,
                                   user: model.childrens[index],
+                                  isaTeacher: isTeacher,
                                 );
-                              // showModalBottomSheet(
-                              //   backgroundColor: Colors.transparent,
-                              //   elevation: 5,
-                              //   context: context,
-                              //   builder: (context) =>
-                              //       BottomSheetChildrensWidget(
-                              //     user: model.childrens[index],
-                              //   ),
-                              // );
                             },
                           ),
                         );

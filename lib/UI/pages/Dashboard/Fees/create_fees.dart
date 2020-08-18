@@ -67,6 +67,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
       builder: (context, model, child) {
         return Scaffold(
           appBar: TopBar(
+            buttonHeroTag: 'feesEntry',
             title: 'FEES',
             child: kBackBtn(context),
             onPressed: () {
@@ -79,7 +80,7 @@ class _FeesPageEntryState extends State<FeesPageEntry> {
             },
             backgroundColor: isReadyToPost
                 ? Theme.of(context).primaryColor
-                : Colors.blueGrey,
+                : Theme.of(context).accentColor,
             child: model.isBusy
                 ? SpinKitThreeBounce(
                     duration: (Duration(milliseconds: 500)),

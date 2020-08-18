@@ -9,10 +9,6 @@ import 'package:ourESchool/UI/pages/Dashboard/Assignment/AssignmentPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/E-Card/E-CardPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/create_fees.dart';
 import 'package:ourESchool/UI/pages/Dashboard/Fees/fees_page_dashboard.dart';
-import 'package:ourESchool/UI/pages/feed/feed_page.dart';
-import 'package:ourESchool/UI/resources/colors.dart';
-import 'package:ourESchool/core/Models/User.dart';
-import 'package:ourESchool/core/Models/fees/fees_model.dart';
 
 class BottomSheetPanel {
   static final int search = 0xf058;
@@ -68,6 +64,7 @@ class BottomSheetPanel {
     BuildContext context, {
     @required final User user,
     final Fees fees,
+    @required bool isaTeacher,
   }) async {
     await showModalBottomSheet(
       shape: Theme.of(context).bottomSheetTheme.shape,
@@ -76,10 +73,16 @@ class BottomSheetPanel {
       context: context,
       builder: (context) {
         return Container(
-            padding: EdgeInsets.only(top: 5, bottom: 0),
-            height: 300,
-            width: fullWidth(context),
-            child: _retweet(context, user: user, fees: fees));
+          padding: EdgeInsets.only(top: 5, bottom: 0),
+          height: 300,
+          width: fullWidth(context),
+          child: _retweet(
+            context,
+            user: user,
+            fees: fees,
+            isaTeacher: isaTeacher,
+          ),
+        );
       },
     );
   }
@@ -88,6 +91,7 @@ class BottomSheetPanel {
     BuildContext context, {
     final User user,
     final Fees fees,
+    bool isaTeacher,
   }) {
     return Column(
       children: <Widget>[
@@ -143,7 +147,40 @@ class BottomSheetPanel {
                 ),
                 'ECard_Page');
           },
-        )
+        ),
+        Visibility(
+          visible: isaTeacher,
+          child: _widgetBottomSheetRow(
+            context,
+            icon: Icons.create,
+            label: string.fees,
+            isEnable: true,
+            onPressed: () {
+              kopenPage(
+                context,
+                FeesPageEntry(
+                  user: user,
+                ),
+                'Fees_Page_Entry',
+              );
+            },
+          ),
+        ),
+        _widgetBottomSheetRow(
+          context,
+          icon: Icons.equalizer,
+          label: string.fees,
+          isEnable: true,
+          onPressed: () {
+            kopenPage(
+              context,
+              FeesPageDash(
+                student: user,
+              ),
+              'Fees_Page',
+            );
+          },
+        ),
       ],
     );
   }
