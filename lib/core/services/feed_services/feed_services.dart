@@ -30,7 +30,7 @@ class FeedServices extends Services {
   List<Announcement> allPosts = List<Announcement>();
   // CollectionReference schoolRefs;
 
-  Stream listenToPostsRealTime({String stdDivGlobal}) {
+  Stream<List<Announcement>> listenToPostsRealTime({String stdDivGlobal}) {
     _requestPosts(stdDivGlobal: stdDivGlobal);
     return postsController.stream;
   }
