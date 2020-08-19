@@ -63,13 +63,29 @@ class _FeedPageState extends State<FeedPage>
             ),
             onPressed: null,
           ),
-          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-          floatingActionButton: Stack(
-            children: <Widget>[
-              Visibility(
-                visible: isTeacher,
-                child: Align(
-                  alignment: Alignment.bottomRight,
+          // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(
+              left: 22,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FloatingActionButton.extended(
+                  label: Text('Filter'),
+                  // heroTag: 'abc',
+                  elevation: 5,
+                  onPressed: () {
+                    //Filter Posts Code Here
+                    filterDialogBox(context, model);
+                  },
+                  icon: Icon(
+                    Icons.filter_list,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+                Visibility(
+                  visible: isTeacher,
                   child: FloatingActionButton(
                     heroTag: 'abc',
                     elevation: 5,
@@ -81,26 +97,14 @@ class _FeedPageState extends State<FeedPage>
                         duration: Duration(milliseconds: 200),
                       );
                     },
-                    child: Icon(Icons.add),
+                    child: Icon(
+                      Icons.add,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 31),
-                child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: FloatingActionButton.extended(
-                      label: Text('Filter'),
-                      // heroTag: 'abc',
-                      elevation: 12,
-                      onPressed: () {
-                        //Filter Posts Code Here
-                        filterDialogBox(context, model);
-                      },
-                      icon: Icon(Icons.filter_list),
-                    )),
-              ),
-            ],
+              ],
+            ),
           ),
           body: Center(
             child: model.data == null
