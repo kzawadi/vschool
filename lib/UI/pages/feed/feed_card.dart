@@ -9,6 +9,7 @@ import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_Viewer.dart';
 import 'package:ourESchool/UI/pages/feed/tweetImage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
@@ -64,7 +65,8 @@ class FeedCard extends StatelessWidget {
                                   backgroundImage: model.data.photoUrl ==
                                           'default'
                                       ? AssetImage(assetsString.teacher_welcome)
-                                      : NetworkImage(model.data.photoUrl),
+                                      : customAdvanceNetworkImage(
+                                          model.data.photoUrl),
                                   backgroundColor: Colors.transparent,
                                 ),
                           SizedBox(
