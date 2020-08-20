@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +7,7 @@ import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_Viewer.dart';
+import 'package:ourESchool/UI/pages/feed/tweetImage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/imports.dart';
@@ -144,42 +144,7 @@ class FeedCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
-                width: MediaQuery.of(context).size.width,
-                child: Hero(
-                  transitionOnUserGestures: true,
-                  tag: feed.id + 'photo',
-                  child: Material(
-                    child: InkWell(
-                      onTap: () {
-                        kopenPageBottom(
-                          context,
-                          FeedViewer(
-                            feed: feed,
-                          ),
-                        );
-                      },
-                      child: feed.photoUrl == ''
-                          ? Container(
-                              height: 0,
-                            )
-                          :
-                          //  Image.network(feed.photoUrl)
-                          CachedNetworkImage(
-                              fit: BoxFit.contain,
-                              imageUrl: feed.photoUrl,
-                              placeholder: (context, url) => kBuzyPage(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              fadeOutDuration:
-                                  const Duration(microseconds: 200),
-                              fadeInDuration: const Duration(microseconds: 200),
-                            ),
-                    ),
-                  ),
-                ),
-              ),
+              FeedImage(feed: feed),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
