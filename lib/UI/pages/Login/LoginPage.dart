@@ -1,4 +1,3 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
@@ -87,10 +86,11 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  void moveFocus(BuildContext context) => FocusScope.of(context).nextFocus();
+
   @override
   Widget build(BuildContext context) {
-    final Color fieldBackGround =
-        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.blakwhitish;
+    final Color fieldBackGround = Theme.of(context).cardColor;
     return BaseView<LoginPageModel>(
       onModelReady: (model) => model,
       builder: (context, model, child) {
@@ -128,9 +128,8 @@ class _LoginPageState extends State<LoginPage> {
                             controller: _schoolNameController,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.text,
-                            onFieldSubmitted: (v) {
-                              FocusScope.of(context).nextFocus();
-                            },
+                            onFieldSubmitted: (v) => moveFocus,
+
 //                            style: Theme.of(context).textTheme.bodyText2,
                             decoration: InputDecoration(
 //                              helperStyle: Theme.of(context)
@@ -184,9 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                               disabledBorder: InputBorder.none,
                             ),
                             controller: _emailController,
-                            onFieldSubmitted: (v) {
-                              FocusScope.of(context).nextFocus();
-                            },
+                            onFieldSubmitted: (v) => moveFocus,
                           ),
                         ),
                         SizedBox(
@@ -221,9 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                               disabledBorder: InputBorder.none,
                             ),
                             controller: _passwordController,
-                            onFieldSubmitted: (v) {
-                              FocusScope.of(context).nextFocus();
-                            },
+                            onFieldSubmitted: (v) => moveFocus,
                           ),
                         ),
                         isRegistered
@@ -259,9 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                                     disabledBorder: InputBorder.none,
                                   ),
                                   controller: _confirmPasswordController,
-                                  onFieldSubmitted: (v) {
-                                    FocusScope.of(context).nextFocus();
-                                  },
+                                  onFieldSubmitted: (v) => moveFocus,
                                 ),
                               )
                             : Container(),
@@ -329,10 +322,12 @@ class _LoginPageState extends State<LoginPage> {
                           height: 25,
                         ),
                         LoginRoundedButton(
+                          heroTag: 'login',
                           label: buttonType == ButtonType.LOGIN
                               ? string.login
                               : string.register,
                           onPressed: () async {
+                            FocusScope.of(context).unfocus();
                             if (model.state == ViewState.Idle)
                               await loginRegisterBtnTap(model, context);
                           },
@@ -351,7 +346,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
               model.state == ViewState.Busy
                   ? Container(
-                      // color: Colors.red,
                       child: BackdropFilter(
                         filter: ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                         child: kBuzyPage(color: Theme.of(context).primaryColor),
