@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/resources/constant.dart';
 import 'package:ourESchool/UI/resources/theme.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
@@ -550,4 +551,35 @@ getImage(BuildContext context, ImageSource source, Function onImageSelected) {
     onImageSelected(file);
     Navigator.pop(context);
   });
+}
+
+class GoodTile extends StatelessWidget {
+  const GoodTile({
+    this.child,
+    this.color,
+    this.splashColor,
+    this.onTap,
+  });
+  final Widget child;
+  final Color color;
+  final Color splashColor;
+  final Function() onTap;
+
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      child: Material(
+        color: color,
+        elevation: 10.0,
+        borderRadius: BorderRadius.circular(15.0),
+        shadowColor: shadowColor(context),
+        child: InkWell(
+          child: child,
+          splashColor: splashColor,
+          borderRadius: BorderRadius.circular(15.0),
+          onTap: onTap == null ? doNothing : () => onTap(),
+        ),
+      ),
+    );
+  }
 }

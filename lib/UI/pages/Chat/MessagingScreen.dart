@@ -48,6 +48,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
               isThemeCurrentlyDark(context) ? MyColors.github : Colors.red[50],
           extendBody: true,
           appBar: TopBar(
+            buttonHeroTag: 'smsPage',
             onTitleTapped: () {},
             title: widget.parentORteacher.displayName,
             child: kBackBtn(context),

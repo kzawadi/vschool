@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 
 class ChatPage extends StatefulWidget {
@@ -65,39 +66,38 @@ class _ChatPageState extends State<ChatPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 12,
-                      // child: model.selectedChild.isEmpty()
-                      //     ? Container(
-                      //         // color: Colors.red,
-                      //         child: Center(
-                      //           child: Text(
-                      //             'No Child Selected',
-                      //             style: ktitleStyle.copyWith(fontSize: 20),
-                      //           ),
-                      //         ),
-                      //       )
-                      //     : model.state == ViewState.Busy
-                      //         ? kBuzyPage(color: Theme.of(context).primaryColor)
-                      //         :
-                      child: Container(
-                        // color: Colors.yellow,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: ListView.builder(
-                            itemCount: model.teachersSnapshot.length,
-                            itemBuilder: (context, i) {
-                              // values.keys.elementAt(index);
-                              var key =
-                                  model.teachersSnapshot.keys.elementAt(i);
-                              var snapshot = model.teachersSnapshot[key];
-                              return ChatTeachersListWidget(
-                                heroTag: snapshot.documentID,
-                                snapshot: snapshot,
-                                model: model,
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                      child: model.selectedChild.isEmpty()
+                          ? Container(
+                              child: Center(
+                                child: Text(
+                                  'No Child Selected',
+                                  style: ktitleStyle.copyWith(fontSize: 20),
+                                ),
+                              ),
+                            )
+                          : model.state == ViewState.Busy
+                              ? kBuzyPage(color: Theme.of(context).primaryColor)
+                              : Container(
+                                  // color: Colors.yellow,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: ListView.builder(
+                                      itemCount: model.teachersSnapshot.length,
+                                      itemBuilder: (context, i) {
+                                        // values.keys.elementAt(index);
+                                        var key = model.teachersSnapshot.keys
+                                            .elementAt(i);
+                                        var snapshot =
+                                            model.teachersSnapshot[key];
+                                        return ChatTeachersListWidget(
+                                          heroTag: snapshot.documentID,
+                                          snapshot: snapshot,
+                                          model: model,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
                     ),
                     Expanded(
                       flex: 1,
@@ -118,12 +118,11 @@ class _ChatPageState extends State<ChatPage> {
                             child: Card(
                               elevation: 0,
                               margin: EdgeInsets.all(2),
-                              color: Colors.red,
                               child: Container(
                                 decoration: new BoxDecoration(
                                   gradient: new LinearGradient(
                                     colors: [
-                                      Colors.deepPurple,
+                                      Theme.of(context).colorScheme.secondary,
                                       Theme.of(context).canvasColor,
                                     ],
                                     begin: const FractionalOffset(1.0, 1.5),
@@ -132,8 +131,7 @@ class _ChatPageState extends State<ChatPage> {
                                     tileMode: TileMode.clamp,
                                   ),
                                 ),
-                                width:
-                                    (MediaQuery.of(context).size.width / 2) - 4,
+                                width: (fullWidth(context) / 2) - 4,
                                 child: Row(
                                   // mainAxisSize: ,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -146,7 +144,8 @@ class _ChatPageState extends State<ChatPage> {
                                     ),
                                     Text(
                                       model.childrens[index].displayName,
-                                      style: ktitleStyle,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle2,
                                     ),
                                   ],
                                 ),

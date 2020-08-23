@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
-import 'package:ourESchool/UI/Widgets/good_tile.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/UI/resources/text_styles.dart';
-import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/core/Models/school_wall/wall_model.dart';
+import 'package:ourESchool/imports.dart';
 
 class WallViewer extends StatelessWidget {
   final Wall wall;
@@ -17,42 +16,19 @@ class WallViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: TopBar(
+        buttonHeroTag: 'holidaysPage',
+        child: kBackBtn(context),
+        onPressed: () {
+          kbackBtn(context);
+        },
+        title: 'School Wall',
+      ),
       backgroundColor: invertInvertColorsStrong(context),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(
-                left: 10.0,
-                top: 50.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(EvaIcons.arrowIosBack),
-                    tooltip: 'Go back',
-                    color: invertColorsStrong(context),
-                    iconSize: 26.0,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    child: Center(
-                      child: Text(
-                        string.school_wall,
-                        style: isThemeCurrentlyDark(context)
-                            ? TitleStylesDefault.white
-                            : TitleStylesDefault.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Expanded(
               child: ListView(
                 physics: BouncingScrollPhysics(),
@@ -60,38 +36,9 @@ class WallViewer extends StatelessWidget {
                   Hero(
                     tag: 'tile2',
                     child: GoodTile(
-                      child: Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            CachedNetworkImage(
-                              fit: BoxFit.contain,
-                              imageUrl: wall.photoUrl,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              fadeOutDuration: const Duration(seconds: 1),
-                              fadeInDuration: const Duration(seconds: 1),
-                            ),
-                            // Container(
-                            //   width: 180,
-                            //   height: 180,
-                            //   decoration: BoxDecoration(
-                            //     shape: BoxShape.rectangle,
-                            //     image: DecorationImage(
-                            //       image: NetworkImage(
-                            //         wall.photoUrl,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      splashColor: MyColors.accent,
+                      child: customNetworkImage(wall.photoUrl),
+
+                      // splashColor: MyColors.accent,
                     ),
                   ),
                   GoodTile(

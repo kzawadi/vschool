@@ -43,6 +43,7 @@ class FeesPageDash extends StatelessWidget {
                           kbackBtn(context);
                         },
                         title: 'NO FEES',
+                        buttonHeroTag: 'feehero',
                       ),
                       body: Center(
                         child: Container(
@@ -61,6 +62,7 @@ class FeesPageDash extends StatelessWidget {
                   )
                 : Scaffold(
                     appBar: TopBar(
+                      buttonHeroTag: 'feeshero',
                       child: kBackBtn(context),
                       onPressed: () {
                         kbackBtn(context);

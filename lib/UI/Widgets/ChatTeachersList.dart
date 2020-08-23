@@ -37,93 +37,93 @@ class _ChatTeachersListWidgetState extends State<ChatTeachersListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TopBar(
-        title: 'Parents',
-        child: null,
-        onPressed: null,
-        buttonHeroTag: 'parentsChatSelection',
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5),
-        child: Hero(
-          transitionOnUserGestures: true,
-          tag: widget.heroTag,
-          child: Container(
-            height: 70,
-            decoration: BoxDecoration(
-              color: Theme.of(context).canvasColor,
-              border: Border(
-                top: BorderSide(width: 1, color: color),
-                bottom: BorderSide(width: 1, color: color),
-                left: BorderSide(width: 1, color: color),
-                right: BorderSide(width: 1, color: color),
-              ),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                  bottomLeft: Radius.circular(60),
-                  bottomRight: Radius.zero,
-                  topRight: Radius.zero),
+    return
+        //  Scaffold(
+        //   appBar: TopBar(
+        //     title: 'Parents',
+        //     child: null,
+        //     onPressed: null,
+        //     buttonHeroTag: 'parentsChatSelection',
+        //   ),
+        //   body:
+        Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Hero(
+        transitionOnUserGestures: true,
+        tag: widget.heroTag,
+        child: Container(
+          // height: 70,
+          decoration: BoxDecoration(
+            color: Theme.of(context).canvasColor,
+            border: Border(
+              top: BorderSide(width: 1, color: color),
+              bottom: BorderSide(width: 1, color: color),
+              left: BorderSide(width: 1, color: color),
+              right: BorderSide(width: 1, color: color),
             ),
-            child: MaterialButton(
-              minWidth: MediaQuery.of(context).size.width,
-              onPressed: () {
-                kopenPage(
-                    context,
-                    MessagingScreen(
-                      student: widget.model.selectedChild,
-                      parentORteacher: widget
-                          .model.teachersListMap[widget.snapshot.documentID],
-                    ),
-                    'Messaging_Screen');
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  widget.model.teachersListMap
-                          .containsKey(widget.snapshot.documentID)
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: CachedNetworkImage(
-                            fit: BoxFit.fill,
-                            imageUrl: widget
-                                .model
-                                .teachersListMap[widget.snapshot.documentID]
-                                .photoUrl,
-                            height: 50,
-                            width: 50,
-                          ),
-                        )
-                      : Image.asset(
-                          assetsString.teacher_welcome,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(60),
+                bottomLeft: Radius.circular(60),
+                bottomRight: Radius.zero,
+                topRight: Radius.zero),
+          ),
+          child: MaterialButton(
+            minWidth: MediaQuery.of(context).size.width,
+            onPressed: () {
+              kopenPage(
+                  context,
+                  MessagingScreen(
+                    student: widget.model.selectedChild,
+                    parentORteacher: widget
+                        .model.teachersListMap[widget.snapshot.documentID],
+                  ),
+                  'Messaging_Screen');
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                widget.model.teachersListMap
+                        .containsKey(widget.snapshot.documentID)
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl: widget
+                              .model
+                              .teachersListMap[widget.snapshot.documentID]
+                              .photoUrl,
                           height: 50,
                           width: 50,
                         ),
-                  Text(
-                    widget.model.teachersListMap
-                            .containsKey(widget.snapshot.documentID)
-                        ? widget
-                            .model
-                            .teachersListMap[widget.snapshot.documentID]
-                            .displayName
-                        : "loading...",
-                    maxLines: 2,
-                    style: TextStyle(
-                        fontSize: 22,
-                        // color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Icon(
-                    Icons.chevron_right,
-                    // color: Colors.white,
-                    size: 55,
-                  )
-                ],
-              ),
+                      )
+                    : Image.asset(
+                        assetsString.teacher_welcome,
+                        height: 50,
+                        width: 50,
+                      ),
+                Text(
+                  widget.model.teachersListMap
+                          .containsKey(widget.snapshot.documentID)
+                      ? widget.model.teachersListMap[widget.snapshot.documentID]
+                          .displayName
+                      : "loading...",
+                  maxLines: 2,
+                  style: TextStyle(
+                      fontSize: 22,
+                      // color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
+                Icon(
+                  Icons.chevron_right,
+                  // color: Colors.white,
+                  size: 55,
+                )
+              ],
             ),
           ),
         ),
       ),
+      // ),
     );
   }
 }
