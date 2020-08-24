@@ -44,7 +44,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
       appBar: TopBar(
         title: 'Teachers',
         child: kBackBtn(context),
-        onPressed: null,
+        onPressed: kbackBtn,
         buttonHeroTag: 'StudentConnection',
       ),
       // floatingActionButton: FloatingActionButton(
