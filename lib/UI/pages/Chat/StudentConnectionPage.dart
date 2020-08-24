@@ -47,14 +47,14 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
         onPressed: null,
         buttonHeroTag: 'StudentConnection',
       ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: '123',
-        // backgroundColor: widget.color,
-        onPressed: () {
-          kbackBtn(context);
-        },
-        child: Icon(Icons.close),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Theme.of(context).errorColor,
+      //   heroTag: '123',
+      //   onPressed: () {
+      //     kbackBtn(context);
+      //   },
+      //   child: Icon(Icons.close),
+      // ),
       body: Hero(
         transitionOnUserGestures: true,
         tag: widget.documentSnapshot.documentID + '12',
@@ -112,7 +112,6 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                         ? kBuzyPage(color: Theme.of(context).primaryColor)
                         : Flexible(
                             child: Container(
-                              // color: Colors.red,
                               child: GridView.builder(
                                 physics: BouncingScrollPhysics(),
                                 gridDelegate:
@@ -158,8 +157,6 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                                         child: FlatButton(
                                           child: Text(
                                             'Chat',
-                                            style: ksubtitleStyle.copyWith(
-                                                fontSize: 18),
                                           ),
                                           onPressed: () {
                                             kopenPage(
@@ -171,6 +168,10 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                                               'Messaging_Screen',
                                             );
                                           },
+                                          color: Theme.of(context).accentColor,
+                                          textColor:
+                                              Theme.of(context).primaryColor,
+                                          clipBehavior: Clip.antiAlias,
                                         ),
                                       )
                                     ],
