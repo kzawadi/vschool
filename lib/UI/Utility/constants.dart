@@ -85,7 +85,7 @@ kopenPageSlide(BuildContext context, Widget page, String pageName,
   );
 }
 
-kBuzyPage({Color color = Colors.white}) {
+Widget kBuzyPage({Color color = Colors.white}) {
   return Align(
     alignment: Alignment.center,
     child: SpinKitThreeBounce(

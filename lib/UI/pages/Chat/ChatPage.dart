@@ -1,5 +1,6 @@
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:stacked/stacked.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({Key key}) : super(key: key);
@@ -17,11 +18,12 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     UserType userType = Provider.of<UserType>(context, listen: false);
     if (userType == UserType.TEACHER) {
-      return BaseView<ChatUsersListPageModel>(
+      return ViewModelBuilder<ChatUsersListPageModel>.reactive(
+        viewModelBuilder: () => ChatUsersListPageModel(),
         onModelReady: (model) =>
             model.getAllStudent(division: _division, standard: _standard),
         builder: (context, model, child) {
-          return model.state == ViewState.Busy
+          return model.isBusy
               ? kBuzyPage(color: Theme.of(context).primaryColor)
               : Scaffold(
                   appBar: TopBar(
@@ -50,7 +52,8 @@ class _ChatPageState extends State<ChatPage> {
       );
     } else if (userType == UserType.PARENT) {
       // User children = User();
-      return BaseView<ChatUsersListPageModel>(
+      return ViewModelBuilder<ChatUsersListPageModel>.reactive(
+          viewModelBuilder: () => ChatUsersListPageModel(),
           onModelReady: (model) => model.getChildrens(),
           builder: (context, model, child) {
             return Scaffold(
@@ -75,7 +78,7 @@ class _ChatPageState extends State<ChatPage> {
                                 ),
                               ),
                             )
-                          : model.state == ViewState.Busy
+                          : model.isBusy
                               ? kBuzyPage(color: Theme.of(context).primaryColor)
                               : Container(
                                   // color: Colors.yellow,
