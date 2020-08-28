@@ -84,31 +84,31 @@ class Wall {
   }
 
   Wall.fromSnapshot(DocumentSnapshot snapshot) {
-    schoolName = snapshot['schoolName'].toString() ?? '';
-    by = snapshot['by'].toString();
-    forDiv = snapshot['forDiv'].toString();
-    timestamp = snapshot['timeStamp'] as Timestamp;
-    forClass = snapshot['forClass'].toString();
-    photoUrl = snapshot['photoUrl'].toString() ?? '';
-    photoPath = snapshot['photoPath'].toString() ?? '';
-    id = snapshot.documentID;
-    mission = snapshot['mission'].toString() ?? '';
-    beliefs = snapshot['beliefs'].toString() ?? '';
-    history = snapshot['history'].toString() ?? '';
-    regNo = snapshot['regNo'].toString() ?? '';
-    location = snapshot['location'].toString() ?? '';
-    contacts = snapshot['contacts'].toString() ?? '';
-    dirSms = snapshot['dirSms'].toString() ?? '';
-    file1 = snapshot['file1'].toString() ?? '';
-    file2 = snapshot['file2'].toString() ?? '';
-    file3 = snapshot['file3'].toString() ?? '';
-    file4 = snapshot['file4'].toString() ?? '';
-    file5 = snapshot['file5'].toString() ?? '';
-    file6 = snapshot['file6'].toString() ?? '';
-    file7 = snapshot['file7'].toString() ?? '';
-    file8 = snapshot['file8'].toString() ?? '';
-    file9 = snapshot['file9'].toString() ?? '';
-    file10 = snapshot['file10'].toString() ?? '';
+    schoolName = snapshot.data()['schoolName'].toString() ?? '';
+    by = snapshot.data()['by'].toString();
+    forDiv = snapshot.data()['forDiv'].toString();
+    timestamp = snapshot.data()['timeStamp'] as Timestamp;
+    forClass = snapshot.data()['forClass'].toString();
+    photoUrl = snapshot.data()['photoUrl'].toString() ?? '';
+    photoPath = snapshot.data()['photoPath'].toString() ?? '';
+    id = snapshot.id;
+    mission = snapshot.data()['mission'].toString() ?? '';
+    beliefs = snapshot.data()['beliefs'].toString() ?? '';
+    history = snapshot.data()['history'].toString() ?? '';
+    regNo = snapshot.data()['regNo'].toString() ?? '';
+    location = snapshot.data()['location'].toString() ?? '';
+    contacts = snapshot.data()['contacts'].toString() ?? '';
+    dirSms = snapshot.data()['dirSms'].toString() ?? '';
+    file1 = snapshot.data()['file1'].toString() ?? '';
+    file2 = snapshot.data()['file2'].toString() ?? '';
+    file3 = snapshot.data()['file3'].toString() ?? '';
+    file4 = snapshot.data()['file4'].toString() ?? '';
+    file5 = snapshot.data()['file5'].toString() ?? '';
+    file6 = snapshot.data()['file6'].toString() ?? '';
+    file7 = snapshot.data()['file7'].toString() ?? '';
+    file8 = snapshot.data()['file8'].toString() ?? '';
+    file9 = snapshot.data()['file9'].toString() ?? '';
+    file10 = snapshot.data()['file10'].toString() ?? '';
   }
 
   Map<String, dynamic> toJson() {

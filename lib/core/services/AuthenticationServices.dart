@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart' as authentication;
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -24,8 +25,8 @@ class AuthenticationServices extends Services {
   bool isUserLoggedIn = false;
   UserType userType = UserType.STUDENT;
 
-  StreamController<FirebaseUser> fireBaseUserStream =
-      StreamController<FirebaseUser>();
+  StreamController<authentication.User> fireBaseUserStream =
+      StreamController<authentication.User>();
   StreamController<bool> isUserLoggedInStream = StreamController<bool>();
   StreamController<UserType> userTypeStream = StreamController<UserType>();
 
@@ -33,9 +34,6 @@ class AuthenticationServices extends Services {
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
   AuthenticationServices() {
-    firestore.settings(
-        // persistenceEnabled: false,
-        );
     isLoggedIn().then((onValue) => isUserLoggedIn = onValue);
     _userType().then((onValue) => userType = onValue);
   }
@@ -80,7 +78,7 @@ class AuthenticationServices extends Services {
         : userType == UserType.TEACHER ? "Parent-Teacher" : "Parent-Teacher";
 
     DocumentReference _schoolLoginRef =
-        schoolRef.collection(schoolCode.toUpperCase().trim()).document('Login');
+        schoolRef.collection(schoolCode.toUpperCase().trim()).doc('Login');
 
     await _schoolLoginRef.get().then((onValue) {
       isSchoolPresent = onValue.exists;
@@ -102,15 +100,16 @@ class AuthenticationServices extends Services {
         .first
         .then((querySnapshot) {
       //todo here only the first is expected but why forEach
-      querySnapshot.documents.forEach((documentSnapshot) {
+      querySnapshot.docs.forEach((documentSnapshot) {
         isUserAvailable = documentSnapshot.exists;
         print("User Data : " + documentSnapshot.data.toString());
         if (userType == UserType.STUDENT) {
           userDataLogin = UserDataLogin(
-            email: documentSnapshot["email"].toString(),
-            id: documentSnapshot["id"].toString(),
+            email: documentSnapshot.data()["email"].toString(),
+            id: documentSnapshot.data()["id"].toString(),
             parentIds:
-                documentSnapshot['parentId'] as Map<dynamic, dynamic> ?? null,
+                documentSnapshot.data()['parentId'] as Map<dynamic, dynamic> ??
+                    null,
           );
           // DocumentReference ref = documentSnapshot["ref"] as DocumentReference;
           // print('Insude Document Reference');
@@ -121,11 +120,12 @@ class AuthenticationServices extends Services {
           //     );
         } else {
           userDataLogin = UserDataLogin(
-            email: documentSnapshot["email"].toString(),
-            id: documentSnapshot["id"].toString(),
-            isATeacher: documentSnapshot["isATeacher"] as bool,
+            email: documentSnapshot.data()["email"].toString(),
+            id: documentSnapshot.data()["id"].toString(),
+            isATeacher: documentSnapshot.data()["isATeacher"] as bool,
             childIds:
-                documentSnapshot["childId"] as Map<dynamic, dynamic> ?? null,
+                documentSnapshot.data()["childId"] as Map<dynamic, dynamic> ??
+                    null,
           );
         }
       });
@@ -170,10 +170,10 @@ class AuthenticationServices extends Services {
     // await sharedPreferencesHelper.clearAllData();
     try {
       AuthErrors authErrors = AuthErrors.UNKNOWN;
-      AuthResult authResult = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      authentication.UserCredential authResult = await auth
+          .createUserWithEmailAndPassword(email: email, password: password);
       firebaseUser = authResult.user;
-      await firestore.collection('users').document(firebaseUser.uid).setData({
+      await firestore.collection('users').doc(firebaseUser.uid).set({
         "uid": firebaseUser.uid,
         "email": firebaseUser.email,
         "username": firebaseUser.displayName,
@@ -203,8 +203,8 @@ class AuthenticationServices extends Services {
     // await sharedPreferencesHelper.clearAllData();
     try {
       AuthErrors authErrors = AuthErrors.UNKNOWN;
-      AuthResult authResult = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      authentication.UserCredential authResult = await auth
+          .signInWithEmailAndPassword(email: email, password: password);
       firebaseUser = authResult.user;
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);

@@ -1,6 +1,6 @@
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart';
+import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart' as theme;
 import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/UI/pages/Login/ForgotPassword.dart';
 import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
@@ -92,7 +92,7 @@ class _SettingPageState extends State<SettingPage> {
                   onTap: () async {
                     kopenPageSlide(
                       context,
-                      Settings(),
+                      theme.Settings(),
                       'Theme_Settings',
                       duration: Duration(seconds: 5),
                     );

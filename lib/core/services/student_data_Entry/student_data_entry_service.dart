@@ -16,6 +16,7 @@ class StudentDataEntryService extends Services {
 
   Future<void> postData({List<StudentEntryData> userEntryData}) async {
 //Schools/India/MAMA/Login/Student/dZdZUa5GAlFtjblV3UVN
+    SetOptions options = SetOptions(merge: true);
 
     for (StudentEntryData u in userEntryData) {
       // String wazazi = u.parentId;
@@ -32,11 +33,11 @@ class StudentDataEntryService extends Services {
       print(data);
       print(wazazimapped);
       DocumentReference _refs = (await schoolRefwithCode())
-          .document('Login')
+          .doc('Login')
           .collection('Student')
-          .document(u.id);
+          .doc(u.id);
 
-      await _refs.setData(data, merge: true);
+      await _refs.set(data, options);
     }
   }
 

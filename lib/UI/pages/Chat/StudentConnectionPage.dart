@@ -31,8 +31,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
     isLoading = true;
     setState(() {});
     await widget.model.getParents(widget.documentSnapshot);
-    parent =
-        widget.model.studentsParentListMap[widget.documentSnapshot.documentID];
+    parent = widget.model.studentsParentListMap[widget.documentSnapshot.id];
     isLoading = false;
     setState(() {});
   }
@@ -44,7 +43,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
       appBar: TopBar(
         title: 'Teachers',
         child: kBackBtn(context),
-        onPressed: kbackBtn,
+        onPressed: kbackBtn(context),
         buttonHeroTag: 'StudentConnection',
       ),
       // floatingActionButton: FloatingActionButton(
@@ -57,7 +56,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
       // ),
       body: Hero(
         transitionOnUserGestures: true,
-        tag: widget.documentSnapshot.documentID + '12',
+        tag: widget.documentSnapshot.id + '12',
         child: SafeArea(
           bottom: false,
           child: Column(

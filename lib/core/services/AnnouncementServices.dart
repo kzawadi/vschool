@@ -20,24 +20,22 @@ class AnnouncementServices extends Services {
     String stdDivGlobal,
   ) async {
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(stdDivGlobal);
+        (await schoolRefwithCode()).doc('Posts').collection(stdDivGlobal);
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();
     if (lastPostSnapshot == null)
-      data = await _postRef
-          .orderBy('timeStamp', descending: true)
-          .limit(40)
-          .getDocuments();
+      data =
+          await _postRef.orderBy('timeStamp', descending: true).limit(40).get();
     else
       data = await _postRef
           .orderBy('timeStamp', descending: true)
-          .startAfter([lastPostSnapshot['timeStamp']])
+          .startAfter([lastPostSnapshot.data()['timeStamp']])
           .limit(5)
-          .getDocuments();
+          .get();
 
-    if (data != null && data.documents.length > 0) {
-      lastPostSnapshot = data.documents[data.documents.length - 1];
-      postDocumentSnapshots.addAll(data.documents);
+    if (data != null && data.docs.length > 0) {
+      lastPostSnapshot = data.docs[data.docs.length - 1];
+      postDocumentSnapshots.addAll(data.docs);
     } else {
       //No More post Available
     }

@@ -204,8 +204,7 @@ class ProfileServices extends Services {
     DocumentReference profielRef = await _getProfileRef(uid, userType);
 
     try {
-      User user = User.fromSnapshot(
-          await profielRef.get(source: Source.serverAndCache));
+      User user = User.fromSnapshot(await profielRef.get());
       return user;
     } catch (e) {
       cprint(e, errorIn: 'cant fetch profile data from firestore');
@@ -327,9 +326,9 @@ class ProfileServices extends Services {
     await docref.get().then(
       (value) {
         studentData = StudentData(
-          email: value["email"].toString(),
-          id: value['id'].toString(),
-          parentIds: value["parentId"] as Map<dynamic, dynamic> ?? null,
+          email: value.data()["email"].toString(),
+          id: value.data()['id'].toString(),
+          parentIds: value.data()["parentId"] as Map<dynamic, dynamic> ?? null,
         );
       },
     );

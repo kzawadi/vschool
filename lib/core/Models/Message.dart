@@ -18,8 +18,8 @@ class Message {
       this.readReceipt});
 
   Message.fromSnapShot(DocumentSnapshot snapshot) {
-    this.id = snapshot.documentID;
-    _fromJson(snapshot.data);
+    this.id = snapshot.id;
+    _fromJson(snapshot.data());
   }
 
   Message.fromJson(Map<String, dynamic> json) {

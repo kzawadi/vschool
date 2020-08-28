@@ -53,19 +53,17 @@ class ChatServices extends Services {
     // childrensId = parentIds.values.toList();
     // print('the parente usernames which are ID  $childrensId');
 
-    var ref =
-        (await schoolRefwithCode()).document('Teachers').collection(_standard);
+    var ref = (await schoolRefwithCode()).doc('Teachers').collection(_standard);
 
-    QuerySnapshot data = await ref.getDocuments();
+    QuerySnapshot data = await ref.get();
 
-    if (data != null && data.documents.length > 0) {
+    if (data != null && data.docs.length > 0) {
       print('Data Added');
-      print(data.documents.first.documentID);
+      print(data.docs.first.id);
 
-      data.documents.forEach(
+      data.docs.forEach(
         (document) => {
-          teachersDocumentSnapshots.putIfAbsent(
-              document.documentID, () => document)
+          teachersDocumentSnapshots.putIfAbsent(document.id, () => document)
         },
       );
     }
@@ -115,24 +113,23 @@ class ChatServices extends Services {
 
     for (String id in childrensId) {
       final Query _studentsRef = (await schoolRefwithCode())
-          .document("Students")
+          .doc("Students")
           .collection(_standard)
           .where("userId", isEqualTo: id);
 
-      QuerySnapshot data = await _studentsRef.getDocuments();
+      QuerySnapshot data = await _studentsRef.get();
 
-      if (data != null && data.documents.length > 0) {
-        data.documents.forEach((document) => {
-              studentsDocumentSnapshots.putIfAbsent(
-                  document.documentID, () => document)
+      if (data != null && data.docs.length > 0) {
+        data.docs.forEach((document) => {
+              studentsDocumentSnapshots.putIfAbsent(document.id, () => document)
             });
       }
     }
   }
 
   Future<User> getUser(DocumentSnapshot documentSnapshot) async {
-    User user =
-        await _profileServices.getUserDataFromReference(documentSnapshot["id"]);
+    User user = await _profileServices
+        .getUserDataFromReference(documentSnapshot.data()["id"]);
 
     // studentListMap.putIfAbsent(documentSnapshot.documentID, () => user);
 
@@ -145,13 +142,12 @@ class ChatServices extends Services {
 //eliminated the field [userId] when iterating this function
 //todo change a firebase function to make sure the field [userId] is always the
 //todo last either by renaming it to [z_userId]
-    for (int index = 1; index < documentSnapshot.data.length - 1; index++) {
+    for (int index = 1; index < documentSnapshot.data().length - 1; index++) {
       parents.add(await _profileServices.getUserDataFromReference(
-          documentSnapshot[index.toString()] as DocumentReference));
+          documentSnapshot.data()[index.toString()] as DocumentReference));
     }
 
-    studentsParentListMap.putIfAbsent(
-        documentSnapshot.documentID, () => parents);
+    studentsParentListMap.putIfAbsent(documentSnapshot.id, () => parents);
 
     return parents;
   }
@@ -164,17 +160,17 @@ class ChatServices extends Services {
     ScrollController scrollController,
   }) async* {
     var ref = (await schoolRefwithCode())
-        .document('Chats')
+        .doc('Chats')
         .collection(student.standardDivision())
-        .document('Parent-Teacher')
+        .doc('Parent-Teacher')
         .collection(loggedIn.id)
-        .document(other.id);
+        .doc(other.id);
 
     String chatRef = 'N.A';
     //todo change source to server and cache
     await ref
         .get()
-        .then((snapShot) => {chatRef = snapShot[student.id].toString()});
+        .then((snapShot) => {chatRef = snapShot.data()[student.id].toString()});
 
     await for (QuerySnapshot snap in firestore
         .collection(chatRef)
@@ -183,7 +179,7 @@ class ChatServices extends Services {
         .snapshots()) {
       try {
         List<Message> messages =
-            snap.documents.map((doc) => Message.fromSnapShot(doc)).toList();
+            snap.docs.map((doc) => Message.fromSnapShot(doc)).toList();
         int smsno = messages.length;
         print('the number of sms fetched is $smsno');
         yield messages;
@@ -201,9 +197,9 @@ class ChatServices extends Services {
 
   Future sendMessage(Message message, User student) async {
     var ref = (await schoolRefwithCode())
-        .document('Chats')
+        .doc('Chats')
         .collection(student.standardDivision())
-        .document('Chat')
+        .doc('Chat')
         .collection(getChatId([message.to, message.for_, message.from]));
 
     await ref.add(message.toJson());
@@ -226,12 +222,12 @@ class ChatServices extends Services {
       String from = message.from;
       String id = message.id;
       DocumentReference ref = (await schoolRefwithCode())
-          .document('Chats')
+          .doc('Chats')
           .collection(student.standardDivision())
-          .document('Chat')
+          .doc('Chat')
           .collection(getChatId([to, forr, from]))
-          .document(id);
-      batch.updateData(ref, {"readReceipt": true});
+          .doc(id);
+      batch.update(ref, {"readReceipt": true});
     }
     batch.commit();
     print('Messages Delivered the batch has been commited');

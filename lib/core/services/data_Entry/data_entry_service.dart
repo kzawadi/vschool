@@ -16,6 +16,7 @@ class DataEntryService extends Services {
 
   Future<void> postData({List<UserEntryData> userEntryData}) async {
 //Schools/India/MAMA/Login/Parent-Teacher/dZdZUa5GAlFtjblV3UVN
+    SetOptions options = SetOptions(merge: true);
 
     for (UserEntryData u in userEntryData) {
       // String watoto = u.childIds;
@@ -34,11 +35,11 @@ class DataEntryService extends Services {
       print(data);
       print(watotomapped);
       DocumentReference _postRefs = (await schoolRefwithCode())
-          .document('Login')
+          .doc('Login')
           .collection('Parent-Teacher')
-          .document(u.id);
+          .doc(u.id);
 
-      await _postRefs.setData(data, merge: true);
+      await _postRefs.set(data, options);
     }
   }
 

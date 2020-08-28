@@ -39,15 +39,15 @@ class Fees {
   }
 
   Fees.fromSnapshot(DocumentSnapshot snapshot) {
-    description = snapshot['description'].toString() ?? '';
-    due = snapshot['due'].toString();
-    paid = snapshot['paid'].toString();
-    timestamp = snapshot['timeStamp'] as Timestamp;
-    to = snapshot['to'].toString();
-    totalFees = snapshot['totalFees'].toString() ?? '';
-    photoPath = snapshot['photoPath'].toString() ?? '';
-    type = FeesTypeHelper.getEnum(snapshot['type'].toString());
-    id = snapshot.documentID;
+    description = snapshot.data()['description'].toString() ?? '';
+    due = snapshot.data()['due'].toString();
+    paid = snapshot.data()['paid'].toString();
+    timestamp = snapshot.data()['timeStamp'] as Timestamp;
+    to = snapshot.data()['to'].toString();
+    totalFees = snapshot.data()['totalFees'].toString() ?? '';
+    photoPath = snapshot.data()['photoPath'].toString() ?? '';
+    type = FeesTypeHelper.getEnum(snapshot.data()['type'].toString());
+    id = snapshot.id;
   }
 
   Map<String, dynamic> toJson() {

@@ -1,4 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
@@ -18,7 +19,7 @@ import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   final _logger = Logger('VSchool');
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -30,6 +31,7 @@ void main() {
   });
 
   Provider.debugCheckInvalidValueType = null;
+  await Firebase.initializeApp();
   setupLocator();
   _logger.info('Going into splash screen');
   runApp(
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
           initialData: User(),
           value: locator<ProfileServices>().loggedInUserStream.stream,
         ),
-        StreamProvider<FirebaseUser>.value(
+        StreamProvider<auth.User>.value(
           initialData: null,
           value: locator<AuthenticationServices>()
               .fireBaseUserStream

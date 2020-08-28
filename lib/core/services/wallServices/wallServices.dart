@@ -36,6 +36,7 @@ class WallServices extends Services {
   }
 
   postWall(Wall wall) async {
+    SetOptions options = SetOptions(merge: true);
     if (schoolCode == null) await getSchoolCode();
 
     wall.timestamp = Timestamp.now();
@@ -54,12 +55,12 @@ class WallServices extends Services {
       filePath = '${Services.country}/$schoolCode/Walls/$fileName';
     }
     DocumentReference _wallPostRef =
-        wallRef.collection(schoolCode.toUpperCase().trim()).document('wall');
+        wallRef.collection(schoolCode.toUpperCase().trim()).doc('wall');
 
     wall.photoPath = filePath;
     Map wallMap = wall.toJson();
 
-    await _wallPostRef.setData(wallMap, merge: true);
+    await _wallPostRef.set(wallMap, options);
     print(wallMap.toString());
   }
 }
