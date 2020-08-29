@@ -91,8 +91,8 @@ class Services {
   SharedPreferencesHelper get sharedPreferencesHelper =>
       _sharedPreferencesHelper;
 
-  getFirebaseUser() async {
-    firebaseUser = await auth.currentUser;
+  getFirebaseUser() {
+    firebaseUser = auth.currentUser;
   }
 
   Future<String> getSchoolCode() async {

@@ -269,14 +269,14 @@ class ProfileServices extends Services {
   Future<DocumentReference> _getProfileRef(
       String uid, UserType userType) async {
     await getSchoolCode();
-    DocumentReference ref = (await schoolRefwithCode()).document('Profile');
+    DocumentReference ref = (await schoolRefwithCode()).doc('Profile');
     switch (userType) {
       case UserType.STUDENT:
-        return ref.collection('Student').document(uid);
+        return ref.collection('Student').doc(uid);
         break;
       case UserType.TEACHER:
       case UserType.PARENT:
-        return ref.collection('Parent-Teacher').document(uid);
+        return ref.collection('Parent-Teacher').doc(uid);
         break;
       case UserType.UNKNOWN:
         return null;
@@ -319,9 +319,9 @@ class ProfileServices extends Services {
 
   getChildParentId({String childId}) async {
     DocumentReference docref = (await schoolRefwithCode())
-        .document('Login')
+        .doc('Login')
         .collection('Student')
-        .document(childId);
+        .doc(childId);
 //todo chang the firestore backend to use child id as Document
     await docref.get().then(
       (value) {

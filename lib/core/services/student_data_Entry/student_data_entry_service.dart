@@ -43,12 +43,12 @@ class StudentDataEntryService extends Services {
 
   File _jsonFile;
   List<StudentEntryData> userData = List<StudentEntryData>();
-  String _path;
+  // String _path;
   String jsonString;
   List<StudentEntryData> _data = [];
 
   Future<String> _loadAStudentAsset() async {
-    _path = await FilePicker.getFilePath().then(
+    await FilePicker.getFilePath().then(
       (value) async {
         _jsonFile = File(value);
         String datastring = await _jsonFile.readAsString();

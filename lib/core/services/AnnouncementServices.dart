@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:http/http.dart' as http;
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'dart:convert';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/core/services/StorageServices.dart';
@@ -73,7 +71,7 @@ class AnnouncementServices extends Services {
       standard = announcement.forClass + announcement.forDiv;
 
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(standard);
+        (await schoolRefwithCode()).doc('Posts').collection(standard);
 
     _postRef.add(announcementMap);
     print('feed posted succeful');
@@ -83,9 +81,9 @@ class AnnouncementServices extends Services {
     // Map announcementMap = announcement.toJson();
 
     var _postRef = (await schoolRefwithCode())
-        .document('Posts')
+        .doc('Posts')
         .collection(stdDivGlobal)
-        .document(id);
+        .doc(id);
 
     await _postRef.delete();
   }

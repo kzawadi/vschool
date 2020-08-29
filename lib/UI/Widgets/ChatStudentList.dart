@@ -55,22 +55,20 @@ class _ChatStudentListWidgetState extends State<ChatStudentListWidget> {
                   foregroundColor: Theme.of(context).primaryColor,
                   backgroundColor: Colors.grey,
                   backgroundImage: customAdvanceNetworkImage(
-                    widget.model.studentListMap[widget.snapshot.documentID]
-                        .photoUrl,
+                    widget.model.studentListMap[widget.snapshot.id].photoUrl,
                   ),
                 ),
                 title: Text(
-                  widget.model.studentListMap
-                          .containsKey(widget.snapshot.documentID)
-                      ? widget.model.studentListMap[widget.snapshot.documentID]
-                          .displayName
+                  widget.model.studentListMap.containsKey(widget.snapshot.id)
+                      ? widget
+                          .model.studentListMap[widget.snapshot.id].displayName
                       : "loading...",
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
                 subtitle: Container(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: Text(
-                    'Class ${widget.model.studentListMap[widget.snapshot.documentID].standard + widget.model.studentListMap[widget.snapshot.documentID].division}',
+                    'Class ${widget.model.studentListMap[widget.snapshot.id].standard + widget.model.studentListMap[widget.snapshot.id].division}',
                     style: TextStyle(color: Colors.grey, fontSize: 15.0),
                   ),
                 ),

@@ -41,7 +41,7 @@ Widget heading(String heading,
     padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
     child: Text(
       heading,
-      style: AppTheme.apptheme.typography.dense.display1
+      style: AppTheme.apptheme.typography.dense.headline4
           .copyWith(fontSize: fontSize),
     ),
   );
@@ -141,7 +141,7 @@ Widget customText(String msg,
   } else {
     if (context != null && style != null) {
       var fontSize =
-          style.fontSize ?? Theme.of(context).textTheme.body1.fontSize;
+          style.fontSize ?? Theme.of(context).textTheme.bodyText2.fontSize;
       style = style.copyWith(
           fontSize: fontSize - (fullWidth(context) <= 375 ? 2 : 0));
     }
@@ -352,13 +352,13 @@ Widget emptyListWidget(BuildContext context, String title,
                   style: Theme.of(context)
                       .typography
                       .dense
-                      .display1
+                      .headline4
                       .copyWith(color: Color(0xff9da9c7))),
               customText(subTitle,
                   style: Theme.of(context)
                       .typography
                       .dense
-                      .body2
+                      .bodyText2
                       .copyWith(color: Color(0xffabb8d6))),
             ],
           )

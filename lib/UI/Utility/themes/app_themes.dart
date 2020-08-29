@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ourESchool/UI/Utility/themes/light_theme.dart';
 import 'package:ourESchool/UI/Utility/themes/newLightTheme.dart';
 
 enum AppTheme { White, Dark, LightGreen, DarkGreen }

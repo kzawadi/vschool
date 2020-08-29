@@ -47,8 +47,8 @@ class _ChatTeachersListWidgetState extends State<ChatTeachersListWidget> {
                       context,
                       MessagingScreen(
                         student: widget.model.selectedChild,
-                        parentORteacher: widget
-                            .model.teachersListMap[widget.snapshot.documentID],
+                        parentORteacher:
+                            widget.model.teachersListMap[widget.snapshot.id],
                       ),
                       'Messaging_Screen');
                 },
@@ -56,19 +56,17 @@ class _ChatTeachersListWidgetState extends State<ChatTeachersListWidget> {
                   foregroundColor: Theme.of(context).primaryColor,
                   backgroundColor: Colors.grey,
                   backgroundImage: customAdvanceNetworkImage(
-                    widget.model.teachersListMap[widget.snapshot.documentID]
-                        .photoUrl,
+                    widget.model.teachersListMap[widget.snapshot.id].photoUrl,
                   ),
                 ),
                 title: Text(
-                  widget.model.teachersListMap[widget.snapshot.documentID]
-                      .displayName,
+                  widget.model.teachersListMap[widget.snapshot.id].displayName,
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
                 subtitle: Container(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: Text(
-                    'Class ${widget.model.teachersListMap[widget.snapshot.documentID].standard + widget.model.teachersListMap[widget.snapshot.documentID].division}',
+                    'Class ${widget.model.teachersListMap[widget.snapshot.id].standard + widget.model.teachersListMap[widget.snapshot.id].division}',
                     style: TextStyle(color: Colors.grey, fontSize: 15.0),
                   ),
                 ),

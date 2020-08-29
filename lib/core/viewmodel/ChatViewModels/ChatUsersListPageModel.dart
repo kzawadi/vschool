@@ -51,8 +51,7 @@ class ChatUsersListPageModel extends BaseViewModel {
   getSingleStudentData(DocumentSnapshot documentSnapshot) async {
     // setState(ViewState.Busy);
     User user = await _chatServices.getUser(documentSnapshot);
-    _chatServices.studentListMap
-        .putIfAbsent(documentSnapshot.documentID, () => user);
+    _chatServices.studentListMap.putIfAbsent(documentSnapshot.id, () => user);
     // await _chatServices.getParents(documentSnapshot);
     notifyListeners();
     // setState(ViewState.Idle);
@@ -77,8 +76,7 @@ class ChatUsersListPageModel extends BaseViewModel {
   Future<User> getSingleTeacherData(DocumentSnapshot documentSnapshot) async {
     // setState(ViewState.Busy);
     User user = await _chatServices.getUser(documentSnapshot);
-    _chatServices.teachersListMap
-        .putIfAbsent(documentSnapshot.documentID, () => user);
+    _chatServices.teachersListMap.putIfAbsent(documentSnapshot.id, () => user);
     await _chatServices.getParents(documentSnapshot);
     notifyListeners();
     return user;

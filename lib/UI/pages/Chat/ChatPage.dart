@@ -40,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
                         var key = model.studentsSnapshot.keys.elementAt(i);
                         var snapshot = model.studentsSnapshot[key];
                         return ChatStudentListWidget(
-                          heroTag: snapshot.documentID,
+                          heroTag: snapshot.id,
                           snapshot: snapshot,
                           model: model,
                         );
@@ -93,7 +93,7 @@ class _ChatPageState extends State<ChatPage> {
                                         var snapshot =
                                             model.teachersSnapshot[key];
                                         return ChatTeachersListWidget(
-                                          heroTag: snapshot.documentID,
+                                          heroTag: snapshot.id,
                                           snapshot: snapshot,
                                           model: model,
                                         );

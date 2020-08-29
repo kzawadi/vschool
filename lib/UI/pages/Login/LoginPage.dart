@@ -1,6 +1,4 @@
-import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
-import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/imports.dart';
 import 'dart:ui' as ui;

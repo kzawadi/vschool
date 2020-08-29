@@ -1,9 +1,9 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
+import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/services/Services.dart';
-import 'package:ourESchool/imports.dart';
+import 'package:ourESchool/core/services/StorageServices.dart';
+import 'package:ourESchool/locator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:path/path.dart' as p;
@@ -16,8 +16,8 @@ class FeedServices extends Services {
 
   final PublishSubject<List<Announcement>> postsController =
       PublishSubject<List<Announcement>>();
-  final PublishSubject<List<Announcement>> profileDataController =
-      PublishSubject<List<Announcement>>();
+  // final PublishSubject<List<Announcement>> profileDataController =
+  // PublishSubject<List<Announcement>>();
 
   // #6: Create a list that will keep the paged results
   List<List<Announcement>> _allPagedResults = List<List<Announcement>>();
@@ -40,14 +40,14 @@ class FeedServices extends Services {
     String stdDivGlobal,
   }) async {
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(stdDivGlobal);
+        (await schoolRefwithCode()).doc('Posts').collection(stdDivGlobal);
     // #2: split the query from the actual subscription
     var pagePostsQuery = _postRef
         .orderBy('timeStamp', descending: true)
         // #3: Limit the amount of results
         .limit(PostsLimit);
 
-    // #5: If we have a document start the query after it
+    // #5: If we have a doc start the query after it
     if (_lastDocument != null) {
       pagePostsQuery = pagePostsQuery.startAfterDocument(_lastDocument);
     }
@@ -58,8 +58,8 @@ class FeedServices extends Services {
     var currentRequestIndex = _allPagedResults.length;
 
     pagePostsQuery.snapshots().listen((postsSnapshot) {
-      if (postsSnapshot.documents.isNotEmpty) {
-        _feed = postsSnapshot.documents
+      if (postsSnapshot.docs.isNotEmpty) {
+        _feed = postsSnapshot.docs
             .map((snapshot) => Announcement.fromSnapshot(snapshot))
             // .where((mappedItem) => mappedItem.caption != null)
             .toList();
@@ -86,9 +86,9 @@ class FeedServices extends Services {
         // #12: Broadcase all feed
         postsController.add(allPosts);
 
-        // #13: Save the last document from the results only if it's the current last page
+        // #13: Save the last doc from the results only if it's the current last page
         if (currentRequestIndex == _allPagedResults.length - 1) {
-          _lastDocument = postsSnapshot.documents.last;
+          _lastDocument = postsSnapshot.docs.last;
         }
 
         // #14: Determine if there's more feed to request
@@ -112,9 +112,9 @@ class FeedServices extends Services {
     // Map feedMap = feed.toJson();
 
     var _postRef = (await schoolRefwithCode())
-        .document('Posts')
+        .doc('Posts')
         .collection(stdDivGlobal)
-        .document(id);
+        .doc(id);
     cprint('Feed with Id $id' + 'has been deleted succeful',
         event: 'deleted Feed');
     await _postRef.delete();
@@ -151,7 +151,7 @@ class FeedServices extends Services {
       standard = feed.forClass + feed.forDiv;
 
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(standard);
+        (await schoolRefwithCode()).doc('Posts').collection(standard);
 
     await _postRef.add(feed.toJson());
     cprint('feed posted succeful ${feed.toJson()}',

@@ -12,7 +12,7 @@ class AssignmentsPage extends StatefulWidget {
   @override
   _AssignmentsPageState createState() => _AssignmentsPageState();
 
-  @override
+  // @override
   String get screenName => string.assignment + 'Page';
 }
 

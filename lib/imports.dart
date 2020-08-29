@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 export 'package:flutter/material.dart';
 export 'package:flutter/scheduler.dart' show timeDilation;
 // export 'package:flutter/foundation.dart'

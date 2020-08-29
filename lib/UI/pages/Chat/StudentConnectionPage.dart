@@ -1,3 +1,5 @@
+import 'package:flutter/scheduler.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 
 class StudentConnectionPage extends StatefulWidget {
@@ -20,9 +22,18 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
   @override
   void initState() {
     super.initState();
+    // getParents();
     // model = widget.model;
-    student = widget.model.studentListMap[widget.documentSnapshot.documentID];
-    WidgetsBinding.instance.addPostFrameCallback((_) => getParents());
+    student = widget.model.studentListMap[widget.documentSnapshot.id];
+    // WidgetsBinding.instance.addPostFrameCallback((_) => getParents());
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
+      SchedulerBinding.instance.addPostFrameCallback((_) => getParents());
+    }
+    // if (SchedulerBinding.instance.schedulerPhase ==
+    //     SchedulerPhase.persistentCallbacks) {
+    //   SchedulerBinding.instance.addPostFrameCallback((_) => getParents());
+    // }
   }
 
   bool isLoading = true;
@@ -207,7 +218,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
           image: DecorationImage(
             fit: BoxFit.cover,
             image: url != 'default'
-                ? NetworkImage(
+                ? customAdvanceNetworkImage(
                     url,
                   )
                 : userType == UserType.STUDENT

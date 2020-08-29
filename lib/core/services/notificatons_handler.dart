@@ -97,11 +97,11 @@ class _MessageHandlerState extends State<MessageHandler> with Services {
     if (fcmToken != null) {
       var tokens = firestore
           .collection('users')
-          .document(uid)
+          .doc(uid)
           .collection('tokens')
-          .document(fcmToken);
+          .doc(fcmToken);
 
-      await tokens.setData({
+      await tokens.set({
         'token': fcmToken,
         'createdAt': FieldValue.serverTimestamp(), // optional
         'platform': Platform.operatingSystem // optional
@@ -110,8 +110,8 @@ class _MessageHandlerState extends State<MessageHandler> with Services {
   }
 
   /// Subscribe the user to a topic
-  _subscribeToTopic() async {
-    // Subscribe the user to a topic
-    cloudmesaging.subscribeToTopic('puppies');
-  }
+  // _subscribeToTopic() async {
+  // Subscribe the user to a topic
+  //   cloudmesaging.subscribeToTopic('puppies');
+  // }
 }

@@ -26,7 +26,7 @@ class WallServices extends Services {
     if (schoolCode == null) await getSchoolCode();
 
     DocumentReference wall =
-        wallRef.collection(schoolCode.toUpperCase().trim()).document('wall');
+        wallRef.collection(schoolCode.toUpperCase().trim()).doc('wall');
 
     DocumentSnapshot data = await wall.get();
 

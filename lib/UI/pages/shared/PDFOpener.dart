@@ -55,6 +55,7 @@ class _PDFOpenerState extends State<PDFOpener> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
+        buttonHeroTag: 'assignment',
         child: kBackBtn(context),
         onPressed: () {
           Navigator.pop(context);

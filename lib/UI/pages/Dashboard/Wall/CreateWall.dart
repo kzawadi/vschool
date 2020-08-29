@@ -30,7 +30,7 @@ class _CreateWallState extends State<CreateWall> {
 
   AnnouncementType announcementType = AnnouncementType.EVENT;
 
-  FocusNode _focusNode = new FocusNode();
+  // FocusNode _focusNode = new FocusNode();
   var _scaffoldKey;
   bool isPosting = false;
   Color postTypeFontColor = Colors.black;
