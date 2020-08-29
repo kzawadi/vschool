@@ -1,5 +1,3 @@
-import 'package:flutter/scheduler.dart';
-import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 
 class StudentConnectionPage extends StatefulWidget {
@@ -16,24 +14,14 @@ class StudentConnectionPage extends StatefulWidget {
 class _StudentConnectionPageState extends State<StudentConnectionPage> {
   User student = User();
   List<User> parent = [];
-
   // ChatUsersListPageModel model;
 
   @override
   void initState() {
     super.initState();
-    // getParents();
     // model = widget.model;
     student = widget.model.studentListMap[widget.documentSnapshot.id];
-    // WidgetsBinding.instance.addPostFrameCallback((_) => getParents());
-    if (SchedulerBinding.instance.schedulerPhase ==
-        SchedulerPhase.persistentCallbacks) {
-      SchedulerBinding.instance.addPostFrameCallback((_) => getParents());
-    }
-    // if (SchedulerBinding.instance.schedulerPhase ==
-    //     SchedulerPhase.persistentCallbacks) {
-    //   SchedulerBinding.instance.addPostFrameCallback((_) => getParents());
-    // }
+    WidgetsBinding.instance.addPostFrameCallback((_) => getParents());
   }
 
   bool isLoading = true;
@@ -51,20 +39,13 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
   Widget build(BuildContext context) {
     // if (isLoading) getParents();
     return Scaffold(
-      appBar: TopBar(
-        title: 'Teachers',
-        child: kBackBtn(context),
-        onPressed: kbackBtn(context),
-        buttonHeroTag: 'StudentConnection',
+      floatingActionButton: FloatingActionButton(
+        // backgroundColor: widget.color,
+        onPressed: () {
+          kbackBtn(context);
+        },
+        child: Icon(Icons.close),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Theme.of(context).errorColor,
-      //   heroTag: '123',
-      //   onPressed: () {
-      //     kbackBtn(context);
-      //   },
-      //   child: Icon(Icons.close),
-      // ),
       body: Hero(
         transitionOnUserGestures: true,
         tag: widget.documentSnapshot.id + '12',
@@ -122,6 +103,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                         ? kBuzyPage(color: Theme.of(context).primaryColor)
                         : Flexible(
                             child: Container(
+                              // color: Colors.red,
                               child: GridView.builder(
                                 physics: BouncingScrollPhysics(),
                                 gridDelegate:
@@ -167,6 +149,8 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                                         child: FlatButton(
                                           child: Text(
                                             'Chat',
+                                            style: ksubtitleStyle.copyWith(
+                                                fontSize: 18),
                                           ),
                                           onPressed: () {
                                             kopenPage(
@@ -178,10 +162,6 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                                               'Messaging_Screen',
                                             );
                                           },
-                                          color: Theme.of(context).accentColor,
-                                          textColor:
-                                              Theme.of(context).primaryColor,
-                                          clipBehavior: Clip.antiAlias,
                                         ),
                                       )
                                     ],
@@ -218,7 +198,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
           image: DecorationImage(
             fit: BoxFit.cover,
             image: url != 'default'
-                ? customAdvanceNetworkImage(
+                ? NetworkImage(
                     url,
                   )
                 : userType == UserType.STUDENT
