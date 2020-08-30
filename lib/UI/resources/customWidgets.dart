@@ -246,6 +246,8 @@ Widget customNetworkImage(String path, {BoxFit fit = BoxFit.contain}) {
 dynamic customAdvanceNetworkImage(String path) {
   if (path == null) {
     path = dummyProfilePic;
+  } else if (path == 'default') {
+    path = dummyProfilePic;
   }
   return CachedNetworkImageProvider(
     path ?? dummyProfilePic,
