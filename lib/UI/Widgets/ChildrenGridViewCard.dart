@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -30,48 +31,20 @@ class ChildrenGridViewCard extends StatelessWidget {
                 Radius.circular(10.0),
               ),
             ),
-            elevation: 5,
+            elevation: 1,
             child: Stack(
               children: <Widget>[
                 Hero(
-                  tag: user.firebaseUuid,
-                  transitionOnUserGestures: true,
-                  child: CachedNetworkImage(
-                    imageUrl: 'http://via.placeholder.com/300x150',
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            new BorderRadius.all(Radius.circular(10.0)),
-                        image: DecorationImage(
-                          image: setImage(user),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
-                ),
-
-                //   Container(
-                //     decoration: BoxDecoration(
-                //       borderRadius: new BorderRadius.all(Radius.circular(10.0)),
-                //       image: DecorationImage(
-                //         image: setImage(user),
-                //         fit: BoxFit.scaleDown,
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                    tag: user.firebaseUuid,
+                    transitionOnUserGestures: true,
+                    child: customNetworkImage(user.photoUrl)),
                 Positioned(
                   bottom: 0,
                   right: 0,
                   left: 0,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.black38,
+                      color: Theme.of(context).primaryColorDark,
                       borderRadius: new BorderRadius.only(
                           bottomLeft: Radius.circular(10.0),
                           bottomRight: Radius.circular(10.0)),
@@ -86,14 +59,20 @@ class ChildrenGridViewCard extends StatelessWidget {
                           //.....................
                           registerd ? user.displayName : "Not Registered Yet",
                           textAlign: TextAlign.center,
-                          style: ktitleStyle.copyWith(color: Colors.white),
+                          style: Theme.of(context)
+                              .textTheme
+                              .button
+                              .copyWith(color: Colors.white),
                         ),
                         Text(
                           registerd
                               ? user.standard + '-' + user.division
                               : user.id,
                           textAlign: TextAlign.center,
-                          style: ksubtitleStyle.copyWith(color: Colors.white),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(color: Colors.white),
                         ),
                       ],
                     ),

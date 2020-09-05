@@ -224,6 +224,11 @@ SizedBox sizedBox({double height = 5, String title}) {
 }
 
 Widget customNetworkImage(String path, {BoxFit fit = BoxFit.contain}) {
+  if (path == null) {
+    path = dummyProfilePic;
+  } else if (path == 'default') {
+    path = dummyProfilePic;
+  }
   return CachedNetworkImage(
     fit: fit,
     imageUrl: path ?? dummyProfilePic,
