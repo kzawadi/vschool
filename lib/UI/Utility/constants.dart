@@ -91,7 +91,7 @@ Widget kBuzyPage({Color color = Colors.white}) {
     child: SpinKitThreeBounce(
       duration: Duration(seconds: 250),
       color: color ?? Colors.white,
-      size: 35.0,
+      size: 20.0,
     ),
   );
 }

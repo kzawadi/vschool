@@ -323,7 +323,7 @@ void customSnackBar(GlobalKey<ScaffoldState> _scaffoldKey, String msg,
 }
 
 Widget emptyListWidget(BuildContext context, String title,
-    {String subTitle, String image = 'emptyImage.png'}) {
+    {String subTitle, String image = 'welcome.png'}) {
   return Container(
       color: Color(0xfffafafa),
       child: Center(

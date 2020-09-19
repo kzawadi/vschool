@@ -3,6 +3,7 @@ import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
 import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/feed/feed_card.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
 
@@ -108,7 +109,9 @@ class _FeedPageState extends State<FeedPage>
           ),
           body: Center(
             child: model.data == null
-                ? kBuzyPage(color: Theme.of(context).accentColor)
+                ? emptyListWidget(context, 'Empty',
+                    subTitle: 'Trying to fetch latest news')
+                //  kBuzyPage(color: Theme.of(context).accentColor)
                 : ListView.builder(
                     dragStartBehavior: DragStartBehavior.start,
                     addAutomaticKeepAlives: true,
