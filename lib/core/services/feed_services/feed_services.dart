@@ -42,59 +42,65 @@ class FeedServices extends Services {
     var _postRef =
         (await schoolRefwithCode()).doc('Posts').collection(stdDivGlobal);
     // #2: split the query from the actual subscription
-    var pagePostsQuery = _postRef
-        .orderBy('timeStamp', descending: true)
-        // #3: Limit the amount of results
-        .limit(PostsLimit);
+    var doc = await _postRef.get();
+    if (doc.docs.isNotEmpty) {
+      var pagePostsQuery = _postRef
+          .orderBy('timeStamp', descending: true)
+          // #3: Limit the amount of results
+          .limit(PostsLimit);
 
-    // #5: If we have a doc start the query after it
-    if (_lastDocument != null) {
-      pagePostsQuery = pagePostsQuery.startAfterDocument(_lastDocument);
-    }
-
-    // if (!_hasMorePosts) return;
-
-    // #7: Get and store the page index that the results belong to
-    var currentRequestIndex = _allPagedResults.length;
-
-    pagePostsQuery.snapshots().listen((postsSnapshot) {
-      if (postsSnapshot.docs.isNotEmpty) {
-        _feed = postsSnapshot.docs
-            .map((snapshot) => Announcement.fromSnapshot(snapshot))
-            // .where((mappedItem) => mappedItem.caption != null)
-            .toList();
-        // #8: Check if the page exists or not
-        var pageExists = currentRequestIndex < _allPagedResults.length;
-
-        // #9: If the page exists update the feed for that page
-        if (pageExists) {
-          _allPagedResults[currentRequestIndex] = _feed;
-        }
-        // #10: If the page doesn't exist add the page data
-        else {
-          _allPagedResults.add(_feed);
-          cprint('the last feed fetched ' + _feed.last.caption.toString(),
-              event: 'Last feed fetched and entered into stream',
-              warningIn: 'This is the last available feed localy');
-        }
-
-        // #11: Concatenate the full list to be shown
-        allPosts = _allPagedResults.fold<List<Announcement>>(
-            List<Announcement>(),
-            (initialValue, pageItems) => initialValue..addAll(pageItems));
-
-        // #12: Broadcase all feed
-        postsController.add(allPosts);
-
-        // #13: Save the last doc from the results only if it's the current last page
-        if (currentRequestIndex == _allPagedResults.length - 1) {
-          _lastDocument = postsSnapshot.docs.last;
-        }
-
-        // #14: Determine if there's more feed to request
-        // _hasMorePosts = feed.length == PostsLimit;
+      // #5: If we have a doc start the query after it
+      if (_lastDocument != null) {
+        pagePostsQuery = pagePostsQuery.startAfterDocument(_lastDocument);
       }
-    });
+
+      // if (!_hasMorePosts) return;
+
+      // #7: Get and store the page index that the results belong to
+      var currentRequestIndex = _allPagedResults.length;
+
+      pagePostsQuery.snapshots().listen(
+        (postsSnapshot) {
+          if (postsSnapshot.docs.isNotEmpty) {
+            _feed = postsSnapshot.docs
+                .map((snapshot) => Announcement.fromSnapshot(snapshot))
+                // .where((mappedItem) => mappedItem.caption != null)
+                .toList();
+            // #8: Check if the page exists or not
+            var pageExists = currentRequestIndex < _allPagedResults.length;
+
+            // #9: If the page exists update the feed for that page
+            if (pageExists) {
+              _allPagedResults[currentRequestIndex] = _feed;
+            }
+            // #10: If the page doesn't exist add the page data
+            else {
+              _allPagedResults.add(_feed);
+              cprint('the last feed fetched ' + _feed.last.caption.toString(),
+                  event: 'Last feed fetched and entered into stream',
+                  warningIn: 'This is the last available feed localy');
+            }
+
+            // #11: Concatenate the full list to be shown
+            allPosts = _allPagedResults.fold<List<Announcement>>(
+                List<Announcement>(),
+                (initialValue, pageItems) => initialValue..addAll(pageItems));
+
+            // #12: Broadcase all feed
+            postsController.add(allPosts);
+
+            // #13: Save the last doc from the results only if it's the current last page
+            if (currentRequestIndex == _allPagedResults.length - 1) {
+              _lastDocument = postsSnapshot.docs.last;
+            }
+
+            // #14: Determine if there's more feed to request
+            // _hasMorePosts = feed.length == PostsLimit;
+          }
+        },
+      );
+    } else
+      cprint('No Class with this name yet', errorIn: 'No Data');
   }
 
   void requestMoreData({String stdDivGlobal}) =>
@@ -104,6 +110,7 @@ class FeedServices extends Services {
   void filteredFeed({String std}) {
     _allPagedResults.clear();
     _lastDocument = null;
+    allPosts.clear();
     requestMoreData(stdDivGlobal: std);
   }
 
