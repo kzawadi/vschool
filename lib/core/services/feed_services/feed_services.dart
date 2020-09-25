@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/services/Services.dart';
@@ -87,7 +88,7 @@ class FeedServices extends Services {
                 (initialValue, pageItems) => initialValue..addAll(pageItems));
 
             // #12: Broadcase all feed
-            postsController.add(allPosts);
+            postsController.add(UnmodifiableListView(allPosts));
 
             // #13: Save the last doc from the results only if it's the current last page
             if (currentRequestIndex == _allPagedResults.length - 1) {

@@ -1,6 +1,6 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
-import 'package:ourESchool/UI/pages/DataEntry/data_Entry_Page.dart';
-import 'package:ourESchool/UI/pages/student_Data_Entry/student_data_Entry_Page.dart';
+import 'package:ourESchool/core/services/data_Entry/data_Entry_Page.dart';
+import 'package:ourESchool/core/services/student_data_Entry/student_data_Entry_Page.dart';
 import 'package:ourESchool/imports.dart';
 
 class MainDashboard extends StatefulWidget {

@@ -2,22 +2,17 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
-import 'package:ourESchool/core/Models/student_data_entry/student_data_entry.dart';
-import 'package:ourESchool/core/viewmodel/Student_Data_Entry_Vm/student_Data_Entry_VM.dart';
+import 'package:ourESchool/core/Models/data_entry/data_entry.dart';
+import 'package:ourESchool/core/services/data_Entry/Data_Entry_ViewmModel.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
 
-class StudentDataImpoter extends StatefulWidget {
-  StudentDataImpoter();
-  @override
-  State createState() => new DataImpoterState();
-}
-
-class DataImpoterState extends State<StudentDataImpoter> {
+class DataImpoter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<StudentDataEntryViewModel>.reactive(
-      viewModelBuilder: () => StudentDataEntryViewModel(),
+    return ViewModelBuilder<DataEntryViewModel>.reactive(
+      // createNewModelOnInsert: true,
+      viewModelBuilder: () => DataEntryViewModel(),
       // onModelReady: (model) => null,
       builder: (context, model, child) {
         return Scaffold(
@@ -27,23 +22,23 @@ class DataImpoterState extends State<StudentDataImpoter> {
             onPressed: null,
             child: null,
           ),
-          body: model.busy(model.userdata)
+          body: !model.dataReady
               ?
               //  kBuzyPage(color: Theme.of(context).accentColor)
               Container(
                   child: Center(
                     child: Text(
                       'No Data file Selected....!',
-                      style: ksubtitleStyle.copyWith(fontSize: 25),
+                      style: ksubtitleStyle.copyWith(fontSize: 10),
                     ),
                   ),
                   // color: Colors.red,
                 )
               : ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: model.userdata.length,
+                  itemCount: model.data.length,
                   itemBuilder: (context, index) {
-                    StudentEntryData studentData = model.userdata[index];
+                    UserEntryData studentData = model.data[index];
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(40, 0, 20, 0),
                       child: Column(
@@ -71,11 +66,17 @@ class DataImpoterState extends State<StudentDataImpoter> {
                           Column(
                             children: [
                               AutoSizeText('PARENTS'),
-                              AutoSizeText(studentData.parentId),
+                              AutoSizeText(studentData.childIds),
                             ],
                           ),
                           SizedBox(
                             height: 6,
+                          ),
+                          Column(
+                            children: [
+                              AutoSizeText('TEACHER'),
+                              AutoSizeText(studentData.isATeacher),
+                            ],
                           ),
                           SizedBox(
                             height: 40,
@@ -88,7 +89,7 @@ class DataImpoterState extends State<StudentDataImpoter> {
           persistentFooterButtons: <Widget>[
             RaisedButton(
               elevation: 10.0,
-              onPressed: () => model.getData(),
+              onPressed: () => model.futureToRun(),
               color: Colors.green,
               child: Icon(
                 Icons.add,
@@ -99,7 +100,7 @@ class DataImpoterState extends State<StudentDataImpoter> {
               padding: const EdgeInsets.fromLTRB(200, 0, 30, 0),
               child: RaisedButton(
                 elevation: 10.0,
-                onPressed: () => model.postData(userEntryData: model.userdata),
+                onPressed: () => model.postData(userEntryData: model.data),
                 color: Colors.blueGrey,
                 child: Icon(
                   Icons.cloud,
