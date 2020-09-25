@@ -22,7 +22,7 @@ class _ResultPageState extends State<ResultPage> {
       child: Scaffold(
         appBar: TopBar(
             title: ResultPage.pageLabel,
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               kbackBtn(context);
             }),

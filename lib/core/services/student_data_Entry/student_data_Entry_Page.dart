@@ -2,22 +2,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
-import 'package:ourESchool/core/Models/data_entry/data_entry.dart';
-import 'package:ourESchool/core/viewmodel/Data_Entry_Vm/Data_Entry_ViewmModel.dart';
+import 'package:ourESchool/core/Models/student_data_entry/student_data_entry.dart';
+import 'package:ourESchool/core/services/student_data_Entry/student_Data_Entry_VM.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
 
-class DataImpoter extends StatefulWidget {
-  DataImpoter();
-  @override
-  State createState() => new DataImpoterState();
-}
-
-class DataImpoterState extends State<DataImpoter> {
+class StudentDataImpoter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<DataEntryViewModel>.reactive(
-      viewModelBuilder: () => DataEntryViewModel(),
+    return ViewModelBuilder<StudentDataEntryViewModel>.reactive(
+      viewModelBuilder: () => StudentDataEntryViewModel(),
       // onModelReady: (model) => null,
       builder: (context, model, child) {
         return Scaffold(
@@ -27,7 +21,7 @@ class DataImpoterState extends State<DataImpoter> {
             onPressed: null,
             child: null,
           ),
-          body: model.busy(model.userdata)
+          body: !model.dataReady
               ?
               //  kBuzyPage(color: Theme.of(context).accentColor)
               Container(
@@ -41,9 +35,9 @@ class DataImpoterState extends State<DataImpoter> {
                 )
               : ListView.builder(
                   physics: BouncingScrollPhysics(),
-                  itemCount: model.userdata.length,
+                  itemCount: model.data.length,
                   itemBuilder: (context, index) {
-                    UserEntryData studentData = model.userdata[index];
+                    StudentEntryData studentData = model.data[index];
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(40, 0, 20, 0),
                       child: Column(
@@ -71,17 +65,11 @@ class DataImpoterState extends State<DataImpoter> {
                           Column(
                             children: [
                               AutoSizeText('PARENTS'),
-                              AutoSizeText(studentData.childIds),
+                              AutoSizeText(studentData.parentId),
                             ],
                           ),
                           SizedBox(
                             height: 6,
-                          ),
-                          Column(
-                            children: [
-                              AutoSizeText('TEACHER'),
-                              AutoSizeText(studentData.isATeacher),
-                            ],
                           ),
                           SizedBox(
                             height: 40,
@@ -94,7 +82,7 @@ class DataImpoterState extends State<DataImpoter> {
           persistentFooterButtons: <Widget>[
             RaisedButton(
               elevation: 10.0,
-              onPressed: () => model.getData(),
+              onPressed: () => model.futureToRun(),
               color: Colors.green,
               child: Icon(
                 Icons.add,
@@ -105,7 +93,7 @@ class DataImpoterState extends State<DataImpoter> {
               padding: const EdgeInsets.fromLTRB(200, 0, 30, 0),
               child: RaisedButton(
                 elevation: 10.0,
-                onPressed: () => model.postData(userEntryData: model.userdata),
+                onPressed: () => model.postData(userEntryData: model.data),
                 color: Colors.blueGrey,
                 child: Icon(
                   Icons.cloud,

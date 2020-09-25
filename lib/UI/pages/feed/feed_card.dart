@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +7,9 @@ import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_Viewer.dart';
+import 'package:ourESchool/UI/pages/feed/tweetImage.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
@@ -64,7 +65,8 @@ class FeedCard extends StatelessWidget {
                                   backgroundImage: model.data.photoUrl ==
                                           'default'
                                       ? AssetImage(assetsString.teacher_welcome)
-                                      : NetworkImage(model.data.photoUrl),
+                                      : customAdvanceNetworkImage(
+                                          model.data.photoUrl),
                                   backgroundColor: Colors.transparent,
                                 ),
                           SizedBox(
@@ -144,42 +146,7 @@ class FeedCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                constraints: BoxConstraints(maxHeight: 300, minHeight: 0),
-                width: MediaQuery.of(context).size.width,
-                child: Hero(
-                  transitionOnUserGestures: true,
-                  tag: feed.id + 'photo',
-                  child: Material(
-                    child: InkWell(
-                      onTap: () {
-                        kopenPageBottom(
-                          context,
-                          FeedViewer(
-                            feed: feed,
-                          ),
-                        );
-                      },
-                      child: feed.photoUrl == ''
-                          ? Container(
-                              height: 0,
-                            )
-                          :
-                          //  Image.network(feed.photoUrl)
-                          CachedNetworkImage(
-                              fit: BoxFit.contain,
-                              imageUrl: feed.photoUrl,
-                              placeholder: (context, url) => kBuzyPage(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              fadeOutDuration:
-                                  const Duration(microseconds: 200),
-                              fadeInDuration: const Duration(microseconds: 200),
-                            ),
-                    ),
-                  ),
-                ),
-              ),
+              FeedImage(feed: feed),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -224,6 +191,7 @@ class FeedCard extends StatelessWidget {
 
 Future buildShowDialogBox(BuildContext context) {
   double elavation = 1;
+  double fontSize = 15;
   return showDialog(
     context: context,
     builder: (context) {
@@ -231,15 +199,12 @@ Future buildShowDialogBox(BuildContext context) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        backgroundColor:
-            isThemeCurrentlyDark(context) ? MyColors.lightMilky : MyColors.okay,
+        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
         title: Text(
           "feed Type",
           style: TextStyle(
             fontSize: 22,
-            color: isThemeCurrentlyDark(context)
-                ? MyColors.kindePeach
-                : MyColors.dark,
+            color: Theme.of(context).accentColor,
           ),
         ),
         content: Column(
@@ -254,12 +219,11 @@ Future buildShowDialogBox(BuildContext context) {
                   shape: kCardCircularShape,
                   elevation: elavation,
                   child: CircleAvatar(
-                    backgroundColor: isThemeCurrentlyDark(context)
-                        ? MyColors.accent
-                        : MyColors.lightMilky,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Text(
                       'C',
                       style: GoogleFonts.roboto(
+                        color: Theme.of(context).primaryColor,
                         textStyle: TextStyle(
                           fontSize: 12.5,
                         ),
@@ -271,10 +235,8 @@ Future buildShowDialogBox(BuildContext context) {
                   'CIRCULAR',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                      color: isThemeCurrentlyDark(context)
-                          ? MyColors.kindePeach
-                          : MyColors.dark,
-                      fontSize: 12.5,
+                      color: Theme.of(context).accentColor,
+                      fontSize: fontSize,
                     ),
                   ),
                 )
@@ -288,13 +250,12 @@ Future buildShowDialogBox(BuildContext context) {
                   shape: kCardCircularShape,
                   elevation: elavation,
                   child: CircleAvatar(
-                    backgroundColor: isThemeCurrentlyDark(context)
-                        ? MyColors.accent
-                        : MyColors.lightMilky,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Text(
                       'E',
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontSize: 12.5,
                         ),
                       ),
@@ -305,10 +266,8 @@ Future buildShowDialogBox(BuildContext context) {
                   'EVENT',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                      fontSize: 12.5,
-                      color: isThemeCurrentlyDark(context)
-                          ? MyColors.kindePeach
-                          : MyColors.dark,
+                      fontSize: fontSize,
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 )
@@ -321,13 +280,12 @@ Future buildShowDialogBox(BuildContext context) {
                   shape: kCardCircularShape,
                   elevation: elavation,
                   child: CircleAvatar(
-                    backgroundColor: isThemeCurrentlyDark(context)
-                        ? MyColors.accent
-                        : MyColors.lightMilky,
+                    backgroundColor: Theme.of(context).primaryColorLight,
                     child: Text(
                       'A',
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontSize: 12.5,
                         ),
                       ),
@@ -338,10 +296,8 @@ Future buildShowDialogBox(BuildContext context) {
                   'ACTIVITY',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                      fontSize: 12.5,
-                      color: isThemeCurrentlyDark(context)
-                          ? MyColors.kindePeach
-                          : MyColors.dark,
+                      fontSize: fontSize,
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 )

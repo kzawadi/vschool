@@ -30,7 +30,7 @@ class _CreateWallState extends State<CreateWall> {
 
   AnnouncementType announcementType = AnnouncementType.EVENT;
 
-  FocusNode _focusNode = new FocusNode();
+  // FocusNode _focusNode = new FocusNode();
   var _scaffoldKey;
   bool isPosting = false;
   Color postTypeFontColor = Colors.black;
@@ -101,7 +101,7 @@ class _CreateWallState extends State<CreateWall> {
           key: _scaffoldKey,
           appBar: TopBar(
             onTitleTapped: () {},
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               if (!isPosting) kbackBtn(context);
             },

@@ -1,4 +1,3 @@
-export 'package:firebase_auth/firebase_auth.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/scheduler.dart' show timeDilation;
 // export 'package:flutter/foundation.dart'
@@ -82,7 +81,6 @@ export 'UI/Widgets/TopBar.dart';
 export 'UI/pages/Profiles/GuardianProfile.dart';
 export 'UI/pages/Profiles/ProfilePage.dart';
 export 'UI/Utility/Resources.dart';
-export 'UI/Widgets/DynamicThemeChanger.dart';
 export 'UI/pages/WelcomeScreen.dart';
 export 'UI/Utility/constants.dart';
 export 'UI/Utility/custom_icons.dart';

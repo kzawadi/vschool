@@ -16,11 +16,11 @@ class FeesServices extends Services {
 
     final QuerySnapshot _feessnapshot = await schoolRef
         .collection(schoolCode.toUpperCase().trim())
-        .document('fees')
+        .doc('fees')
         .collection(studentId)
         .limit(1)
         .orderBy('timestamp', descending: true)
-        .getDocuments()
+        .get()
         .timeout(
           _DEFAULT_TIMEOUT,
           onTimeout: () => Future.error(
@@ -29,10 +29,9 @@ class FeesServices extends Services {
           ),
         );
 
-    cprint(_feessnapshot.documents.first.data.toString(),
-        event: 'fees retrived is');
+    cprint(_feessnapshot.docs.first.data.toString(), event: 'fees retrived is');
 
-    return Fees.fromSnapshot(_feessnapshot.documents.first);
+    return Fees.fromSnapshot(_feessnapshot.docs.first);
   }
 
   postFees(Fees fees, String studentId) async {
@@ -42,7 +41,7 @@ class FeesServices extends Services {
 
     CollectionReference _feesRef = schoolRef
         .collection(schoolCode.toUpperCase().trim())
-        .document('fees')
+        .doc('fees')
         .collection(studentId);
     //.document();
 

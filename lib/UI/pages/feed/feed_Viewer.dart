@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
+import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -40,8 +41,9 @@ class FeedViewer extends StatelessWidget {
       },
       child: Scaffold(
         appBar: TopBar(
+          buttonHeroTag: string.announcement,
           title: "Viewer",
-          child: kBackBtn,
+          child: kBackBtn(context),
           onPressed: () {
             kbackBtn(context);
           },

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as authentication;
 import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -17,16 +17,17 @@ class Services {
       locator<SharedPreferencesHelper>();
   static final String country =
       "India"; //Get this from firstScreen(UI Not developed yet)
-  static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final authentication.FirebaseAuth _auth =
+      authentication.FirebaseAuth.instance;
 
-  static final Firestore _firestore = Firestore.instance;
+  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   static final FirebaseMessaging _fcm = FirebaseMessaging();
   static final FirebaseAnalytics _analytics = FirebaseAnalytics();
   static final FirebaseInAppMessaging _fiam = FirebaseInAppMessaging();
   static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  FirebaseUser firebaseUser;
+  authentication.User firebaseUser;
 
   User _user;
 
@@ -60,13 +61,13 @@ class Services {
       Server.baseUrl + Server.webApi + Server.addAssignment;
 
   final DocumentReference _schoolRef =
-      _firestore.collection('Schools').document(country);
+      _firestore.collection('Schools').doc(country);
 
   final DocumentReference _wallRef =
-      _firestore.collection('walls').document('websites');
+      _firestore.collection('walls').doc('websites');
 
-  Firestore get firestore => _firestore;
-  FirebaseAuth get auth => _auth;
+  FirebaseFirestore get firestore => _firestore;
+  authentication.FirebaseAuth get auth => _auth;
   User get loggedInUser => _user;
   FirebaseMessaging get cloudmesaging => _fcm;
   FlutterLocalNotificationsPlugin get localNotifications =>
@@ -90,8 +91,8 @@ class Services {
   SharedPreferencesHelper get sharedPreferencesHelper =>
       _sharedPreferencesHelper;
 
-  getFirebaseUser() async {
-    firebaseUser = await _auth.currentUser();
+  getFirebaseUser() {
+    firebaseUser = auth.currentUser;
   }
 
   Future<String> getSchoolCode() async {

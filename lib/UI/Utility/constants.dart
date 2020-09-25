@@ -50,10 +50,13 @@ ShapeBorder kCardCircularShape = RoundedRectangleBorder(
   borderRadius: BorderRadius.all(Radius.circular(50)),
 );
 
-Widget kBackBtn = Icon(
-  Icons.arrow_back_ios,
-  // color: Colors.black54,
-);
+Widget kBackBtn(BuildContext context) {
+  return Icon(
+    Icons.arrow_back_ios,
+    color: Theme.of(context).accentColor,
+    // color: Colors.black54,
+  );
+}
 
 kopenPage(BuildContext context, Widget page, String pageName) {
   return Navigator.push(
@@ -65,23 +68,30 @@ kopenPage(BuildContext context, Widget page, String pageName) {
   );
 }
 
-kopenPageSlide(BuildContext context, Widget page, {Duration duration}) {
+kopenPageSlide(BuildContext context, Widget page, String pageName,
+    {Duration duration}) {
   return Navigator.push(
     context,
-    RouteTransition(
-        // fade: false,
-        widget: page,
-        duration: duration),
+    MaterialPageRoute(
+      settings: RouteSettings(name: pageName),
+      builder: (BuildContext context) {
+        RouteTransition(
+            // fade: false,
+            widget: page,
+            duration: duration);
+        return page;
+      },
+    ),
   );
 }
 
-kBuzyPage({Color color = Colors.white}) {
+Widget kBuzyPage({Color color = Colors.white}) {
   return Align(
     alignment: Alignment.center,
     child: SpinKitThreeBounce(
       duration: Duration(seconds: 250),
       color: color ?? Colors.white,
-      size: 35.0,
+      size: 20.0,
     ),
   );
 }

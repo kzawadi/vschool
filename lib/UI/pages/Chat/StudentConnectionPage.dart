@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 
 class StudentConnectionPage extends StatefulWidget {
@@ -20,8 +22,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
   @override
   void initState() {
     super.initState();
-    // model = widget.model;
-    student = widget.model.studentListMap[widget.documentSnapshot.documentID];
+    student = widget.model.studentListMap[widget.documentSnapshot.id];
     WidgetsBinding.instance.addPostFrameCallback((_) => getParents());
   }
 
@@ -31,8 +32,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
     isLoading = true;
     setState(() {});
     await widget.model.getParents(widget.documentSnapshot);
-    parent =
-        widget.model.studentsParentListMap[widget.documentSnapshot.documentID];
+    parent = widget.model.studentsParentListMap[widget.documentSnapshot.id];
     isLoading = false;
     setState(() {});
   }
@@ -41,16 +41,23 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
   Widget build(BuildContext context) {
     // if (isLoading) getParents();
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        // backgroundColor: widget.color,
-        onPressed: () {
-          kbackBtn(context);
-        },
-        child: Icon(Icons.close),
+      appBar: AppBar(
+        leading: kBackBtn(context),
+        centerTitle: true,
+        title: Text(
+          'Parents',
+          style: GoogleFonts.quicksand(
+            color: Theme.of(context).accentColor,
+            textStyle: Theme.of(context).textTheme.headline4,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.normal,
+          ),
+        ),
       ),
       body: Hero(
         transitionOnUserGestures: true,
-        tag: widget.documentSnapshot.documentID + '12',
+        tag: widget.documentSnapshot.id + '12',
         child: SafeArea(
           bottom: false,
           child: Column(
@@ -105,7 +112,6 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                         ? kBuzyPage(color: Theme.of(context).primaryColor)
                         : Flexible(
                             child: Container(
-                              // color: Colors.red,
                               child: GridView.builder(
                                 physics: BouncingScrollPhysics(),
                                 gridDelegate:
@@ -151,8 +157,6 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                                         child: FlatButton(
                                           child: Text(
                                             'Chat',
-                                            style: ksubtitleStyle.copyWith(
-                                                fontSize: 18),
                                           ),
                                           onPressed: () {
                                             kopenPage(
@@ -164,6 +168,10 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
                                               'Messaging_Screen',
                                             );
                                           },
+                                          color: Theme.of(context).accentColor,
+                                          textColor:
+                                              Theme.of(context).primaryColor,
+                                          clipBehavior: Clip.antiAlias,
                                         ),
                                       )
                                     ],
@@ -198,15 +206,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.all(Radius.circular(borderradius)),
           image: DecorationImage(
-            fit: BoxFit.cover,
-            image: url != 'default'
-                ? NetworkImage(
-                    url,
-                  )
-                : userType == UserType.STUDENT
-                    ? AssetImage(assetsString.student_welcome)
-                    : AssetImage(assetsString.parents_welcome),
-          ),
+              fit: BoxFit.cover, image: customAdvanceNetworkImage(url)),
         ),
       ),
     );

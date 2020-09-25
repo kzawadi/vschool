@@ -39,15 +39,15 @@ class Fees {
   }
 
   Fees.fromSnapshot(DocumentSnapshot snapshot) {
-    description = snapshot['description'].toString() ?? '';
-    fordiv = snapshot['fordiv'].toString();
-    ratings = snapshot['ratings'].toString();
-    timestamp = snapshot['timeStamp'] as Timestamp;
-    subject = snapshot['subject'].toString();
-    forclass = snapshot['forclass'].toString() ?? '';
-    bookCover = snapshot['bookCover'].toString() ?? '';
-    type = FeesTypeHelper.getEnum(snapshot['type'].toString());
-    isbn = snapshot['isbn'].toString() ?? '';
+    description = snapshot.data()['description'].toString() ?? '';
+    fordiv = snapshot.data()['fordiv'].toString();
+    ratings = snapshot.data()['ratings'].toString();
+    timestamp = snapshot.data()['timeStamp'] as Timestamp;
+    subject = snapshot.data()['subject'].toString();
+    forclass = snapshot.data()['forclass'].toString() ?? '';
+    bookCover = snapshot.data()['bookCover'].toString() ?? '';
+    type = FeesTypeHelper.getEnum(snapshot.data()['type'].toString());
+    isbn = snapshot.data()['isbn'].toString() ?? '';
   }
 
   Map<String, dynamic> toJson() {

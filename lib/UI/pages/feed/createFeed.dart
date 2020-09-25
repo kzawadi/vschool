@@ -86,7 +86,7 @@ class _CreateFeedState extends State<CreateFeed> {
           appBar: TopBar(
             buttonHeroTag: string.announcement,
             onTitleTapped: () {},
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               if (!isPosting) kbackBtn(context);
             },
@@ -98,11 +98,11 @@ class _CreateFeedState extends State<CreateFeed> {
               if (isReadyToPost) floatingButtonPressed(model, context);
             },
             backgroundColor: isReadyToPost
-                ? Theme.of(context).primaryColor
-                : Colors.blueGrey,
+                ? Theme.of(context).accentColor
+                : Theme.of(context).colorScheme.background,
             child: model.isBusy
                 ? SpinKitDoubleBounce(
-                    color: Colors.white,
+                    color: Theme.of(context).primaryColor,
                     size: 20,
                   )
                 : Icon(Icons.check),

@@ -38,10 +38,11 @@ class _HolidayPageState extends State<HolidayPage> {
           return Scaffold(
             resizeToAvoidBottomPadding: false,
             appBar: TopBar(
+              buttonHeroTag: 'holidaysPage',
               onTitleTapped: () {
                 model.refreshHolidays();
               },
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 kbackBtn(context);
               },

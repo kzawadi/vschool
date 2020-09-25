@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyColors {
-  static const primary = Color(0xfff50057);
+  static const primary = Color(0xff264653);
   static const primaryDark = Color(0xff0029cb);
-  static const accent = Color(0xff00e5ff);
+  static const accent = Color(0xffE9C46A);
   static const light = Color(0xffeceff1);
+  static const primaryColorDark = Color(0xff305769);
+  static const primaryColorLight = Color(0xffdce9ef);
   static const lightMilky = Color(0xFFFAF7F7);
   static const dark = Color(0xff37474f);
   static const white = Color(0xfffafafa);
@@ -20,6 +22,9 @@ class MyColors {
   static const kinderMellow = Color(0xffE2F0CB);
   static const welcomeTeacherColor = Color(0xffffB7B2);
   static const kindePeach = Color(0xffffDAC1);
+  static const persian_green = Color(0xff2A9D8F);
+  static const sandy_brown = Color(0xffF4A261);
+  // static const primary = Colors();
 } //main app colors
 
 class MaterialColors {

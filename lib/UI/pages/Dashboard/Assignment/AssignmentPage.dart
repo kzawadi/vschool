@@ -12,7 +12,7 @@ class AssignmentsPage extends StatefulWidget {
   @override
   _AssignmentsPageState createState() => _AssignmentsPageState();
 
-  @override
+  // @override
   String get screenName => string.assignment + 'Page';
 }
 
@@ -83,8 +83,9 @@ class _AssignmentsPageState extends State<AssignmentsPage> {
         return Scaffold(
           key: _scaffoldKey,
           appBar: TopBar(
+              buttonHeroTag: 'assignmentPage',
               title: string.assignment,
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 kbackBtn(context);
               }),

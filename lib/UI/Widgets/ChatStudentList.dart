@@ -1,4 +1,5 @@
 import 'package:flutter/scheduler.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 
 class ChatStudentListWidget extends StatefulWidget {
@@ -30,70 +31,48 @@ class _ChatStudentListWidgetState extends State<ChatStudentListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Hero(
-        transitionOnUserGestures: true,
-        tag: widget.heroTag,
-        child: Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: Theme.of(context).canvasColor,
-            border: Border(
-              top: BorderSide(width: 1, color: color(context)),
-              bottom: BorderSide(width: 1, color: color(context)),
-              left: BorderSide(width: 1, color: color(context)),
-              right: BorderSide(width: 1, color: color(context)),
-            ),
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60),
-                bottomLeft: Radius.circular(60),
-                bottomRight: Radius.zero,
-                topRight: Radius.zero),
-          ),
-          child: MaterialButton(
-            minWidth: MediaQuery.of(context).size.width,
-            onPressed: () {
-              kopenPage(
-                context,
-                StudentConnectionPage(
-                  model: widget.model,
-                  documentSnapshot: widget.snapshot,
-                  // color: color,
+    return widget.model.isBusy
+        ? kBuzyPage(color: Theme.of(context).primaryColor)
+        : widget.model.studentListMap.isEmpty
+            ? Container(
+                child: Center(
+                  child: Text('No Students'),
                 ),
-                'Student_Connection_Page',
-              );
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Image.asset(
-                  assetsString.student_welcome,
-                  height: 50,
-                  width: 50,
+              )
+            : ListTile(
+                onTap: () {
+                  kopenPage(
+                    context,
+                    StudentConnectionPage(
+                      model: widget.model,
+                      documentSnapshot: widget.snapshot,
+                      // color: color,
+                    ),
+                    'Student_Connection_Page',
+                  );
+                },
+                leading: CircleAvatar(
+                  foregroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Colors.grey,
+                  backgroundImage: customAdvanceNetworkImage(
+                    widget.model.studentListMap[widget.snapshot.id].photoUrl,
+                  ),
                 ),
-                Text(
-                  widget.model.studentListMap
-                          .containsKey(widget.snapshot.documentID)
-                      ? widget.model.studentListMap[widget.snapshot.documentID]
-                          .displayName
+                title: Text(
+                  widget.model.studentListMap.containsKey(widget.snapshot.id)
+                      ? widget
+                          .model.studentListMap[widget.snapshot.id].displayName
                       : "loading...",
-                  maxLines: 2,
-                  style: TextStyle(
-                      fontSize: 22,
-                      // color: Colors.white,
-                      fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
-                Icon(
-                  Icons.chevron_right,
-                  // color: Colors.white,
-                  size: 55,
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+                subtitle: Container(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Text(
+                    'Class ${widget.model.studentListMap[widget.snapshot.id].standard + widget.model.studentListMap[widget.snapshot.id].division}',
+                    style: TextStyle(color: Colors.grey, fontSize: 15.0),
+                  ),
+                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 8),
+              );
   }
 }

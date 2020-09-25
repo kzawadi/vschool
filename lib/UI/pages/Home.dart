@@ -1,4 +1,3 @@
-import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
@@ -12,7 +11,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with Services {
+class _HomeState extends State<Home> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _currentIndex = 0;
@@ -37,14 +36,6 @@ class _HomeState extends State<Home> with Services {
     super.initState();
   }
 
-  ImageProvider<dynamic> setImage(User user) {
-    return user.photoUrl != 'default'
-        ? NetworkImage(
-            user.photoUrl,
-          )
-        : AssetImage(assetsString.student_welcome);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,36 +50,36 @@ class _HomeState extends State<Home> with Services {
 
   List<BottomNavyBarItem> bottomBarItemsNew = [
     BottomNavyBarItem(
-      activeColor: Colors.teal[700],
+      activeColor: MyColors.primary,
       icon: Icon(
         Icons.home,
       ),
-      inactiveColor: Colors.teal[700],
-      title: Text(string.dashboard),
+      inactiveColor: MyColors.primary,
+      title: Text(string.feed),
     ),
     BottomNavyBarItem(
-      activeColor: Colors.blue,
+      activeColor: MyColors.persian_green,
       icon: Icon(
         Icons.dashboard,
       ),
-      inactiveColor: Colors.blue,
+      inactiveColor: MyColors.persian_green,
       title: Text(string.dashboard),
     ),
     BottomNavyBarItem(
-      activeColor: Colors.pink[300],
+      activeColor: MyColors.dark,
       icon: Icon(
         CustomIcons.chat_bubble,
         // size: 25,
       ),
-      inactiveColor: Colors.pink[300],
+      inactiveColor: MyColors.dark,
       title: Text(string.chat),
     ),
     BottomNavyBarItem(
-      inactiveColor: Colors.orange,
+      inactiveColor: Colors.teal,
       icon: Icon(
         Icons.settings,
       ),
-      activeColor: Colors.orange,
+      activeColor: Colors.teal,
       title: Text(
         string.setting,
       ),
@@ -102,7 +93,10 @@ class _HomeState extends State<Home> with Services {
       iconSize: 24,
       containerHeight: 56,
       backgroundColor:
-          isThemeCurrentlyDark(context) ? MyColors.github : MyColors.white,
+          //  isThemeCurrentlyDark(context)
+          //     ? Theme.of(context).primaryColor
+          //     :
+          Theme.of(context).accentColor,
       // animationDuration: Duration(milliseconds: 260), it is the default
       selectedIndex: _currentIndex,
       showElevation: false, // use this to remove appBar's elevation

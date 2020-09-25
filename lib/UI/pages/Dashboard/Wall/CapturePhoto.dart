@@ -141,8 +141,8 @@ class _CapturePhotoState extends State<CapturePhoto>
             onPressed: () {
               if (controller.description != cameraDescription) {
                 controller != null && controller.value.isRecordingVideo
-                  ? null
-                  : onNewCameraSelected(cameraDescription);
+                    ? null
+                    : onNewCameraSelected(cameraDescription);
               }
             },
           ),
@@ -196,7 +196,7 @@ class _CapturePhotoState extends State<CapturePhoto>
       if (mounted) {
         setState(() {
           imagePath = filePath;
-          Navigator.pop(context,imagePath);
+          Navigator.pop(context, imagePath);
           // videoController?.dispose();
           // videoController = null;
         });

@@ -72,7 +72,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        child: kBackBtn,
+        child: kBackBtn(context),
         onPressed: () {
           kbackBtn(context);
         },

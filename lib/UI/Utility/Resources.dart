@@ -1,7 +1,7 @@
 class string {
   //WelcolcomePage
 
-  static const get_started = 'Get Started';
+  static const get_started = 'Lets Go';
   static const teacher = 'Teachers';
   static const teacher_welcome_text =
       'Create posts, and notify your students and there parents to keep them updated';
@@ -136,6 +136,8 @@ Check School posts to stay updated with school news.''';
 
 //Announcements
   static const announcement = 'Announcement';
+  static const feed = 'Feed';
+
 //Wall
   static const wall = 'Wall';
   static const create_wall = 'Create Wall';

@@ -13,7 +13,7 @@ class EBookSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        child: kBackBtn,
+        child: kBackBtn(context),
         onPressed: () {
           kbackBtn(context);
         },

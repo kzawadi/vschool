@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:http/http.dart' as http;
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'dart:convert';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/core/services/StorageServices.dart';
@@ -20,24 +18,22 @@ class AnnouncementServices extends Services {
     String stdDivGlobal,
   ) async {
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(stdDivGlobal);
+        (await schoolRefwithCode()).doc('Posts').collection(stdDivGlobal);
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();
     if (lastPostSnapshot == null)
-      data = await _postRef
-          .orderBy('timeStamp', descending: true)
-          .limit(40)
-          .getDocuments();
+      data =
+          await _postRef.orderBy('timeStamp', descending: true).limit(40).get();
     else
       data = await _postRef
           .orderBy('timeStamp', descending: true)
-          .startAfter([lastPostSnapshot['timeStamp']])
+          .startAfter([lastPostSnapshot.data()['timeStamp']])
           .limit(5)
-          .getDocuments();
+          .get();
 
-    if (data != null && data.documents.length > 0) {
-      lastPostSnapshot = data.documents[data.documents.length - 1];
-      postDocumentSnapshots.addAll(data.documents);
+    if (data != null && data.docs.length > 0) {
+      lastPostSnapshot = data.docs[data.docs.length - 1];
+      postDocumentSnapshots.addAll(data.docs);
     } else {
       //No More post Available
     }
@@ -75,7 +71,7 @@ class AnnouncementServices extends Services {
       standard = announcement.forClass + announcement.forDiv;
 
     var _postRef =
-        (await schoolRefwithCode()).document('Posts').collection(standard);
+        (await schoolRefwithCode()).doc('Posts').collection(standard);
 
     _postRef.add(announcementMap);
     print('feed posted succeful');
@@ -85,9 +81,9 @@ class AnnouncementServices extends Services {
     // Map announcementMap = announcement.toJson();
 
     var _postRef = (await schoolRefwithCode())
-        .document('Posts')
+        .doc('Posts')
         .collection(stdDivGlobal)
-        .document(id);
+        .doc(id);
 
     await _postRef.delete();
   }

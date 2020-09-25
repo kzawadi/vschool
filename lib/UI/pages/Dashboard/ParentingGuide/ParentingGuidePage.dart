@@ -23,7 +23,8 @@ I want to perform login and call a function for that, this function can either r
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        child: kBackBtn,
+        buttonHeroTag: 'parentingPage',
+        child: kBackBtn(context),
         onPressed: () {
           kbackBtn(context);
         },

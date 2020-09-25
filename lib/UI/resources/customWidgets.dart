@@ -5,8 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/resources/constant.dart';
 import 'package:ourESchool/UI/resources/theme.dart';
+import 'package:ourESchool/UI/Utility/Resources.dart';
+
+import 'package:ourESchool/core/Models/User.dart';
 
 Widget customTitleText(String title, {BuildContext context}) {
   return Text(
@@ -19,6 +23,14 @@ Widget customTitleText(String title, {BuildContext context}) {
   );
 }
 
+ImageProvider<dynamic> setImage(User user) {
+  return user.photoUrl != 'default'
+      ? NetworkImage(
+          user.photoUrl,
+        )
+      : AssetImage(assetsString.student_welcome);
+}
+
 Widget heading(String heading,
     {double horizontalPadding = 10, BuildContext context}) {
   double fontSize = 16;
@@ -29,7 +41,7 @@ Widget heading(String heading,
     padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
     child: Text(
       heading,
-      style: AppTheme.apptheme.typography.dense.display1
+      style: AppTheme.apptheme.typography.dense.headline4
           .copyWith(fontSize: fontSize),
     ),
   );
@@ -129,7 +141,7 @@ Widget customText(String msg,
   } else {
     if (context != null && style != null) {
       var fontSize =
-          style.fontSize ?? Theme.of(context).textTheme.body1.fontSize;
+          style.fontSize ?? Theme.of(context).textTheme.bodyText2.fontSize;
       style = style.copyWith(
           fontSize: fontSize - (fullWidth(context) <= 375 ? 2 : 0));
     }
@@ -212,6 +224,11 @@ SizedBox sizedBox({double height = 5, String title}) {
 }
 
 Widget customNetworkImage(String path, {BoxFit fit = BoxFit.contain}) {
+  if (path == null) {
+    path = dummyProfilePic;
+  } else if (path == 'default') {
+    path = dummyProfilePic;
+  }
   return CachedNetworkImage(
     fit: fit,
     imageUrl: path ?? dummyProfilePic,
@@ -233,6 +250,8 @@ Widget customNetworkImage(String path, {BoxFit fit = BoxFit.contain}) {
 
 dynamic customAdvanceNetworkImage(String path) {
   if (path == null) {
+    path = dummyProfilePic;
+  } else if (path == 'default') {
     path = dummyProfilePic;
   }
   return CachedNetworkImageProvider(
@@ -304,7 +323,7 @@ void customSnackBar(GlobalKey<ScaffoldState> _scaffoldKey, String msg,
 }
 
 Widget emptyListWidget(BuildContext context, String title,
-    {String subTitle, String image = 'emptyImage.png'}) {
+    {String subTitle, String image = 'welcome.png'}) {
   return Container(
       color: Color(0xfffafafa),
       child: Center(
@@ -340,13 +359,13 @@ Widget emptyListWidget(BuildContext context, String title,
                   style: Theme.of(context)
                       .typography
                       .dense
-                      .display1
+                      .headline4
                       .copyWith(color: Color(0xff9da9c7))),
               customText(subTitle,
                   style: Theme.of(context)
                       .typography
                       .dense
-                      .body2
+                      .bodyText2
                       .copyWith(color: Color(0xffabb8d6))),
             ],
           )
@@ -539,4 +558,35 @@ getImage(BuildContext context, ImageSource source, Function onImageSelected) {
     onImageSelected(file);
     Navigator.pop(context);
   });
+}
+
+class GoodTile extends StatelessWidget {
+  const GoodTile({
+    this.child,
+    this.color,
+    this.splashColor,
+    this.onTap,
+  });
+  final Widget child;
+  final Color color;
+  final Color splashColor;
+  final Function() onTap;
+
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      child: Material(
+        color: color,
+        elevation: 10.0,
+        borderRadius: BorderRadius.circular(15.0),
+        shadowColor: shadowColor(context),
+        child: InkWell(
+          child: child,
+          splashColor: splashColor,
+          borderRadius: BorderRadius.circular(15.0),
+          onTap: onTap == null ? doNothing : () => onTap(),
+        ),
+      ),
+    );
+  }
 }

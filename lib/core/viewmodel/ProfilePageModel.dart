@@ -112,10 +112,10 @@ class ProfilePageModel extends BaseModel {
     setState(ViewState.Idle);
   }
 
-  @override
-  void dispose() {
-    if (true) {}
-  }
+  // @override
+  // void dispose() {
+  //   if (true) {}
+  // }
 
   // Future<User> getUserProfileDataOfGuardian(UserType userType, String id) async {
   //   setState(ViewState.Busy);

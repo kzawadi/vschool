@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/themes/app_themes.dart';
 import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
+import 'package:ourESchool/imports.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
-  static final String name = 'setting';
+  static const String name = 'Settings';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
+      appBar: TopBar(
+        title: 'Settings',
+        child: kBackBtn(context),
+        onPressed: () {
+          kbackBtn(context);
+        },
+        buttonHeroTag: 'ThemeSetting',
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -32,7 +38,7 @@ class Settings extends StatelessWidget {
                 },
                 title: Text(
                   enumName(theme),
-                  style: appThemeData[theme].textTheme.bodyText2,
+                  style: appThemeData[theme].primaryTextTheme.bodyText2,
                 ),
               ),
             );

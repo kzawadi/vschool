@@ -17,7 +17,7 @@ class User {
   });
 
   User.fromSnapshot(DocumentSnapshot documentSnapshot) {
-    _fromJson(documentSnapshot.data);
+    _fromJson(documentSnapshot.data());
   }
 
   _fromJson(Map<String, dynamic> json) {

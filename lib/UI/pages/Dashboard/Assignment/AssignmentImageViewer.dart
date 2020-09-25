@@ -16,8 +16,9 @@ class _AssignmentImageViewerState extends State<AssignmentImageViewer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
+        buttonHeroTag: 'pdfAssignment',
         title: widget.assignment.title,
-        child: kBackBtn,
+        child: kBackBtn(context),
         onPressed: () {
           kbackBtn(context);
         },
