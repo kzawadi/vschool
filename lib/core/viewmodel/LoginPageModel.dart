@@ -61,6 +61,7 @@ class LoginPageModel extends BaseModel {
           await _analyticsService.logLogin();
           return true;
         } else {
+          currentLoggingStatus = 'Wrong password entered';
           return false;
         }
       } else {

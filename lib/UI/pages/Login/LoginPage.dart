@@ -1,4 +1,6 @@
+import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/imports.dart';
 import 'dart:ui' as ui;
@@ -344,10 +346,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               model.state == ViewState.Busy
                   ? Container(
+                      height: fullHeight(context) - 180,
                       child: BackdropFilter(
-                        filter: ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: kBuzyPage(color: Theme.of(context).primaryColor),
-                      ),
+                          filter:
+                              ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: customScreenLoader(context)),
                     )
                   : Container(),
             ],

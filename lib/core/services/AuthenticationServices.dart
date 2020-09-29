@@ -17,7 +17,7 @@ class AuthenticationServices extends Services {
   //       _firebaseUser = await _auth.signInWithCredential(credential);
   //     });
   //     print("signed in " + _firebaseUser.displayName);
-  //   } on PlatformException catch (e) {
+  //   } catch (e) {
   //     print(e.toString());
   //   }
   // }
@@ -218,7 +218,7 @@ class AuthenticationServices extends Services {
       );
 
       return authErrors;
-    } on PlatformException catch (e) {
+    } catch (e) {
       return catchException(e);
     }
   }
@@ -258,7 +258,7 @@ class AuthenticationServices extends Services {
       authErrors = AuthErrors.SUCCESS;
       print("Password Reset Link Send");
       return authErrors;
-    } on PlatformException catch (e) {
+    } catch (e) {
       return catchException(e);
     }
   }
