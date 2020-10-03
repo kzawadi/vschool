@@ -1,22 +1,23 @@
 import 'package:ourESchool/core/Models/student_data_entry/student_data_entry.dart';
 import 'package:ourESchool/core/services/student_data_Entry/student_data_entry_service.dart';
-import 'package:ourESchool/imports.dart';
+import 'package:ourESchool/locator.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
-class StudentDataEntryViewModel extends BaseViewModel {
+class StudentDataEntryViewModel
+    extends FutureViewModel<List<StudentEntryData>> {
   StudentDataEntryService _dataEntryService =
       locator<StudentDataEntryService>();
-  DialogService _dialogService = locator<DialogService>();
-  StudentDataEntryViewModel();
-  List<StudentEntryData> get userdata => _dataEntryService.userData;
+  // StudentDataEntryViewModel();
+  // List<StudentEntryData> get userdata => _dataEntryService.userData;
 
-  getData() async {
-    setBusy(true);
-    await _dataEntryService.getData();
-    notifyListeners();
-    setBusy(false);
-  }
+  // getData() async {
+  //   setBusy(true);
+  //   await _dataEntryService.getData();
+  //   notifyListeners();
+  //   setBusy(false);
+  // }
+  @override
+  Future<List<StudentEntryData>> futureToRun() => _dataEntryService.getData();
 
   postData({List<StudentEntryData> userEntryData}) async {
     setBusy(true);

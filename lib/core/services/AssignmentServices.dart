@@ -53,12 +53,11 @@ class AssignmentServices extends Services {
     }
   }
 
-  getAssignments(String stdDiv_Global) async {
+  getAssignments(String stdDivGlobal) async {
     // await getSchoolCode();
 
-    var _assignmentRef = (await schoolRefwithCode())
-        .document('Assignments')
-        .collection(stdDiv_Global);
+    var _assignmentRef =
+        (await schoolRefwithCode()).doc('Assignments').collection(stdDivGlobal);
 
     QuerySnapshot data;
     //  = await _schoolRef.getDocuments();
@@ -67,17 +66,17 @@ class AssignmentServices extends Services {
         data = await _assignmentRef
             .orderBy('timeStamp', descending: true)
             .limit(5)
-            .getDocuments();
+            .get();
       else
         data = await _assignmentRef
             .orderBy('timeStamp', descending: true)
-            .startAfter([lastAssignmnetSnapshot['timeStamp']])
+            .startAfter([lastAssignmnetSnapshot.data()['timeStamp']])
             .limit(5)
-            .getDocuments();
+            .get();
 
-      if (data != null && data.documents.length > 0) {
-        lastAssignmnetSnapshot = data.documents[data.documents.length - 1];
-        assignmnetDocumentSnapshots.addAll(data.documents);
+      if (data != null && data.docs.length > 0) {
+        lastAssignmnetSnapshot = data.docs[data.docs.length - 1];
+        assignmnetDocumentSnapshots.addAll(data.docs);
       }
     } catch (e) {
       print('In Exception : ');

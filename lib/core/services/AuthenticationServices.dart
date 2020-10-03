@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart' as authentication;
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationServices extends Services {
   // Future handleGoogleSignIn() async {
@@ -16,7 +18,7 @@ class AuthenticationServices extends Services {
   //       _firebaseUser = await _auth.signInWithCredential(credential);
   //     });
   //     print("signed in " + _firebaseUser.displayName);
-  //   } on PlatformException catch (e) {
+  //   } catch (e) {
   //     print(e.toString());
   //   }
   // }
@@ -24,8 +26,8 @@ class AuthenticationServices extends Services {
   bool isUserLoggedIn = false;
   UserType userType = UserType.STUDENT;
 
-  StreamController<FirebaseUser> fireBaseUserStream =
-      StreamController<FirebaseUser>();
+  StreamController<authentication.User> fireBaseUserStream =
+      StreamController<authentication.User>();
   StreamController<bool> isUserLoggedInStream = StreamController<bool>();
   StreamController<UserType> userTypeStream = StreamController<UserType>();
 
@@ -33,9 +35,6 @@ class AuthenticationServices extends Services {
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
   AuthenticationServices() {
-    firestore.settings(
-        // persistenceEnabled: false,
-        );
     isLoggedIn().then((onValue) => isUserLoggedIn = onValue);
     _userType().then((onValue) => userType = onValue);
   }
@@ -80,7 +79,7 @@ class AuthenticationServices extends Services {
         : userType == UserType.TEACHER ? "Parent-Teacher" : "Parent-Teacher";
 
     DocumentReference _schoolLoginRef =
-        schoolRef.collection(schoolCode.toUpperCase().trim()).document('Login');
+        schoolRef.collection(schoolCode.toUpperCase().trim()).doc('Login');
 
     await _schoolLoginRef.get().then((onValue) {
       isSchoolPresent = onValue.exists;
@@ -102,15 +101,16 @@ class AuthenticationServices extends Services {
         .first
         .then((querySnapshot) {
       //todo here only the first is expected but why forEach
-      querySnapshot.documents.forEach((documentSnapshot) {
+      querySnapshot.docs.forEach((documentSnapshot) {
         isUserAvailable = documentSnapshot.exists;
         print("User Data : " + documentSnapshot.data.toString());
         if (userType == UserType.STUDENT) {
           userDataLogin = UserDataLogin(
-            email: documentSnapshot["email"].toString(),
-            id: documentSnapshot["id"].toString(),
+            email: documentSnapshot.data()["email"].toString(),
+            id: documentSnapshot.data()["id"].toString(),
             parentIds:
-                documentSnapshot['parentId'] as Map<dynamic, dynamic> ?? null,
+                documentSnapshot.data()['parentId'] as Map<dynamic, dynamic> ??
+                    null,
           );
           // DocumentReference ref = documentSnapshot["ref"] as DocumentReference;
           // print('Insude Document Reference');
@@ -121,11 +121,12 @@ class AuthenticationServices extends Services {
           //     );
         } else {
           userDataLogin = UserDataLogin(
-            email: documentSnapshot["email"].toString(),
-            id: documentSnapshot["id"].toString(),
-            isATeacher: documentSnapshot["isATeacher"] as bool,
+            email: documentSnapshot.data()["email"].toString(),
+            id: documentSnapshot.data()["id"].toString(),
+            isATeacher: documentSnapshot.data()["isATeacher"] as bool,
             childIds:
-                documentSnapshot["childId"] as Map<dynamic, dynamic> ?? null,
+                documentSnapshot.data()["childId"] as Map<dynamic, dynamic> ??
+                    null,
           );
         }
       });
@@ -170,10 +171,10 @@ class AuthenticationServices extends Services {
     // await sharedPreferencesHelper.clearAllData();
     try {
       AuthErrors authErrors = AuthErrors.UNKNOWN;
-      AuthResult authResult = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      authentication.UserCredential authResult = await auth
+          .createUserWithEmailAndPassword(email: email, password: password);
       firebaseUser = authResult.user;
-      await firestore.collection('users').document(firebaseUser.uid).setData({
+      await firestore.collection('users').doc(firebaseUser.uid).set({
         "uid": firebaseUser.uid,
         "email": firebaseUser.email,
         "username": firebaseUser.displayName,
@@ -198,13 +199,45 @@ class AuthenticationServices extends Services {
     }
   }
 
+  Future<AuthErrors> signInWithGoogle(
+      {UserType userType, String schoolCode}) async {
+    try {
+      AuthErrors authErrors = AuthErrors.UNKNOWN;
+      authentication.UserCredential userCredential;
+
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final authentication.GoogleAuthCredential googleAuthCredential =
+          authentication.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      userCredential = await auth.signInWithCredential(googleAuthCredential);
+
+      firebaseUser = userCredential.user;
+      authErrors = AuthErrors.SUCCESS;
+      sharedPreferencesHelper.setSchoolCode(schoolCode);
+      print("User Loggedin using Goolge Acoount");
+
+      isUserLoggedIn = true;
+      fireBaseUserStream.sink.add(firebaseUser);
+      isUserLoggedInStream.add(isUserLoggedIn);
+      await _analyticsService.setUserProperties(
+          userId: userCredential.user.uid);
+      return authErrors;
+    } catch (e) {
+      return catchException(e);
+    }
+  }
+
   Future<AuthErrors> emailPasswordSignIn(String email, String password,
       UserType userType, String schoolCode) async {
     // await sharedPreferencesHelper.clearAllData();
     try {
       AuthErrors authErrors = AuthErrors.UNKNOWN;
-      AuthResult authResult = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      authentication.UserCredential authResult = await auth
+          .signInWithEmailAndPassword(email: email, password: password);
       firebaseUser = authResult.user;
       authErrors = AuthErrors.SUCCESS;
       sharedPreferencesHelper.setSchoolCode(schoolCode);
@@ -218,7 +251,7 @@ class AuthenticationServices extends Services {
       );
 
       return authErrors;
-    } on PlatformException catch (e) {
+    } catch (e) {
       return catchException(e);
     }
   }
@@ -258,7 +291,7 @@ class AuthenticationServices extends Services {
       authErrors = AuthErrors.SUCCESS;
       print("Password Reset Link Send");
       return authErrors;
-    } on PlatformException catch (e) {
+    } catch (e) {
       return catchException(e);
     }
   }

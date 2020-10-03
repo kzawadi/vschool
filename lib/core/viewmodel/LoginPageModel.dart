@@ -61,23 +61,35 @@ class LoginPageModel extends BaseModel {
           await _analyticsService.logLogin();
           return true;
         } else {
+          currentLoggingStatus = 'Wrong password entered';
           return false;
         }
-      } else {
-        if (password != confirmPassword) {
-          currentLoggingStatus = 'Passwords do not match';
-          setState(ViewState.Idle);
-          return false;
-        }
+      } else if (buttonType == ButtonType.GOOGLELOGIN) {
         AuthErrors res =
-            await _registerUser(email, password, userType, schoolCode);
+            await _googleLogin(schoolCode: schoolCode, userType: userType);
         setState(ViewState.Idle);
         if (res == AuthErrors.SUCCESS) {
-          await _analyticsService.logSignUp();
+          await _analyticsService.logLogin();
           return true;
         } else {
+          currentLoggingStatus = "failed to login with google try again later";
           return false;
         }
+      }
+
+      if (password != confirmPassword) {
+        currentLoggingStatus = 'Passwords do not match';
+        setState(ViewState.Idle);
+        return false;
+      }
+      AuthErrors res =
+          await _registerUser(email, password, userType, schoolCode);
+      setState(ViewState.Idle);
+      if (res == AuthErrors.SUCCESS) {
+        await _analyticsService.logSignUp();
+        return true;
+      } else {
+        return false;
       }
     }
   }
@@ -90,6 +102,16 @@ class LoginPageModel extends BaseModel {
       userType,
       schoolCode,
     );
+    currentLoggingStatus = AuthErrorsHelper.getValue(authError);
+    return authError;
+  }
+
+  Future _googleLogin({UserType userType, String schoolCode}) async {
+    AuthErrors authError = await _authenticationService.signInWithGoogle(
+      schoolCode: schoolCode,
+      userType: userType,
+    );
+
     currentLoggingStatus = AuthErrorsHelper.getValue(authError);
     return authError;
   }

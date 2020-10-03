@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
@@ -71,7 +71,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   floatingButtonPressed(
-      var model, UserType userType, FirebaseUser firebaseUser) async {
+      var model, UserType userType, auth.User firebaseUser) async {
     bool res = false;
 
     if (_bloodGroup.isEmpty ||
@@ -83,8 +83,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
           context, 'You Need to fill all the details and a profile Photo'));
     } else {
       if (model.state == ViewState.Idle) {
-        FirebaseUser firebaseUser =
-            Provider.of<FirebaseUser>(context, listen: false);
+        auth.User firebaseUser = Provider.of<auth.User>(context, listen: false);
 
         res = await model.setProfileDataParent(
           user: User(
@@ -97,7 +96,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
               firebaseUuid: firebaseUser.uid,
               id: await _sharedPreferencesHelper.getLoggedInUserId(),
               isTeacher: false,
-              isVerified: firebaseUser.isEmailVerified,
+              isVerified: firebaseUser.emailVerified,
               connection: await getConnection(userType),
               photoUrl: path),
           userType: userType,
@@ -125,7 +124,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
   @override
   Widget build(BuildContext context) {
     userType = Provider.of<UserType>(context, listen: false);
-    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
+    var firebaseUser = Provider.of<auth.User>(context, listen: false);
     print("In Guardian ProfilePage " + UserTypeHelper.getValue(userType));
     if (userType == UserType.PARENT || userType == UserType.TEACHER) {
       isEditable = true;
@@ -155,8 +154,9 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
         return Scaffold(
           key: _scaffoldKey,
           appBar: TopBar(
+            buttonHeroTag: 'guardianProfilePage',
             title: widget.title,
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               if (Navigator.canPop(context)) Navigator.pop(context);
             },
@@ -166,13 +166,13 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
             child: FloatingActionButton(
               tooltip: 'Save',
               elevation: 20,
-              backgroundColor: Colors.red,
+              backgroundColor: Theme.of(context).accentColor,
               onPressed: () async {
                 await floatingButtonPressed(model, userType, firebaseUser);
               },
               child: model.state == ViewState.Busy
                   ? SpinKitDoubleBounce(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColorLight,
                       size: 20,
                     )
                   : Icon(Icons.check),

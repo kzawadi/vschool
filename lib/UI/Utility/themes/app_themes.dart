@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/Utility/themes/newLightTheme.dart';
 
 enum AppTheme { White, Dark, LightGreen, DarkGreen }
 
@@ -8,10 +9,11 @@ String enumName(AppTheme anyEnum) {
 }
 
 final appThemeData = {
-  AppTheme.White: ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Colors.white,
-  ),
+  AppTheme.White: newLightTheme,
+  // ThemeData(
+  //   brightness: Brightness.light,
+  //   primaryColor: Colors.white,
+  // ),
   AppTheme.Dark: ThemeData(
     brightness: Brightness.dark,
     primaryColor: Colors.black,

@@ -1,1 +1,1 @@
-enum ButtonType { LOGIN, REGISTER }
+enum ButtonType { LOGIN, REGISTER, GOOGLELOGIN }

@@ -38,7 +38,7 @@ class _TimeTablePageState extends State<TimeTablePage>
     return Scaffold(
       appBar: TopBar(
         title: string.timetable,
-        child: kBackBtn,
+        child: kBackBtn(context),
         onPressed: () {
           Navigator.pop(context);
         },

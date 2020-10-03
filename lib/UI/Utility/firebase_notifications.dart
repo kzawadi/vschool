@@ -25,11 +25,11 @@ class FirebaseNotifications with Services {
     if (fcmToken != null) {
       DocumentReference tokens = firestore
           .collection('users')
-          .document(id)
+          .doc(id)
           .collection('tokens')
-          .document(fcmToken);
+          .doc(fcmToken);
 
-      await tokens.setData({
+      await tokens.set({
         'token': fcmToken,
         'createdAt': FieldValue.serverTimestamp(), // optional
         'platform': Platform.operatingSystem // optional

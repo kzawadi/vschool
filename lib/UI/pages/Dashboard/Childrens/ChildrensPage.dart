@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'package:ourESchool/UI/Widgets/BottomSheetChildrensWidget.dart';
 import 'package:ourESchool/UI/Widgets/ChildrenGridViewCard.dart';
+import 'package:ourESchool/UI/Widgets/bottom_sheet.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
+import 'package:ourESchool/core/enums/UserType.dart';
+import 'package:provider/provider.dart';
 
 class ChildrensPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool isTeacher = false;
+    var userType = Provider.of<UserType>(context, listen: false);
+    if (userType == UserType.TEACHER) {
+      isTeacher = true;
+    }
     return BaseView<ProfilePageModel>(
       onModelReady: (model) => model.getChildrens(),
       builder: (context, model, child) {
         return Scaffold(
           appBar: TopBar(
             buttonHeroTag: string.childrens,
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               kbackBtn(context);
             },
@@ -47,14 +54,10 @@ class ChildrensPage extends StatelessWidget {
                             user: model.childrens[index],
                             onTap: () {
                               if (model.childrens[index].displayName != '')
-                                showModalBottomSheet(
-                                  backgroundColor: Colors.transparent,
-                                  elevation: 5,
-                                  context: context,
-                                  builder: (context) =>
-                                      BottomSheetChildrensWidget(
-                                    user: model.childrens[index],
-                                  ),
+                                BottomSheetPanel().openRetweetbottomSheet(
+                                  context,
+                                  user: model.childrens[index],
+                                  isaTeacher: isTeacher,
                                 );
                             },
                           ),

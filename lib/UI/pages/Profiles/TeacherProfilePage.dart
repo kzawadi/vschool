@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
@@ -67,10 +67,10 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
   String _mobileNo = '';
   int a = 0;
 
-  floatingButoonPressed(var model, FirebaseUser firebaseUser) async {
+  floatingButoonPressed(var model, auth.User firebaseUser) async {
     bool res = false;
 
-    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
+    var firebaseUser = Provider.of<auth.User>(context, listen: false);
 
     if (_bloodGroup.isEmpty ||
         _division.isEmpty ||
@@ -98,7 +98,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
             firebaseUuid: firebaseUser.uid,
             id: await _sharedPreferencesHelper.getLoggedInUserId(),
             isTeacher: userType == UserType.TEACHER ? true : false,
-            isVerified: firebaseUser.isEmailVerified,
+            isVerified: firebaseUser.emailVerified,
             photoUrl: path,
             connection: await getConnection(userType),
           ),
@@ -124,7 +124,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
   @override
   Widget build(BuildContext context) {
     userType = Provider.of<UserType>(context, listen: false);
-    var firebaseUser = Provider.of<FirebaseUser>(context, listen: false);
+    var firebaseUser = Provider.of<auth.User>(context, listen: false);
 
     if (userType == UserType.STUDENT) {
       guardiansPanel = false;
@@ -155,8 +155,9 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
           return Scaffold(
             key: _scaffoldKey,
             appBar: TopBar(
+              buttonHeroTag: 'teacherProfilePage',
               title: string.profile,
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 if (model.state ==
                     ViewState.Idle) if (Navigator.canPop(context))
@@ -165,14 +166,14 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
             ),
             floatingActionButton: FloatingActionButton(
               tooltip: 'Save',
-              elevation: 20,
-              backgroundColor: Colors.green,
+              elevation: 3,
+              backgroundColor: Theme.of(context).accentColor,
               onPressed: () async {
                 await floatingButoonPressed(model, firebaseUser);
               },
               child: model.state == ViewState.Busy
                   ? SpinKitDoubleBounce(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColorLight,
                       size: 20,
                     )
                   : Icon(Icons.check),

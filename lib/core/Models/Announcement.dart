@@ -39,16 +39,16 @@ class Announcement {
   }
 
   Announcement.fromSnapshot(DocumentSnapshot snapshot) {
-    caption = snapshot['caption'].toString() ?? '';
-    by = snapshot['by'].toString();
-    forDiv = snapshot['forDiv'].toString();
-    timestamp = snapshot['timeStamp'] as Timestamp;
-    forClass = snapshot['forClass'].toString();
-    photoUrl = snapshot['photoUrl'].toString() ?? '';
-    createrPhotoUrl = snapshot['createrPhotoUrl'].toString() ?? '';
-    photoPath = snapshot['photoPath'].toString() ?? '';
-    type = AnnouncementTypeHelper.getEnum(snapshot['type'].toString());
-    id = snapshot.documentID;
+    caption = snapshot.data()['caption'].toString() ?? '';
+    by = snapshot.data()['by'].toString();
+    forDiv = snapshot.data()['forDiv'].toString();
+    timestamp = snapshot.data()['timeStamp'] as Timestamp;
+    forClass = snapshot.data()['forClass'].toString();
+    photoUrl = snapshot.data()['photoUrl'].toString() ?? '';
+    createrPhotoUrl = snapshot.data()['createrPhotoUrl'].toString() ?? '';
+    photoPath = snapshot.data()['photoPath'].toString() ?? '';
+    type = AnnouncementTypeHelper.getEnum(snapshot.data()['type'].toString());
+    id = snapshot.id;
   }
 
   /// something is not very okay with decoding and encoding of timestamp fields..

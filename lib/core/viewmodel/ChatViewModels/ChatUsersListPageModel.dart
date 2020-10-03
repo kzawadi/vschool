@@ -1,6 +1,12 @@
-import 'package:ourESchool/imports.dart';
+// import 'package:ourESchool/imports.dart';
 
-class ChatUsersListPageModel extends BaseModel {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ourESchool/core/Models/User.dart';
+import 'package:ourESchool/core/services/ChatServices.dart';
+import 'package:ourESchool/locator.dart';
+import 'package:stacked/stacked.dart';
+
+class ChatUsersListPageModel extends BaseViewModel {
   ChatUsersListPageModel();
 
   ChatServices _chatServices = locator<ChatServices>();
@@ -31,48 +37,46 @@ class ChatUsersListPageModel extends BaseModel {
   }
 
   getChildrens() async {
-    setState(ViewState.Busy);
+    setBusy(true);
     await _chatServices.getChildrens();
-    setState(ViewState.Idle);
+    setBusy(false);
   }
 
   getAllStudent({String standard = '', String division = ''}) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     await _chatServices.getStudents(standard: standard, division: division);
-    setState(ViewState.Idle);
+    setBusy(false);
   }
 
   getSingleStudentData(DocumentSnapshot documentSnapshot) async {
     // setState(ViewState.Busy);
     User user = await _chatServices.getUser(documentSnapshot);
-    _chatServices.studentListMap
-        .putIfAbsent(documentSnapshot.documentID, () => user);
+    _chatServices.studentListMap.putIfAbsent(documentSnapshot.id, () => user);
     // await _chatServices.getParents(documentSnapshot);
     notifyListeners();
     // setState(ViewState.Idle);
   }
 
   getParents(DocumentSnapshot documentSnapshot) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     print('Parent Data Fetching Started');
     await _chatServices.getParents(documentSnapshot);
-    setState(ViewState.Idle);
+    setBusy(false);
     print('Parent Data Fetched');
   }
 
   getAllTeachers({String standard = '', String division = ''}) async {
-    setState(ViewState.Busy);
+    setBusy(true);
     teachersListMap.clear();
     teachersSnapshot.clear();
     await _chatServices.getTeachers(division: division, standard: standard);
-    setState(ViewState.Idle);
+    setBusy(false);
   }
 
   Future<User> getSingleTeacherData(DocumentSnapshot documentSnapshot) async {
     // setState(ViewState.Busy);
     User user = await _chatServices.getUser(documentSnapshot);
-    _chatServices.teachersListMap
-        .putIfAbsent(documentSnapshot.documentID, () => user);
+    _chatServices.teachersListMap.putIfAbsent(documentSnapshot.id, () => user);
     await _chatServices.getParents(documentSnapshot);
     notifyListeners();
     return user;

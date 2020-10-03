@@ -1,6 +1,6 @@
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
-import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart';
+import 'package:ourESchool/UI/Utility/themes/theme_setting_page.dart' as theme;
 import 'package:ourESchool/UI/pages/Dashboard/Wall/CreateWall.dart';
 import 'package:ourESchool/UI/pages/Login/ForgotPassword.dart';
 import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
@@ -9,6 +9,7 @@ import 'package:ourESchool/UI/pages/WelcomeScreen.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 import 'package:ourESchool/core/viewmodel/LoginPageModel.dart';
+import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,10 +30,10 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     LoginPageModel model = locator<LoginPageModel>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-        centerTitle: true,
-        elevation: 0,
+      appBar: TopBarAlternative(
+        buttonHeroTag: string.setting,
+        title: 'Settings',
+        onPressed: null,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -89,7 +90,12 @@ class _SettingPageState extends State<SettingPage> {
                   context: context,
                   icon: Icons.settings,
                   onTap: () async {
-                    kopenPage(context, Settings(), 'Theme_Settings');
+                    kopenPageSlide(
+                      context,
+                      theme.Settings(),
+                      'Theme_Settings',
+                      duration: Duration(seconds: 5),
+                    );
                   },
                   subtitle: string.theme_subtitle,
                   title: string.themeSettings),

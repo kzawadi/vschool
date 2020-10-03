@@ -16,6 +16,7 @@ class DataEntryService extends Services {
 
   Future<void> postData({List<UserEntryData> userEntryData}) async {
 //Schools/India/MAMA/Login/Parent-Teacher/dZdZUa5GAlFtjblV3UVN
+    SetOptions options = SetOptions(merge: true);
 
     for (UserEntryData u in userEntryData) {
       // String watoto = u.childIds;
@@ -34,50 +35,54 @@ class DataEntryService extends Services {
       print(data);
       print(watotomapped);
       DocumentReference _postRefs = (await schoolRefwithCode())
-          .document('Login')
+          .doc('Login')
           .collection('Parent-Teacher')
-          .document(u.id);
+          .doc(u.id);
 
-      await _postRefs.setData(data, merge: true);
+      await _postRefs.set(data, options);
     }
   }
 
   File _jsonFile;
-  List<UserEntryData> userData = List<UserEntryData>();
-  String _path;
+  var userData = <UserEntryData>[];
+  // String _path;
   String jsonString;
-  List<UserEntryData> _data = [];
+  var _data = <UserEntryData>[];
 
   Future<String> _loadAStudentAsset() async {
-    _path = await FilePicker.getFilePath().then(
+    //todo pass in the file type
+    await FilePicker.getFilePath().then(
       (value) async {
         _jsonFile = File(value);
         String datastring = await _jsonFile.readAsString();
         jsonString = datastring;
       },
-    ).catchError((error) {
-      //showSomeAlert() or handleSomething()
-      print(error);
-    });
+    ).catchError(
+      (error) {
+        //showSomeAlert() or handleSomething()
+        print(error);
+      },
+    );
 
     return jsonString;
   }
 
-  getData() async {
+  Future<List<UserEntryData>> getData() async {
+    clearData();
     String dataJson = await _loadAStudentAsset();
     _data = (json.decode(dataJson) as List)
         .map((i) => UserEntryData.fromJson(i))
         .toList();
     userData.addAll(_data);
-    _clearChached();
     //  notifyListeners();
     print(userData);
-
+    return userData;
     // notifyListeners();
     // return userData;
   }
 
-  void _clearChached() {
-    FilePicker.clearTemporaryFiles();
+  void clearData() {
+    _data.clear();
+    userData.clear();
   }
 }

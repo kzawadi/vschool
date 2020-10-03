@@ -35,8 +35,9 @@ class _ECardPageState extends State<ECardPage> {
 
         return Scaffold(
           appBar: TopBar(
+            buttonHeroTag: 'ecard',
             title: string.e_card,
-            child: kBackBtn,
+            child: kBackBtn(context),
             onPressed: () {
               kbackBtn(context);
             },

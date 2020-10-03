@@ -4,8 +4,11 @@ import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
+import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
+
 import 'package:ourESchool/locator.dart';
 import 'Login/LoginPage.dart';
 
@@ -127,19 +130,28 @@ class WelcomeScreen extends StatelessWidget {
                 fontSize: 30,
               ),
             ),
+            doneText: Text(
+              'Go',
+              style: GoogleFonts.quicksand(
+                color: Theme.of(context).primaryColor,
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            background: Theme.of(context).primaryColor,
             showSkipButton: true,
             fullTransition: 130,
             doneButtonPersist: true,
           ),
           Positioned(
             bottom: 60.0,
-            left: MediaQuery.of(context).size.width / 4,
-            width: MediaQuery.of(context).size.width / 2,
+            left: fullWidth(context) / 4,
+            width: fullWidth(context) / 2,
             // left: MediaQuery.of(context).size.width / 2 - 40,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Hero(
-                tag: 'title',
+                tag: 'login',
                 transitionOnUserGestures: true,
                 child: MaterialButton(
                   height: 48,
@@ -149,19 +161,18 @@ class WelcomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                   ),
                   onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => LoginPage(),
-                      ),
-                    );
+                    kopenPageSlide(context, LoginPage(), 'Login');
+
                     await _analyticsService.logScreen(screenName: 'Login');
                   },
-                  color: MyColors.lightMilky,
+                  color: Theme.of(context).primaryColor,
                   child: Text(
                     string.get_started,
                     style: GoogleFonts.montserrat(
-                        color: Colors.black, fontSize: 17),
+                      color: Theme.of(context).accentColor,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),

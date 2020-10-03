@@ -1,6 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:ourESchool/imports.dart';
+import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/pages/Chat/MessagingScreen.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
+import 'package:ourESchool/core/viewmodel/ChatViewModels/ChatUsersListPageModel.dart';
 
 class ChatTeachersListWidget extends StatefulWidget {
   // final Function onPressed;
@@ -12,8 +16,6 @@ class ChatTeachersListWidget extends StatefulWidget {
 
   @override
   _ChatTeachersListWidgetState createState() => _ChatTeachersListWidgetState();
-
-  // void onLoad()
 }
 
 class _ChatTeachersListWidgetState extends State<ChatTeachersListWidget> {
@@ -29,91 +31,46 @@ class _ChatTeachersListWidgetState extends State<ChatTeachersListWidget> {
     }
   }
 
-  Color color = RandomColor().randomColor(
-      colorSaturation: ColorSaturation.highSaturation,
-      colorBrightness: ColorBrightness.primary,
-      colorHue: ColorHue.custom(Range(21, 40)),
-      debug: true);
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Hero(
-        transitionOnUserGestures: true,
-        tag: widget.heroTag,
-        child: Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: Theme.of(context).canvasColor,
-            border: Border(
-              top: BorderSide(width: 1, color: color),
-              bottom: BorderSide(width: 1, color: color),
-              left: BorderSide(width: 1, color: color),
-              right: BorderSide(width: 1, color: color),
-            ),
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60),
-                bottomLeft: Radius.circular(60),
-                bottomRight: Radius.zero,
-                topRight: Radius.zero),
-          ),
-          child: MaterialButton(
-            minWidth: MediaQuery.of(context).size.width,
-            onPressed: () {
-              kopenPage(
-                  context,
-                  MessagingScreen(
-                    student: widget.model.selectedChild,
-                    parentORteacher: widget
-                        .model.teachersListMap[widget.snapshot.documentID],
-                  ),
-                  'Messaging_Screen');
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                widget.model.teachersListMap
-                        .containsKey(widget.snapshot.documentID)
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: widget
-                              .model
-                              .teachersListMap[widget.snapshot.documentID]
-                              .photoUrl,
-                          height: 50,
-                          width: 50,
-                        ),
-                      )
-                    : Image.asset(
-                        assetsString.teacher_welcome,
-                        height: 50,
-                        width: 50,
-                      ),
-                Text(
-                  widget.model.teachersListMap
-                          .containsKey(widget.snapshot.documentID)
-                      ? widget.model.teachersListMap[widget.snapshot.documentID]
-                          .displayName
-                      : "loading...",
-                  maxLines: 2,
-                  style: TextStyle(
-                      fontSize: 22,
-                      // color: Colors.white,
-                      fontWeight: FontWeight.w600),
+    return widget.model.isBusy
+        ? kBuzyPage(color: Theme.of(context).primaryColor)
+        : widget.model.teachersListMap.isEmpty
+            ? Container(
+                child: Center(
+                  child: Text('No Teachers'),
                 ),
-                Icon(
-                  Icons.chevron_right,
-                  // color: Colors.white,
-                  size: 55,
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+              )
+            : ListTile(
+                onTap: () {
+                  kopenPage(
+                      context,
+                      MessagingScreen(
+                        student: widget.model.selectedChild,
+                        parentORteacher:
+                            widget.model.teachersListMap[widget.snapshot.id],
+                      ),
+                      'Messaging_Screen');
+                },
+                leading: CircleAvatar(
+                  foregroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Colors.grey,
+                  backgroundImage: customAdvanceNetworkImage(
+                    widget.model.teachersListMap[widget.snapshot.id].photoUrl,
+                  ),
+                ),
+                title: Text(
+                  widget.model.teachersListMap[widget.snapshot.id].displayName,
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+                subtitle: Container(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Text(
+                    'Class ${widget.model.teachersListMap[widget.snapshot.id].standard + widget.model.teachersListMap[widget.snapshot.id].division}',
+                    style: TextStyle(color: Colors.grey, fontSize: 15.0),
+                  ),
+                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 8),
+              );
   }
 }

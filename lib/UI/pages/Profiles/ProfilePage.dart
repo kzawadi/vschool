@@ -13,7 +13,6 @@ import 'package:ourESchool/UI/pages/BaseView.dart';
 import 'package:ourESchool/UI/pages/Home.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/core/Models/User.dart';
-import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/enums/ViewState.dart';
 import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 import 'package:ourESchool/core/viewmodel/ProfilePageModel.dart';
@@ -123,8 +122,9 @@ class _ProfilePageState extends State<ProfilePage> {
           return Scaffold(
             key: _scaffoldKey,
             appBar: TopBar(
+              buttonHeroTag: 'studentProfilePage',
               title: string.profile,
-              child: kBackBtn,
+              child: kBackBtn(context),
               onPressed: () {
                 if (model.state ==
                     ViewState.Idle) if (Navigator.canPop(context))
@@ -134,13 +134,13 @@ class _ProfilePageState extends State<ProfilePage> {
             floatingActionButton: FloatingActionButton(
               tooltip: 'Save',
               elevation: 20,
-              backgroundColor: Colors.green,
+              backgroundColor: Theme.of(context).accentColor,
               onPressed: () async {
                 await floatingButoonPressed(model);
               },
               child: model.state == ViewState.Busy
                   ? SpinKitDoubleBounce(
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColorLight,
                       size: 20,
                     )
                   : Icon(Icons.check),

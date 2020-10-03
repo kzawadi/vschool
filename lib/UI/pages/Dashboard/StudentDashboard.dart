@@ -10,7 +10,7 @@ class StudentDashboard extends StatefulWidget {
 
   _StudentDashboardState createState() => _StudentDashboardState();
 
-  @override
+  // @override
   String get screenName => 'Students Dashboard';
 }
 
