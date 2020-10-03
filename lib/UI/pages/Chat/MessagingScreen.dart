@@ -44,8 +44,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
       onModelReady: (model) => model.setState2(ViewState.Busy),
       builder: (context, model, child) {
         return Scaffold(
-          backgroundColor:
-              isThemeCurrentlyDark(context) ? MyColors.github : Colors.red[50],
+          backgroundColor: Theme.of(context).backgroundColor,
           extendBody: true,
           appBar: TopBar(
             buttonHeroTag: 'smsPage',

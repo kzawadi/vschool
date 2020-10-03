@@ -1,10 +1,6 @@
-import 'package:ourESchool/UI/Utility/ui_helpers.dart';
-
 import '../../imports.dart';
 import 'package:intl/intl.dart';
 
-// List<String> messageDates = [];
-// typedef void Read();
 class MessagesListViewBuilder extends StatelessWidget {
   MessagesListViewBuilder({
     this.messagesList,
@@ -12,7 +8,6 @@ class MessagesListViewBuilder extends StatelessWidget {
     void read,
   });
 
-  // List<String> messageDates = [];
   final List<Message> messagesList;
   String previusDate = '';
   final ScrollController scrollController;
@@ -45,17 +40,6 @@ class MessagesListViewBuilder extends StatelessWidget {
             ),
           );
           showDate = true;
-          // if (previusDate != currentDate) {
-          //   messageDates.add(
-          //     DateFormat("d MMM y").format(
-          //       DateTime.parse(
-          //         messagesList[index].timeStamp.toDate().toLocal().toString(),
-          //       ),
-          //     ),
-          //   );
-          //   showDate = true;
-          //   previusDate = currentDate;
-          // }
         } else {
           if (previusDate == '') {
             previusDate = DateFormat("d MMM y").format(
@@ -70,28 +54,10 @@ class MessagesListViewBuilder extends StatelessWidget {
             ),
           );
           if (previusDate != currentDate) {
-            // messageDates.add(
-            //   DateFormat("d MMM y").format(
-            //     DateTime.parse(
-            //       messagesList[index + 1]
-            //           .timeStamp
-            //           .toDate()
-            //           .toLocal()
-            //           .toString(),
-            //     ),
-            //   ),
-            // );
             showDate = true;
             previusDate = currentDate;
           }
         }
-
-        // print(messageDates);
-        // print(showDate);
-        ///to do a list of id to be updated  for read receipts
-        // print(messagesList[index].from);
-        // print(user.id.toString());
-
         if (messagesList[index].from == user.id) {
           return MyMessageWidget(
             message: messagesList[index],
@@ -126,23 +92,24 @@ class OtherMessageWidget extends StatelessWidget {
           margin: EdgeInsets.only(left: 20, right: 20, top: 2),
           padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 5),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(8),
-              topRight: Radius.circular(8),
-              bottomRight: Radius.circular(8),
-              bottomLeft: Radius.circular(8),
-            ),
-            color: isThemeCurrentlyDark(context)
-                ? Color.fromARGB(0xff, 33, 40, 42)
-                : Color.fromARGB(0xff, 249, 248, 240), //249, 248, 240
-          ),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+              ),
+              color: Color(0xff96bdcf)),
           child: Wrap(
             alignment: WrapAlignment.end,
             crossAxisAlignment: WrapCrossAlignment.end,
             children: [
               Padding(
                 padding: EdgeInsets.only(right: 12, bottom: 2),
-                child: Text(message.message, style: TextStyle(fontSize: 16)),
+                child: Text(message.message,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .copyWith(color: Colors.black, fontSize: 15)),
               ),
               SizedBox(width: 4),
               Row(
@@ -187,22 +154,25 @@ class MyMessageWidget extends StatelessWidget {
           margin: EdgeInsets.only(left: 20, right: 20, top: 2),
           padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 5),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-                bottomRight: Radius.circular(8),
-                bottomLeft: Radius.circular(8),
-              ),
-              color: isThemeCurrentlyDark(context)
-                  ? Color.fromARGB(0xff, 7, 94, 84)
-                  : Colors.greenAccent),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+            ),
+            color: Theme.of(context).colorScheme.primaryVariant,
+          ),
           child: Wrap(
             alignment: WrapAlignment.end,
             crossAxisAlignment: WrapCrossAlignment.end,
             children: [
               Padding(
                 padding: EdgeInsets.only(right: 12, bottom: 2),
-                child: Text(message.message, style: TextStyle(fontSize: 16)),
+                child: Text(message.message,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .copyWith(color: Colors.white, fontSize: 15)),
               ),
               SizedBox(width: 4),
               Row(
@@ -211,13 +181,15 @@ class MyMessageWidget extends StatelessWidget {
                   Opacity(
                     opacity: 0.6,
                     child: Text(
-                      DateFormat("E").add_jm().format(
-                            DateTime.parse(
-                              message.timeStamp.toDate().toLocal().toString(),
+                        DateFormat("E").add_jm().format(
+                              DateTime.parse(
+                                message.timeStamp.toDate().toLocal().toString(),
+                              ),
                             ),
-                          ),
-                      style: ksubtitleStyle.copyWith(fontSize: 11),
-                    ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            .copyWith(color: Colors.white, fontSize: 12)),
                   ),
                   SizedBox(width: 5),
                   Chatdecorations.doubleCheck(message.readReceipt, true),
