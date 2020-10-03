@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as authentication;
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/imports.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationServices extends Services {
   // Future handleGoogleSignIn() async {
@@ -17,7 +18,7 @@ class AuthenticationServices extends Services {
   //       _firebaseUser = await _auth.signInWithCredential(credential);
   //     });
   //     print("signed in " + _firebaseUser.displayName);
-  //   } on PlatformException catch (e) {
+  //   } catch (e) {
   //     print(e.toString());
   //   }
   // }
@@ -198,6 +199,38 @@ class AuthenticationServices extends Services {
     }
   }
 
+  Future<AuthErrors> signInWithGoogle(
+      {UserType userType, String schoolCode}) async {
+    try {
+      AuthErrors authErrors = AuthErrors.UNKNOWN;
+      authentication.UserCredential userCredential;
+
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final authentication.GoogleAuthCredential googleAuthCredential =
+          authentication.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      userCredential = await auth.signInWithCredential(googleAuthCredential);
+
+      firebaseUser = userCredential.user;
+      authErrors = AuthErrors.SUCCESS;
+      sharedPreferencesHelper.setSchoolCode(schoolCode);
+      print("User Loggedin using Goolge Acoount");
+
+      isUserLoggedIn = true;
+      fireBaseUserStream.sink.add(firebaseUser);
+      isUserLoggedInStream.add(isUserLoggedIn);
+      await _analyticsService.setUserProperties(
+          userId: userCredential.user.uid);
+      return authErrors;
+    } catch (e) {
+      return catchException(e);
+    }
+  }
+
   Future<AuthErrors> emailPasswordSignIn(String email, String password,
       UserType userType, String schoolCode) async {
     // await sharedPreferencesHelper.clearAllData();
@@ -218,7 +251,7 @@ class AuthenticationServices extends Services {
       );
 
       return authErrors;
-    } on PlatformException catch (e) {
+    } catch (e) {
       return catchException(e);
     }
   }
@@ -258,7 +291,7 @@ class AuthenticationServices extends Services {
       authErrors = AuthErrors.SUCCESS;
       print("Password Reset Link Send");
       return authErrors;
-    } on PlatformException catch (e) {
+    } catch (e) {
       return catchException(e);
     }
   }

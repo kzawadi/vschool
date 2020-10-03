@@ -1,18 +1,18 @@
+import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/imports.dart';
 import 'dart:ui' as ui;
 
 class LoginPage extends StatefulWidget {
   static const id = 'LoginPage';
-  // static UserType loginTypeSelected = UserType.STUDENT;
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // String idHint = string.student_id;
   UserType loginTypeSelected = UserType.TEACHER;
   bool isRegistered = false;
   String notYetRegisteringText = string.not_registered;
@@ -41,9 +41,34 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  // MainPageModel mainPageModel;
-
   loginRegisterBtnTap(LoginPageModel model, BuildContext context) async {
+    //todo tried implementing google signin but failed due to the process of
+    //todo looking at each school for that user ID (eamil) and google sign in
+    //todo i cant submit becouse it is not given in ux/ui
+    // if (buttonType == ButtonType.GOOGLELOGIN) {
+    //   bool response = await model.checkUserDetails(
+    //     email: _emailController.text,
+    //     password: _passwordController.text,
+    //     schoolCode: _schoolNameController.text,
+    //     userType: loginTypeSelected,
+    //     buttonType: buttonType,
+    //     confirmPassword: _confirmPasswordController.text,
+    //   );
+    //   if (response) {
+    //     if (locator<AuthenticationServices>().userType == UserType.PARENT) {
+    //       Navigator.pushNamedAndRemoveUntil(
+    //           context, GuardianProfilePage.id, (r) => false);
+    //     } else {
+    //       Navigator.pushNamedAndRemoveUntil(
+    //           context, TeacherProfilePage.id, (r) => false);
+    //     }
+    //   } else {
+    //     // _scaffoldKey.currentState
+    //     //   .showSnackBar(ksnackBar(context, 'something went wrong...'));
+    //   }
+    //   _scaffoldKey.currentState
+    //       .showSnackBar(ksnackBar(context, model.currentLoggingStatus));
+    // } else
     if (_emailController.text == null ||
         _passwordController.text == null ||
         _schoolNameController.text == null) {
@@ -74,10 +99,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushNamedAndRemoveUntil(
                 context, TeacherProfilePage.id, (r) => false);
           }
-        } else {
-          // _scaffoldKey.currentState
-          //   .showSnackBar(ksnackBar(context, 'something went wrong...'));
-        }
+        } else {}
         _scaffoldKey.currentState
             .showSnackBar(ksnackBar(context, model.currentLoggingStatus));
       }
@@ -116,7 +138,6 @@ class _LoginPageState extends State<LoginPage> {
                           height: 25,
                         ),
                         Container(
-                          // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
                               color: fieldBackGround,
@@ -127,15 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.text,
                             onFieldSubmitted: (v) => moveFocus,
-
-//                            style: Theme.of(context).textTheme.bodyText2,
                             decoration: InputDecoration(
-//                              helperStyle: Theme.of(context)
-//                                  .inputDecorationTheme
-//                                  .helperStyle,
-//                              hintStyle: Theme.of(context)
-//                                  .inputDecorationTheme
-//                                  .labelStyle,
                               hintText: string.school_name_code_hint,
                               labelText: string.school_name_code,
                               prefixIcon: Icon(Icons.school),
@@ -154,7 +167,6 @@ class _LoginPageState extends State<LoginPage> {
                           height: 10,
                         ),
                         Container(
-                          // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
                               color: fieldBackGround,
@@ -163,14 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                             onChanged: (email) {},
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
-//                            style: Theme.of(context).textTheme.bodyText2,
                             decoration: InputDecoration(
-//                              helperStyle: Theme.of(context)
-//                                  .inputDecorationTheme
-//                                  .helperStyle,
-//                              hintStyle: Theme.of(context)
-//                                  .inputDecorationTheme
-//                                  .labelStyle,
                               hintText: string.email_hint,
                               labelText: string.email,
                               prefixIcon: Icon(Icons.email),
@@ -188,7 +193,6 @@ class _LoginPageState extends State<LoginPage> {
                           height: 15,
                         ),
                         Container(
-                          // padding: EdgeInsets.symmetric(horizontal: 24),
                           height: 60,
                           decoration: BoxDecoration(
                               color: fieldBackGround,
@@ -198,14 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                             onChanged: (password) {},
                             keyboardType: TextInputType.text,
                             textInputAction: TextInputAction.next,
-//                            style: Theme.of(context).textTheme.bodyText2,
                             decoration: InputDecoration(
-//                              helperStyle: Theme.of(context)
-//                                  .inputDecorationTheme
-//                                  .helperStyle,
-//                              hintStyle: Theme.of(context)
-//                                  .inputDecorationTheme
-//                                  .labelStyle,
                               hintText: string.password_hint,
                               labelText: string.password,
                               prefixIcon: Icon(Icons.lock),
@@ -272,13 +269,10 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text(
                                     notYetRegisteringText,
                                     style: TextStyle(
-                                      // color: kmainColorTeacher,
                                       fontSize: 15,
                                     ),
                                   ),
                                   onPressed: () {
-                                    // _scaffoldKey.currentState.showSnackBar(
-                                    //     ksnackBar(context, 'message'));
                                     setState(() {
                                       if (buttonType == ButtonType.LOGIN) {
                                         buttonType = ButtonType.REGISTER;
@@ -298,12 +292,10 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text(
                                     string.need_help,
                                     style: TextStyle(
-                                      // color: kmainColorTeacher,
                                       fontSize: 15,
                                     ),
                                   ),
                                   onPressed: () {
-                                    //Forget Password Logic
                                     kopenPage(
                                       context,
                                       ForgotPasswordPage(),
@@ -319,16 +311,21 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           height: 25,
                         ),
-                        LoginRoundedButton(
-                          heroTag: 'login',
-                          label: buttonType == ButtonType.LOGIN
-                              ? string.login
-                              : string.register,
-                          onPressed: () async {
-                            FocusScope.of(context).unfocus();
-                            if (model.state == ViewState.Idle)
-                              await loginRegisterBtnTap(model, context);
-                          },
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            LoginRoundedButton(
+                              heroTag: 'login',
+                              label: buttonType == ButtonType.LOGIN
+                                  ? string.login
+                                  : string.register,
+                              onPressed: () async {
+                                FocusScope.of(context).unfocus();
+                                if (model.state == ViewState.Idle)
+                                  await loginRegisterBtnTap(model, context);
+                              },
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 15,
@@ -344,10 +341,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               model.state == ViewState.Busy
                   ? Container(
+                      height: fullHeight(context) - 180,
                       child: BackdropFilter(
-                        filter: ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: kBuzyPage(color: Theme.of(context).primaryColor),
-                      ),
+                          filter:
+                              ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: customScreenLoader(context)),
                     )
                   : Container(),
             ],

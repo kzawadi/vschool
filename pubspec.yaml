@@ -68,6 +68,7 @@ dependencies:
   firebase_messaging: ^7.0.0
   firebase_in_app_messaging: ^0.2.0+1
   logging: ^0.11.4
+  google_sign_in: ^4.5.4
 
 dev_dependencies:
   flutter_test:
@@ -126,3 +127,4 @@ flutter:
         - asset: assets/fonts/Quicksand/Quicksand-Regular.ttf
         - asset: assets/fonts/Quicksand/Quicksand-Medium.ttf
         - asset: assets/fonts/Quicksand/Quicksand-Bold.ttf
+
