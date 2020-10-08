@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'student_data_entry_db.dart';
 
@@ -12,9 +12,11 @@ StudentEntryDataDb _$StudentEntryDataDbFromJson(Map<String, dynamic> json) {
   return _StudentEntryDataDb.fromJson(json);
 }
 
+/// @nodoc
 class _$StudentEntryDataDbTearOff {
   const _$StudentEntryDataDbTearOff();
 
+// ignore: unused_element
   _StudentEntryDataDb call(
       {String email, String id, Map<int, String> parentId}) {
     return _StudentEntryDataDb(
@@ -23,20 +25,29 @@ class _$StudentEntryDataDbTearOff {
       parentId: parentId,
     );
   }
+
+// ignore: unused_element
+  StudentEntryDataDb fromJson(Map<String, Object> json) {
+    return StudentEntryDataDb.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $StudentEntryDataDb = _$StudentEntryDataDbTearOff();
 
+/// @nodoc
 mixin _$StudentEntryDataDb {
   String get email;
-  String get id;
+  String get id; // bool isATeacher,
+// String isATeachers,
   Map<int, String> get parentId;
 
   Map<String, dynamic> toJson();
   $StudentEntryDataDbCopyWith<StudentEntryDataDb> get copyWith;
 }
 
+/// @nodoc
 abstract class $StudentEntryDataDbCopyWith<$Res> {
   factory $StudentEntryDataDbCopyWith(
           StudentEntryDataDb value, $Res Function(StudentEntryDataDb) then) =
@@ -44,6 +55,7 @@ abstract class $StudentEntryDataDbCopyWith<$Res> {
   $Res call({String email, String id, Map<int, String> parentId});
 }
 
+/// @nodoc
 class _$StudentEntryDataDbCopyWithImpl<$Res>
     implements $StudentEntryDataDbCopyWith<$Res> {
   _$StudentEntryDataDbCopyWithImpl(this._value, this._then);
@@ -67,6 +79,7 @@ class _$StudentEntryDataDbCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$StudentEntryDataDbCopyWith<$Res>
     implements $StudentEntryDataDbCopyWith<$Res> {
   factory _$StudentEntryDataDbCopyWith(
@@ -76,6 +89,7 @@ abstract class _$StudentEntryDataDbCopyWith<$Res>
   $Res call({String email, String id, Map<int, String> parentId});
 }
 
+/// @nodoc
 class __$StudentEntryDataDbCopyWithImpl<$Res>
     extends _$StudentEntryDataDbCopyWithImpl<$Res>
     implements _$StudentEntryDataDbCopyWith<$Res> {
@@ -102,6 +116,8 @@ class __$StudentEntryDataDbCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_StudentEntryDataDb
     with DiagnosticableTreeMixin
     implements _StudentEntryDataDb {
@@ -114,7 +130,8 @@ class _$_StudentEntryDataDb
   final String email;
   @override
   final String id;
-  @override
+  @override // bool isATeacher,
+// String isATeachers,
   final Map<int, String> parentId;
 
   @override
@@ -175,7 +192,8 @@ abstract class _StudentEntryDataDb implements StudentEntryDataDb {
   String get email;
   @override
   String get id;
-  @override
+  @override // bool isATeacher,
+// String isATeachers,
   Map<int, String> get parentId;
   @override
   _$StudentEntryDataDbCopyWith<_StudentEntryDataDb> get copyWith;

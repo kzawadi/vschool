@@ -2,6 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
+import 'package:ourESchool/UI/pages/libary/create_library_ViewModel.dart';
+import 'package:ourESchool/UI/pages/libary/library_services.dart';
 // import 'package:ourESchool/UI/Utility/data_importer.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/data_Entry/data_entry_service.dart';
@@ -70,4 +72,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => FeedViewModel());
 
   locator.registerLazySingleton(() => FirebaseNotifications());
+
+  locator.registerLazySingleton(() => LibraryServices());
+  locator.registerLazySingleton(() => CreateLibaryViewModel());
 }

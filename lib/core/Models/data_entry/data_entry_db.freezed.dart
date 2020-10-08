@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'data_entry_db.dart';
 
@@ -12,9 +12,11 @@ UserEntryDataDb _$UserEntryDataDbFromJson(Map<String, dynamic> json) {
   return _UserEntryDataDb.fromJson(json);
 }
 
+/// @nodoc
 class _$UserEntryDataDbTearOff {
   const _$UserEntryDataDbTearOff();
 
+// ignore: unused_element
   _UserEntryDataDb call(
       {String email, String id, bool isATeacher, Map<int, String> childId}) {
     return _UserEntryDataDb(
@@ -24,21 +26,29 @@ class _$UserEntryDataDbTearOff {
       childId: childId,
     );
   }
+
+// ignore: unused_element
+  UserEntryDataDb fromJson(Map<String, Object> json) {
+    return UserEntryDataDb.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $UserEntryDataDb = _$UserEntryDataDbTearOff();
 
+/// @nodoc
 mixin _$UserEntryDataDb {
   String get email;
   String get id;
-  bool get isATeacher;
+  bool get isATeacher; // String isATeachers,
   Map<int, String> get childId;
 
   Map<String, dynamic> toJson();
   $UserEntryDataDbCopyWith<UserEntryDataDb> get copyWith;
 }
 
+/// @nodoc
 abstract class $UserEntryDataDbCopyWith<$Res> {
   factory $UserEntryDataDbCopyWith(
           UserEntryDataDb value, $Res Function(UserEntryDataDb) then) =
@@ -47,6 +57,7 @@ abstract class $UserEntryDataDbCopyWith<$Res> {
       {String email, String id, bool isATeacher, Map<int, String> childId});
 }
 
+/// @nodoc
 class _$UserEntryDataDbCopyWithImpl<$Res>
     implements $UserEntryDataDbCopyWith<$Res> {
   _$UserEntryDataDbCopyWithImpl(this._value, this._then);
@@ -73,6 +84,7 @@ class _$UserEntryDataDbCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$UserEntryDataDbCopyWith<$Res>
     implements $UserEntryDataDbCopyWith<$Res> {
   factory _$UserEntryDataDbCopyWith(
@@ -83,6 +95,7 @@ abstract class _$UserEntryDataDbCopyWith<$Res>
       {String email, String id, bool isATeacher, Map<int, String> childId});
 }
 
+/// @nodoc
 class __$UserEntryDataDbCopyWithImpl<$Res>
     extends _$UserEntryDataDbCopyWithImpl<$Res>
     implements _$UserEntryDataDbCopyWith<$Res> {
@@ -112,6 +125,8 @@ class __$UserEntryDataDbCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_UserEntryDataDb
     with DiagnosticableTreeMixin
     implements _UserEntryDataDb {
@@ -127,7 +142,7 @@ class _$_UserEntryDataDb
   final String id;
   @override
   final bool isATeacher;
-  @override
+  @override // String isATeachers,
   final Map<int, String> childId;
 
   @override
@@ -195,7 +210,7 @@ abstract class _UserEntryDataDb implements UserEntryDataDb {
   String get id;
   @override
   bool get isATeacher;
-  @override
+  @override // String isATeachers,
   Map<int, String> get childId;
   @override
   _$UserEntryDataDbCopyWith<_UserEntryDataDb> get copyWith;
