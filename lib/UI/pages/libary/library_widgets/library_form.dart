@@ -4,14 +4,14 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
-import 'package:ourESchool/UI/pages/libary/create_library_ViewModel.dart';
+import 'package:ourESchool/UI/pages/libary/library_ViewModel.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/library/library_model.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 
-class LibaryForm extends HookViewModelWidget<CreateLibaryViewModel> {
+class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   final ValueChanged _onChanged = (val) => print(val);
   bool _ageHasError = false;
@@ -22,8 +22,7 @@ class LibaryForm extends HookViewModelWidget<CreateLibaryViewModel> {
   void moveFocus(BuildContext context) => FocusScope.of(context).nextFocus();
 
   @override
-  Widget buildViewModelWidget(
-      BuildContext context, CreateLibaryViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, LibaryViewModel model) {
     User currentUser = Provider.of<User>(context, listen: false);
     final _description = useTextEditingController();
     final _standard = useTextEditingController();
@@ -176,6 +175,7 @@ class LibaryForm extends HookViewModelWidget<CreateLibaryViewModel> {
                           );
 
                           model.postLibrary(classlibrary: library);
+                          // model.getLibrary();
                         } else {
                           print(_fbKey.currentState.value);
                           print('validation failed');

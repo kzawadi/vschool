@@ -1,5 +1,6 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/UI/pages/libary/create_library.dart';
+import 'package:ourESchool/UI/pages/libary/library_widgets/library_page.dart';
 import 'package:ourESchool/core/maps/map/map_screen.dart';
 import 'package:ourESchool/core/services/data_Entry/data_Entry_Page.dart';
 import 'package:ourESchool/core/services/student_data_Entry/student_data_Entry_Page.dart';
@@ -164,9 +165,11 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                             RowReusableCardButtonBanner(
                               paddingTop: 0,
                               tileColor: Colors.red,
-                              icon: FontAwesomeIcons.medkit,
-                              label: string.health_tips,
-                              onPressed: () {},
+                              icon: FontAwesomeIcons.book,
+                              label: 'Library',
+                              onPressed: () {
+                                kopenPage(context, LibraryPage(), 'library');
+                              },
                             ),
                             RowReusableCardButtonBanner(
                               paddingTop: 0,

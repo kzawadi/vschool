@@ -5,13 +5,22 @@ import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:stacked/stacked.dart';
 
-class CreateLibaryViewModel extends BaseViewModel {
-  final LibraryServices _feedServices = locator<LibraryServices>();
+class LibaryViewModel extends BaseViewModel {
+  final LibraryServices _libraryServices = locator<LibraryServices>();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
+
+  List get library => _libraryServices.libraryList;
 
   postLibrary({Classlibrary classlibrary}) {
     setBusy(true);
-    _feedServices.uploadLibary(classlibrary: classlibrary);
+    _libraryServices.uploadLibary(classlibrary: classlibrary);
+    setBusy(false);
+  }
+
+  getLibrary() {
+    setBusy(true);
+    _libraryServices.getLibrary();
+    notifyListeners();
     setBusy(false);
   }
 }
