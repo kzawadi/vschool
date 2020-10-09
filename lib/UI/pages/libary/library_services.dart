@@ -22,7 +22,7 @@ class LibraryServices extends Services {
         event: 'adding a Library in firestore');
   }
 
-  void getLibrary({String cls}) async {
+  Future<Null> getLibrary({String cls}) async {
     var _libraryRefGet = (await schoolRefwithCode())
         .doc('library')
         //todo remember to get class dynamicaly from the user of something like that
@@ -36,7 +36,7 @@ class LibraryServices extends Services {
           ),
         );
 
-    _libraryRefGet.then((collection) => {
+    await _libraryRefGet.then((collection) => {
           collection.docs.forEach((doc) {
             var day = Classlibrary.fromJson(doc.data());
             cprint('docs ' + day.toString());
