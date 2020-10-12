@@ -13,8 +13,7 @@ import 'package:ourESchool/UI/Utility/Resources.dart';
 
 class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
-  final ValueChanged _onChanged = (val) => print(val);
-  bool _ageHasError = false;
+  // bool _ageHasError = false;
 
   String _day = '';
   List _subjectss;
@@ -52,9 +51,11 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                       controller: _standard,
                       decoration: InputDecoration(
                         labelText: 'Standard',
-                        suffixIcon: _ageHasError
-                            ? Icon(Icons.error, color: Colors.red)
-                            : Icon(Icons.check, color: Colors.green),
+                        icon: Icon(Icons.fiber_manual_record),
+
+                        // suffixIcon: _ageHasError
+                        //     ? Icon(Icons.error, color: Colors.red)
+                        //     : Icon(Icons.check, color: Colors.green),
                       ),
                       onChanged: (val) {
                         print(val);
@@ -69,9 +70,11 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                       controller: _division,
                       decoration: InputDecoration(
                         labelText: 'Division',
-                        suffixIcon: _ageHasError
-                            ? Icon(Icons.error, color: Colors.red)
-                            : Icon(Icons.check, color: Colors.green),
+                        icon: Icon(Icons.class_),
+
+                        // suffixIcon: _ageHasError
+                        //     ? Icon(Icons.error, color: Colors.red)
+                        //     : Icon(Icons.check, color: Colors.green),
                       ),
                       onChanged: (val) {
                         print(val);
@@ -87,9 +90,11 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                       controller: _description,
                       decoration: InputDecoration(
                         labelText: 'Description',
-                        suffixIcon: _ageHasError
-                            ? Icon(Icons.error, color: Colors.red)
-                            : Icon(Icons.check, color: Colors.green),
+                        icon: Icon(Icons.description),
+
+                        // suffixIcon: _ageHasError
+                        //     ? Icon(Icons.error, color: Colors.red)
+                        //     : Icon(Icons.check, color: Colors.green),
                       ),
                       onChanged: (val) {
                         print(val);
@@ -102,9 +107,9 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                     FormBuilderDropdown(
                       attribute: 'day',
                       decoration: const InputDecoration(
+                        icon: Icon(Icons.view_comfy_rounded),
                         labelText: 'Choose a week day',
                       ),
-                      // initialValue: 'Male',
                       hint: Text('Select a day'),
                       validators: [FormBuilderValidators.required()],
                       items: Choices.days
@@ -113,9 +118,7 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                                 child: Text('$day'),
                               ))
                           .toList(),
-
                       allowClear: true,
-
                       onChanged: (day) {
                         _day = day;
                       },
@@ -126,7 +129,7 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                     SizedBox(height: 15),
                     FormBuilderCheckboxGroup(
                       decoration: InputDecoration(
-                          labelText: 'Select the subject of the day'),
+                          labelText: 'Select the subjects of the day'),
                       attribute: 'Subjects',
                       options: Choices.options,
                       onChanged: (day) {
