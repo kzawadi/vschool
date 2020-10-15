@@ -1,3 +1,5 @@
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+
 class string {
   //WelcolcomePage
 
@@ -226,4 +228,39 @@ class assetsString {
   static const teacher_welcome = 'assets/teacherpng.png';
   static const student_welcome = 'assets/studentpng.png';
   static const parents_welcome = 'assets/family.png';
+}
+
+class Choices {
+  static const subjectsOptions = [
+    'English',
+    'Swahili',
+    'Mathematics',
+    'Social Studies',
+    'History',
+    'Sports',
+    'Science',
+    'Information Technology',
+    'Civics',
+    'Geography',
+  ];
+  static const days = [
+    'Monday',
+    'Tuesday',
+    'wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  static const List<FormBuilderFieldOption> options = [
+    FormBuilderFieldOption(value: 'English'),
+    FormBuilderFieldOption(value: 'Mathematics'),
+    FormBuilderFieldOption(value: 'Sports'),
+    FormBuilderFieldOption(value: 'Science'),
+    FormBuilderFieldOption(value: 'Sociel Studies'),
+    FormBuilderFieldOption(value: 'History'),
+    FormBuilderFieldOption(value: 'Geography'),
+    FormBuilderFieldOption(value: 'Swahili'),
+    FormBuilderFieldOption(value: 'Information Technology'),
+    FormBuilderFieldOption(value: 'Civics'),
+  ];
 }

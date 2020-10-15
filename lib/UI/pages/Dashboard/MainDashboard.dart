@@ -1,4 +1,7 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
+import 'package:ourESchool/UI/pages/libary/create_library.dart';
+import 'package:ourESchool/UI/pages/libary/library_widgets/library_page.dart';
+import 'package:ourESchool/core/maps/map/map_screen.dart';
 import 'package:ourESchool/core/services/data_Entry/data_Entry_Page.dart';
 import 'package:ourESchool/core/services/student_data_Entry/student_data_Entry_Page.dart';
 import 'package:ourESchool/imports.dart';
@@ -91,8 +94,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                     tileColor: Colors.grey,
                     label: string.transportation,
                     onPressed: () {
-                      kopenPage(
-                          context, TransportationPage(), 'TransportationPage');
+                      kopenPage(context, MapScreen(), 'TransportationPage');
                       // analytics.logSelectContent(
                       //     contentType: 'Fees Page Dashboard', itemId: null);
                     },
@@ -149,18 +151,25 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                               paddingTop: 0,
                               tileColor: Colors.pinkAccent,
                               icon: FontAwesomeIcons.female,
-                              label: string.parenting_guide,
                               onPressed: () {
-                                kopenPage(context, ParentingGuidePage(),
-                                    'ParentingGuide_Page');
+                                kopenPage(
+                                    context, CreateLibrary(), 'library Create');
                               },
+                              label: 'Library',
+                              // label: string.parenting_guide,
+                              // onPressed: () {
+                              //   kopenPage(context, ParentingGuidePage(),
+                              //       'ParentingGuide_Page');
+                              // },
                             ),
                             RowReusableCardButtonBanner(
                               paddingTop: 0,
                               tileColor: Colors.red,
-                              icon: FontAwesomeIcons.medkit,
-                              label: string.health_tips,
-                              onPressed: () {},
+                              icon: FontAwesomeIcons.book,
+                              label: 'Library',
+                              onPressed: () {
+                                kopenPage(context, LibraryPage(), 'library');
+                              },
                             ),
                             RowReusableCardButtonBanner(
                               paddingTop: 0,

@@ -92,12 +92,7 @@ class _HomeState extends State<Home> {
       itemCornerRadius: 50,
       iconSize: 24,
       containerHeight: 56,
-      backgroundColor:
-          //  isThemeCurrentlyDark(context)
-          //     ? Theme.of(context).primaryColor
-          //     :
-          Theme.of(context).accentColor,
-      // animationDuration: Duration(milliseconds: 260), it is the default
+      backgroundColor: Theme.of(context).accentColor,
       selectedIndex: _currentIndex,
       showElevation: false, // use this to remove appBar's elevation
       onItemSelected: (v) {
@@ -114,7 +109,6 @@ class _HomeState extends State<Home> {
           }
           _currentIndex = v;
         });
-        // }
       },
       items: bottomBarItemsNew,
     );

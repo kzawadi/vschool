@@ -6,6 +6,7 @@ import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
+import 'package:ourESchool/UI/Widgets/customLoader.dart';
 
 class FeedPage extends StatefulWidget {
   FeedPage({
@@ -108,42 +109,46 @@ class _FeedPageState extends State<FeedPage>
             ),
           ),
           body: Center(
-            child: model.data == null
-                ? emptyListWidget(context, 'Empty',
-                    subTitle: 'Trying to fetch latest news')
-                //  kBuzyPage(color: Theme.of(context).accentColor)
-                : ListView.builder(
-                    dragStartBehavior: DragStartBehavior.start,
-                    addAutomaticKeepAlives: true,
-                    physics: BouncingScrollPhysics(),
-                    cacheExtent: 2000,
-                    itemCount: model.data.length,
-                    itemBuilder: (context, index) {
-                      if (index < model.data.length) {
-                        return CreationAwareListItem(
-                          itemCreated: () {
-                            if (index % 6 == 0)
-                              model.requestMoreData(stdDivGlobal: stdDivGlobal);
-                          },
-                          child: FeedCard(
-                            feed: model.data[index],
-                          ),
-                        );
-                      } else {
-                        return Center(
-                          child: new Opacity(
-                            opacity: model.isBusy ? 1.0 : 0.0,
-                            child: new SizedBox(
-                                width: 32.0,
-                                height: 32.0,
-                                child: kBuzyPage(
-                                  color: Theme.of(context).primaryColor,
-                                )),
-                          ),
-                        );
-                      }
-                    },
-                  ),
+            child: model.isBusy
+                ? customScreenLoader(context)
+                : model.data == null
+                    ? emptyListWidget(context, 'Empty',
+                        subTitle: 'Trying to fetch latest news')
+                    //  kBuzyPage(color: Theme.of(context).accentColor)
+                    : ListView.builder(
+                        dragStartBehavior: DragStartBehavior.start,
+                        addAutomaticKeepAlives: true,
+                        physics: BouncingScrollPhysics(),
+                        cacheExtent: 2000,
+                        itemCount: model.data.length,
+                        itemBuilder: (context, index) {
+                          if (index < model.data.length) {
+                            return CreationAwareListItem(
+                              itemCreated: () {
+                                //todo change this in production
+                                if (index % 6 == 0)
+                                  model.requestMoreData(
+                                      stdDivGlobal: stdDivGlobal);
+                              },
+                              child: FeedCard(
+                                feed: model.data[index],
+                              ),
+                            );
+                          } else {
+                            return Center(
+                              child: new Opacity(
+                                opacity: model.isBusy ? 1.0 : 0.0,
+                                child: new SizedBox(
+                                    width: 32.0,
+                                    height: 32.0,
+                                    child: kBuzyPage(
+                                      color: Theme.of(context).primaryColor,
+                                    )),
+                              ),
+                            );
+                          }
+                        },
+                      ),
           ),
         );
       },

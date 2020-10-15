@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'student_data_entry.dart';
 
@@ -12,9 +12,11 @@ StudentEntryData _$StudentEntryDataFromJson(Map<String, dynamic> json) {
   return _StudentEntryData.fromJson(json);
 }
 
+/// @nodoc
 class _$StudentEntryDataTearOff {
   const _$StudentEntryDataTearOff();
 
+// ignore: unused_element
   _StudentEntryData call({String email, String id, String parentId}) {
     return _StudentEntryData(
       email: email,
@@ -22,20 +24,30 @@ class _$StudentEntryDataTearOff {
       parentId: parentId,
     );
   }
+
+// ignore: unused_element
+  StudentEntryData fromJson(Map<String, Object> json) {
+    return StudentEntryData.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $StudentEntryData = _$StudentEntryDataTearOff();
 
+/// @nodoc
 mixin _$StudentEntryData {
   String get email;
-  String get id;
+  String get id; // bool isATeacher,
+// String isATeacher,
+// Map<dynamic, String> childId,
   String get parentId;
 
   Map<String, dynamic> toJson();
   $StudentEntryDataCopyWith<StudentEntryData> get copyWith;
 }
 
+/// @nodoc
 abstract class $StudentEntryDataCopyWith<$Res> {
   factory $StudentEntryDataCopyWith(
           StudentEntryData value, $Res Function(StudentEntryData) then) =
@@ -43,6 +55,7 @@ abstract class $StudentEntryDataCopyWith<$Res> {
   $Res call({String email, String id, String parentId});
 }
 
+/// @nodoc
 class _$StudentEntryDataCopyWithImpl<$Res>
     implements $StudentEntryDataCopyWith<$Res> {
   _$StudentEntryDataCopyWithImpl(this._value, this._then);
@@ -65,6 +78,7 @@ class _$StudentEntryDataCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$StudentEntryDataCopyWith<$Res>
     implements $StudentEntryDataCopyWith<$Res> {
   factory _$StudentEntryDataCopyWith(
@@ -74,6 +88,7 @@ abstract class _$StudentEntryDataCopyWith<$Res>
   $Res call({String email, String id, String parentId});
 }
 
+/// @nodoc
 class __$StudentEntryDataCopyWithImpl<$Res>
     extends _$StudentEntryDataCopyWithImpl<$Res>
     implements _$StudentEntryDataCopyWith<$Res> {
@@ -99,6 +114,8 @@ class __$StudentEntryDataCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_StudentEntryData
     with DiagnosticableTreeMixin
     implements _StudentEntryData {
@@ -111,7 +128,9 @@ class _$_StudentEntryData
   final String email;
   @override
   final String id;
-  @override
+  @override // bool isATeacher,
+// String isATeacher,
+// Map<dynamic, String> childId,
   final String parentId;
 
   @override
@@ -170,7 +189,9 @@ abstract class _StudentEntryData implements StudentEntryData {
   String get email;
   @override
   String get id;
-  @override
+  @override // bool isATeacher,
+// String isATeacher,
+// Map<dynamic, String> childId,
   String get parentId;
   @override
   _$StudentEntryDataCopyWith<_StudentEntryData> get copyWith;

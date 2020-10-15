@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'feed.dart';
 
@@ -12,9 +12,11 @@ Feed _$FeedFromJson(Map<String, dynamic> json) {
   return _Feed.fromJson(json);
 }
 
+/// @nodoc
 class _$FeedTearOff {
   const _$FeedTearOff();
 
+// ignore: unused_element
   _Feed call(
       {String caption,
       String by,
@@ -35,15 +37,22 @@ class _$FeedTearOff {
       id: id,
     );
   }
+
+// ignore: unused_element
+  Feed fromJson(Map<String, Object> json) {
+    return Feed.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $Feed = _$FeedTearOff();
 
+/// @nodoc
 mixin _$Feed {
   String get caption;
   String get by;
-  String get forDiv;
+  String get forDiv; // DateTime timestamp,
   String get forClass;
   String get photoUrl;
   String get photoPath;
@@ -54,6 +63,7 @@ mixin _$Feed {
   $FeedCopyWith<Feed> get copyWith;
 }
 
+/// @nodoc
 abstract class $FeedCopyWith<$Res> {
   factory $FeedCopyWith(Feed value, $Res Function(Feed) then) =
       _$FeedCopyWithImpl<$Res>;
@@ -68,6 +78,7 @@ abstract class $FeedCopyWith<$Res> {
       String id});
 }
 
+/// @nodoc
 class _$FeedCopyWithImpl<$Res> implements $FeedCopyWith<$Res> {
   _$FeedCopyWithImpl(this._value, this._then);
 
@@ -99,6 +110,7 @@ class _$FeedCopyWithImpl<$Res> implements $FeedCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$FeedCopyWith<$Res> implements $FeedCopyWith<$Res> {
   factory _$FeedCopyWith(_Feed value, $Res Function(_Feed) then) =
       __$FeedCopyWithImpl<$Res>;
@@ -114,6 +126,7 @@ abstract class _$FeedCopyWith<$Res> implements $FeedCopyWith<$Res> {
       String id});
 }
 
+/// @nodoc
 class __$FeedCopyWithImpl<$Res> extends _$FeedCopyWithImpl<$Res>
     implements _$FeedCopyWith<$Res> {
   __$FeedCopyWithImpl(_Feed _value, $Res Function(_Feed) _then)
@@ -147,6 +160,8 @@ class __$FeedCopyWithImpl<$Res> extends _$FeedCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$_Feed with DiagnosticableTreeMixin implements _Feed {
   const _$_Feed(
       {this.caption,
@@ -167,7 +182,7 @@ class _$_Feed with DiagnosticableTreeMixin implements _Feed {
   final String by;
   @override
   final String forDiv;
-  @override
+  @override // DateTime timestamp,
   final String forClass;
   @override
   final String photoUrl;
@@ -265,7 +280,7 @@ abstract class _Feed implements Feed {
   String get by;
   @override
   String get forDiv;
-  @override
+  @override // DateTime timestamp,
   String get forClass;
   @override
   String get photoUrl;

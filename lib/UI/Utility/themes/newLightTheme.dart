@@ -452,7 +452,7 @@ final ThemeData newLightTheme = ThemeData(
   iconTheme: IconThemeData(
     color: Color(0xdd000000),
     opacity: 1.0,
-    size: 24.0,
+    size: 17.0,
   ),
   primaryIconTheme: IconThemeData(
     color: Color(0xffffffff),
