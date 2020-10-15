@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ourESchool/core/Models/User.dart';
 import 'package:stacked/stacked.dart';
 import 'package:ourESchool/UI/pages/libary/library_ViewModel.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
@@ -9,10 +10,14 @@ import 'package:ourESchool/UI/Widgets/rounded_rectangle.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 
 class LibraryPage extends StatelessWidget {
+  final User child;
+
+  const LibraryPage({Key key, this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    String cls = (child.standard + child.division).toUpperCase();
     return ViewModelBuilder<LibaryViewModel>.reactive(
-      onModelReady: (model) => model.getLibrary(),
+      onModelReady: (model) => model.getLibrary(cls: cls),
       builder: (context, model, child) {
         print('PartialBuildsView rebuilt');
         return Scaffold(

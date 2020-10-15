@@ -32,8 +32,8 @@ class LibraryServices extends Services {
   Future<Null> getLibrary({String cls}) async {
     var _libraryRefGet = (await schoolRefwithCode())
         .doc('library')
-        //todo remember to get class dynamicaly from the user of something like that
-        .collection('8C')
+        //todo remember to make a diffult class so parents can filter by their entries
+        .collection(cls)
         .get()
         .timeout(
           _DEFAULT_TIMEOUT,

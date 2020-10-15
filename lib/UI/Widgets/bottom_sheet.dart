@@ -155,7 +155,12 @@ class BottomSheetPanel {
           label: 'Library',
           isEnable: true,
           onPressed: () {
-            kopenPage(context, LibraryPage(), 'Back_Pack_Page');
+            kopenPage(
+                context,
+                LibraryPage(
+                  child: user,
+                ),
+                'Back_Pack_Page');
           },
         ),
         Visibility(
