@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:ourESchool/UI/pages/libary/library_ViewModel.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ourESchool/core/Models/library/library_model.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Widgets/customLoader.dart';
+import 'package:ourESchool/UI/Widgets/rounded_rectangle.dart';
 
 class LibraryPage extends StatelessWidget {
   @override
@@ -48,6 +48,11 @@ class EntryItem extends StatelessWidget {
   const EntryItem({this.entry});
   final Classlibrary entry;
 
+  @override
+  Widget build(BuildContext context) {
+    return _buildTiles(context, entry);
+  }
+
   // This function recursively creates the multi-level list rows.
   Widget _buildTiles(BuildContext context, Classlibrary root) {
     if (root.subjects.isEmpty) {
@@ -56,64 +61,55 @@ class EntryItem extends StatelessWidget {
       );
     }
     return ExpansionTile(
-        leading: Container(
-          padding: EdgeInsets.only(right: 12.0),
-          decoration: new BoxDecoration(
-            border: new Border(
-              right: new BorderSide(width: 1.0, color: Colors.white24),
+      leading: Container(
+        padding: EdgeInsets.only(right: 12.0),
+        decoration: new BoxDecoration(
+          border: new Border(
+            right: new BorderSide(width: 1.0, color: Colors.white24),
+          ),
+        ),
+        child: Icon(Icons.ac_unit, color: Colors.black),
+      ),
+      key: PageStorageKey<Classlibrary>(root),
+      title: Column(
+        children: [
+          RoundedContainer(
+            color: Theme.of(context).accentColor,
+            child: Text(
+              root.day,
+              style: Theme.of(context).textTheme.button.copyWith(fontSize: 17),
             ),
           ),
-          child: Icon(Icons.ac_unit, color: Colors.black),
-        ),
-        key: PageStorageKey<Classlibrary>(root),
-        title: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-              height: 65,
-              width: double.maxFinite,
-              child: Card(
-                elevation: 0,
-                child: Center(
-                  child: Text(
-                    root.day,
-                    style: Theme.of(context)
-                        .textTheme
-                        .button
-                        .copyWith(fontSize: 17),
-                  ),
-                ),
-              ),
-            ),
-            // Text(
-            //   root.day,
-            //   style: Theme.of(context).textTheme.button.copyWith(fontSize: 17),
-            // ),
-            SizedBox(height: 20),
-            Text(root.description),
-            SizedBox(height: 30),
-          ],
-        ),
-        children: root.subjects.map((e) {
+          SizedBox(height: 20),
+          Text(
+            root.description,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
+          SizedBox(height: 30),
+        ],
+      ),
+      children: (root.subjects.map(
+        (s) {
           var w = Padding(
-            padding: EdgeInsets.only(left: 10.0, top: 10),
+            padding: EdgeInsets.only(left: 8, top: 10, right: 30),
             child: Column(
               children: [
-                // Text(root.description),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                Text(e),
+                RoundedContainer(
+                  color: Theme.of(context).colorScheme.primaryVariant,
+                  width: MediaQuery.of(context).size.width - 40,
+
+                  margin: EdgeInsets.symmetric(horizontal: 60),
+                  // padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: Text(s,
+                      style: Theme.of(context).accentTextTheme.bodyText2),
+                ),
               ],
             ),
           );
 
           return w;
-        }).toList());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildTiles(context, entry);
+        },
+      ).toList()),
+    );
   }
 }
