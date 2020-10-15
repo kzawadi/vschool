@@ -15,7 +15,13 @@ class LibraryPage extends StatelessWidget {
   const LibraryPage({Key key, this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String cls = (child.standard + child.division).toUpperCase();
+    String cls = '';
+    if (child == null) {
+      cls =
+          '8C'; //todo Just setted the default library to 8C more thought later
+    } else
+      cls = (child.standard + child.division).toUpperCase();
+
     return ViewModelBuilder<LibaryViewModel>.reactive(
       onModelReady: (model) => model.getLibrary(cls: cls),
       builder: (context, model, child) {
