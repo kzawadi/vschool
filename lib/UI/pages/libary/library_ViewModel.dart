@@ -17,9 +17,10 @@ class LibaryViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<Null> getLibrary() async {
+  Future<Null> getLibrary({String cls}) async {
     setBusy(true);
-    await _libraryServices.getLibrary();
+    _libraryServices.libraryList.clear();
+    await _libraryServices.getLibrary(cls: cls);
     notifyListeners();
     setBusy(false);
   }
