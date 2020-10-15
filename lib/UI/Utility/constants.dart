@@ -54,6 +54,7 @@ Widget kBackBtn(BuildContext context) {
   return Icon(
     Icons.arrow_back_ios,
     color: Theme.of(context).accentColor,
+    size: Theme.of(context).iconTheme.size,
     // color: Colors.black54,
   );
 }

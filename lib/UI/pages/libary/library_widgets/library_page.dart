@@ -6,6 +6,7 @@ import 'package:ourESchool/core/Models/library/library_model.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:ourESchool/UI/Widgets/rounded_rectangle.dart';
+import 'package:ourESchool/UI/Utility/constants.dart';
 
 class LibraryPage extends StatelessWidget {
   @override
@@ -18,8 +19,10 @@ class LibraryPage extends StatelessWidget {
           appBar: TopBar(
             buttonHeroTag: 'Library',
             title: "Library",
-            onPressed: null,
-            child: null,
+            onPressed: () {
+              kbackBtn(context);
+            },
+            child: kBackBtn(context),
           ),
           body: Center(
             child: model.isBusy

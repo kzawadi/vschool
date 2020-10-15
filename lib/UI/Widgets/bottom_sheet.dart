@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/pages/libary/library_widgets/library_page.dart';
 import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/fees/fees_model.dart';
@@ -60,7 +61,7 @@ class BottomSheetPanel {
     );
   }
 
-  void openRetweetbottomSheet(
+  void openBottomSheet(
     BuildContext context, {
     @required final User user,
     final Fees fees,
@@ -146,6 +147,15 @@ class BottomSheetPanel {
                   user: user,
                 ),
                 'ECard_Page');
+          },
+        ),
+        _widgetBottomSheetRow(
+          context,
+          icon: Icons.book,
+          label: 'Library',
+          isEnable: true,
+          onPressed: () {
+            kopenPage(context, LibraryPage(), 'Back_Pack_Page');
           },
         ),
         Visibility(

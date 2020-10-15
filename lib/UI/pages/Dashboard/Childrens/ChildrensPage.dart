@@ -54,7 +54,7 @@ class ChildrensPage extends StatelessWidget {
                             user: model.childrens[index],
                             onTap: () {
                               if (model.childrens[index].displayName != '')
-                                BottomSheetPanel().openRetweetbottomSheet(
+                                BottomSheetPanel().openBottomSheet(
                                   context,
                                   user: model.childrens[index],
                                   isaTeacher: isTeacher,
