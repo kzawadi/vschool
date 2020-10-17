@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/pages/libary/library_ViewModel.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/library/library_model.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
 
   String _day = '';
   List _subjectss;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void moveFocus(BuildContext context) => FocusScope.of(context).nextFocus();
 
@@ -276,6 +278,11 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                           model.postLibrary(classlibrary: library);
                           // model.getLibrary();
                         } else {
+                          //todo this is not working yet
+                          ksnackBar(context, 'Please enter details properly');
+                          cprint('Login Error',
+                              errorIn:
+                                  'Have Not Entered Library Fomr Details Properly');
                           print(_fbKey.currentState.value);
                           print('validation failed');
                         }
