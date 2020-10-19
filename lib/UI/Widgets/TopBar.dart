@@ -2,6 +2,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -29,6 +30,7 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      shape: kAppBarShape,
       primary: true,
       // textTheme: Theme.of(context).primaryTextTheme,
       actions: [
@@ -37,9 +39,9 @@ class _TopBarState extends State<TopBar> {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15),
+              bottomLeft: Radius.circular(26),
               topRight: Radius.circular(15),
-              bottomRight: Radius.circular(5),
+              bottomRight: Radius.circular(26),
               topLeft: Radius.circular(5),
             ),
           ),
@@ -112,6 +114,7 @@ class _TopBarAlternativeState extends State<TopBarAlternative> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      shape: kAppBarShape,
       centerTitle: true,
       title: Hero(
         tag: widget.buttonHeroTag,

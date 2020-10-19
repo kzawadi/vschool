@@ -87,6 +87,8 @@ class EntryItem extends StatelessWidget {
       key: PageStorageKey<Classlibrary>(root),
       title: Column(
         children: [
+          SizedBox(height: 30),
+
           RoundedContainer(
             color: Theme.of(context).accentColor,
             child: Text(
@@ -117,6 +119,8 @@ class EntryItem extends StatelessWidget {
                   child: Text(s,
                       style: Theme.of(context).accentTextTheme.bodyText2),
                 ),
+                SizedBox(height: 15),
+
               ],
             ),
           );
