@@ -53,6 +53,7 @@ class _FeedPageState extends State<FeedPage>
       builder: (context, model, child) {
         this.model = model;
         return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           key: scaffoldKey,
           appBar: TopBar(
             buttonHeroTag: string.announcement,

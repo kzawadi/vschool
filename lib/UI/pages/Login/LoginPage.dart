@@ -115,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
       onModelReady: (model) => model,
       builder: (context, model, child) {
         return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           key: _scaffoldKey,
           resizeToAvoidBottomPadding: false,
           appBar: TopBar(
@@ -328,11 +329,16 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 0,
                         ),
-                        Image(
+                        // Image(
+                        //   fit: BoxFit.cover,
+                        //   image: AssetImage("assets/images/welcome.png"),
+                        // ),
+                        Image.asset(
+                          "assets/images/welcome01.png",
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/images/welcome.png"),
+                          height: isRegistered ? 272 : 347,
                         ),
                       ],
                     ),

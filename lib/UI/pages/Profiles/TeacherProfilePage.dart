@@ -153,6 +153,7 @@ class _TeacherProfilePage extends State<TeacherProfilePage> {
           }
 
           return Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
             key: _scaffoldKey,
             appBar: TopBar(
               buttonHeroTag: 'teacherProfilePage',

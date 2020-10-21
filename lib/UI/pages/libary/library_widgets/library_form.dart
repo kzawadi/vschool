@@ -32,7 +32,7 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
     final _division = useTextEditingController();
 
     return Scaffold(
-        backgroundColor: Theme.of(context).primaryColorLight,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: TopBar(
           buttonHeroTag: 'libraryEntry',
           title: 'Library',

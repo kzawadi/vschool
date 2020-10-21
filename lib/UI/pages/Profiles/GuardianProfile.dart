@@ -152,6 +152,7 @@ class _GuardianProfilePageState extends State<GuardianProfilePage> {
         }
 
         return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           key: _scaffoldKey,
           appBar: TopBar(
             buttonHeroTag: 'guardianProfilePage',
