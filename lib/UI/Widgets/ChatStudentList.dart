@@ -70,7 +70,7 @@ class _ChatStudentListWidgetState extends State<ChatStudentListWidget> {
                   padding: const EdgeInsets.only(top: 5.0),
                   child: Text(
                     'Class ${widget.model.studentListMap[widget.snapshot.id].standard + widget.model.studentListMap[widget.snapshot.id].division}',
-                    style: TextStyle(color: Colors.grey, fontSize: 15.0),
+                    style: TextStyle(color: Colors.grey[700], fontSize: 15.0),
                   ),
                 ),
                 contentPadding: EdgeInsets.symmetric(horizontal: 8),

@@ -3,6 +3,7 @@ import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
 import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/feed/feed_card.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
@@ -53,6 +54,7 @@ class _FeedPageState extends State<FeedPage>
       builder: (context, model, child) {
         this.model = model;
         return Scaffold(
+          extendBody: true,
           backgroundColor: Theme.of(context).backgroundColor,
           key: scaffoldKey,
           appBar: TopBar(
@@ -67,48 +69,52 @@ class _FeedPageState extends State<FeedPage>
             onPressed: null,
           ),
           // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.only(
-              left: 22,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                FloatingActionButton.extended(
-                  label: Text('Filter'),
-                  // heroTag: 'abc',
-                  elevation: 5,
-                  onPressed: () {
-                    //Filter Posts Code Here
-                    filterDialogBox(context, model);
-                  },
-                  icon: Icon(
-                    Icons.filter_list,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                Visibility(
-                  visible: isTeacher,
-                  child: FloatingActionButton(
-                    heroTag: 'abc',
-                    elevation: 5,
-                    onPressed: () {
-                      kopenPageSlide(
-                        context,
-                        CreateFeed(),
-                        'Creating_Feed',
-                        duration: Duration(milliseconds: 200),
-                      );
-                    },
-                    child: Icon(
-                      Icons.add,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // floatingActionButton: Positioned(
+          //   top: 140,
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(
+          //       left: 22,
+          //     ),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: <Widget>[
+          //         FloatingActionButton.extended(
+          //           isExtended: true,
+          //           label: Text('Filter'),
+          //           // heroTag: 'abc',
+          //           elevation: 5,
+          //           onPressed: () {
+          //             //Filter Posts Code Here
+          //             filterDialogBox(context, model);
+          //           },
+          //           icon: Icon(
+          //             Icons.filter_list,
+          //             color: Theme.of(context).primaryColor,
+          //           ),
+          //         ),
+          //         Visibility(
+          //           visible: isTeacher,
+          //           child: FloatingActionButton(
+          //             heroTag: 'abc',
+          //             elevation: 5,
+          //             onPressed: () {
+          //               kopenPageSlide(
+          //                 context,
+          //                 CreateFeed(),
+          //                 'Creating_Feed',
+          //                 duration: Duration(milliseconds: 200),
+          //               );
+          //             },
+          //             child: Icon(
+          //               Icons.add,
+          //               color: Theme.of(context).primaryColor,
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           body: Center(
             child: model.isBusy
                 ? customScreenLoader(context)
@@ -116,40 +122,87 @@ class _FeedPageState extends State<FeedPage>
                     ? emptyListWidget(context, 'Empty',
                         subTitle: 'Trying to fetch latest news')
                     //  kBuzyPage(color: Theme.of(context).accentColor)
-                    : ListView.builder(
-                        dragStartBehavior: DragStartBehavior.start,
-                        addAutomaticKeepAlives: true,
-                        physics: BouncingScrollPhysics(),
-                        cacheExtent: 2000,
-                        itemCount: model.data.length,
-                        itemBuilder: (context, index) {
-                          if (index < model.data.length) {
-                            return CreationAwareListItem(
-                              itemCreated: () {
-                                //todo change this in production
-                                if (index % 6 == 0)
-                                  model.requestMoreData(
-                                      stdDivGlobal: stdDivGlobal);
+                    : Stack(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        children: <Widget>[
+                            ListView.builder(
+                              dragStartBehavior: DragStartBehavior.start,
+                              addAutomaticKeepAlives: true,
+                              physics: BouncingScrollPhysics(),
+                              cacheExtent: 2000,
+                              itemCount: model.data.length,
+                              itemBuilder: (context, index) {
+                                if (index < model.data.length) {
+                                  return CreationAwareListItem(
+                                    itemCreated: () {
+                                      //todo change this in production
+                                      if (index % 6 == 0)
+                                        model.requestMoreData(
+                                            stdDivGlobal: stdDivGlobal);
+                                    },
+                                    child: FeedCard(
+                                      feed: model.data[index],
+                                    ),
+                                  );
+                                } else {
+                                  return Center(
+                                    child: new Opacity(
+                                      opacity: model.isBusy ? 1.0 : 0.0,
+                                      child: new SizedBox(
+                                          width: 32.0,
+                                          height: 32.0,
+                                          child: kBuzyPage(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          )),
+                                    ),
+                                  );
+                                }
                               },
-                              child: FeedCard(
-                                feed: model.data[index],
+                            ),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(200, 40, 0, 60),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          right: 12,
+                                          left: fullWidth(context) / 4,
+                                          top: 3,
+                                          bottom: 3),
+                                      child: RaisedButton(
+                                        padding: EdgeInsets.all(14.5),
+                                        color:
+                                            Theme.of(context).bottomAppBarColor,
+                                        textColor: black,
+                                        onPressed: () {
+                                          filterDialogBox(context, model);
+                                        },
+                                        child: Text(
+                                          "Filter",
+                                          style: TextStyle(
+                                            color: black,
+                                            fontSize: 18.0,
+                                          ),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                new BorderRadius.circular(16.0),
+                                            side: BorderSide(
+                                                color: Theme.of(context)
+                                                    .accentColor,
+                                                width: 1.0)),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            );
-                          } else {
-                            return Center(
-                              child: new Opacity(
-                                opacity: model.isBusy ? 1.0 : 0.0,
-                                child: new SizedBox(
-                                    width: 32.0,
-                                    height: 32.0,
-                                    child: kBuzyPage(
-                                      color: Theme.of(context).primaryColor,
-                                    )),
-                              ),
-                            );
-                          }
-                        },
-                      ),
+                            ),
+                          ]),
           ),
         );
       },
