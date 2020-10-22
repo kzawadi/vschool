@@ -1,4 +1,5 @@
 import 'package:flutter/scheduler.dart';
+import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 
@@ -32,7 +33,7 @@ class _ChatStudentListWidgetState extends State<ChatStudentListWidget> {
   @override
   Widget build(BuildContext context) {
     return widget.model.isBusy
-        ? kBuzyPage(color: Theme.of(context).primaryColor)
+        ? customScreenLoader(context)
         : widget.model.studentListMap.isEmpty
             ? Container(
                 child: Center(

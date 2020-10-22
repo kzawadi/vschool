@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
@@ -24,8 +25,9 @@ class _ChatPageState extends State<ChatPage> {
             model.getAllStudent(division: _division, standard: _standard),
         builder: (context, model, child) {
           return model.isBusy
-              ? kBuzyPage(color: Theme.of(context).primaryColor)
+              ? customScreenLoader(context)
               : Scaffold(
+                  backgroundColor: Theme.of(context).backgroundColor,
                   appBar: TopBar(
                     title: 'Chats',
                     child: null,
