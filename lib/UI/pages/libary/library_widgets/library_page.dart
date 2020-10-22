@@ -27,6 +27,7 @@ class LibraryPage extends StatelessWidget {
       builder: (context, model, child) {
         print('PartialBuildsView rebuilt');
         return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: TopBar(
             buttonHeroTag: 'Library',
             title: "Library",
@@ -50,6 +51,22 @@ class LibraryPage extends StatelessWidget {
                           return EntryItem(entry: library);
                         },
                       ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            heroTag: 'abc',
+            elevation: 1, //todo filter class
+            onPressed: () {
+              // kopenPageSlide(
+              //   context,
+              //   CreateFeed(),
+              //   'Creating_Feed',
+              //   duration: Duration(milliseconds: 200),
+              // );
+            },
+            child: Icon(
+              Icons.add,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         );
       },
@@ -88,7 +105,6 @@ class EntryItem extends StatelessWidget {
       title: Column(
         children: [
           SizedBox(height: 30),
-
           RoundedContainer(
             color: Theme.of(context).accentColor,
             child: Text(
@@ -120,7 +136,6 @@ class EntryItem extends StatelessWidget {
                       style: Theme.of(context).accentTextTheme.bodyText2),
                 ),
                 SizedBox(height: 15),
-
               ],
             ),
           );

@@ -515,6 +515,7 @@ class ProfileFields extends StatelessWidget {
           decoration: InputDecoration(
             //todo added prefix icon to direct more visuals of the field
             alignLabelWithHint: true,
+            isDense: true,
             contentPadding: const EdgeInsets.all(8.0),
             hintText: hintText,
             labelText: labelText,

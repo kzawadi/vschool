@@ -16,8 +16,6 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   // bool _ageHasError = false;
 
-  String _day = '';
-  List _subjectss;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void moveFocus(BuildContext context) => FocusScope.of(context).nextFocus();
@@ -26,6 +24,8 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
   Widget buildViewModelWidget(BuildContext context, LibaryViewModel model) {
     User currentUser = Provider.of<User>(context, listen: false);
     final Color fieldBackGround = Theme.of(context).highlightColor;
+    String _day = '';
+    List _subjectss;
 
     final _description = useTextEditingController();
     final _standard = useTextEditingController();
@@ -131,7 +131,7 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                     SizedBox(height: 15),
                     SizedBox(height: 15),
                     Container(
-                      height: 60,
+                      height: 120,
                       decoration: BoxDecoration(
                           color: fieldBackGround,
                           borderRadius: BorderRadius.circular(14)),
@@ -140,11 +140,6 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                         controller: _description,
                         decoration: InputDecoration(
                           labelText: 'Description',
-                          // icon: Icon(Icons.description),
-
-                          // suffixIcon: _ageHasError
-                          //     ? Icon(Icons.error, color: Colors.red)
-                          //     : Icon(Icons.check, color: Colors.green),
                           helperStyle: Theme.of(context)
                               .inputDecorationTheme
                               .helperStyle,
@@ -163,7 +158,8 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                           print(val);
                         },
                         validators: [FormBuilderValidators.required()],
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 4,
                         onFieldSubmitted: (v) => moveFocus(context),
                       ),
                     ),
