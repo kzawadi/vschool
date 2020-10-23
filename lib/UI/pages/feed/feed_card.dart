@@ -119,9 +119,7 @@ class FeedCard extends StatelessWidget {
                               shape: kCardCircularShape,
                               elevation: 1,
                               child: CircleAvatar(
-                                backgroundColor: isThemeCurrentlyDark(context)
-                                    ? ShadowColors.light
-                                    : MyColors.blakwhitish,
+                                backgroundColor: Theme.of(context).accentColor,
                                 child: Text(
                                   feed.type
                                       .toString()
@@ -130,9 +128,7 @@ class FeedCard extends StatelessWidget {
                                       .substring(0, 1),
                                   style: GoogleFonts.roboto(
                                     textStyle: TextStyle(
-                                      color: isThemeCurrentlyDark(context)
-                                          ? MyColors.accent
-                                          : MyColors.black,
+                                      color: Theme.of(context).primaryColor,
                                       fontSize: 12.5,
                                     ),
                                   ),
@@ -199,12 +195,12 @@ Future buildShowDialogBox(BuildContext context) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+        backgroundColor: Theme.of(context).backgroundColor,
         title: Text(
-          "feed Type",
+          "Post Type",
           style: TextStyle(
             fontSize: 22,
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         content: Column(
@@ -235,7 +231,7 @@ Future buildShowDialogBox(BuildContext context) {
                   'CIRCULAR',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).primaryColor,
                       fontSize: fontSize,
                     ),
                   ),
@@ -267,7 +263,7 @@ Future buildShowDialogBox(BuildContext context) {
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
                       fontSize: fontSize,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 )
@@ -297,7 +293,7 @@ Future buildShowDialogBox(BuildContext context) {
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
                       fontSize: fontSize,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 )

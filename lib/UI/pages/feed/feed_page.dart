@@ -160,46 +160,50 @@ class _FeedPageState extends State<FeedPage>
                                 }
                               },
                             ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(200, 40, 0, 60),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Expanded(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: 12,
-                                          left: fullWidth(context) / 4,
-                                          top: 3,
-                                          bottom: 3),
-                                      child: RaisedButton(
-                                        padding: EdgeInsets.all(14.5),
-                                        color:
-                                            Theme.of(context).bottomAppBarColor,
-                                        textColor: black,
-                                        onPressed: () {
-                                          filterDialogBox(context, model);
-                                        },
-                                        child: Text(
-                                          "Filter",
-                                          style: TextStyle(
-                                            color: black,
-                                            fontSize: 18.0,
+                            Hero(
+                              tag: 'abc',
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(200, 40, 0, 60),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            right: 12,
+                                            left: fullWidth(context) / 4,
+                                            top: 3,
+                                            bottom: 3),
+                                        child: RaisedButton(
+                                          padding: EdgeInsets.all(14.5),
+                                          color: Theme.of(context)
+                                              .bottomAppBarColor,
+                                          textColor: black,
+                                          onPressed: () {
+                                            filterDialogBox(context, model);
+                                          },
+                                          child: Text(
+                                            "Filter",
+                                            style: TextStyle(
+                                              color: black,
+                                              fontSize: 15.0,
+                                            ),
                                           ),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      16.0),
+                                              side: BorderSide(
+                                                  color: Theme.of(context)
+                                                      .accentColor,
+                                                  width: 1.0)),
                                         ),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                new BorderRadius.circular(16.0),
-                                            side: BorderSide(
-                                                color: Theme.of(context)
-                                                    .accentColor,
-                                                width: 1.0)),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ]),
@@ -214,6 +218,10 @@ class _FeedPageState extends State<FeedPage>
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
           title: Text(
             string.show_announcement_of,
             style: TextStyle(fontWeight: FontWeight.w700),
