@@ -68,53 +68,6 @@ class _FeedPageState extends State<FeedPage>
             ),
             onPressed: null,
           ),
-          // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-          // floatingActionButton: Positioned(
-          //   top: 140,
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(
-          //       left: 22,
-          //     ),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: <Widget>[
-          //         FloatingActionButton.extended(
-          //           isExtended: true,
-          //           label: Text('Filter'),
-          //           // heroTag: 'abc',
-          //           elevation: 5,
-          //           onPressed: () {
-          //             //Filter Posts Code Here
-          //             filterDialogBox(context, model);
-          //           },
-          //           icon: Icon(
-          //             Icons.filter_list,
-          //             color: Theme.of(context).primaryColor,
-          //           ),
-          //         ),
-          //         Visibility(
-          //           visible: isTeacher,
-          //           child: FloatingActionButton(
-          //             heroTag: 'abc',
-          //             elevation: 5,
-          //             onPressed: () {
-          //               kopenPageSlide(
-          //                 context,
-          //                 CreateFeed(),
-          //                 'Creating_Feed',
-          //                 duration: Duration(milliseconds: 200),
-          //               );
-          //             },
-          //             child: Icon(
-          //               Icons.add,
-          //               color: Theme.of(context).primaryColor,
-          //             ),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
           body: Center(
             child: model.isBusy
                 ? customScreenLoader(context)
