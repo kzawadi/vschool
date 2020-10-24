@@ -71,7 +71,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => FeedServices());
   locator.registerLazySingleton(() => FeedViewModel());
 
-  locator.registerLazySingleton(() => FirebaseNotifications());
+  // locator.registerLazySingleton(() => FirebaseNotifications());
 
   locator.registerLazySingleton(() => LibraryServices());
   locator.registerLazySingleton(() => LibaryViewModel());

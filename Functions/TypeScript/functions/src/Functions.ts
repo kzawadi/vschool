@@ -189,6 +189,7 @@ export async function notificationChat(eventSnapshot: any, context: any) {
       sound: 'default',
 
     }
+    
   };
   console.log('=========thee end of notification=======');
   return fcm.sendToDevice(tokens, payload,options);
