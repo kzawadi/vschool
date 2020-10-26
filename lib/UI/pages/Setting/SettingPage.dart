@@ -30,6 +30,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     LoginPageModel model = locator<LoginPageModel>();
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: TopBarAlternative(
         buttonHeroTag: string.setting,
         title: 'Settings',

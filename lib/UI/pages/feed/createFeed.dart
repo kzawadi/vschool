@@ -82,6 +82,7 @@ class _CreateFeedState extends State<CreateFeed> {
       builder: (context, model, child) {
         isPosting = !model.isBusy ? false : true;
         return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           key: _scaffoldKey,
           appBar: TopBar(
             buttonHeroTag: string.announcement,

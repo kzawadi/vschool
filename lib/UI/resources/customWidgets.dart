@@ -79,7 +79,9 @@ Widget customIcon(BuildContext context,
               ? 'TwitterIcon'
               : isFontAwesomeRegular
                   ? 'AwesomeRegular'
-                  : isFontAwesomeSolid ? 'AwesomeSolid' : 'Fontello'),
+                  : isFontAwesomeSolid
+                      ? 'AwesomeSolid'
+                      : 'Fontello'),
       size: size,
       color: isEnable ? Theme.of(context).primaryColor : iconColor,
     ),

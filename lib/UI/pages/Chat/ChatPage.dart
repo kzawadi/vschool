@@ -1,3 +1,4 @@
+import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
@@ -24,8 +25,9 @@ class _ChatPageState extends State<ChatPage> {
             model.getAllStudent(division: _division, standard: _standard),
         builder: (context, model, child) {
           return model.isBusy
-              ? kBuzyPage(color: Theme.of(context).primaryColor)
+              ? customScreenLoader(context)
               : Scaffold(
+                  backgroundColor: Theme.of(context).backgroundColor,
                   appBar: TopBar(
                     title: 'Chats',
                     child: null,
@@ -57,6 +59,7 @@ class _ChatPageState extends State<ChatPage> {
           onModelReady: (model) => model.getChildrens(),
           builder: (context, model, child) {
             return Scaffold(
+              backgroundColor: Theme.of(context).backgroundColor,
               appBar: TopBarAlternative(
                 title: 'Chats',
                 // child: null,
@@ -64,11 +67,12 @@ class _ChatPageState extends State<ChatPage> {
                 buttonHeroTag: 'Parent/TechersChats',
               ),
               body: Container(
+                // height: 610,
                 // color: Colors.red,
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      flex: 12,
+                      flex: 11,
                       child: model.selectedChild.isEmpty()
                           ? Container(
                               child: Center(
@@ -79,7 +83,7 @@ class _ChatPageState extends State<ChatPage> {
                               ),
                             )
                           : model.isBusy
-                              ? kBuzyPage(color: Theme.of(context).primaryColor)
+                              ? customScreenLoader(context)
                               : Container(
                                   // color: Colors.yellow,
                                   child: Padding(
@@ -103,7 +107,7 @@ class _ChatPageState extends State<ChatPage> {
                                 ),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: ListView.builder(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
@@ -119,14 +123,30 @@ class _ChatPageState extends State<ChatPage> {
                             // enableFeedback: true,
                             // highlightColor: Theme.of(context).accentColor,
                             child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(26),
+                                  // bottomLeft: Radius.circular(26),
+                                  // bottomRight: Radius.circular(26),
+                                ),
+                              ),
                               elevation: 0,
-                              margin: EdgeInsets.all(2),
+                              margin: EdgeInsets.only(bottom: 60),
                               child: Container(
                                 decoration: new BoxDecoration(
+                                  // borderRadius: BorderRadius.only(
+                                  //     topRight: Radius.circular(26),
+                                  //     topLeft: Radius.circular(26)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black38,
+                                        spreadRadius: 0,
+                                        blurRadius: 10),
+                                  ],
                                   gradient: new LinearGradient(
                                     colors: [
-                                      Theme.of(context).colorScheme.secondary,
-                                      Theme.of(context).canvasColor,
+                                      Theme.of(context).primaryColor,
+                                      Theme.of(context).accentColor,
                                     ],
                                     begin: const FractionalOffset(1.0, 1.5),
                                     end: const FractionalOffset(1.0, 0.0),
@@ -134,7 +154,7 @@ class _ChatPageState extends State<ChatPage> {
                                     tileMode: TileMode.clamp,
                                   ),
                                 ),
-                                width: (fullWidth(context) / 2) - 4,
+                                width: (fullWidth(context) / 2) - 60,
                                 child: Row(
                                   // mainAxisSize: ,
                                   mainAxisAlignment: MainAxisAlignment.center,

@@ -485,12 +485,13 @@ class ProfileFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color fieldBackGround =
-        isThemeCurrentlyDark(context) ? MyColors.dark : MyColors.blakwhitish;
+    final Color fieldBackGround = Theme.of(context).cardColor;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 60,
+        color: fieldBackGround,
         decoration: BoxDecoration(
           color: fieldBackGround,
           borderRadius: BorderRadius.circular(14),
@@ -512,6 +513,10 @@ class ProfileFields extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
+            //todo added prefix icon to direct more visuals of the field
+            alignLabelWithHint: true,
+            isDense: true,
+            contentPadding: const EdgeInsets.all(8.0),
             hintText: hintText,
             labelText: labelText,
             border: InputBorder.none,

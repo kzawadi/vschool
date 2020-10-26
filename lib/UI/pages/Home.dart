@@ -1,7 +1,6 @@
 import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 
 class Home extends StatefulWidget {
@@ -20,12 +19,10 @@ class _HomeState extends State<Home> {
 
   String pageName = string.home;
 
-  List<Widget> pages = [
+  List<Widget> _pages = [
     FeedPage(),
     MainDashboard(),
     ChatPage(),
-    // NotificationPage(),
-    // Settings()
     SettingPage()
   ];
 
@@ -36,81 +33,76 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      extendBody: true,
       key: _scaffoldKey,
-      bottomNavigationBar: bnb(),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(26), topLeft: Radius.circular(26)),
+          boxShadow: [
+            BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.pending),
+                label: "Home",
+                backgroundColor: Theme.of(context).bottomAppBarColor,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.dashboard_outlined),
+                label: "Panel",
+                backgroundColor: Theme.of(context).bottomAppBarColor,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.chat_bubble_outline_rounded),
+                label: "Chat",
+                backgroundColor: Theme.of(context).bottomAppBarColor,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: "Settings",
+                backgroundColor: Theme.of(context).bottomAppBarColor,
+              ),
+            ],
+            currentIndex: _currentIndex,
+            iconSize: 22,
+            onTap: _onItemTapped,
+            selectedItemColor: wood_smoke,
+            unselectedItemColor: trout,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            selectedIconTheme: IconThemeData(color: wood_smoke, opacity: 1),
+            unselectedIconTheme: IconThemeData(color: trout, opacity: 0.6),
+            selectedLabelStyle: TextStyle(
+                color: wood_smoke, fontSize: 12, fontWeight: FontWeight.w800),
+            unselectedLabelStyle: TextStyle(
+                color: trout, fontSize: 12, fontWeight: FontWeight.w800),
+            backgroundColor: Theme.of(context).bottomAppBarColor,
+            type: BottomNavigationBarType.shifting,
+          ),
+        ),
+      ),
       body: IndexedStack(
         index: _currentIndex,
-        children: pages,
+        children: _pages,
       ),
-    );
-  }
-
-  List<BottomNavyBarItem> bottomBarItemsNew = [
-    BottomNavyBarItem(
-      activeColor: MyColors.primary,
-      icon: Icon(
-        Icons.home,
-      ),
-      inactiveColor: MyColors.primary,
-      title: Text(string.feed),
-    ),
-    BottomNavyBarItem(
-      activeColor: MyColors.persian_green,
-      icon: Icon(
-        Icons.dashboard,
-      ),
-      inactiveColor: MyColors.persian_green,
-      title: Text(string.dashboard),
-    ),
-    BottomNavyBarItem(
-      activeColor: MyColors.dark,
-      icon: Icon(
-        CustomIcons.chat_bubble,
-        // size: 25,
-      ),
-      inactiveColor: MyColors.dark,
-      title: Text(string.chat),
-    ),
-    BottomNavyBarItem(
-      inactiveColor: Colors.teal,
-      icon: Icon(
-        Icons.settings,
-      ),
-      activeColor: Colors.teal,
-      title: Text(
-        string.setting,
-      ),
-    )
-  ];
-
-  BottomNavyBar bnb() {
-    return BottomNavyBar(
-      curve: Curves.easeIn,
-      itemCornerRadius: 50,
-      iconSize: 24,
-      containerHeight: 56,
-      backgroundColor: Theme.of(context).accentColor,
-      selectedIndex: _currentIndex,
-      showElevation: false, // use this to remove appBar's elevation
-      onItemSelected: (v) {
-        setState(() {
-          // HapticFeedback.selectionClick();
-          if (v == 0) {
-            pageName = FeedPage.pageName;
-          } else if (v == 1) {
-            pageName = MainDashboard.pageName;
-          } else if (v == 2) {
-            pageName = ChatPage.pageName;
-          } else if (v == 3) {
-            pageName = SettingPage.pageName;
-          }
-          _currentIndex = v;
-        });
-      },
-      items: bottomBarItemsNew,
     );
   }
 }

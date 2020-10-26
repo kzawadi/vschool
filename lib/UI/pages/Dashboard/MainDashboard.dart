@@ -21,6 +21,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: TopBarAlternative(
         buttonHeroTag: string.dashboard,
         title: string.dashboard,

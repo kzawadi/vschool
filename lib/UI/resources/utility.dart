@@ -1,9 +1,18 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:developer' as developer;
 
 final kAnalytics = FirebaseAnalytics();
+
+const kAppBarShape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.only(
+    bottomLeft: Radius.circular(26),
+    bottomRight: Radius.circular(26),
+
+  ),
+);
 
 String getPostTime2(String date) {
   if (date == null || date.isEmpty) {

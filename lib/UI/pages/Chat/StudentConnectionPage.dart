@@ -1,5 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/imports.dart';
 
 class StudentConnectionPage extends StatefulWidget {
@@ -44,6 +45,7 @@ class _StudentConnectionPageState extends State<StudentConnectionPage> {
       appBar: AppBar(
         leading: kBackBtn(context),
         centerTitle: true,
+        shape: kAppBarShape,
         title: Text(
           'Parents',
           style: GoogleFonts.quicksand(

@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/pages/libary/library_ViewModel.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/library/library_model.dart';
 import 'package:provider/provider.dart';
@@ -15,19 +16,23 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   // bool _ageHasError = false;
 
-  String _day = '';
-  List _subjectss;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void moveFocus(BuildContext context) => FocusScope.of(context).nextFocus();
 
   @override
   Widget buildViewModelWidget(BuildContext context, LibaryViewModel model) {
     User currentUser = Provider.of<User>(context, listen: false);
+    final Color fieldBackGround = Theme.of(context).highlightColor;
+    String _day = '';
+    List _subjectss;
+
     final _description = useTextEditingController();
     final _standard = useTextEditingController();
     final _division = useTextEditingController();
 
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: TopBar(
           buttonHeroTag: 'libraryEntry',
           title: 'Library',
@@ -46,85 +51,174 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                   children: [
                     SizedBox(height: 15),
                     SizedBox(height: 15),
-                    FormBuilderTextField(
-                      attribute: 'Standard',
-                      controller: _standard,
-                      decoration: InputDecoration(
-                        labelText: 'Standard',
-                        icon: Icon(Icons.fiber_manual_record),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: fieldBackGround,
+                          borderRadius: BorderRadius.circular(14)),
+                      child: FormBuilderTextField(
+                        attribute: 'Standard',
+                        controller: _standard,
+                        textCapitalization: TextCapitalization.words,
+                        // style: Theme.of(context).textTheme.bodyText2,
+                        decoration: InputDecoration(
+                          labelText: 'Standard',
 
-                        // suffixIcon: _ageHasError
-                        //     ? Icon(Icons.error, color: Colors.red)
-                        //     : Icon(Icons.check, color: Colors.green),
+                          // suffixIcon: _ageHasError
+                          //     ? Icon(Icons.error, color: Colors.red)
+                          //     : Icon(Icons.check, color: Colors.green),
+                          helperStyle: Theme.of(context)
+                              .inputDecorationTheme
+                              .helperStyle,
+                          hintStyle:
+                              Theme.of(context).inputDecorationTheme.labelStyle,
+                          // hintText: 'e.g, 8C',
+                          // labelText: string.confirm_password,
+                          prefixIcon: Icon(Icons.edit_location),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                        ),
+                        onChanged: (val) {
+                          print(val);
+                        },
+                        validators: [FormBuilderValidators.required()],
+                        keyboardType: TextInputType.number,
+                        onFieldSubmitted: (v) => moveFocus(context),
                       ),
-                      onChanged: (val) {
-                        print(val);
-                      },
-                      validators: [FormBuilderValidators.required()],
-                      keyboardType: TextInputType.number,
-                      onFieldSubmitted: (v) => moveFocus,
                     ),
                     SizedBox(height: 15),
-                    FormBuilderTextField(
-                      attribute: '  Division',
-                      controller: _division,
-                      decoration: InputDecoration(
-                        labelText: 'Division',
-                        icon: Icon(Icons.class_),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: fieldBackGround,
+                          borderRadius: BorderRadius.circular(14)),
+                      child: FormBuilderTextField(
+                        attribute: '  Division',
+                        controller: _division,
+                        textCapitalization: TextCapitalization.characters,
+                        decoration: InputDecoration(
+                          labelText: 'Division',
+                          // icon: Icon(Icons.class_),
 
-                        // suffixIcon: _ageHasError
-                        //     ? Icon(Icons.error, color: Colors.red)
-                        //     : Icon(Icons.check, color: Colors.green),
+                          // suffixIcon: _ageHasError
+                          //     ? Icon(Icons.error, color: Colors.red)
+                          //     : Icon(Icons.check, color: Colors.green),
+                          helperStyle: Theme.of(context)
+                              .inputDecorationTheme
+                              .helperStyle,
+                          hintStyle:
+                              Theme.of(context).inputDecorationTheme.labelStyle,
+                          // hintText: 'e.g, 8C',
+                          // labelText: string.confirm_password,
+                          prefixIcon: Icon(Icons.class_),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                        ),
+                        onChanged: (val) {
+                          print(val);
+                        },
+                        validators: [FormBuilderValidators.required()],
+                        keyboardType: TextInputType.text,
+                        onFieldSubmitted: (v) => moveFocus(context),
                       ),
-                      onChanged: (val) {
-                        print(val);
-                      },
-                      validators: [FormBuilderValidators.required()],
-                      keyboardType: TextInputType.text,
-                      onFieldSubmitted: (v) => moveFocus,
                     ),
                     SizedBox(height: 15),
                     SizedBox(height: 15),
-                    FormBuilderTextField(
-                      attribute: 'Description',
-                      controller: _description,
-                      decoration: InputDecoration(
-                        labelText: 'Description',
-                        icon: Icon(Icons.description),
-
-                        // suffixIcon: _ageHasError
-                        //     ? Icon(Icons.error, color: Colors.red)
-                        //     : Icon(Icons.check, color: Colors.green),
+                    Container(
+                      height: 120,
+                      decoration: BoxDecoration(
+                          color: fieldBackGround,
+                          borderRadius: BorderRadius.circular(14)),
+                      child: FormBuilderTextField(
+                        attribute: 'Description',
+                        controller: _description,
+                        decoration: InputDecoration(
+                          labelText: 'Description',
+                          helperStyle: Theme.of(context)
+                              .inputDecorationTheme
+                              .helperStyle,
+                          hintStyle:
+                              Theme.of(context).inputDecorationTheme.labelStyle,
+                          // hintText: 'e.g, 8C',
+                          // labelText: string.confirm_password,
+                          prefixIcon: Icon(Icons.description),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                        ),
+                        onChanged: (val) {
+                          print(val);
+                        },
+                        validators: [FormBuilderValidators.required()],
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 4,
+                        onFieldSubmitted: (v) => moveFocus(context),
                       ),
-                      onChanged: (val) {
-                        print(val);
-                      },
-                      validators: [FormBuilderValidators.required()],
-                      keyboardType: TextInputType.text,
-                      onFieldSubmitted: (v) => moveFocus,
                     ),
                     SizedBox(height: 15),
-                    FormBuilderDropdown(
-                      attribute: 'day',
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.view_comfy_rounded),
-                        labelText: 'Choose a week day',
-                      ),
-                      hint: Text('Select a day'),
-                      validators: [FormBuilderValidators.required()],
-                      items: Choices.days
-                          .map((day) => DropdownMenuItem(
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: fieldBackGround,
+                          borderRadius: BorderRadius.circular(14)),
+                      child: FormBuilderDropdown(
+                        attribute: 'day',
+                        decoration: const InputDecoration(
+                          // icon: Icon(Icons.view_comfy_rounded),
+                          labelText: 'Choose a week day',
+
+                          // hintText: 'e.g, 8C',
+                          // labelText: string.confirm_password,
+                          prefixIcon: Icon(Icons.view_comfy_rounded),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                        ),
+
+                        hint: Text('Select a day'),
+                        dropdownColor: Theme.of(context).colorScheme.surface,
+                        validators: [FormBuilderValidators.required()],
+                        items: Choices.days
+                            .map(
+                              (day) => DropdownMenuItem(
                                 value: day,
-                                child: Text('$day'),
-                              ))
-                          .toList(),
-                      allowClear: true,
-                      onChanged: (day) {
-                        _day = day;
-                      },
-                      onSaved: (day) {
-                        _day = day;
-                      },
+                                child: Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    border: Border.all(
+                                        color: Theme.of(context).primaryColor,
+                                        style: BorderStyle.solid,
+                                        width: 0.80),
+                                  ),
+                                  child: Text(
+                                    '$day',
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        // allowClear: true,
+                        onChanged: (day) {
+                          _day = day;
+                        },
+                        onSaved: (day) {
+                          _day = day;
+                        },
+                      ),
                     ),
                     SizedBox(height: 15),
                     FormBuilderCheckboxGroup(
@@ -146,7 +240,7 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                 children: <Widget>[
                   Expanded(
                     child: MaterialButton(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).errorColor,
                       child: Text(
                         'Reset',
                         style: TextStyle(color: Colors.white),
@@ -180,6 +274,11 @@ class LibaryForm extends HookViewModelWidget<LibaryViewModel> {
                           model.postLibrary(classlibrary: library);
                           // model.getLibrary();
                         } else {
+                          //todo this is not working yet
+                          ksnackBar(context, 'Please enter details properly');
+                          cprint('Login Error',
+                              errorIn:
+                                  'Have Not Entered Library Fomr Details Properly');
                           print(_fbKey.currentState.value);
                           print('validation failed');
                         }
