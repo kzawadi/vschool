@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
 
   int _currentIndex = 0;
   Color background = Colors.white;
-  FirebaseNotifications _notifications = locator<FirebaseNotifications>();
+  // FirebaseNotifications _notifications = locator<FirebaseNotifications>();
 
   String pageName = string.home;
 
@@ -28,8 +28,8 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    _notifications.firebaseNotificationServices();
-    _notifications.configLocalNotification();
+    // configLocalNotification();
+    // firebaseNotificationServices();
     super.initState();
   }
 

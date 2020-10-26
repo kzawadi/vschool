@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
+import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
 import 'package:ourESchool/UI/pages/Home.dart';
@@ -32,6 +33,8 @@ void main() async {
 
   Provider.debugCheckInvalidValueType = null;
   await Firebase.initializeApp();
+  configLocalNotification();
+  firebaseNotificationServices();
   setupLocator();
   _logger.info('Going into splash screen');
   runApp(
