@@ -28,8 +28,8 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    configLocalNotification();
-    firebaseNotificationServices();
+    // configLocalNotification();
+    // firebaseNotificationServices();
     super.initState();
   }
 

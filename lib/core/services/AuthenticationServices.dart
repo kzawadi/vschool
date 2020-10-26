@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as authentication;
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -76,7 +77,9 @@ class AuthenticationServices extends Services {
     bool isUserAvailable = false;
     String loginType = userType == UserType.STUDENT
         ? "Student"
-        : userType == UserType.TEACHER ? "Parent-Teacher" : "Parent-Teacher";
+        : userType == UserType.TEACHER
+            ? "Parent-Teacher"
+            : "Parent-Teacher";
 
     DocumentReference _schoolLoginRef =
         schoolRef.collection(schoolCode.toUpperCase().trim()).doc('Login');
@@ -166,6 +169,30 @@ class AuthenticationServices extends Services {
     return ReturnType.SUCCESS;
   }
 
+  ///this is a function to serve fcm token in firestore
+  void _saveDeviceToken() async {
+    String fcmToken = await cloudmesaging.getToken();
+    String id = await sharedPreferencesHelper.getLoggedInUserId();
+
+    // cprint('curent user id is $firebaseUser'.toString());
+
+    // Save it to Firestore
+    if (fcmToken != null) {
+      DocumentReference tokens = firestore
+          .collection('users')
+          .doc(id)
+          .collection('tokens')
+          .doc(fcmToken);
+
+      await tokens.set({
+        'token': fcmToken,
+        'createdAt': FieldValue.serverTimestamp(), // optional
+        'platform': Platform.operatingSystem // optional
+      });
+    }
+    cprint('the token is $fcmToken'.toString());
+  }
+
   Future emailPasswordRegister(String email, String password, UserType userType,
       String schoolCode) async {
     // await sharedPreferencesHelper.clearAllData();
@@ -192,6 +219,7 @@ class AuthenticationServices extends Services {
       isUserLoggedIn = true;
       isUserLoggedInStream.add(isUserLoggedIn);
       fireBaseUserStream.add(firebaseUser);
+      _saveDeviceToken();
       await _analyticsService.logSignUp();
       return authErrors;
     } catch (e) {
@@ -223,6 +251,7 @@ class AuthenticationServices extends Services {
       isUserLoggedIn = true;
       fireBaseUserStream.sink.add(firebaseUser);
       isUserLoggedInStream.add(isUserLoggedIn);
+      _saveDeviceToken();
       await _analyticsService.setUserProperties(
           userId: userCredential.user.uid);
       return authErrors;
@@ -246,6 +275,7 @@ class AuthenticationServices extends Services {
       isUserLoggedIn = true;
       fireBaseUserStream.sink.add(firebaseUser);
       isUserLoggedInStream.add(isUserLoggedIn);
+      _saveDeviceToken();
       await _analyticsService.setUserProperties(
         userId: authResult.user.uid,
       );
