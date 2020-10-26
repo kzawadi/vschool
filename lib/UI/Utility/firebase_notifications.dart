@@ -7,40 +7,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
-import 'package:ourESchool/core/helpers/shared_preferences_helper.dart';
 
-import '../../locator.dart';
-
-// class FirebaseNotifications with Services {
-SharedPreferencesHelper _sharedPreferencesHelper =
-    locator<SharedPreferencesHelper>();
 StreamSubscription iosSubscription;
 final FirebaseMessaging _cloudmesaging = FirebaseMessaging();
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final _localNotifications = new FlutterLocalNotificationsPlugin();
-
-void _saveDeviceToken() async {
-  String fcmToken = await _cloudmesaging.getToken();
-  String id = await _sharedPreferencesHelper.getLoggedInUserId();
-
-  // cprint('curent user id is $firebaseUser'.toString());
-
-  // Save it to Firestore
-  if (fcmToken != null) {
-    DocumentReference tokens = _firestore
-        .collection('users')
-        .doc(id)
-        .collection('tokens')
-        .doc(fcmToken);
-
-    await tokens.set({
-      'token': fcmToken,
-      'createdAt': FieldValue.serverTimestamp(), // optional
-      'platform': Platform.operatingSystem // optional
-    });
-  }
-  cprint('the token is $fcmToken'.toString());
-}
+var _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
 
 void configLocalNotification() {
   var settingsAndroid = new AndroidInitializationSettings('app_icon');
@@ -48,7 +18,7 @@ void configLocalNotification() {
 
   var initializationSettings =
       new InitializationSettings(android: settingsAndroid, iOS: settingsIOS);
-  _localNotifications.initialize(initializationSettings,
+  _flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: onSelect);
 }
 
@@ -62,13 +32,19 @@ void showNotification(message) async {
         ? 'com.mappdeveloper.usa.our_e_school'
         // todo be replaced by ios project id
         : 'com.mappdeveloper.usa.our_e_school',
-    'e school chat demo',
+    'FLUTTER_NOTIFICATION_CLICK',
     'General notifications channel descriptions',
     playSound: true,
+    color: Colors.red,
+
     // sound: ,
     enableVibration: true,
     importance: Importance.max,
     priority: Priority.high,
+    ticker: 'ticker',
+    ledOnMs: 1000,
+    ledOffMs: 500,
+    sound: RawResourceAndroidNotificationSound('vschool_sound'),
   );
   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
   var platformChannelSpecifics = new NotificationDetails(
@@ -76,11 +52,11 @@ void showNotification(message) async {
     iOS: iOSPlatformChannelSpecifics,
   );
 
-  cprint(message);
+  cprint(message.toString());
 //    cprint(message['body'].toString());
 //    cprint(json.encode(message));
 
-  await _localNotifications.show(0, message['title'].toString(),
+  await _flutterLocalNotificationsPlugin.show(0, message['title'].toString(),
       message['body'].toString(), platformChannelSpecifics,
       payload: json.encode(message));
 
@@ -93,13 +69,13 @@ void firebaseNotificationServices() {
   if (Platform.isIOS) {
     iosSubscription = _cloudmesaging.onIosSettingsRegistered.listen((data) {
       cprint(data);
-      _saveDeviceToken();
+      // _saveDeviceToken();
     });
 
     _cloudmesaging.requestNotificationPermissions(IosNotificationSettings(
         sound: true, badge: true, alert: true, provisional: true));
   } else {
-    _saveDeviceToken();
+    // _saveDeviceToken();
   }
 
   _cloudmesaging.configure(
@@ -107,12 +83,11 @@ void firebaseNotificationServices() {
       cprint('onMessage: $message');
       Platform.isAndroid
           ? showNotification(message['notification'])
-          : showNotification(message['aps']['alert']);
+          : showNotification(message['aps']['alert']); //this is for Ios setup
       return;
     },
     onResume: (Map<String, dynamic> message) async {
       cprint("onResume: $message");
-      // TODO optional
     },
     onBackgroundMessage: myBackgroundMessageHandler,
     onLaunch: (Map<String, dynamic> message) async {
@@ -122,14 +97,13 @@ void firebaseNotificationServices() {
   );
 }
 
-var flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
   cprint("myBackgroundMessageHandler message: $message");
   int msgId = int.tryParse(message["data"]["msgId"].toString()) ?? 0;
   cprint("msgId $msgId");
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
     '01',
-    'vschool',
+    'FLUTTER_NOTIFICATION_CLICK',
     'for when an sms is receieved',
     color: Colors.orangeAccent[100],
     importance: Importance.max,
@@ -137,12 +111,19 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
     ticker: 'ticker',
     enableVibration: true,
     playSound: true,
+    ledOnMs: 1000,
+    ledOffMs: 500,
+    sound: RawResourceAndroidNotificationSound('vschool_sound'),
   );
-  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+    presentAlert: true,
+    presentSound: true,
+    sound: 'vschool_sound',
+  );
   var platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics);
-  flutterLocalNotificationsPlugin.show(msgId, message["data"]["msgTitle"],
+  _flutterLocalNotificationsPlugin.show(msgId, message["data"]["msgTitle"],
       message["data"]["msgBody"], platformChannelSpecifics,
       payload: message["data"]["data"]);
   return Future<void>.value();
