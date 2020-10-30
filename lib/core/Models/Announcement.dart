@@ -8,22 +8,27 @@ class Announcement {
   Timestamp timestamp;
   String forClass;
   String photoUrl;
-  String createrPhotoUrl;
+  String userId;
   String photoPath;
   AnnouncementType type;
   String id;
+  int likeCount;
+  List<String> likeList;
 
-  Announcement(
-      {this.caption = '',
-      this.by,
-      this.forDiv,
-      this.timestamp,
-      this.forClass,
-      this.photoUrl = '',
-      this.createrPhotoUrl = '',
-      this.photoPath = '',
-      this.type,
-      this.id});
+  Announcement({
+    this.caption = '',
+    this.by,
+    this.forDiv,
+    this.timestamp,
+    this.forClass,
+    this.photoUrl = '',
+    this.userId = '',
+    this.photoPath = '',
+    this.type,
+    this.id,
+    this.likeCount,
+    this.likeList,
+  });
 
   Announcement.fromJson(Map<String, dynamic> json) {
     caption = json['caption'] ?? '';
@@ -32,10 +37,23 @@ class Announcement {
     timestamp = json['timestamp'] as Timestamp;
     forClass = json['forClass'];
     photoUrl = json['photoUrl'] ?? '';
-    createrPhotoUrl = json['createrPhotoUrl'] ?? '';
+    userId = json['userId'] ?? '';
     photoPath = json['photoPath'] ?? '';
     type = AnnouncementTypeHelper.getEnum(json['type']);
     id = json['id'];
+    if (json["likeList"] != null) {
+      likeList = List<String>();
+      final list = json['likeList'];
+      if (list is List) {
+        json['likeList'].forEach((value) {
+          likeList.add(value);
+        });
+        likeCount = likeList.length;
+      }
+    } else {
+      likeList = [];
+      likeCount = 0;
+    }
   }
 
   Announcement.fromSnapshot(DocumentSnapshot snapshot) {
@@ -45,10 +63,23 @@ class Announcement {
     timestamp = snapshot.data()['timeStamp'] as Timestamp;
     forClass = snapshot.data()['forClass'].toString();
     photoUrl = snapshot.data()['photoUrl'].toString() ?? '';
-    createrPhotoUrl = snapshot.data()['createrPhotoUrl'].toString() ?? '';
+    userId = snapshot.data()['userId'].toString() ?? '';
     photoPath = snapshot.data()['photoPath'].toString() ?? '';
     type = AnnouncementTypeHelper.getEnum(snapshot.data()['type'].toString());
     id = snapshot.id;
+    if (snapshot.data()["likeList"] != null) {
+      likeList = List<String>();
+      final list = snapshot.data()['likeList'];
+      if (list is List) {
+        snapshot.data()['likeList'].forEach((value) {
+          likeList.add(value);
+        });
+        likeCount = likeList.length;
+      }
+    } else {
+      likeList = [];
+      likeCount = 0;
+    }
   }
 
   /// something is not very okay with decoding and encoding of timestamp fields..
@@ -62,10 +93,11 @@ class Announcement {
     data['timeStamp'] = Timestamp.now();
     data['forClass'] = this.forClass;
     data['photoUrl'] = this.photoUrl;
-    data['createrPhotoUrl'] = this.createrPhotoUrl;
+    data['userId'] = this.userId;
     data['type'] = AnnouncementTypeHelper.getValue(this.type);
     data['photoPath'] = this.photoPath;
-    // data['id'] = this.id;
+    data['likeList'] = this.likeList;
+    data['likeCount'] = this.likeCount;
     return data;
   }
 }

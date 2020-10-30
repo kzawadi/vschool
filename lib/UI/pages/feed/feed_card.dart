@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Widgets/PostIconsRow.dart';
 import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_Viewer.dart';
+import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/UI/pages/feed/tweetImage.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
@@ -13,13 +15,10 @@ import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedCard extends StatelessWidget {
-  FeedCard({
-    Key key,
-    this.feed,
-  }) : super(key: key);
+  FeedCard({Key key, this.feed, this.feedModel}) : super(key: key);
 
   final Announcement feed;
-  // final feed feed;
+  final FeedViewModel feedModel;
   bool isAteacher = false;
 
   @override
@@ -162,6 +161,13 @@ class FeedCard extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: fullWidth(context) / 2),
+                child: PostIconsRow(
+                  model: feedModel,
+                  feed: feed,
                 ),
               ),
             ],

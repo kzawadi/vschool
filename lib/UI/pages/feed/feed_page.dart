@@ -95,6 +95,7 @@ class _FeedPageState extends State<FeedPage>
                                     },
                                     child: FeedCard(
                                       feed: model.data[index],
+                                      feedModel: model,
                                     ),
                                   );
                                 } else {
