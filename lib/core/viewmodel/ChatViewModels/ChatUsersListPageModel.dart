@@ -5,6 +5,7 @@ import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/services/ChatServices.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:stacked/stacked.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 
 class ChatUsersListPageModel extends BaseViewModel {
   ChatUsersListPageModel();
@@ -67,6 +68,7 @@ class ChatUsersListPageModel extends BaseViewModel {
 
   getAllTeachers({String standard = '', String division = ''}) async {
     setBusy(true);
+    cprint("...activated...");
     teachersListMap.clear();
     teachersSnapshot.clear();
     await _chatServices.getTeachers(division: division, standard: standard);
