@@ -74,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 11,
-                      child: model.selectedChild.isEmpty()
+                      child: model.selectedChild == null
                           ? Container(
                               child: Center(
                                 child: Text(
