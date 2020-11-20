@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'subscriptionResponse_model.dart';
+part of 'subResponse_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

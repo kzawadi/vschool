@@ -3,8 +3,8 @@ import 'package:meta/meta.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'subscriptionResponse_model.g.dart';
-part 'subscriptionResponse_model.freezed.dart';
+part 'subResponse_model.g.dart';
+part 'subResponse_model.freezed.dart';
 
 @immutable
 @freezed
