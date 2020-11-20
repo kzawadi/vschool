@@ -18,7 +18,7 @@ class _$SubscriptionTearOff {
 
 // ignore: unused_element
   _Subscription call(
-      {@required int amount,
+      {@required String amount,
       String itemDesc,
       @required String msisdn,
       String school,
@@ -48,7 +48,7 @@ const $Subscription = _$SubscriptionTearOff();
 
 /// @nodoc
 mixin _$Subscription {
-  int get amount;
+  String get amount;
   String get itemDesc;
   String get msisdn;
   String get school;
@@ -66,7 +66,7 @@ abstract class $SubscriptionCopyWith<$Res> {
           Subscription value, $Res Function(Subscription) then) =
       _$SubscriptionCopyWithImpl<$Res>;
   $Res call(
-      {int amount,
+      {String amount,
       String itemDesc,
       String msisdn,
       String school,
@@ -94,7 +94,7 @@ class _$SubscriptionCopyWithImpl<$Res> implements $SubscriptionCopyWith<$Res> {
     Object userName = freezed,
   }) {
     return _then(_value.copyWith(
-      amount: amount == freezed ? _value.amount : amount as int,
+      amount: amount == freezed ? _value.amount : amount as String,
       itemDesc: itemDesc == freezed ? _value.itemDesc : itemDesc as String,
       msisdn: msisdn == freezed ? _value.msisdn : msisdn as String,
       school: school == freezed ? _value.school : school as String,
@@ -115,7 +115,7 @@ abstract class _$SubscriptionCopyWith<$Res>
       __$SubscriptionCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int amount,
+      {String amount,
       String itemDesc,
       String msisdn,
       String school,
@@ -145,7 +145,7 @@ class __$SubscriptionCopyWithImpl<$Res> extends _$SubscriptionCopyWithImpl<$Res>
     Object userName = freezed,
   }) {
     return _then(_Subscription(
-      amount: amount == freezed ? _value.amount : amount as int,
+      amount: amount == freezed ? _value.amount : amount as String,
       itemDesc: itemDesc == freezed ? _value.itemDesc : itemDesc as String,
       msisdn: msisdn == freezed ? _value.msisdn : msisdn as String,
       school: school == freezed ? _value.school : school as String,
@@ -178,7 +178,7 @@ class _$_Subscription with DiagnosticableTreeMixin implements _Subscription {
       _$_$_SubscriptionFromJson(json);
 
   @override
-  final int amount;
+  final String amount;
   @override
   final String itemDesc;
   @override
@@ -257,7 +257,7 @@ class _$_Subscription with DiagnosticableTreeMixin implements _Subscription {
 
 abstract class _Subscription implements Subscription {
   const factory _Subscription(
-      {@required int amount,
+      {@required String amount,
       String itemDesc,
       @required String msisdn,
       String school,
@@ -269,7 +269,7 @@ abstract class _Subscription implements Subscription {
       _$_Subscription.fromJson;
 
   @override
-  int get amount;
+  String get amount;
   @override
   String get itemDesc;
   @override

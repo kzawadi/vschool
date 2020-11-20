@@ -6,134 +6,125 @@ import 'package:ourESchool/UI/Widgets/contra_text.dart';
 import 'package:ourESchool/UI/Widgets/customAppBar.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_card_item.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/core/services/payments/subscription_View_Model.dart';
+import 'package:stacked/stacked.dart';
 
-class PaymentPageOne extends StatefulWidget {
-  @override
-  _PaymentPageOneState createState() => _PaymentPageOneState();
-}
-
-class _PaymentPageOneState extends State<PaymentPageOne> {
-  bool isChanged = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void onChanged(bool value) {
-    setState(() {
-      isChanged = value;
-    });
-  }
-
+class PaymentPageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar2(
-        height: 120,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 24.0),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: ButtonRoundWithShadow(
-                          size: 48,
-                          borderColor: wood_smoke,
-                          color: white,
-                          callback: () {
-                            Navigator.pop(context);
-                          },
-                          shadowColor: wood_smoke,
-                          iconPath: "assets/icons/arrow_back.svg"),
+    return ViewModelBuilder<SubscriptionViewModel>.reactive(
+      onModelReady: (model) {},
+      viewModelBuilder: () => SubscriptionViewModel(),
+      builder: (context, model, child) => Scaffold(
+        appBar: CustomAppBar2(
+          height: 120,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 24.0),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: ButtonRoundWithShadow(
+                            size: 48,
+                            borderColor: wood_smoke,
+                            color: white,
+                            callback: () {
+                              Navigator.pop(context);
+                            },
+                            shadowColor: wood_smoke,
+                            iconPath: "assets/icons/arrow_back.svg"),
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: ContraText(
-                    size: 27,
-                    alignment: Alignment.bottomCenter,
-                    text: "Payments",
+                  Expanded(
+                    flex: 2,
+                    child: ContraText(
+                      size: 27,
+                      alignment: Alignment.bottomCenter,
+                      text: "Payments",
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      width: 20,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(top: 12),
+            child: Column(
+              children: <Widget>[
+                InkWell(
+                  onTap: model.makeSub(),
+                  child: PaymentCartItem(
+                    bgColor: lightening_yellow,
+                    type: "per month",
+                    price: "\$" + "54",
                   ),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    width: 20,
+                PaymentCartItem(
+                  bgColor: white,
+                  type: "per month",
+                  price: "\$" + "54",
+                ),
+                PaymentCartItem(
+                  bgColor: lightening_yellow,
+                  type: "per month",
+                  price: "\$" + "54",
+                ),
+                // Container(
+                //   margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                //   padding: EdgeInsets.all(24),
+                //   decoration: ShapeDecoration(
+                //       color: bareley_white,
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.all(Radius.circular(16)),
+                //       )),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: <Widget>[
+                //       ContraText(
+                //         alignment: Alignment.centerLeft,
+                //         size: 21,
+                //         text: "Auto renew",
+                //       ),
+                //       Switch(
+                //         value: isChanged,
+                //         // onChanged: onChanged,
+                //         activeColor: lightening_yellow,
+                //         inactiveTrackColor: selago,
+                //         inactiveThumbColor: white,
+                //       )
+                //     ],
+                //   ),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: ButtonPlainWithShadow(
+                    text: "Subscribe now",
+                    height: 48,
+                    shadowColor: wood_smoke,
+                    color: wood_smoke,
+                    callback: () {},
+                    textColor: white,
+                    borderColor: wood_smoke,
                   ),
                 )
               ],
             ),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.only(top: 12),
-          child: Column(
-            children: <Widget>[
-              PaymentCartItem(
-                bgColor: lightening_yellow,
-                type: "per month",
-                price: "\$" + "54",
-              ),
-              PaymentCartItem(
-                bgColor: white,
-                type: "per month",
-                price: "\$" + "54",
-              ),
-              PaymentCartItem(
-                bgColor: lightening_yellow,
-                type: "per month",
-                price: "\$" + "54",
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                padding: EdgeInsets.all(24),
-                decoration: ShapeDecoration(
-                    color: bareley_white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                    )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    ContraText(
-                      alignment: Alignment.centerLeft,
-                      size: 21,
-                      text: "Auto renew",
-                    ),
-                    Switch(
-                      value: isChanged,
-                      onChanged: onChanged,
-                      activeColor: lightening_yellow,
-                      inactiveTrackColor: selago,
-                      inactiveThumbColor: white,
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: ButtonPlainWithShadow(
-                  text: "Subscribe now",
-                  height: 48,
-                  shadowColor: wood_smoke,
-                  color: wood_smoke,
-                  callback: () {},
-                  textColor: white,
-                  borderColor: wood_smoke,
-                ),
-              )
-            ],
           ),
         ),
       ),

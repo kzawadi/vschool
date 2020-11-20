@@ -10,7 +10,7 @@ part 'subscriptions_model.freezed.dart';
 @freezed
 abstract class Subscription with _$Subscription {
   const factory Subscription({
-    @required int amount,
+    @required String amount,
     String itemDesc,
     @required String msisdn,
     String school,

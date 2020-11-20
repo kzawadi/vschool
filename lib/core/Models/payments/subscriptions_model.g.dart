@@ -8,7 +8,7 @@ part of 'subscriptions_model.dart';
 
 _$_Subscription _$_$_SubscriptionFromJson(Map<String, dynamic> json) {
   return _$_Subscription(
-    amount: json['amount'] as int,
+    amount: json['amount'] as String,
     itemDesc: json['itemDesc'] as String,
     msisdn: json['msisdn'] as String,
     school: json['school'] as String,

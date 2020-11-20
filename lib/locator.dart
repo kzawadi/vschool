@@ -8,6 +8,8 @@ import 'package:ourESchool/UI/pages/libary/library_services.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/core/services/data_Entry/data_entry_service.dart';
 import 'package:ourESchool/core/services/feed_services/feed_services.dart';
+import 'package:ourESchool/core/services/payments/subscription_View_Model.dart';
+import 'package:ourESchool/core/services/payments/subscription_services.dart';
 import 'package:ourESchool/core/services/student_data_Entry/student_data_entry_service.dart';
 import 'package:ourESchool/core/services/data_Entry/Data_Entry_ViewmModel.dart';
 import 'package:ourESchool/core/services/student_data_Entry/student_Data_Entry_VM.dart';
@@ -75,4 +77,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => LibraryServices());
   locator.registerLazySingleton(() => LibaryViewModel());
+
+  locator.registerLazySingleton(() => SubscriptionServices());
+  locator.registerLazySingleton(() => SubscriptionViewModel());
 }
