@@ -10,6 +10,8 @@ import 'package:ourESchool/core/services/payments/subscription_View_Model.dart';
 import 'package:stacked/stacked.dart';
 
 class PaymentPageOne extends StatelessWidget {
+  final String words =
+      "Thanks for appreciating our system , your about to subscribe to our services so we can innovate more.";
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SubscriptionViewModel>.reactive(
@@ -66,35 +68,28 @@ class PaymentPageOne extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // Checkbox(
-                      //   onChanged: onChecked,
-                      //   value: isChecked,
-                      // ),
-                      Expanded(
-                        child: Text(
-                          "Thanks for apreciating our system , your about to subscribe to our services so we can innovate more.",
-                        ),
-                      )
-                    ],
+                  padding: const EdgeInsets.all(18.0),
+                  child: ContraText(
+                    alignment: Alignment.center,
+                    text: words,
+                    size: 18,
+                    weight: FontWeight.w600,
                   ),
                 ),
+                // ),
                 InkWell(
                   onTap: model.makeSub,
                   child: PaymentCartItem(
                     bgColor: lightening_yellow,
-                    type: "Year",
-                    price: "Tsh " + "50,000",
+                    type: "Per Year",
+                    price: "Tz " + "50,000",
                   ),
                 ),
-                sizedBox(height: 15),
+                sizedBox(height: 30),
                 PaymentCartItem(
-                  bgColor: lightening_yellow,
-                  type: "Month",
-                  price: "Tsh " + "5,000",
+                  bgColor: flamingo,
+                  type: "Per Month",
+                  price: "Tz " + "5,000",
                 ),
               ],
             ),
