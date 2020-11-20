@@ -4,10 +4,12 @@ import 'package:ourESchool/UI/Widgets/button_round_with_shadow.dart';
 import 'package:ourESchool/UI/Widgets/contra_text.dart';
 import 'package:ourESchool/UI/Widgets/customAppBar.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_card_item.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/phone_number.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/services/payments/subscription_View_Model.dart';
 import 'package:stacked/stacked.dart';
+import 'package:ourESchool/UI/Utility/constants.dart';
 
 class PaymentPageOne extends StatelessWidget {
   final String words =
@@ -77,16 +79,23 @@ class PaymentPageOne extends StatelessWidget {
                   ),
                 ),
                 // ),
-                InkWell(
-                  onTap: model.makeSub,
-                  child: PaymentCartItem(
-                    bgColor: lightening_yellow,
-                    type: "Per Year",
-                    price: "Tz " + "50,000",
+                // InkWell(
+                //   onTap: kopenPage(context, PhoneNumber(),
+                //       'Phone_number_entry_for_subscribing'),
+                // onTap: model.makeSub,
+                PaymentCartItem(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PhoneNumber()),
                   ),
+                  bgColor: lightening_yellow,
+                  type: "Per Year",
+                  price: "Tz " + "50,000",
                 ),
+                // ),
                 sizedBox(height: 30),
                 PaymentCartItem(
+                  onTap: () {},
                   bgColor: flamingo,
                   type: "Per Month",
                   price: "Tz " + "5,000",
