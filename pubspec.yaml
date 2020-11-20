@@ -49,6 +49,7 @@ dependencies:
   google_maps_flutter:
   vector_math:
   maps_toolkit:
+  # flutter_svg:
 
   # peek_and_pop: ^0.1.8
   # snap: ^1.0.0
