@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ourESchool/UI/Widgets/button_plain_with_shadow.dart';
 import 'package:ourESchool/UI/Widgets/button_round_with_shadow.dart';
 import 'package:ourESchool/UI/Widgets/contra_text.dart';
 import 'package:ourESchool/UI/Widgets/customAppBar.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_card_item.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/services/payments/subscription_View_Model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,9 +13,8 @@ class PaymentPageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SubscriptionViewModel>.reactive(
-      onModelReady: (model) {},
-      viewModelBuilder: () => SubscriptionViewModel(),
       builder: (context, model, child) => Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: CustomAppBar2(
           height: 120,
           child: Column(
@@ -48,7 +47,7 @@ class PaymentPageOne extends StatelessWidget {
                     child: ContraText(
                       size: 27,
                       alignment: Alignment.bottomCenter,
-                      text: "Payments",
+                      text: "Subscriptions",
                     ),
                   ),
                   Expanded(
@@ -62,72 +61,47 @@ class PaymentPageOne extends StatelessWidget {
             ],
           ),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(top: 12),
+        body: Center(
+          child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // Checkbox(
+                      //   onChanged: onChecked,
+                      //   value: isChecked,
+                      // ),
+                      Expanded(
+                        child: Text(
+                          "Thanks for apreciating our system , your about to subscribe to our services so we can innovate more.",
+                        ),
+                      )
+                    ],
+                  ),
+                ),
                 InkWell(
-                  onTap: model.makeSub(),
+                  onTap: model.makeSub,
                   child: PaymentCartItem(
                     bgColor: lightening_yellow,
-                    type: "per month",
-                    price: "\$" + "54",
+                    type: "Year",
+                    price: "Tsh " + "50,000",
                   ),
                 ),
-                PaymentCartItem(
-                  bgColor: white,
-                  type: "per month",
-                  price: "\$" + "54",
-                ),
+                sizedBox(height: 15),
                 PaymentCartItem(
                   bgColor: lightening_yellow,
-                  type: "per month",
-                  price: "\$" + "54",
+                  type: "Month",
+                  price: "Tsh " + "5,000",
                 ),
-                // Container(
-                //   margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                //   padding: EdgeInsets.all(24),
-                //   decoration: ShapeDecoration(
-                //       color: bareley_white,
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.all(Radius.circular(16)),
-                //       )),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: <Widget>[
-                //       ContraText(
-                //         alignment: Alignment.centerLeft,
-                //         size: 21,
-                //         text: "Auto renew",
-                //       ),
-                //       Switch(
-                //         value: isChanged,
-                //         // onChanged: onChanged,
-                //         activeColor: lightening_yellow,
-                //         inactiveTrackColor: selago,
-                //         inactiveThumbColor: white,
-                //       )
-                //     ],
-                //   ),
-                // ),
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: ButtonPlainWithShadow(
-                    text: "Subscribe now",
-                    height: 48,
-                    shadowColor: wood_smoke,
-                    color: wood_smoke,
-                    callback: () {},
-                    textColor: white,
-                    borderColor: wood_smoke,
-                  ),
-                )
               ],
             ),
           ),
         ),
       ),
+      viewModelBuilder: () => SubscriptionViewModel(),
     );
   }
 }

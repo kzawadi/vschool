@@ -6,7 +6,13 @@ import 'package:stacked/stacked.dart';
 class SubscriptionViewModel extends BaseViewModel {
   SubscriptionServices _subscriptionService = locator<SubscriptionServices>();
 
-  makeSub() {
+  void empty() {
+    setBusy(true);
+    print("this is not okay atAll");
+    setBusy(false);
+  }
+
+  void makeSub() {
     setBusy(true);
     _subscriptionService.subscribe();
     cprint("payment under way");
