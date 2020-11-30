@@ -68,6 +68,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => StudentDataEntryViewModel());
 
   locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => OwnerViewModel());
 
   locator.registerLazySingleton(() => FeedServices());

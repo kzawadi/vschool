@@ -6,6 +6,8 @@ import 'package:logging/logging.dart';
 import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 import 'package:ourESchool/UI/Utility/themes/theme_manager.dart';
 import 'package:ourESchool/UI/Utility/ui_helpers.dart';
+import 'package:ourESchool/UI/Widgets/dialog_snack_bottomsheets/setup_bottom_sheet_ui.dart';
+import 'package:ourESchool/UI/Widgets/dialog_snack_bottomsheets/setup_dialog_ui.dart';
 import 'package:ourESchool/UI/pages/Home.dart';
 import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
 import 'package:ourESchool/UI/pages/Profiles/ProfilePage.dart';
@@ -19,6 +21,7 @@ import 'package:ourESchool/core/services/Services.dart';
 import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 void main() async {
   final _logger = Logger('VSchool');
@@ -36,6 +39,8 @@ void main() async {
   configLocalNotification();
   firebaseNotificationServices();
   setupLocator();
+  setupDialogUi();
+  setupBottomSheetUi();
   _logger.info('Going into splash screen');
   runApp(
     MyApp(),
@@ -115,6 +120,7 @@ class OurSchoolApp extends StatelessWidget with Services {
           navigatorObservers: [
             locator<AnalyticsService>().getAnalyticsObserver(),
           ],
+          navigatorKey: locator<DialogService>().navigatorKey,
         );
       },
     );
