@@ -111,14 +111,14 @@ class BottomSheetPanel {
           icon: Icons.format_align_center,
           label: string.announcement,
           onPressed: () {
-            kopenPage(
-              context,
-              //todo create a good page for feed of specific student
-              FeedPage(
-                announcementFor: user.standard + user.division.toUpperCase(),
-              ),
-              'Announcement_Page',
-            );
+            // kopenPage(
+            //   context,
+            //todo create a good page for feed of specific student
+            //   FeedPage(
+            //     announcementFor: user.standard + user.division.toUpperCase(),
+            //   ),
+            //   'Announcement_Page',
+            // );
           },
         ),
         _widgetBottomSheetRow(

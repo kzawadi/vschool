@@ -1,4 +1,6 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_page_one.dart';
+import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/libary/create_library.dart';
 import 'package:ourESchool/UI/pages/libary/library_widgets/library_page.dart';
 import 'package:ourESchool/core/maps/map/map_screen.dart';
@@ -82,7 +84,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                           label: string.assignment,
                           onPressed: () {
                             kopenPage(
-                                context, AssignmentsPage(), 'Assignments_Page');
+                                context, CreateFeed(), 'Assignments_Page');
                           },
                           icon: Icons.assignment,
                         ),
@@ -137,6 +139,18 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       //     contentType: 'Fees Page Dashboard', itemId: null);
                     },
                     icon: FontAwesomeIcons.user,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'Subscription',
+                    height: 70,
+                    tileColor: Colors.yellow,
+                    label: 'Subscription',
+                    onPressed: () {
+                      kopenPage(context, PaymentPageOne(), 'subscription_page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.moneyBill,
                   ),
                   SizedBox(
                     height: 105,

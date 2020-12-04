@@ -40,6 +40,13 @@ class FeedViewModel extends StreamViewModel {
     setBusy(false);
   }
 
+  void addLikeToTweet({Announcement feed, String firebaseUserId}) async {
+    setBusy(true);
+    await _feedServices.addLikeToTweet(
+        feed: feed, firebaseUserId: firebaseUserId);
+    setBusy(false);
+  }
+
   @override
   Stream get stream =>
       _feedServices.listenToPostsRealTime(stdDivGlobal: stdDivGlobal);

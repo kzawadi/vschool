@@ -166,4 +166,40 @@ class FeedServices extends Services {
         event: 'adding a feed in firestore');
     cprint(standard);
   }
+
+  /// Add/Remove like on a feed
+  /// [postId] is feed id, [userId] is user's id who like/unlike feed
+  addLikeToTweet({Announcement feed, String firebaseUserId}) async {
+    String standard;
+    try {
+      if (feed.likeList != null &&
+          feed.likeList.length > 0 &&
+          feed.likeList.any((userId) => userId == firebaseUserId)) {
+        // If user wants to undo/remove his like on feed
+        feed.likeList.removeWhere((id) => id == firebaseUserId);
+        feed.likeCount -= 1;
+      } else {
+        // If user like feed
+        if (feed.likeList == null) {
+          feed.likeList = [];
+        }
+        feed.likeList.add(firebaseUserId);
+        feed.likeCount += 1;
+      }
+
+      if (feed.forClass == 'Global') {
+        standard = 'Global';
+      } else
+        standard = feed.forClass + feed.forDiv;
+
+      var _postRefs =
+          (await schoolRefwithCode()).doc('Posts').collection(standard);
+      // update likelist of a feed
+      _postRefs
+          .doc(feed.id)
+          .update({"likeCount": feed.likeCount, "likeList": feed.likeList});
+    } catch (error) {
+      cprint(error, errorIn: 'addLikeToTweet');
+    }
+  }
 }

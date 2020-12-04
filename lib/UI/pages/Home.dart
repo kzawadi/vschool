@@ -1,7 +1,6 @@
 import 'package:ourESchool/UI/pages/feed/feed_page.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/imports.dart';
-import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 
 class Home extends StatefulWidget {
   static const id = 'Home';
