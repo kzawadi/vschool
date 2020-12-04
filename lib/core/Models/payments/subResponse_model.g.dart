@@ -10,7 +10,7 @@ _$_SubscriptionResponse _$_$_SubscriptionResponseFromJson(
     Map<String, dynamic> json) {
   return _$_SubscriptionResponse(
     responseCode: json['responseCode'] as String,
-    outputResponseDesc: json['outputResponseDesc'] as String,
+    output_ResponseDesc: json['output_ResponseDesc'] as String,
   );
 }
 
@@ -18,5 +18,5 @@ Map<String, dynamic> _$_$_SubscriptionResponseToJson(
         _$_SubscriptionResponse instance) =>
     <String, dynamic>{
       'responseCode': instance.responseCode,
-      'outputResponseDesc': instance.outputResponseDesc,
+      'output_ResponseDesc': instance.output_ResponseDesc,
     };

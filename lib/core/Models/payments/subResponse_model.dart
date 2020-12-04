@@ -11,7 +11,7 @@ part 'subResponse_model.freezed.dart';
 abstract class SubscriptionResponse with _$SubscriptionResponse {
   const factory SubscriptionResponse({
     String responseCode,
-    String outputResponseDesc,
+    String output_ResponseDesc,
   }) = _SubscriptionResponse;
 
   factory SubscriptionResponse.fromJson(Map<String, dynamic> json) =>

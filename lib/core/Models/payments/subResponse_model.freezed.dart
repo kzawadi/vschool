@@ -17,10 +17,11 @@ class _$SubscriptionResponseTearOff {
   const _$SubscriptionResponseTearOff();
 
 // ignore: unused_element
-  _SubscriptionResponse call({String responseCode, String outputResponseDesc}) {
+  _SubscriptionResponse call(
+      {String responseCode, String output_ResponseDesc}) {
     return _SubscriptionResponse(
       responseCode: responseCode,
-      outputResponseDesc: outputResponseDesc,
+      output_ResponseDesc: output_ResponseDesc,
     );
   }
 
@@ -37,7 +38,7 @@ const $SubscriptionResponse = _$SubscriptionResponseTearOff();
 /// @nodoc
 mixin _$SubscriptionResponse {
   String get responseCode;
-  String get outputResponseDesc;
+  String get output_ResponseDesc;
 
   Map<String, dynamic> toJson();
   $SubscriptionResponseCopyWith<SubscriptionResponse> get copyWith;
@@ -48,7 +49,7 @@ abstract class $SubscriptionResponseCopyWith<$Res> {
   factory $SubscriptionResponseCopyWith(SubscriptionResponse value,
           $Res Function(SubscriptionResponse) then) =
       _$SubscriptionResponseCopyWithImpl<$Res>;
-  $Res call({String responseCode, String outputResponseDesc});
+  $Res call({String responseCode, String output_ResponseDesc});
 }
 
 /// @nodoc
@@ -63,15 +64,15 @@ class _$SubscriptionResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object responseCode = freezed,
-    Object outputResponseDesc = freezed,
+    Object output_ResponseDesc = freezed,
   }) {
     return _then(_value.copyWith(
       responseCode: responseCode == freezed
           ? _value.responseCode
           : responseCode as String,
-      outputResponseDesc: outputResponseDesc == freezed
-          ? _value.outputResponseDesc
-          : outputResponseDesc as String,
+      output_ResponseDesc: output_ResponseDesc == freezed
+          ? _value.output_ResponseDesc
+          : output_ResponseDesc as String,
     ));
   }
 }
@@ -83,7 +84,7 @@ abstract class _$SubscriptionResponseCopyWith<$Res>
           $Res Function(_SubscriptionResponse) then) =
       __$SubscriptionResponseCopyWithImpl<$Res>;
   @override
-  $Res call({String responseCode, String outputResponseDesc});
+  $Res call({String responseCode, String output_ResponseDesc});
 }
 
 /// @nodoc
@@ -100,15 +101,15 @@ class __$SubscriptionResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object responseCode = freezed,
-    Object outputResponseDesc = freezed,
+    Object output_ResponseDesc = freezed,
   }) {
     return _then(_SubscriptionResponse(
       responseCode: responseCode == freezed
           ? _value.responseCode
           : responseCode as String,
-      outputResponseDesc: outputResponseDesc == freezed
-          ? _value.outputResponseDesc
-          : outputResponseDesc as String,
+      output_ResponseDesc: output_ResponseDesc == freezed
+          ? _value.output_ResponseDesc
+          : output_ResponseDesc as String,
     ));
   }
 }
@@ -119,7 +120,7 @@ class __$SubscriptionResponseCopyWithImpl<$Res>
 class _$_SubscriptionResponse
     with DiagnosticableTreeMixin
     implements _SubscriptionResponse {
-  const _$_SubscriptionResponse({this.responseCode, this.outputResponseDesc});
+  const _$_SubscriptionResponse({this.responseCode, this.output_ResponseDesc});
 
   factory _$_SubscriptionResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_SubscriptionResponseFromJson(json);
@@ -127,11 +128,11 @@ class _$_SubscriptionResponse
   @override
   final String responseCode;
   @override
-  final String outputResponseDesc;
+  final String output_ResponseDesc;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SubscriptionResponse(responseCode: $responseCode, outputResponseDesc: $outputResponseDesc)';
+    return 'SubscriptionResponse(responseCode: $responseCode, output_ResponseDesc: $output_ResponseDesc)';
   }
 
   @override
@@ -140,7 +141,7 @@ class _$_SubscriptionResponse
     properties
       ..add(DiagnosticsProperty('type', 'SubscriptionResponse'))
       ..add(DiagnosticsProperty('responseCode', responseCode))
-      ..add(DiagnosticsProperty('outputResponseDesc', outputResponseDesc));
+      ..add(DiagnosticsProperty('output_ResponseDesc', output_ResponseDesc));
   }
 
   @override
@@ -150,16 +151,16 @@ class _$_SubscriptionResponse
             (identical(other.responseCode, responseCode) ||
                 const DeepCollectionEquality()
                     .equals(other.responseCode, responseCode)) &&
-            (identical(other.outputResponseDesc, outputResponseDesc) ||
+            (identical(other.output_ResponseDesc, output_ResponseDesc) ||
                 const DeepCollectionEquality()
-                    .equals(other.outputResponseDesc, outputResponseDesc)));
+                    .equals(other.output_ResponseDesc, output_ResponseDesc)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(responseCode) ^
-      const DeepCollectionEquality().hash(outputResponseDesc);
+      const DeepCollectionEquality().hash(output_ResponseDesc);
 
   @override
   _$SubscriptionResponseCopyWith<_SubscriptionResponse> get copyWith =>
@@ -175,7 +176,7 @@ class _$_SubscriptionResponse
 abstract class _SubscriptionResponse implements SubscriptionResponse {
   const factory _SubscriptionResponse(
       {String responseCode,
-      String outputResponseDesc}) = _$_SubscriptionResponse;
+      String output_ResponseDesc}) = _$_SubscriptionResponse;
 
   factory _SubscriptionResponse.fromJson(Map<String, dynamic> json) =
       _$_SubscriptionResponse.fromJson;
@@ -183,7 +184,7 @@ abstract class _SubscriptionResponse implements SubscriptionResponse {
   @override
   String get responseCode;
   @override
-  String get outputResponseDesc;
+  String get output_ResponseDesc;
   @override
   _$SubscriptionResponseCopyWith<_SubscriptionResponse> get copyWith;
 }

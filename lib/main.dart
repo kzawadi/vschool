@@ -13,6 +13,7 @@ import 'package:ourESchool/UI/pages/Profiles/GuardianProfile.dart';
 import 'package:ourESchool/UI/pages/Profiles/ProfilePage.dart';
 import 'package:ourESchool/UI/pages/Profiles/TeacherProfilePage.dart';
 import 'package:ourESchool/UI/pages/WelcomeScreen.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
 import 'package:ourESchool/core/services/AuthenticationServices.dart';
@@ -31,7 +32,7 @@ void main() async {
 
   Logger.root.level = Level.ALL; // defaults to Level.INFO
   Logger.root.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.message}');
+    cprint('${record.level.name}: ${record.time}: ${record.message}');
   });
 
   Provider.debugCheckInvalidValueType = null;
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         ),
         StreamProvider<auth.User>.value(
           initialData: null,
+          lazy: false,
           value: locator<AuthenticationServices>()
               .fireBaseUserStream
               .stream
@@ -120,7 +122,7 @@ class OurSchoolApp extends StatelessWidget with Services {
           navigatorObservers: [
             locator<AnalyticsService>().getAnalyticsObserver(),
           ],
-          navigatorKey: locator<DialogService>().navigatorKey,
+          navigatorKey: locator<NavigationService>().navigatorKey,
         );
       },
     );

@@ -78,21 +78,16 @@ class PaymentPageOne extends StatelessWidget {
                     weight: FontWeight.w600,
                   ),
                 ),
-                // ),
-                // InkWell(
-                //   onTap: kopenPage(context, PhoneNumber(),
-                //       'Phone_number_entry_for_subscribing'),
-                // onTap: model.makeSub,
                 PaymentCartItem(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PhoneNumber()),
-                  ),
+                  onTap: model.makeSub,
+                  // () => Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => PhoneNumber()),
+                  // ),
                   bgColor: lightening_yellow,
                   type: "Per Year",
                   price: "Tz " + "50,000",
                 ),
-                // ),
                 sizedBox(height: 30),
                 PaymentCartItem(
                   onTap: () {},
