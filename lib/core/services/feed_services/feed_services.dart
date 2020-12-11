@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:observable_ish/observable_ish.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/services/Services.dart';
@@ -8,8 +9,19 @@ import 'package:ourESchool/locator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:path/path.dart' as p;
+import 'package:stacked/stacked.dart';
 
-class FeedServices extends Services {
+class FeedServices extends Services with ReactiveServiceMixin {
+  RxValue<String> _counter = RxValue<String>(initial: "Global");
+  String get counter => _counter.value;
+
+  FeedServices() {
+    listenToReactiveValues([_counter]);
+  }
+
+  void changeFeedType({String type}) {
+    _counter.value = type;
+  }
   // final CollectionReference _postsCollectionReference =
   //     Firestore.instance.collection('feed');
 
@@ -108,11 +120,11 @@ class FeedServices extends Services {
       _requestPosts(stdDivGlobal: stdDivGlobal);
 
   ///this will clear the already fetched data and pass in [std] and be fetched again
-  void filteredFeed({String std}) {
+  void filteredFeed() {
     _allPagedResults.clear();
     _lastDocument = null;
     allPosts.clear();
-    requestMoreData(stdDivGlobal: std);
+    requestMoreData(stdDivGlobal: counter);
   }
 
   /// this will delete in firestore a given feed by its Id

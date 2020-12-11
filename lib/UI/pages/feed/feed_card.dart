@@ -20,17 +20,16 @@ class FeedCard extends StatelessWidget {
   final Announcement feed;
   final FeedViewModel feedModel;
   bool isAteacher = false;
-
   @override
   Widget build(BuildContext context) {
     var userType = Provider.of<UserType>(context, listen: false);
     if (userType == UserType.TEACHER) {
       isAteacher = true;
     }
-    return ViewModelBuilder.reactive(
+    return ViewModelBuilder<OwnerViewModel>.reactive(
       disposeViewModel: false,
       createNewModelOnInsert: false,
-      onModelReady: (model) => model.futureToRun(),
+      onModelReady: (model) => model.futureToRun,
       viewModelBuilder: () => OwnerViewModel(UserType.TEACHER, feed.by),
       builder: (context, model, child) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 3),

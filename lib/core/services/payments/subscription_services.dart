@@ -16,7 +16,7 @@ class SubscriptionServices {
     String subMainUrl =
         "http://ec2-3-8-36-235.eu-west-2.compute.amazonaws.com:80/silver";
     var subBody = Subscription(
-      msisdn: "000000000001",
+      msisdn: "255756882578",
       amount: "50000",
       itemDesc: "school",
       userId: "new user new user",

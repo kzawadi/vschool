@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:ourESchool/UI/Utility/firebase_notifications.dart';
 import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/UI/pages/libary/library_ViewModel.dart';
@@ -69,10 +68,11 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => BottomSheetService());
-  locator.registerLazySingleton(() => OwnerViewModel());
+  // locator.registerLazySingleton(() => OwnerViewModel());
 
   locator.registerLazySingleton(() => FeedServices());
-  locator.registerLazySingleton(() => FeedViewModel());
+  locator.registerSingleton(FeedViewModel());
+  locator.registerSingleton(OwnerViewModel());
 
   // locator.registerLazySingleton(() => FirebaseNotifications());
 
@@ -81,4 +81,6 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => SubscriptionServices());
   locator.registerLazySingleton(() => SubscriptionViewModel());
+
+  locator.registerLazySingleton(() => NavigationService());
 }
