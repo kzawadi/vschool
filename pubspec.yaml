@@ -64,6 +64,8 @@ dependencies:
   stacked_hooks: null
   stacked_services: ^0.6.0
   vector_math: null
+  framy_annotation:
+  device_preview:
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ dev_dependencies:
   build_runner: ^1.10.0
   freezed: null
   json_serializable: null
+  framy_generator:
 
 flutter:
   uses-material-design: true

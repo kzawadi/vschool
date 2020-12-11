@@ -1,4 +1,7 @@
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/imports.dart';
+
+@framyModel
 
 class Message {
   String to;

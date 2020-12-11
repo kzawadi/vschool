@@ -23,6 +23,7 @@ import 'package:ourESchool/core/services/analytics_service.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 
 void main() async {
   final _logger = Logger('VSchool');
@@ -48,6 +49,11 @@ void main() async {
   );
 }
 
+@FramyUseProvider(User)
+@FramyUseProvider(auth.User)
+@FramyUseProvider(UserType)
+@FramyUseProvider(bool)
+@FramyApp()
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -83,6 +89,8 @@ class MyApp extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
+// @FramyApp(useDevicePreview: true)
+@FramyUseProvider(ThemeManager)
 class OurSchoolApp extends StatelessWidget with Services {
   OurSchoolApp({
     Key key,

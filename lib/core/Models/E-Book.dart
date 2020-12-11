@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 
+@framyModel
 class EBook {
   String bookId;
   String imageUrl;

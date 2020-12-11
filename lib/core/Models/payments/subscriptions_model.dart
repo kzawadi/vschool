@@ -1,3 +1,4 @@
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +9,7 @@ part 'subscriptions_model.freezed.dart';
 
 @immutable
 @freezed
+@framyModel
 abstract class Subscription with _$Subscription {
   const factory Subscription({
     @required String amount,

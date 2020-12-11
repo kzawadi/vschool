@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
@@ -14,6 +15,7 @@ import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:stacked/stacked.dart';
 import 'package:ourESchool/UI/Widgets/customLoader.dart';
 
+@FramyWidget()
 class FeedPage extends StatelessWidget {
   FeedPage({Key key, reactive: false}) : super(key: key);
   // final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -22,7 +24,7 @@ class FeedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userType = Provider.of<UserType>(context, listen: false);
+    // var userType = Provider.of<UserType>(context, listen: false);
     return ViewModelBuilder<FeedViewModel>.reactive(
       fireOnModelReadyOnce: true,
       disposeViewModel: false,

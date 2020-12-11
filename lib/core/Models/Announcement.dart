@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/core/enums/announcementType.dart';
 
+@framyModel
 class Announcement {
   String caption;
   String by;

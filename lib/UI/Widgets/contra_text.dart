@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 
+@FramyWidget()
 class ContraText extends StatelessWidget {
   final Alignment alignment;
   final String text;

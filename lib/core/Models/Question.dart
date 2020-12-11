@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/core/enums/questionLevel.dart';
 import 'package:ourESchool/core/enums/questionType.dart';
 
+@framyModel
 class Question {
   final String question;
   final List answer;

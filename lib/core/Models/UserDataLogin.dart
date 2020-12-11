@@ -1,7 +1,10 @@
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/imports.dart';
 
 SharedPreferencesHelper _sharedPreferencesHelper =
     locator<SharedPreferencesHelper>();
+
+@framyModel
 
 class UserDataLogin {
   String id;
