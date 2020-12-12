@@ -27,24 +27,41 @@ import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/themes/newLightTheme.dart';
 import 'package:framy_annotation/framy_annotation.dart';
 import 'dart:core';
-import 'package:ourESchool/UI/pages/feed/feed_page.dart';
-import 'package:ourESchool/core/enums/UserType.dart';
-import 'package:ourESchool/UI/Utility/constants.dart';
-import 'package:ourESchool/UI/resources/colors.dart';
-import 'package:ourESchool/locator.dart';
-import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
-import 'package:ourESchool/UI/resources/customWidgets.dart';
-import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
-import 'package:ourESchool/UI/Utility/Resources.dart';
-import 'package:ourESchool/UI/Widgets/TopBar.dart';
-import 'package:ourESchool/UI/Widgets/customLoader.dart';
-import 'package:ourESchool/UI/pages/feed/feed_card.dart';
-import 'package:stacked/stacked.dart';
-import 'package:flutter/gestures.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_page_one.dart';
+import 'package:ourESchool/core/services/payments/subscription_View_Model.dart';
 import 'package:ourESchool/UI/Widgets/contra_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ourESchool/UI/resources/colors.dart';
+import 'package:ourESchool/UI/resources/customWidgets.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_card_item.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/phone_number.dart';
+import 'package:ourESchool/UI/Widgets/button_round_with_shadow.dart';
+import 'package:ourESchool/UI/Widgets/customAppBar.dart';
+import 'package:stacked/stacked.dart';
+import 'package:ourESchool/UI/pages/feed/feed_card.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ourESchool/core/enums/UserType.dart';
+import 'package:ourESchool/imports.dart';
+import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
+import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
+import 'package:ourESchool/UI/pages/feed/feed_Viewer.dart';
+import 'package:ourESchool/UI/pages/feed/feed_page.dart';
+import 'package:ourESchool/UI/Utility/Resources.dart';
+import 'package:ourESchool/UI/pages/feed/tweetImage.dart';
+import 'package:animations/animations.dart';
+import 'package:ourESchool/UI/Widgets/PostIconsRow.dart';
+import 'package:ourESchool/locator.dart';
+import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
+import 'package:ourESchool/UI/Widgets/TopBar.dart';
+import 'package:ourESchool/UI/Widgets/customLoader.dart';
+import 'package:flutter/gestures.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/subscription_Form.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/enums/announcementType.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -65,7 +82,6 @@ import 'dart:convert';
 import 'package:ourESchool/core/Models/holiday_item.dart';
 import 'package:ourESchool/core/Models/library/library_model.dart';
 import 'package:ourESchool/core/Models/Message.dart';
-import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/core/Models/payments/subResponse_model.dart';
 import 'package:ourESchool/core/Models/payments/subscriptions_model.dart';
 import 'package:ourESchool/core/Models/Question.dart';
@@ -167,10 +183,13 @@ Route onGenerateRoute(RouteSettings settings) {
     '/button': FramyButtonPage(),
     '/toggle': FramyTogglePage(),
     '/textfield': FramyTextFieldPage(),
+    '/PaymentPage': FramyPaymentPageCustomPage(),
+    '/FeedCardWidget': FramyFeedCardWidgetCustomPage(),
     '/FeedPage': FramyFeedPageCustomPage(),
     '/ContraText': FramyContraTextCustomPage(),
     '/TopBar': FramyTopBarCustomPage(),
     '/TopBarAlternative': FramyTopBarAlternativeCustomPage(),
+    '/SubscriptionDetails': FramySubscriptionDetailsCustomPage(),
     '/storyboard': FramyStoryboardPage(),
   };
   final page = routes[settings.name] ?? FramyFontsPage();
@@ -395,6 +414,18 @@ class FramyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: SizedBox.shrink(),
+                title: Text('PaymentPage'),
+                onTap: () =>
+                    Navigator.of(context).pushReplacementNamed('/PaymentPage'),
+              ),
+              ListTile(
+                leading: SizedBox.shrink(),
+                title: Text('FeedCardWidget'),
+                onTap: () => Navigator.of(context)
+                    .pushReplacementNamed('/FeedCardWidget'),
+              ),
+              ListTile(
+                leading: SizedBox.shrink(),
                 title: Text('FeedPage'),
                 onTap: () =>
                     Navigator.of(context).pushReplacementNamed('/FeedPage'),
@@ -416,6 +447,12 @@ class FramyDrawer extends StatelessWidget {
                 title: Text('TopBarAlternative'),
                 onTap: () => Navigator.of(context)
                     .pushReplacementNamed('/TopBarAlternative'),
+              ),
+              ListTile(
+                leading: SizedBox.shrink(),
+                title: Text('SubscriptionDetails'),
+                onTap: () => Navigator.of(context)
+                    .pushReplacementNamed('/SubscriptionDetails'),
               ),
               ListTile(
                 leading: Icon(Icons.view_carousel),
@@ -1194,6 +1231,49 @@ class _FramyCustomPageState extends State<FramyCustomPage> {
   }
 }
 
+class FramyPaymentPageCustomPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FramyCustomPage(
+      key: Key('Framy_PaymentPage_Page'),
+      dependencies: [
+        FramyDependencyModel<SubscriptionViewModel>(
+            'SubscriptionViewModel', 'SubscriptionViewModel', null),
+      ],
+      builder: (DependencyValueGetter valueGetter) {
+        return provider.MultiProvider(
+          providers: [
+            provider.Provider<SubscriptionViewModel>.value(
+                value: valueGetter('SubscriptionViewModel')),
+          ],
+          child: PaymentPage(),
+        );
+      },
+    );
+  }
+}
+
+class FramyFeedCardWidgetCustomPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FramyCustomPage(
+      key: Key('Framy_FeedCardWidget_Page'),
+      dependencies: [
+        FramyDependencyModel<Announcement>('feed', 'Announcement', null),
+        FramyDependencyModel<FeedViewModel>('feedModel', 'FeedViewModel', null),
+        FramyDependencyModel<bool>('isAteacher', 'bool', null),
+      ],
+      builder: (DependencyValueGetter valueGetter) {
+        return FeedCardWidget(
+          feed: valueGetter('feed'),
+          feedModel: valueGetter('feedModel'),
+          isAteacher: valueGetter('isAteacher'),
+        );
+      },
+    );
+  }
+}
+
 class FramyFeedPageCustomPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -1280,6 +1360,27 @@ class FramyTopBarAlternativeCustomPage extends StatelessWidget {
           onPressed: valueGetter('onPressed'),
           buttonHeroTag: valueGetter('buttonHeroTag'),
           onTitleTapped: valueGetter('onTitleTapped'),
+        );
+      },
+    );
+  }
+}
+
+class FramySubscriptionDetailsCustomPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FramyCustomPage(
+      key: Key('Framy_SubscriptionDetails_Page'),
+      dependencies: [
+        FramyDependencyModel<DialogRequest>(
+            'dialogRequest', 'DialogRequest', null),
+        FramyDependencyModel<dynamic Function(DialogResponse)>(
+            'onDialogTap', 'dynamic Function(DialogResponse)', null),
+      ],
+      builder: (DependencyValueGetter valueGetter) {
+        return SubscriptionDetails(
+          dialogRequest: valueGetter('dialogRequest'),
+          onDialogTap: valueGetter('onDialogTap'),
         );
       },
     );

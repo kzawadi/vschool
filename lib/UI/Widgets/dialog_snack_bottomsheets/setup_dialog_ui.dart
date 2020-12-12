@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
@@ -5,12 +6,18 @@ import 'package:ourESchool/core/enums/dialog_type.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/subscription_Form.dart';
 
 void setupDialogUi() {
   var dialogService = locator<DialogService>();
 
   var builders = {
     DialogType.Form: (context, dialogRequest, completer) => _FormCustomDialog(
+          dialogRequest: dialogRequest,
+          onDialogTap: completer,
+        ),
+    DialogType.SubscriptionsDetails: (context, dialogRequest, completer) =>
+        SubscriptionDetails(
           dialogRequest: dialogRequest,
           onDialogTap: completer,
         ),

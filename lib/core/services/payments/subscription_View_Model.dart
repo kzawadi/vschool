@@ -1,6 +1,7 @@
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/payments/subResponse_model.dart';
 import 'package:ourESchool/core/enums/bottom_sheet_type.dart';
+import 'package:ourESchool/core/enums/dialog_type.dart';
 import 'package:ourESchool/core/services/payments/subscription_services.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:stacked/stacked.dart';
@@ -13,6 +14,8 @@ class SubscriptionViewModel extends BaseViewModel {
 
   SubscriptionResponse get pesaResponse => _subscriptionService.res;
   bool get rescode => _subscriptionService.code;
+
+  get title => "TITLE";
   // String get paymentDesc => _subscriptionService.paymentDesc;
 
   void makeSub() async {
@@ -22,26 +25,29 @@ class SubscriptionViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  // Future showBasicDialog() async {
-  //   await _dialogService.showDialog(
-  //     title: 'The Basic Dialog',
-  //     description: paymentDesc,
-  //     buttonTitle: 'This is the main button title',
-  //     // dialogPlatform: DialogPlatform.Cupertino, // DialogPlatform.Material
-  //   );
-  // }
+  ///This method triger a Diolof form which a user can enter her phone number
+  ///for mpesa Subscription payment procedure to start and after getting that number
+  ///through the responseData we pass it to the API
+  ///the Data coming from the dialog is [msisdn]
+  Future showSubscriptionBillingNumberForm() async {
+    await _dialogService
+        .showCustomDialog(
+      variant: DialogType.SubscriptionsDetails,
+      customData: DialogType.SubscriptionsDetails,
+      barrierDismissible: true,
+    )
+        .then(
+      (value) async {
+        String msisdn = value.responseData.toString();
+        cprint(msisdn);
+        await _subscriptionService.subscribe(msisdn: msisdn);
+      },
+      onError: (e) => cprint(
+          "No value was found in showSubscriptionBillingNumberForm---" + e),
+    );
 
-  // Future showCustomBottomSheet() async {
-  //   var response = await _bottomSheetService.showCustomSheet(
-  //     variant: BottomSheetType.floating,
-  //     title: 'This is a floating sheet',
-  //     description: paymentDesc,
-  //     mainButtonTitle: 'Awesome!',
-  //     secondaryButtonTitle: 'This is cool',
-  //   );
-
-  //   // Remember the null check, if you don't and the user dismisses the dialog without selecting an option
-  //   // it will be null.
-  //   print('response: ${response?.confirmed}');
-  // }
+    // Remember the null check, if you don't and the user dismisses the dialog without selecting an option
+    // it will be null.
+    // print('response data: ${response?.responseData}');
+  }
 }

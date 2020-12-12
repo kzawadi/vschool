@@ -12,11 +12,11 @@ class SubscriptionServices {
   SubscriptionResponse res;
   bool code = true;
   String paymentDesc = "noData";
-  Future<void> subscribe() async {
+  Future<void> subscribe({String msisdn}) async {
     String subMainUrl =
         "http://ec2-3-8-36-235.eu-west-2.compute.amazonaws.com:80/silver";
     var subBody = Subscription(
-      msisdn: "255756882578",
+      msisdn: msisdn,
       amount: "50000",
       itemDesc: "school",
       userId: "new user new user",
