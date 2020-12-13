@@ -1,6 +1,5 @@
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/payments/subResponse_model.dart';
-import 'package:ourESchool/core/enums/bottom_sheet_type.dart';
 import 'package:ourESchool/core/enums/dialog_type.dart';
 import 'package:ourESchool/core/services/payments/subscription_services.dart';
 import 'package:ourESchool/locator.dart';
@@ -11,6 +10,12 @@ class SubscriptionViewModel extends BaseViewModel {
   SubscriptionServices _subscriptionService = locator<SubscriptionServices>();
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
+
+  bool _confirmationResult;
+  bool get confirmationResult => _confirmationResult;
+
+  DialogResponse _dialogResponse;
+  DialogResponse get customDialogResult => _dialogResponse;
 
   SubscriptionResponse get pesaResponse => _subscriptionService.res;
   bool get rescode => _subscriptionService.code;
@@ -38,16 +43,19 @@ class SubscriptionViewModel extends BaseViewModel {
     )
         .then(
       (value) async {
-        String msisdn = value.responseData.toString();
-        cprint(msisdn);
-        await _subscriptionService.subscribe(msisdn: msisdn);
+        //todo handle confirmation of okay..because now the function will be called even if the dialog was cancelled
+
+        if (value.confirmed) {
+          String msisdn = value?.responseData.toString().trim();
+          _confirmationResult = value?.confirmed;
+          cprint(msisdn);
+          await _subscriptionService.subscribe(msisdn: msisdn);
+        } else
+          cprint("Payments process Canceled",
+              event: "Subscription Process Canceled");
       },
       onError: (e) => cprint(
           "No value was found in showSubscriptionBillingNumberForm---" + e),
     );
-
-    // Remember the null check, if you don't and the user dismisses the dialog without selecting an option
-    // it will be null.
-    // print('response data: ${response?.responseData}');
   }
 }

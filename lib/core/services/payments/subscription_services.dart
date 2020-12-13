@@ -26,7 +26,7 @@ class SubscriptionServices {
     );
     final payload = jsonEncode(subBody);
     cprint(payload);
-    var response = await http.post(
+    await http.post(
       subMainUrl,
       body: payload,
       headers: {"Content-Type": "application/json"},

@@ -66,6 +66,9 @@ dependencies:
   vector_math: null
   framy_annotation:
   device_preview:
+  auto_route:
+
+
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +77,8 @@ dev_dependencies:
   freezed: null
   json_serializable: null
   framy_generator:
+  auto_route_generator:
+
 
 flutter:
   uses-material-design: true

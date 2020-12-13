@@ -24,6 +24,7 @@ import 'package:ourESchool/locator.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:framy_annotation/framy_annotation.dart';
+import 'package:ourESchool/app/router.gr.dart' as auto_router;
 
 void main() async {
   final _logger = Logger('VSchool');
@@ -131,6 +132,8 @@ class OurSchoolApp extends StatelessWidget with Services {
             locator<AnalyticsService>().getAnalyticsObserver(),
           ],
           navigatorKey: locator<NavigationService>().navigatorKey,
+          // initialRoute: Routes.FeedPage,
+          onGenerateRoute: auto_router.Router().onGenerateRoute,
         );
       },
     );

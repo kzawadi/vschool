@@ -99,7 +99,8 @@ class SubscriptionDetails extends HookWidget {
                         margin: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
                         child: CupertinoTextField(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 6),
                           decoration: BoxDecoration(
                               color: Theme.of(context).accentColor,
                               borderRadius:
@@ -108,7 +109,7 @@ class SubscriptionDetails extends HookWidget {
                           clearButtonMode: OverlayVisibilityMode.editing,
                           keyboardType: TextInputType.phone,
                           maxLines: 1,
-                          placeholder: '+255756882578',
+                          placeholder: '255756882578',
                         ),
                       ),
                       Container(
@@ -117,8 +118,12 @@ class SubscriptionDetails extends HookWidget {
                         constraints: const BoxConstraints(maxWidth: 250),
                         child: RaisedButton(
                           onPressed: () {
-                            onDialogTap(DialogResponse(
-                                responseData: _phoneController.text));
+                            onDialogTap(
+                              DialogResponse(
+                                confirmed: true,
+                                responseData: _phoneController.text,
+                              ),
+                            );
                           },
                           color: MyColors.primary,
                           shape: const RoundedRectangleBorder(
