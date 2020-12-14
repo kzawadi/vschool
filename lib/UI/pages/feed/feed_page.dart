@@ -37,6 +37,7 @@ class FeedPage extends StatelessWidget {
 }
 
 class FeedPageWidget extends ViewModelWidget<FeedViewModel> {
+  const FeedPageWidget({Key key}) : super(key: key, reactive: true);
   @override
   Widget build(BuildContext context, FeedViewModel viewModel) {
     return Scaffold(

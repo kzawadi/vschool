@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/UI/resources/constant.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:stacked/stacked.dart';
 
-class PostIconsRow extends StatelessWidget {
-  PostIconsRow({Key key, this.model, this.feed}) : super(key: key);
+class PostIconsRow extends ViewModelWidget<FeedViewModel> {
+  PostIconsRow({Key key, this.model, this.feed})
+      : super(key: key, reactive: true);
 
   final Announcement feed;
   // final String firebaseUser;
@@ -84,7 +87,7 @@ class PostIconsRow extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, FeedViewModel viewModel) {
     return Container(
         child: Column(
       children: <Widget>[_likeCommentsIcons(context, feed: feed)],

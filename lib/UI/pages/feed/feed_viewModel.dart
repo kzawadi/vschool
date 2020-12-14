@@ -52,10 +52,11 @@ class FeedViewModel extends StreamViewModel {
     setBusy(false);
   }
 
-  void addLikeToTweet({Announcement feed, String firebaseUserId}) async {
+  Future addLikeToTweet({Announcement feed, String firebaseUserId}) async {
     setBusy(true);
     await _feedServices.addLikeToTweet(
         feed: feed, firebaseUserId: firebaseUserId);
+    notifyListeners();
     setBusy(false);
   }
 

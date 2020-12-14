@@ -38,7 +38,7 @@ class FeedCard extends StatelessWidget {
       builder: (context, model, child) => FeedCardWidget(
         feed: feed,
         feedModel: feedModel,
-        isAteacher: isAteacher,
+        // isAteacher: isAteacher,
       ),
     );
   }
@@ -48,12 +48,9 @@ class FeedCard extends StatelessWidget {
 class FeedCardWidget extends ViewModelWidget<OwnerViewModel> {
   final Announcement feed;
   final FeedViewModel feedModel;
-  bool isAteacher = false;
-  FeedCardWidget({
-    this.feed,
-    this.feedModel,
-    this.isAteacher,
-  });
+  // bool isAteacher = false;
+  const FeedCardWidget({Key key, this.feed, this.feedModel})
+      : super(key: key, reactive: true);
 
   @override
   Widget build(BuildContext context, OwnerViewModel viewModel) {
