@@ -16,6 +16,7 @@ final String words =
 class PaymentPageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //todo set this to nonReactive
     return ViewModelBuilder<SubscriptionViewModel>.reactive(
       viewModelBuilder: () => SubscriptionViewModel(),
       builder: (context, model, child) => PaymentPage(),
@@ -90,11 +91,7 @@ class PaymentPage extends ViewModelWidget<SubscriptionViewModel> {
                 ),
               ),
               PaymentCartItem(
-                onTap: viewModel.makeSub,
-                // () => Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => PhoneNumber()),
-                // ),
+                onTap: viewModel.showSubscriptionBillingNumberFormYearly,
                 bgColor: lightening_yellow,
                 type: "Per Year",
                 price: "Tz " + "50,000",

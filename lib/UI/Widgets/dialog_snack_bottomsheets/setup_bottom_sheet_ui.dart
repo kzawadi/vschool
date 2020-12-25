@@ -1,3 +1,4 @@
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/core/enums/bottom_sheet_type.dart';
 import 'package:ourESchool/locator.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -9,7 +10,7 @@ void setupBottomSheetUi() {
 
   final builders = {
     BottomSheetType.floating: (context, sheetRequest, completer) =>
-        _FloatingBoxBottomSheet(
+        FloatingBoxBottomSheet(
           request: sheetRequest,
           completer: completer,
         )
@@ -18,10 +19,11 @@ void setupBottomSheetUi() {
   bottomSheetService.setCustomSheetBuilders(builders);
 }
 
-class _FloatingBoxBottomSheet extends StatelessWidget {
+@FramyWidget()
+class FloatingBoxBottomSheet extends StatelessWidget {
   final SheetRequest request;
   final Function(SheetResponse) completer;
-  const _FloatingBoxBottomSheet({
+  const FloatingBoxBottomSheet({
     Key key,
     this.request,
     this.completer,
@@ -40,7 +42,7 @@ class _FloatingBoxBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            request.title,
+            request.title ?? "Title",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -49,7 +51,7 @@ class _FloatingBoxBottomSheet extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            request.description,
+            request.description ?? "Description",
             style: TextStyle(color: Colors.grey),
           ),
           Row(
@@ -59,14 +61,14 @@ class _FloatingBoxBottomSheet extends StatelessWidget {
               MaterialButton(
                 onPressed: () => completer(SheetResponse(confirmed: true)),
                 child: Text(
-                  request.secondaryButtonTitle,
+                  request.secondaryButtonTitle ?? "Secondary Tittle",
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),
               FlatButton(
                 onPressed: () => completer(SheetResponse(confirmed: true)),
                 child: Text(
-                  request.mainButtonTitle,
+                  request.mainButtonTitle ?? "Main Tittle",
                   style: TextStyle(color: Colors.white),
                 ),
                 color: Theme.of(context).primaryColor,

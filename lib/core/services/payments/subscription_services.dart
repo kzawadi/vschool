@@ -6,23 +6,59 @@ import 'package:ourESchool/core/enums/bottom_sheet_type.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class SubscriptionServices {
+class SubscriptionServices with Services {
   final _bottomSheetService = locator<BottomSheetService>();
 
   SubscriptionResponse res;
-  bool code = true;
+  // bool code = true;
   String paymentDesc = "noData";
+  // String schoolCode = '';
+
   Future<void> subscribe({String msisdn}) async {
+    String schoolName = await getSchoolCode();
+    String subMainUrl =
+        "http://ec2-3-8-36-235.eu-west-2.compute.amazonaws.com:80/silver";
+    var subBody = Subscription(
+      msisdn: msisdn,
+      amount: "5000",
+      itemDesc: "Vschool Subscription Monthly",
+      userId: auth.currentUser.uid,
+      typeOfSubscription: "MONTHLY",
+      school: schoolName,
+      userName: auth.currentUser.email,
+    );
+    final payload = jsonEncode(subBody);
+    cprint(payload);
+    await http.post(
+      subMainUrl,
+      body: payload,
+      headers: {"Content-Type": "application/json"},
+    ).then(
+      (value) async {
+        cprint('Response status: ${value.statusCode}');
+        cprint('Response body: ${value.body}');
+        var x = jsonDecode(value.body);
+        res = SubscriptionResponse.fromJson(x);
+        Map<String, dynamic> map = jsonDecode(value.body);
+        paymentDesc = map['output_ResponseDesc'];
+        cprint(paymentDesc);
+        await showCustomBottomSheet(desc: paymentDesc);
+      },
+    );
+  }
+
+  Future<void> subscribeYearly({String msisdn}) async {
+    String schoolName = await getSchoolCode();
     String subMainUrl =
         "http://ec2-3-8-36-235.eu-west-2.compute.amazonaws.com:80/silver";
     var subBody = Subscription(
       msisdn: msisdn,
       amount: "50000",
-      itemDesc: "school",
-      userId: "new user new user",
-      typeOfSubscription: "MONTHLY",
-      school: "mama",
-      userName: "parent",
+      itemDesc: "Vschool Subscription Yearly",
+      userId: auth.currentUser.uid,
+      typeOfSubscription: "YEARLY",
+      school: schoolName,
+      userName: auth.currentUser.email,
     );
     final payload = jsonEncode(subBody);
     cprint(payload);

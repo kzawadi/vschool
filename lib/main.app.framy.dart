@@ -60,6 +60,8 @@ import 'package:ourESchool/UI/Widgets/creation_aware_list_item.dart';
 import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:flutter/gestures.dart';
+import 'package:ourESchool/UI/Widgets/dialog_snack_bottomsheets/setup_bottom_sheet_ui.dart';
+import 'package:ourESchool/core/enums/bottom_sheet_type.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/enums/announcementType.dart';
@@ -92,6 +94,7 @@ import 'package:ourESchool/core/Models/student_data_entry/student_data_entry.dar
 import 'package:ourESchool/core/Models/student_data_entry/student_data_entry_db.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/UserDataLogin.dart';
+import 'package:ourESchool/core/Models/contributions/contribution_model.dart';
 
 void main() {
   runApp(FramyApp());
@@ -187,6 +190,7 @@ Route onGenerateRoute(RouteSettings settings) {
     '/FeedCardWidget': FramyFeedCardWidgetCustomPage(),
     '/FeedPage': FramyFeedPageCustomPage(),
     '/ContraText': FramyContraTextCustomPage(),
+    '/FloatingBoxBottomSheet': FramyFloatingBoxBottomSheetCustomPage(),
     '/TopBar': FramyTopBarCustomPage(),
     '/TopBarAlternative': FramyTopBarAlternativeCustomPage(),
     '/storyboard': FramyStoryboardPage(),
@@ -440,6 +444,12 @@ class FramyDrawer extends StatelessWidget {
                 title: Text('ContraText'),
                 onTap: () =>
                     Navigator.of(context).pushReplacementNamed('/ContraText'),
+              ),
+              ListTile(
+                leading: SizedBox.shrink(),
+                title: Text('FloatingBoxBottomSheet'),
+                onTap: () => Navigator.of(context)
+                    .pushReplacementNamed('/FloatingBoxBottomSheet'),
               ),
               ListTile(
                 leading: SizedBox.shrink(),
@@ -1281,13 +1291,11 @@ class FramyFeedCardWidgetCustomPage extends StatelessWidget {
       dependencies: [
         FramyDependencyModel<Announcement>('feed', 'Announcement', null),
         FramyDependencyModel<FeedViewModel>('feedModel', 'FeedViewModel', null),
-        FramyDependencyModel<bool>('isAteacher', 'bool', null),
       ],
       builder: (DependencyValueGetter valueGetter) {
         return FeedCardWidget(
           feed: valueGetter('feed'),
           feedModel: valueGetter('feedModel'),
-          isAteacher: valueGetter('isAteacher'),
         );
       },
     );
@@ -1332,6 +1340,26 @@ class FramyContraTextCustomPage extends StatelessWidget {
           color: valueGetter('color'),
           weight: valueGetter('weight'),
           textAlign: valueGetter('textAlign'),
+        );
+      },
+    );
+  }
+}
+
+class FramyFloatingBoxBottomSheetCustomPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FramyCustomPage(
+      key: Key('Framy_FloatingBoxBottomSheet_Page'),
+      dependencies: [
+        FramyDependencyModel<SheetRequest>('request', 'SheetRequest', null),
+        FramyDependencyModel<dynamic Function(SheetResponse)>(
+            'completer', 'dynamic Function(SheetResponse)', null),
+      ],
+      builder: (DependencyValueGetter valueGetter) {
+        return FloatingBoxBottomSheet(
+          request: valueGetter('request'),
+          completer: valueGetter('completer'),
         );
       },
     );
@@ -1861,7 +1889,8 @@ class FramyWidgetDependencyInput extends StatelessWidget {
               dependency.type == 'StudentEntryData' ||
               dependency.type == 'StudentEntryDataDb' ||
               dependency.type == 'User' ||
-              dependency.type == 'UserDataLogin')
+              dependency.type == 'UserDataLogin' ||
+              dependency.type == 'Contribution')
             FramyModelInput(
               key: inputKey,
               dependencies: dependency.subDependencies,
@@ -2093,8 +2122,9 @@ dynamic initList(String listType) {
   if (listType == 'StudentEntryData') return <StudentEntryData>[];
   if (listType == 'StudentEntryDataDb') return <StudentEntryDataDb>[];
   if (listType == 'User') return <User>[];
-  if (listType == 'UserDataLogin')
-    return <UserDataLogin>[];
+  if (listType == 'UserDataLogin') return <UserDataLogin>[];
+  if (listType == 'Contribution')
+    return <Contribution>[];
   else
     return [];
 }
@@ -2852,6 +2882,41 @@ final framyModelConstructorMap =
     } else
       return null;
   },
+  'Contribution': (dep) {
+    if (dep.constructor == '') {
+      return Contribution(
+        amount:
+            dep.subDependencies.singleWhere((d) => d.name == 'amount').value,
+        contributionId: dep.subDependencies
+            .singleWhere((d) => d.name == 'contributionId')
+            .value,
+        studentName: dep.subDependencies
+            .singleWhere((d) => d.name == 'studentName')
+            .value,
+        parentName: dep.subDependencies
+            .singleWhere((d) => d.name == 'parentName')
+            .value,
+        payed: dep.subDependencies.singleWhere((d) => d.name == 'payed').value,
+        description: dep.subDependencies
+            .singleWhere((d) => d.name == 'description')
+            .value,
+        startDate:
+            dep.subDependencies.singleWhere((d) => d.name == 'startDate').value,
+        expireDate: dep.subDependencies
+            .singleWhere((d) => d.name == 'expireDate')
+            .value,
+        targetClass: dep.subDependencies
+            .singleWhere((d) => d.name == 'targetClass')
+            .value,
+      );
+    }
+    if (dep.constructor == '.fromJson') {
+      return Contribution.fromJson(
+        dep.subDependencies.singleWhere((d) => d.name == 'json').value,
+      );
+    } else
+      return null;
+  },
   'String': (dep) => '',
   'double': (dep) => 0.0,
   'int': (dep) => 0,
@@ -3294,6 +3359,24 @@ List<FramyDependencyModel> createSubDependencies(String type,
             'parentIds', 'Map<dynamic, dynamic>', null),
       ];
 
+    case 'Contribution':
+      return [
+        FramyDependencyModel<String>('amount', 'String', null),
+        FramyDependencyModel<String>('contributionId', 'String', null),
+        FramyDependencyModel<String>('studentName', 'String', null),
+        FramyDependencyModel<String>('parentName', 'String', null),
+        FramyDependencyModel<bool>('payed', 'bool', null),
+        FramyDependencyModel<String>('description', 'String', null),
+        FramyDependencyModel<String>('startDate', 'String', null),
+        FramyDependencyModel<String>('expireDate', 'String', null),
+        FramyDependencyModel<String>('targetClass', 'String', null),
+      ];
+    case 'Contribution.fromJson':
+      return [
+        FramyDependencyModel<Map<String, dynamic>>(
+            'json', 'Map<String, dynamic>', null),
+      ];
+
     default:
       return [];
   }
@@ -3327,6 +3410,7 @@ Map<String, List<String>> framyAvailableConstructorNames = {
   'StudentEntryDataDb': ['', '.fromJson'],
   'User': ['', '.fromSnapshot', '.fromJson'],
   'UserDataLogin': [''],
+  'Contribution': ['', '.fromJson'],
 };
 
 dynamic getFunctionCallback(FramyDependencyModel dependency) {

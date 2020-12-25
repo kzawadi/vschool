@@ -1,4 +1,5 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
+import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution_page.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_page_one.dart';
 import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/libary/create_library.dart';
@@ -143,7 +144,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                   ColumnReusableCardButton(
                     directionIconHeroTag: 'Subscription',
                     height: 70,
-                    tileColor: Colors.yellow,
+                    tileColor: Colors.cyan,
                     label: 'Subscription',
                     onPressed: () {
                       kopenPage(context, PaymentPageOne(), 'subscription_page');
@@ -151,6 +152,19 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       //     contentType: 'Fees Page Dashboard', itemId: null);
                     },
                     icon: FontAwesomeIcons.moneyBill,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'VirtualBank',
+                    height: 70,
+                    tileColor: Colors.blue,
+                    label: 'Virtual-Bank',
+                    onPressed: () {
+                      kopenPage(context, ContributionsFormPage(),
+                          'Virtual_Bank_page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.piggyBank,
                   ),
                   SizedBox(
                     height: 105,

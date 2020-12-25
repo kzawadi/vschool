@@ -60,14 +60,13 @@ dependencies:
   random_color: ^1.0.3
   rxdart: null
   shared_preferences: ^0.5.7+3
-  stacked: ^1.7.6
+  stacked: ^1.7.7
   stacked_hooks: null
   stacked_services: ^0.6.0
   vector_math: null
   framy_annotation:
   device_preview:
   auto_route:
-
 
 
 dev_dependencies:
