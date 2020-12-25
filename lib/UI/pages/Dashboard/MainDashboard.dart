@@ -1,8 +1,9 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
-import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution_page.dart';
+import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution_form_page.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_page_one.dart';
 import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/libary/create_library.dart';
+import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution-view_page.dart';
 import 'package:ourESchool/UI/pages/libary/library_widgets/library_page.dart';
 import 'package:ourESchool/core/maps/map/map_screen.dart';
 import 'package:ourESchool/core/services/data_Entry/data_Entry_Page.dart';
@@ -165,6 +166,18 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       //     contentType: 'Fees Page Dashboard', itemId: null);
                     },
                     icon: FontAwesomeIcons.piggyBank,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'Products',
+                    height: 70,
+                    tileColor: Colors.blueGrey,
+                    label: 'Products',
+                    onPressed: () {
+                      kopenPage(context, ContributionView(), 'products_Page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.productHunt,
                   ),
                   SizedBox(
                     height: 105,
