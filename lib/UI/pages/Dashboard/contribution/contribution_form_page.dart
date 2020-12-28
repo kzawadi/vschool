@@ -4,6 +4,7 @@ import 'package:ourESchool/core/viewmodel/contributions/contribution_ViewModel.d
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 
 class ContributionsFormPage extends StatelessWidget {
   @override
@@ -16,6 +17,7 @@ class ContributionsFormPage extends StatelessWidget {
   }
 }
 
+@FramyWidget(isPage: true)
 class ContributionForm extends HookViewModelWidget<ContributionsViewModel> {
   ContributionForm({Key key}) : super(key: key);
   void moveFocus(BuildContext context) => FocusScope.of(context).nextFocus();

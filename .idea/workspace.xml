@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6ba2e34b-8c9d-46bd-93cb-c845805eeb9c" name="Default Changelist" comment="some UI tweaks still cant filter classes">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="4e4f463232483498" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1fKhIOs9NIaStDTuDOXgBoqxFbA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="C:/src/flutter/packages/flutter" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6ba2e34b-8c9d-46bd-93cb-c845805eeb9c" name="Default Changelist" comment="" />
+      <created>1587759281831</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587759281831</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="some UI tweaks still cant filter classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some UI tweaks still cant filter classes" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="480" y="174" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1601033053956">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="480" y="174" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1600.900@0.0.1600.900" timestamp="1601033053956" />
+    <state x="555" y="150" key="#xdebugger.evaluate" timestamp="1601033420885">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="555" y="150" key="#xdebugger.evaluate/0.0.1600.900@0.0.1600.900" timestamp="1601033420885" />
+    <state x="478" y="26" key="CommitChangelistDialog2" timestamp="1602757016642">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="478" y="26" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1602757016642" />
+    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl" timestamp="1609122192921">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1609122192921" />
+    <state width="1540" height="190" key="GridCell.Tab.0.bottom" timestamp="1607114565714">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="190" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1607114565714" />
+    <state width="1540" height="190" key="GridCell.Tab.0.center" timestamp="1607114565714">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="190" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1607114565714" />
+    <state width="1540" height="190" key="GridCell.Tab.0.left" timestamp="1607114565713">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="190" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1607114565713" />
+    <state width="1540" height="190" key="GridCell.Tab.0.right" timestamp="1607114565714">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="190" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1607114565714" />
+    <state width="1540" height="108" key="GridCell.Tab.1.bottom" timestamp="1604056300997">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="108" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
+    <state width="1540" height="108" key="GridCell.Tab.1.center" timestamp="1604056300997">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="108" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
+    <state width="1540" height="108" key="GridCell.Tab.1.left" timestamp="1604056300997">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="108" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
+    <state width="1540" height="108" key="GridCell.Tab.1.right" timestamp="1604056300997">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1540" height="108" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
+    <state x="357" y="76" key="SettingsEditor" timestamp="1609122319746">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="357" y="76" key="SettingsEditor/0.0.1600.900@0.0.1600.900" timestamp="1609122319746" />
+    <state x="456" y="207" key="run.anything.popup" timestamp="1602064235399">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="456" y="207" key="run.anything.popup/0.0.1600.900@0.0.1600.900" timestamp="1602064235399" />
+    <state x="463" y="190" width="672" height="678" key="search.everywhere.popup" timestamp="1607851991851">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state x="463" y="190" width="672" height="678" key="search.everywhere.popup/0.0.1600.900@0.0.1600.900" timestamp="1607851991851" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="Copyright.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

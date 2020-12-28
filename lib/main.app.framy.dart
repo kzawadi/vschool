@@ -27,6 +27,13 @@ import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/Utility/themes/newLightTheme.dart';
 import 'package:framy_annotation/framy_annotation.dart';
 import 'dart:core';
+import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution_form_page.dart';
+import 'package:ourESchool/core/viewmodel/contributions/contribution_ViewModel.dart';
+import 'package:ourESchool/imports.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:stacked/stacked.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_page_one.dart';
 import 'package:ourESchool/core/services/payments/subscription_View_Model.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
@@ -36,16 +43,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:ourESchool/UI/Widgets/button_round_with_shadow.dart';
 import 'package:ourESchool/UI/resources/colors.dart';
 import 'package:ourESchool/UI/Widgets/customAppBar.dart';
-import 'package:stacked/stacked.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/subscription_Form.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ourESchool/UI/pages/feed/feed_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:ourESchool/core/enums/UserType.dart';
-import 'package:ourESchool/imports.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
@@ -67,10 +71,11 @@ import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/enums/announcementType.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ourESchool/core/Models/Assignment.dart';
-import 'package:ourESchool/core/Models/data_entry/data_entry.dart';
+import 'package:ourESchool/core/Models/contributions/contribution_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+import 'package:ourESchool/core/Models/data_entry/data_entry.dart';
 import 'package:ourESchool/core/Models/data_entry/data_entry_db.dart';
 import 'package:ourESchool/core/Models/E-Book.dart';
 import 'package:flutter/widgets.dart';
@@ -94,7 +99,6 @@ import 'package:ourESchool/core/Models/student_data_entry/student_data_entry.dar
 import 'package:ourESchool/core/Models/student_data_entry/student_data_entry_db.dart';
 import 'package:ourESchool/core/Models/User.dart';
 import 'package:ourESchool/core/Models/UserDataLogin.dart';
-import 'package:ourESchool/core/Models/contributions/contribution_model.dart';
 
 void main() {
   runApp(FramyApp());
@@ -185,6 +189,7 @@ Route onGenerateRoute(RouteSettings settings) {
     '/button': FramyButtonPage(),
     '/toggle': FramyTogglePage(),
     '/textfield': FramyTextFieldPage(),
+    '/ContributionForm': FramyContributionFormCustomPage(),
     '/PaymentPage': FramyPaymentPageCustomPage(),
     '/SubscriptionDetails': FramySubscriptionDetailsCustomPage(),
     '/FeedCardWidget': FramyFeedCardWidgetCustomPage(),
@@ -414,6 +419,12 @@ class FramyDrawer extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+              ListTile(
+                leading: SizedBox.shrink(),
+                title: Text('ContributionForm'),
+                onTap: () => Navigator.of(context)
+                    .pushReplacementNamed('/ContributionForm'),
               ),
               ListTile(
                 leading: SizedBox.shrink(),
@@ -1240,6 +1251,19 @@ class _FramyCustomPageState extends State<FramyCustomPage> {
   }
 }
 
+class FramyContributionFormCustomPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FramyCustomPage(
+      key: Key('Framy_ContributionForm_Page'),
+      dependencies: [],
+      builder: (DependencyValueGetter valueGetter) {
+        return ContributionForm();
+      },
+    );
+  }
+}
+
 class FramyPaymentPageCustomPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -1692,7 +1716,15 @@ class FramyStoryboardPage extends StatelessWidget {
       crossAxisSpacing: 16,
       mainAxisSpacing: 16,
       childAspectRatio: 1 / 2,
-      children: [],
+      children: [
+        FramyStoryboardCustomPageWithDependencies(
+          name: 'ContributionForm',
+          dependencies: [],
+          builder: (DependencyValueGetter valueGetter) {
+            return ContributionForm();
+          },
+        ),
+      ],
     );
   }
 }
@@ -1865,6 +1897,7 @@ class FramyWidgetDependencyInput extends StatelessWidget {
             )
           else if (dependency.type == 'Announcement' ||
               dependency.type == 'Assignment' ||
+              dependency.type == 'Contribution' ||
               dependency.type == 'UserEntryData' ||
               dependency.type == 'UserEntryDataDb' ||
               dependency.type == 'EBook' ||
@@ -1889,8 +1922,7 @@ class FramyWidgetDependencyInput extends StatelessWidget {
               dependency.type == 'StudentEntryData' ||
               dependency.type == 'StudentEntryDataDb' ||
               dependency.type == 'User' ||
-              dependency.type == 'UserDataLogin' ||
-              dependency.type == 'Contribution')
+              dependency.type == 'UserDataLogin')
             FramyModelInput(
               key: inputKey,
               dependencies: dependency.subDependencies,
@@ -2096,6 +2128,7 @@ dynamic initList(String listType) {
   if (listType == 'bool') return <bool>[];
   if (listType == 'Announcement') return <Announcement>[];
   if (listType == 'Assignment') return <Assignment>[];
+  if (listType == 'Contribution') return <Contribution>[];
   if (listType == 'UserEntryData') return <UserEntryData>[];
   if (listType == 'UserEntryDataDb') return <UserEntryDataDb>[];
   if (listType == 'EBook') return <EBook>[];
@@ -2122,9 +2155,8 @@ dynamic initList(String listType) {
   if (listType == 'StudentEntryData') return <StudentEntryData>[];
   if (listType == 'StudentEntryDataDb') return <StudentEntryDataDb>[];
   if (listType == 'User') return <User>[];
-  if (listType == 'UserDataLogin') return <UserDataLogin>[];
-  if (listType == 'Contribution')
-    return <Contribution>[];
+  if (listType == 'UserDataLogin')
+    return <UserDataLogin>[];
   else
     return [];
 }
@@ -2303,6 +2335,41 @@ final framyModelConstructorMap =
         dep.subDependencies
             .singleWhere((d) => d.name == 'documentSnapshot')
             .value,
+      );
+    } else
+      return null;
+  },
+  'Contribution': (dep) {
+    if (dep.constructor == '') {
+      return Contribution(
+        amount:
+            dep.subDependencies.singleWhere((d) => d.name == 'amount').value,
+        contributionId: dep.subDependencies
+            .singleWhere((d) => d.name == 'contributionId')
+            .value,
+        studentName: dep.subDependencies
+            .singleWhere((d) => d.name == 'studentName')
+            .value,
+        parentName: dep.subDependencies
+            .singleWhere((d) => d.name == 'parentName')
+            .value,
+        payed: dep.subDependencies.singleWhere((d) => d.name == 'payed').value,
+        description: dep.subDependencies
+            .singleWhere((d) => d.name == 'description')
+            .value,
+        startDate:
+            dep.subDependencies.singleWhere((d) => d.name == 'startDate').value,
+        expireDate: dep.subDependencies
+            .singleWhere((d) => d.name == 'expireDate')
+            .value,
+        targetClass: dep.subDependencies
+            .singleWhere((d) => d.name == 'targetClass')
+            .value,
+      );
+    }
+    if (dep.constructor == '.fromJson') {
+      return Contribution.fromJson(
+        dep.subDependencies.singleWhere((d) => d.name == 'json').value,
       );
     } else
       return null;
@@ -2882,41 +2949,6 @@ final framyModelConstructorMap =
     } else
       return null;
   },
-  'Contribution': (dep) {
-    if (dep.constructor == '') {
-      return Contribution(
-        amount:
-            dep.subDependencies.singleWhere((d) => d.name == 'amount').value,
-        contributionId: dep.subDependencies
-            .singleWhere((d) => d.name == 'contributionId')
-            .value,
-        studentName: dep.subDependencies
-            .singleWhere((d) => d.name == 'studentName')
-            .value,
-        parentName: dep.subDependencies
-            .singleWhere((d) => d.name == 'parentName')
-            .value,
-        payed: dep.subDependencies.singleWhere((d) => d.name == 'payed').value,
-        description: dep.subDependencies
-            .singleWhere((d) => d.name == 'description')
-            .value,
-        startDate:
-            dep.subDependencies.singleWhere((d) => d.name == 'startDate').value,
-        expireDate: dep.subDependencies
-            .singleWhere((d) => d.name == 'expireDate')
-            .value,
-        targetClass: dep.subDependencies
-            .singleWhere((d) => d.name == 'targetClass')
-            .value,
-      );
-    }
-    if (dep.constructor == '.fromJson') {
-      return Contribution.fromJson(
-        dep.subDependencies.singleWhere((d) => d.name == 'json').value,
-      );
-    } else
-      return null;
-  },
   'String': (dep) => '',
   'double': (dep) => 0.0,
   'int': (dep) => 0,
@@ -2981,6 +3013,24 @@ List<FramyDependencyModel> createSubDependencies(String type,
       return [
         FramyDependencyModel<DocumentSnapshot>(
             'documentSnapshot', 'DocumentSnapshot', null),
+      ];
+
+    case 'Contribution':
+      return [
+        FramyDependencyModel<String>('amount', 'String', null),
+        FramyDependencyModel<String>('contributionId', 'String', null),
+        FramyDependencyModel<String>('studentName', 'String', null),
+        FramyDependencyModel<String>('parentName', 'String', null),
+        FramyDependencyModel<bool>('payed', 'bool', null),
+        FramyDependencyModel<String>('description', 'String', null),
+        FramyDependencyModel<String>('startDate', 'String', null),
+        FramyDependencyModel<String>('expireDate', 'String', null),
+        FramyDependencyModel<String>('targetClass', 'String', null),
+      ];
+    case 'Contribution.fromJson':
+      return [
+        FramyDependencyModel<Map<String, dynamic>>(
+            'json', 'Map<String, dynamic>', null),
       ];
 
     case 'UserEntryData':
@@ -3359,24 +3409,6 @@ List<FramyDependencyModel> createSubDependencies(String type,
             'parentIds', 'Map<dynamic, dynamic>', null),
       ];
 
-    case 'Contribution':
-      return [
-        FramyDependencyModel<String>('amount', 'String', null),
-        FramyDependencyModel<String>('contributionId', 'String', null),
-        FramyDependencyModel<String>('studentName', 'String', null),
-        FramyDependencyModel<String>('parentName', 'String', null),
-        FramyDependencyModel<bool>('payed', 'bool', null),
-        FramyDependencyModel<String>('description', 'String', null),
-        FramyDependencyModel<String>('startDate', 'String', null),
-        FramyDependencyModel<String>('expireDate', 'String', null),
-        FramyDependencyModel<String>('targetClass', 'String', null),
-      ];
-    case 'Contribution.fromJson':
-      return [
-        FramyDependencyModel<Map<String, dynamic>>(
-            'json', 'Map<String, dynamic>', null),
-      ];
-
     default:
       return [];
   }
@@ -3385,6 +3417,7 @@ List<FramyDependencyModel> createSubDependencies(String type,
 Map<String, List<String>> framyAvailableConstructorNames = {
   'Announcement': ['', '.fromJson', '.fromSnapshot'],
   'Assignment': ['', '.fromJson', '.fromSnapshot'],
+  'Contribution': ['', '.fromJson'],
   'UserEntryData': ['', '.fromJson'],
   'UserEntryDataDb': ['', '.fromJson'],
   'EBook': [''],
@@ -3410,7 +3443,6 @@ Map<String, List<String>> framyAvailableConstructorNames = {
   'StudentEntryDataDb': ['', '.fromJson'],
   'User': ['', '.fromSnapshot', '.fromJson'],
   'UserDataLogin': [''],
-  'Contribution': ['', '.fromJson'],
 };
 
 dynamic getFunctionCallback(FramyDependencyModel dependency) {
