@@ -18,6 +18,7 @@ class ContributionsFormPage extends StatelessWidget {
 }
 
 @FramyWidget(isPage: true)
+@FramyUseProvider(ContributionsViewModel)
 class ContributionForm extends HookViewModelWidget<ContributionsViewModel> {
   ContributionForm({Key key}) : super(key: key);
   void moveFocus(BuildContext context) => FocusScope.of(context).nextFocus();

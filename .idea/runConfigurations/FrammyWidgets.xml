@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="FrammyWidgets" type="FlutterRunConfigurationType" factoryName="Flutter" activateToolWindowBeforeRun="false">
+    <option name="filePath" value="$PROJECT_DIR$/lib/main.app.framy.dart" />
+    <method v="2" />
+  </configuration>
+</component>

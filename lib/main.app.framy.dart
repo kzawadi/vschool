@@ -1256,9 +1256,18 @@ class FramyContributionFormCustomPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FramyCustomPage(
       key: Key('Framy_ContributionForm_Page'),
-      dependencies: [],
+      dependencies: [
+        FramyDependencyModel<ContributionsViewModel>(
+            'ContributionsViewModel', 'ContributionsViewModel', null),
+      ],
       builder: (DependencyValueGetter valueGetter) {
-        return ContributionForm();
+        return provider.MultiProvider(
+          providers: [
+            provider.Provider<ContributionsViewModel>.value(
+                value: valueGetter('ContributionsViewModel')),
+          ],
+          child: ContributionForm(),
+        );
       },
     );
   }
@@ -1719,9 +1728,18 @@ class FramyStoryboardPage extends StatelessWidget {
       children: [
         FramyStoryboardCustomPageWithDependencies(
           name: 'ContributionForm',
-          dependencies: [],
+          dependencies: [
+            FramyDependencyModel<ContributionsViewModel>(
+                'ContributionsViewModel', 'ContributionsViewModel', null),
+          ],
           builder: (DependencyValueGetter valueGetter) {
-            return ContributionForm();
+            return provider.MultiProvider(
+              providers: [
+                provider.Provider<ContributionsViewModel>.value(
+                    value: valueGetter('ContributionsViewModel')),
+              ],
+              child: ContributionForm(),
+            );
           },
         ),
       ],
