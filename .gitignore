@@ -48,7 +48,6 @@ flutter_*.png
 linked_*.ds
 unlinked.ds
 unlinked_spec.ds
-C:\Users\kelvi\Desktop\VSCHOOL ASSETS\shule\vschool\.flutter-plugins-dependencies
 
 # Firebase Related
 # GoogleService-Info.plist
@@ -102,9 +101,4 @@ coverage/
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-# .flutter-plugins-dependencies
-.gitignore
 Functions/TypeScript/functions/package-lock.json
-# .flutter-plugins-dependencies
-# .flutter-plugins-dependencies
-# .flutter-plugins-dependencies
