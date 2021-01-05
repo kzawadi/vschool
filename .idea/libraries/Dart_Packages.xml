@@ -239,10 +239,10 @@
       <root url="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/xml-3.7.0/lib" />
       <root url="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/xml-4.5.1/lib" />
       <root url="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/yaml-2.2.1/lib" />
-      <root url="file://$USER_HOME$/fvm/default/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$USER_HOME$/fvm/default/packages/flutter/lib" />
-      <root url="file://$USER_HOME$/fvm/default/packages/flutter_test/lib" />
-      <root url="file://$USER_HOME$/fvm/default/packages/flutter_web_plugins/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/stable/bin/cache/pkg/sky_engine/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/stable/packages/flutter/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/stable/packages/flutter_test/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/stable/packages/flutter_web_plugins/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

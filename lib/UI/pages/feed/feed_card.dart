@@ -103,59 +103,70 @@ class FeedCardWidget extends ViewModelWidget<OwnerViewModel> {
                                   ),
                                 ),
                           // TimeStamp section
-                          Text(
-                            // 'data',
-                            DateFormat("MMM d, E").add_jm().format(
-                                DateTime.parse(feed.timestamp
-                                    .toDate()
-                                    .toLocal()
-                                    .toString())),
-                            style: GoogleFonts.roboto(
-                              textStyle: TextStyle(
-                                fontSize: 12.5,
-                              ),
-                            ),
-                          ),
+                          // Text(
+                          //   // 'data',
+                          //   DateFormat("MMM d, E").add_jm().format(
+                          //       DateTime.parse(feed.timestamp
+                          //           .toDate()
+                          //           .toLocal()
+                          //           .toString())),
+                          //   style: GoogleFonts.roboto(
+                          //     textStyle: TextStyle(
+                          //       fontSize: 12.5,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],
                   ),
                   //feed Type section
-                  Visibility(
-                    visible: feed.type == null ? false : true,
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            // print(feed.timestamp.toString());
-                            buildShowDialogBox(context);
-                          },
-                          child: Card(
-                            shape: kCardCircularShape,
-                            elevation: 1,
-                            child: CircleAvatar(
-                              backgroundColor: Theme.of(context).accentColor,
-                              child: Text(
-                                feed.type
-                                    .toString()
-                                    .substring(
-                                        feed.type.toString().indexOf('.') + 1)
-                                    .substring(0, 1),
-                                style: GoogleFonts.roboto(
-                                  textStyle: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 12.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                  // Visibility(
+                  // visible: feed.type == null ? false : true,
+                  // child: Row(
+                  //   children: [
+                  //     InkWell(
+                  //       onTap: () {
+                  //         // print(feed.timestamp.toString());
+                  //         buildShowDialogBox(context);
+                  //       },
+                  Text(
+                    // 'data',
+                    DateFormat("MMM d, E").add_jm().format(DateTime.parse(
+                        feed.timestamp.toDate().toLocal().toString())),
+                    style: GoogleFonts.roboto(
+                      textStyle: TextStyle(
+                        fontSize: 12.5,
+                      ),
                     ),
-                  )
+                  ),
+
+                  // Card(
+                  //   shape: kCardCircularShape,
+                  //   elevation: 1,
+                  //   child: CircleAvatar(
+                  //     backgroundColor: Theme.of(context).accentColor,
+                  //     child: Text(
+                  //       feed.type
+                  //           .toString()
+                  //           .substring(
+                  //               feed.type.toString().indexOf('.') + 1)
+                  //           .substring(0, 1),
+                  //       style: GoogleFonts.roboto(
+                  //         textStyle: TextStyle(
+                  //           color: Theme.of(context).primaryColor,
+                  //           fontSize: 12.5,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // ),
                 ],
               ),
+              // )
+              // ],
+              // ),
             ),
             FeedImage(feed: feed),
             Padding(
@@ -182,7 +193,7 @@ class FeedCardWidget extends ViewModelWidget<OwnerViewModel> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: fullWidth(context) / 2),
+              padding: EdgeInsets.only(left: fullWidth(context) / 2.5),
               child: PostIconsRow(
                 model: feedModel,
                 feed: feed,

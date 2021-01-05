@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ourESchool/UI/pages/feed/announcement_owner.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/UI/resources/constant.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
