@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:ourESchool/UI/Widgets/rounded_bordered_container.dart';
 
 class ContributionView extends StatelessWidget {
@@ -9,9 +11,13 @@ class ContributionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('My Cart'),
-        ),
+        appBar: TopBar(
+            buttonHeroTag: 'cart',
+            child: kBackBtn(context),
+            onPressed: () {
+              kbackBtn(context);
+            },
+            title: "School Items"),
         body: Column(
           children: <Widget>[
             Flexible(
@@ -78,7 +84,7 @@ class ContributionView extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        '\$200',
+                        'Tsh. 200',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w300),
                       )
@@ -90,7 +96,7 @@ class ContributionView extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text('\$400',
+                      Text('Tsh. 350',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
@@ -182,7 +188,7 @@ class ContributionView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "Rs. 5000",
+                    "Tsh. 2300",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   )
                 ],

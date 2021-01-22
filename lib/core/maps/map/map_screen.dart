@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:ui' as ui;
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ourESchool/core/maps/map/map_view.dart';
@@ -28,6 +31,8 @@ class MapScreenController extends State<MapScreen> {
   List<LatLng> polyLinePoints = List<LatLng>();
   Completer completer = Completer();
   Marker startMarker, endMarker, movingMarker;
+  BitmapDescriptor busIcon;
+
   bool playing = false;
   int _currentMarkerIndex = 0;
   double zoom = 15;
@@ -63,11 +68,7 @@ class MapScreenController extends State<MapScreen> {
         polyLinePoints[1].latitude,
         polyLinePoints[1].longitude);
 
-    movingMarker = Marker(
-      markerId: MarkerId("01"),
-      position: polyLinePoints[0],
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
-    );
+    movingMarker = await getCustomMarker();
 
     var bounds = await Utils.boundsFromLatLngList(polyLinePoints);
     if (!mounted) return;
@@ -85,10 +86,15 @@ class MapScreenController extends State<MapScreen> {
   }
 
   /// This method converts custom image to BitmapDescriptor which is needed for Map Marker Icon
-  Future<BitmapDescriptor> getCustomMarker() {
-    return BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(),
-      "assets/icons/green-car-marker.png",
+  Future<Marker> getCustomMarker() async {
+    await getBytesFromAssetz('assets/images/busIcon.png').then((value) {
+      busIcon = BitmapDescriptor.fromBytes(value);
+    });
+
+    return Marker(
+      markerId: MarkerId("01"),
+      position: polyLinePoints[0],
+      icon: busIcon,
     );
   }
 
@@ -105,7 +111,7 @@ class MapScreenController extends State<MapScreen> {
   }
 
   void initializeTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
+    timer = Timer.periodic(Duration(milliseconds: 1), (timer) {
       if (timer.isActive && playing) {
         if (_currentMarkerIndex < polyLinePoints.length - 1)
           updateMarkerPosition();
@@ -148,5 +154,18 @@ class MapScreenController extends State<MapScreen> {
     polyLinePoints.clear();
     _currentMarkerIndex = 0;
     initializeMapComponents();
+  }
+
+  ///This take an icon (png) and convert it to bytes then resized according to the device
+  ///screen pixel ratio
+  Future<Uint8List> getBytesFromAssetz(String path) async {
+    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: pixelRatio.round() * 30);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+        .buffer
+        .asUint8List();
   }
 }
