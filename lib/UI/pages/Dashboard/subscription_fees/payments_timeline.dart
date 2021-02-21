@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ourESchool/UI/Utility/constants.dart';
+import 'package:ourESchool/UI/Widgets/TopBar.dart';
 import 'package:timelines/timelines.dart';
 
 const kTileHeight = 50.0;
@@ -33,7 +35,14 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text('payments progres')),
+      appBar: TopBar(
+        buttonHeroTag: 'paymentsPage',
+        title: 'Payments',
+        child: kBackBtn(context),
+        onPressed: () {
+          if (Navigator.canPop(context)) Navigator.pop(context);
+        },
+      ),
       body: Timeline.tileBuilder(
         theme: TimelineThemeData(
           direction: Axis.horizontal,
