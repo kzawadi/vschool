@@ -7,10 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6ba2e34b-8c9d-46bd-93cb-c845805eeb9c" name="Default Changelist" comment="some UI tweaks still cant filter classes">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/Widgets/PostIconsRow.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/Widgets/PostIconsRow.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/UI/pages/feed/feed_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/pages/feed/feed_card.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +17,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[4e4f463232483498]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -114,14 +111,10 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="480" y="174" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1600.900@0.0.1600.900" timestamp="1609364241898" />
-    <state x="478" y="26" key="CommitChangelistDialog2" timestamp="1602757016642">
+    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl" timestamp="1613120235743">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="478" y="26" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1602757016642" />
-    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl" timestamp="1609122192921">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1609122192921" />
+    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1613120235743" />
     <state width="1540" height="212" key="GridCell.Tab.0.bottom" timestamp="1609806689649">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
@@ -138,30 +131,10 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state width="1540" height="212" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1609806689649" />
-    <state width="1540" height="108" key="GridCell.Tab.1.bottom" timestamp="1604056300997">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="108" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
-    <state width="1540" height="108" key="GridCell.Tab.1.center" timestamp="1604056300997">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="108" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
-    <state width="1540" height="108" key="GridCell.Tab.1.left" timestamp="1604056300997">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="108" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
-    <state width="1540" height="108" key="GridCell.Tab.1.right" timestamp="1604056300997">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="108" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1604056300997" />
     <state x="282" y="106" key="SettingsEditor" timestamp="1609194535470">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="282" y="106" key="SettingsEditor/0.0.1600.900@0.0.1600.900" timestamp="1609194535470" />
-    <state x="456" y="207" key="run.anything.popup" timestamp="1602064235399">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="456" y="207" key="run.anything.popup/0.0.1600.900@0.0.1600.900" timestamp="1602064235399" />
     <state x="463" y="190" width="672" height="678" key="search.everywhere.popup" timestamp="1609806520507">
       <screen x="0" y="0" width="1600" height="900" />
     </state>

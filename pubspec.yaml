@@ -9,75 +9,74 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  animations:
-  observable_ish:
-  auto_size_text:
-  bloc:
-  bottom_navy_bar:
-  cached_network_image:
+  animations: null
+  auto_route: null
+  auto_size_text: null
+  bloc: null
+  bottom_navy_bar: null
+  cached_network_image: null
   camera: ^0.5.8+5
-  cloud_firestore:
-  cupertino_icons:
-  custom_radio_grouped_button:
-  division:
-  equatable:
-  eva_icons_flutter:
+  cloud_firestore: null
+  cupertino_icons: null
+  custom_radio_grouped_button: null
+  device_preview: null
+  division: null
+  equatable: null
+  eva_icons_flutter: null
   file_picker: ^1.12.0
-  firebase_analytics:
-  firebase_auth:
-  firebase_core:
-  firebase_in_app_messaging:
-  firebase_messaging:
+  firebase_analytics: null
+  firebase_auth: null
+  firebase_core: null
+  firebase_in_app_messaging: null
+  firebase_messaging: null
   firebase_storage: ^4.0.0
-  flare_splash_screen:
-  flutter_bloc:
-  flutter_form_builder:
-  flutter_hooks:
-  flutter_local_notifications:
-  flutter_plugin_pdf_viewer:
-  flutter_sparkline:
-  flutter_spinkit:
-  flutter_staggered_grid_view:
-  font_awesome_flutter:
-  freezed_annotation:
-  get_it:
-  google_fonts:
-  google_maps_flutter:
-  google_sign_in:
-  http:
-  image:
-  image_picker:
-  intl:
-  intro_views_flutter:
-  json_annotation:
-  logging:
-  maps_toolkit:
-  meta:
-  path_provider:
+  flare_splash_screen: null
+  flutter_bloc: null
+  flutter_form_builder: null
+  flutter_hooks: null
+  flutter_local_notifications: null
+  flutter_plugin_pdf_viewer: null
+  flutter_sparkline: null
+  flutter_spinkit: null
+  flutter_staggered_grid_view: null
+  font_awesome_flutter: null
+  framy_annotation: null
+  freezed_annotation: null
+  get_it: null
+  google_fonts: null
+  google_maps_flutter: null
+  google_sign_in: null
+  http: null
+  image: null
+  image_picker: null
+  intl: null
+  intro_views_flutter: null
+  json_annotation: null
+  logging: null
+  maps_toolkit: null
+  meta: null
+  observable_ish: null
+  path_provider: null
   permission_handler: ^4.4.0+hotfix.2
-  photo_view:
-  provider:
-  random_color:
-  rxdart:
-  shared_preferences:
-  stacked:
-  stacked_hooks:
-  stacked_services:
-  vector_math:
-  framy_annotation:
-  device_preview:
-  auto_route:
-
+  photo_view: null
+  provider: null
+  random_color: null
+  rxdart: null
+  shared_preferences: null
+  stacked: null
+  stacked_hooks: null
+  stacked_services: null
+  timelines: ^0.0.2+1
+  vector_math: null
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner:
-  freezed:
-  json_serializable:
-  framy_generator:
-  auto_route_generator:
-
+  auto_route_generator: null
+  build_runner: null
+  framy_generator: null
+  freezed: null
+  json_serializable: null
 
 flutter:
   uses-material-design: true
@@ -86,6 +85,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/flare_anim/Loading.flr
+    - assets/images/process_timeline/
 
   fonts:
     - family: Customicons

@@ -1,6 +1,7 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
 import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution_form_page.dart';
 import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_page_one.dart';
+import 'package:ourESchool/UI/pages/Dashboard/subscription_fees/payments_timeline.dart';
 import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/libary/create_library.dart';
 import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution-view_page.dart';
@@ -178,6 +179,19 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       //     contentType: 'Fees Page Dashboard', itemId: null);
                     },
                     icon: FontAwesomeIcons.productHunt,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'payements',
+                    height: 70,
+                    tileColor: Colors.blueGrey,
+                    label: 'payments',
+                    onPressed: () {
+                      kopenPage(
+                          context, ProcessTimelinePage(), 'payments_Page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.applePay,
                   ),
                   SizedBox(
                     height: 105,
