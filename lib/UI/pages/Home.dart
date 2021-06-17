@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
       // fireOnModelReadyOnce: true,
       // disposeViewModel: false,
       viewModelBuilder: () => HomeViewModel(),
-      builder: (context, model, child) => Scaffold(
+      builder: (context, model, child) => Scaffold(   
         body: PageTransitionSwitcher(
           duration: const Duration(milliseconds: 300),
           reverse: model.reverse,

@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/Utility/Resources.dart';
 import 'package:flutter/material.dart';
-import 'package:intro_views_flutter/Models/page_view_model.dart';
+// import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:ourESchool/UI/resources/colors.dart';

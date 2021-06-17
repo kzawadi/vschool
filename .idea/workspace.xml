@@ -7,7 +7,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6ba2e34b-8c9d-46bd-93cb-c845805eeb9c" name="Default Changelist" comment="some UI tweaks still cant filter classes">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.fvm/flutter_sdk/packages/flutter/lib/src/services/platform_channel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/.fvm/flutter_sdk/packages/flutter/lib/src/services/platform_channel.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/pages/Dashboard/Holidays/HolidayPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/pages/Dashboard/Holidays/HolidayPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/pages/Dashboard/Holidays/holiday_details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/pages/Dashboard/Holidays/holiday_details_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/pages/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/pages/Home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/pages/Login/LoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/pages/Login/LoginPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/UI/pages/WelcomeScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/UI/pages/WelcomeScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +27,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[4e4f463232483498]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@4e4f463232483498]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -32,7 +42,10 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../src/flutter/packages/flutter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/android" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -95,64 +108,13 @@
     <option name="LAST_COMMIT_MESSAGE" value="some UI tweaks still cant filter classes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="392" y="108" key="#Notifications" timestamp="1609194090093">
-      <screen x="0" y="0" width="1600" height="900" />
+    <state x="740" y="339" key="FileChooserDialogImpl" timestamp="1622808825264">
+      <screen x="0" y="0" width="1920" height="1170" />
     </state>
-    <state x="392" y="108" key="#Notifications/0.0.1600.900@0.0.1600.900" timestamp="1609194090093" />
-    <state x="254" y="104" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609194586872">
-      <screen x="0" y="0" width="1600" height="900" />
+    <state x="740" y="339" key="FileChooserDialogImpl/0.0.1920.1170/-1600.300.1600.870@0.0.1920.1170" timestamp="1622808825264" />
+    <state x="440" y="159" key="SettingsEditor" timestamp="1622808800680">
+      <screen x="0" y="0" width="1920" height="1170" />
     </state>
-    <state x="254" y="104" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.900@0.0.1600.900" timestamp="1609194586872" />
-    <state x="529" y="238" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1609194449882">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="529" y="238" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1600.900@0.0.1600.900" timestamp="1609194449882" />
-    <state x="480" y="174" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1609364241898">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="480" y="174" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1600.900@0.0.1600.900" timestamp="1609364241898" />
-    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl" timestamp="1613120235743">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="580" y="204" width="578" height="614" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1613120235743" />
-    <state width="1540" height="212" key="GridCell.Tab.0.bottom" timestamp="1609806689649">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="212" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1609806689649" />
-    <state width="1540" height="212" key="GridCell.Tab.0.center" timestamp="1609806689649">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="212" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1609806689649" />
-    <state width="1540" height="212" key="GridCell.Tab.0.left" timestamp="1609806689649">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="212" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1609806689649" />
-    <state width="1540" height="212" key="GridCell.Tab.0.right" timestamp="1609806689649">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1540" height="212" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1609806689649" />
-    <state x="282" y="106" key="SettingsEditor" timestamp="1609194535470">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="282" y="106" key="SettingsEditor/0.0.1600.900@0.0.1600.900" timestamp="1609194535470" />
-    <state x="463" y="190" width="672" height="678" key="search.everywhere.popup" timestamp="1609806520507">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="463" y="190" width="672" height="678" key="search.everywhere.popup/0.0.1600.900@0.0.1600.900" timestamp="1609806520507" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="Copyright.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <state x="440" y="159" key="SettingsEditor/0.0.1920.1170/-1600.300.1600.870@0.0.1920.1170" timestamp="1622808800680" />
   </component>
 </project>
