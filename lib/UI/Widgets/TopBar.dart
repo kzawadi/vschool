@@ -1,9 +1,11 @@
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 
+@FramyWidget()
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final Widget child;
@@ -88,6 +90,7 @@ class _TopBarState extends State<TopBar> {
 }
 
 ///this is created to eliminat the heri tag issue ''title
+@FramyWidget()
 class TopBarAlternative extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   // final Widget child;

@@ -88,45 +88,45 @@ Widget customIcon(BuildContext context,
   );
 }
 
-Widget customTappbleIcon(BuildContext context, int icon,
-    {double size = 16,
-    bool isEnable = false,
-    Function(bool, int) onPressed1,
-    bool isBoolValue,
-    int id,
-    Function onPressed2,
-    bool isFontAwesomeRegular = false,
-    bool istwitterIcon = false,
-    bool isFontAwesomeSolid = false,
-    Color iconColor,
-    EdgeInsetsGeometry padding}) {
-  if (padding == null) {
-    padding = EdgeInsets.all(10);
-  }
-  return MaterialButton(
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      minWidth: 10,
-      height: 10,
-      padding: padding,
-      shape: CircleBorder(),
-      color: Colors.transparent,
-      elevation: 0,
-      onPressed: () {
-        if (onPressed1 != null) {
-          onPressed1(isBoolValue, id);
-        } else if (onPressed2 != null) {
-          onPressed2();
-        }
-      },
-      child: customIcon(context,
-          icon: icon,
-          size: size,
-          isEnable: isEnable,
-          istwitterIcon: istwitterIcon,
-          isFontAwesomeRegular: isFontAwesomeRegular,
-          isFontAwesomeSolid: isFontAwesomeSolid,
-          iconColor: iconColor));
-}
+// Widget customTappbleIcon(BuildContext context, int icon,
+//     {double size = 16,
+//     bool isEnable = false,
+//     Function(bool, int) onPressed1,
+//     bool isBoolValue,
+//     int id,
+//     Function onPressed2,
+//     bool isFontAwesomeRegular = false,
+//     bool istwitterIcon = false,
+//     bool isFontAwesomeSolid = false,
+//     Color iconColor,
+//     EdgeInsetsGeometry padding}) {
+//   if (padding == null) {
+//     padding = EdgeInsets.all(10);
+//   }
+//   return MaterialButton(
+//       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+//       minWidth: 10,
+//       height: 10,
+//       padding: padding,
+//       shape: CircleBorder(),
+//       color: Colors.transparent,
+//       elevation: 0,
+//       onPressed: () {
+//         if (onPressed1 != null) {
+//           onPressed1(isBoolValue, id);
+//         } else if (onPressed2 != null) {
+//           onPressed2();
+//         }
+//       },
+//       child: customIcon(context,
+//           icon: icon,
+//           size: size,
+//           isEnable: isEnable,
+//           istwitterIcon: istwitterIcon,
+//           isFontAwesomeRegular: isFontAwesomeRegular,
+//           isFontAwesomeSolid: isFontAwesomeSolid,
+//           iconColor: iconColor));
+// }
 
 Widget customText(String msg,
     {Key key,

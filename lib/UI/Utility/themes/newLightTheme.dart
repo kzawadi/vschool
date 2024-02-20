@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
+@FramyTheme()
 final ThemeData newLightTheme = ThemeData(
   primarySwatch: MaterialColor(
     4280698195,

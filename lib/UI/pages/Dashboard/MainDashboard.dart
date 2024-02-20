@@ -1,5 +1,10 @@
 import 'package:ourESchool/UI/pages/Dashboard/Wall/WallPage.dart';
+import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution_form_page.dart';
+import 'package:ourESchool/UI/pages/Dashboard/payments/subscription/payment_page_one.dart';
+import 'package:ourESchool/UI/pages/Dashboard/subscription_fees/payments_timeline.dart';
+import 'package:ourESchool/UI/pages/feed/createFeed.dart';
 import 'package:ourESchool/UI/pages/libary/create_library.dart';
+import 'package:ourESchool/UI/pages/Dashboard/contribution/contribution-view_page.dart';
 import 'package:ourESchool/UI/pages/libary/library_widgets/library_page.dart';
 import 'package:ourESchool/core/maps/map/map_screen.dart';
 import 'package:ourESchool/core/services/data_Entry/data_Entry_Page.dart';
@@ -82,7 +87,7 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                           label: string.assignment,
                           onPressed: () {
                             kopenPage(
-                                context, AssignmentsPage(), 'Assignments_Page');
+                                context, CreateFeed(), 'Assignments_Page');
                           },
                           icon: Icons.assignment,
                         ),
@@ -137,6 +142,56 @@ class _MainDashboardState extends State<MainDashboard> with Services {
                       //     contentType: 'Fees Page Dashboard', itemId: null);
                     },
                     icon: FontAwesomeIcons.user,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'Subscription',
+                    height: 70,
+                    tileColor: Colors.cyan,
+                    label: 'Subscription',
+                    onPressed: () {
+                      kopenPage(context, PaymentPageOne(), 'subscription_page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.moneyBill,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'VirtualBank',
+                    height: 70,
+                    tileColor: Colors.blue,
+                    label: 'Virtual-Bank',
+                    onPressed: () {
+                      kopenPage(context, ContributionsFormPage(),
+                          'Virtual_Bank_page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.piggyBank,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'Products',
+                    height: 70,
+                    tileColor: Colors.blueGrey,
+                    label: 'Products',
+                    onPressed: () {
+                      kopenPage(context, ContributionView(), 'products_Page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.productHunt,
+                  ),
+                  ColumnReusableCardButton(
+                    directionIconHeroTag: 'payements',
+                    height: 70,
+                    tileColor: Colors.blueGrey,
+                    label: 'payments',
+                    onPressed: () {
+                      kopenPage(
+                          context, ProcessTimelinePage(), 'payments_Page');
+                      // analytics.logSelectContent(
+                      //     contentType: 'Fees Page Dashboard', itemId: null);
+                    },
+                    icon: FontAwesomeIcons.applePay,
                   ),
                   SizedBox(
                     height: 105,

@@ -2,6 +2,7 @@ import 'package:ourESchool/UI/Widgets/customLoader.dart';
 import 'package:ourESchool/UI/resources/customWidgets.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
+import 'package:ourESchool/UI/resources/utility.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({Key key}) : super(key: key);
@@ -73,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
                   children: <Widget>[
                     Expanded(
                       flex: 11,
-                      child: model.selectedChild.isEmpty()
+                      child: model.selectedChild == null
                           ? Container(
                               child: Center(
                                 child: Text(
@@ -96,6 +97,7 @@ class _ChatPageState extends State<ChatPage> {
                                             .elementAt(i);
                                         var snapshot =
                                             model.teachersSnapshot[key];
+                                        cprint(snapshot.id);
                                         return ChatTeachersListWidget(
                                           heroTag: snapshot.id,
                                           snapshot: snapshot,
@@ -116,6 +118,7 @@ class _ChatPageState extends State<ChatPage> {
                           return InkWell(
                             onTap: () {
                               model.selectedChild = model.childrens[index];
+                              cprint(model.childrens[index].division);
                               model.getAllTeachers(
                                   division: model.selectedChild.division,
                                   standard: model.selectedChild.standard);

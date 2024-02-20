@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:observable_ish/observable_ish.dart';
 import 'package:ourESchool/UI/resources/utility.dart';
 import 'package:ourESchool/core/Models/Announcement.dart';
 import 'package:ourESchool/core/services/Services.dart';
@@ -8,8 +9,19 @@ import 'package:ourESchool/locator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:ourESchool/UI/Utility/constants.dart';
 import 'package:path/path.dart' as p;
+import 'package:stacked/stacked.dart';
 
-class FeedServices extends Services {
+class FeedServices extends Services with ReactiveServiceMixin {
+  RxValue<String> _counter = RxValue<String>(initial: "Global");
+  String get counter => _counter.value;
+
+  FeedServices() {
+    listenToReactiveValues([_counter]);
+  }
+
+  void changeFeedType({String type}) {
+    _counter.value = type;
+  }
   // final CollectionReference _postsCollectionReference =
   //     Firestore.instance.collection('feed');
 
@@ -108,11 +120,11 @@ class FeedServices extends Services {
       _requestPosts(stdDivGlobal: stdDivGlobal);
 
   ///this will clear the already fetched data and pass in [std] and be fetched again
-  void filteredFeed({String std}) {
+  void filteredFeed() {
     _allPagedResults.clear();
     _lastDocument = null;
     allPosts.clear();
-    requestMoreData(stdDivGlobal: std);
+    requestMoreData(stdDivGlobal: counter);
   }
 
   /// this will delete in firestore a given feed by its Id
@@ -165,5 +177,41 @@ class FeedServices extends Services {
     cprint('feed posted succeful ${feed.toJson()}',
         event: 'adding a feed in firestore');
     cprint(standard);
+  }
+
+  /// Add/Remove like on a feed
+  /// [postId] is feed id, [userId] is user's id who like/unlike feed
+  addLikeToTweet({Announcement feed, String firebaseUserId}) async {
+    String standard;
+    try {
+      if (feed.likeList != null &&
+          feed.likeList.length > 0 &&
+          feed.likeList.any((userId) => userId == firebaseUserId)) {
+        // If user wants to undo/remove his like on feed
+        feed.likeList.removeWhere((id) => id == firebaseUserId);
+        feed.likeCount -= 1;
+      } else {
+        // If user like feed
+        if (feed.likeList == null) {
+          feed.likeList = [];
+        }
+        feed.likeList.add(firebaseUserId);
+        feed.likeCount += 1;
+      }
+
+      if (feed.forClass == 'Global') {
+        standard = 'Global';
+      } else
+        standard = feed.forClass + feed.forDiv;
+
+      var _postRefs =
+          (await schoolRefwithCode()).doc('Posts').collection(standard);
+      // update likelist of a feed
+      _postRefs
+          .doc(feed.id)
+          .update({"likeCount": feed.likeCount, "likeList": feed.likeList});
+    } catch (error) {
+      cprint(error, errorIn: 'addLikeToTweet');
+    }
   }
 }

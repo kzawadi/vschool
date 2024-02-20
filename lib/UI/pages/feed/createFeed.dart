@@ -2,6 +2,7 @@ import 'package:ourESchool/UI/pages/Dashboard/Wall/camera_screen.dart';
 import 'package:ourESchool/UI/pages/feed/feed_viewModel.dart';
 import 'package:ourESchool/imports.dart';
 import 'package:stacked/stacked.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class CreateFeed extends StatefulWidget {
   CreateFeed({Key key}) : super(key: key);
@@ -44,9 +45,12 @@ class _CreateFeedState extends State<CreateFeed> {
 
   floatingButtonPressed(FeedViewModel model, BuildContext context) async {
     User user = Provider.of<User>(context, listen: false);
+    var firebaseUser = Provider.of<auth.User>(context, listen: false);
+
     Announcement feed = Announcement(
+      userId: firebaseUser.uid,
       by: user.id,
-      createrPhotoUrl: user.photoUrl,
+      // createrPhotoUrl: user.photoUrl,
       caption: _captionController.text,
       forClass:
           postType == 'SPECIFIC' ? _standardController.text.trim() : 'Global',

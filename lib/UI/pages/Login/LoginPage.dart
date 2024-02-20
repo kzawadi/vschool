@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
         return Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           key: _scaffoldKey,
-          resizeToAvoidBottomPadding: false,
+          resizeToAvoidBottomInset: false,
           appBar: TopBar(
             buttonHeroTag: 'logininner',
             title: string.login,

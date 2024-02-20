@@ -14,10 +14,10 @@
 *.iml
 *.ipr
 *.iws
-.idea/
+# .idea/
 
 # Visual Studio Code related
-.vscode/
+# .vscode/
 
 # Flutter repo-specific
 /bin/cache/
@@ -101,9 +101,4 @@ coverage/
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-# .flutter-plugins-dependencies
-.gitignore
 Functions/TypeScript/functions/package-lock.json
-# .flutter-plugins-dependencies
-# .flutter-plugins-dependencies
-# .flutter-plugins-dependencies

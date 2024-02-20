@@ -17,6 +17,7 @@ class Services {
       locator<SharedPreferencesHelper>();
   static final String country =
       "India"; //Get this from firstScreen(UI Not developed yet)
+  //todo REMEMBER TO CHANGE THIS TO TANZANIA WHEN READY FOR PRODUCTION
   static final authentication.FirebaseAuth _auth =
       authentication.FirebaseAuth.instance;
 

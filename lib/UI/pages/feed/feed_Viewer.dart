@@ -40,6 +40,7 @@ class FeedViewer extends StatelessWidget {
         Navigator.pop(context);
       },
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: TopBar(
           buttonHeroTag: string.announcement,
           title: "Viewer",

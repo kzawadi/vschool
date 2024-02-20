@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:ourESchool/core/enums/fees.dart';
 
+@framyModel
 class Fees {
   String description;
   String due;

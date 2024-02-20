@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:framy_annotation/framy_annotation.dart';
+
 HolidayData holidaysFromJson(String str) {
   final jsonData = json.decode(str);
   return HolidayData.fromJson(jsonData);
@@ -14,6 +16,7 @@ String holidaysToJson(HolidayData data) {
   return json.encode(dyn);
 }
 
+@framyModel
 class HolidayData {
   Meta meta;
   Response response;
@@ -34,6 +37,7 @@ class HolidayData {
       };
 }
 
+@framyModel
 class Meta {
   int code;
 
@@ -50,6 +54,7 @@ class Meta {
       };
 }
 
+@framyModel
 class Response {
   List<Holiday> holidays;
 
@@ -70,6 +75,7 @@ class Response {
       };
 }
 
+@framyModel
 class Holiday {
   String name;
   String description;
@@ -108,6 +114,7 @@ class Holiday {
       };
 }
 
+@framyModel
 class Date {
   String iso;
   Datetime datetime;
@@ -134,6 +141,7 @@ class Date {
       };
 }
 
+@framyModel
 class Datetime {
   int year;
   int month;
@@ -170,6 +178,7 @@ class Datetime {
       };
 }
 
+@framyModel
 class Timezone {
   String offset;
   String zoneabb;
@@ -202,10 +211,11 @@ class Timezone {
       };
 }
 
+@framyModel
 enum Locations { ALL }
 
 final locationsValues = new EnumValues({"All": Locations.ALL});
-
+@framyModel
 enum Type { NATIONAL_HOLIDAY, LOCAL_HOLIDAY, OBSERVANCE, SEASON, CHRISTIAN }
 
 final typeValues = new EnumValues({

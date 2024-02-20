@@ -491,7 +491,7 @@ class ProfileFields extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 60,
-        color: fieldBackGround,
+        // color: fieldBackGround,
         decoration: BoxDecoration(
           color: fieldBackGround,
           borderRadius: BorderRadius.circular(14),

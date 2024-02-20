@@ -36,7 +36,7 @@ class _HolidayPageState extends State<HolidayPage> {
         onModelReady: (model) => model.getHolidays(),
         builder: (context, model, child) {
           return Scaffold(
-            resizeToAvoidBottomPadding: false,
+            resizeToAvoidBottomInset: false,
             appBar: TopBar(
               buttonHeroTag: 'holidaysPage',
               onTitleTapped: () {

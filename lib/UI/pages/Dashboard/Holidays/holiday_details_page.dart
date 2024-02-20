@@ -275,7 +275,7 @@ class HolidayDetailsPageState extends State<HolidayDetailsPage>
               );
             }).toList()),
       ), // ),
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
     );
   }
 }

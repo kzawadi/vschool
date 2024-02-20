@@ -1,3 +1,4 @@
+import 'package:framy_annotation/framy_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +9,7 @@ part 'student_data_entry.g.dart';
 
 @immutable
 @freezed
+@framyModel
 abstract class StudentEntryData with _$StudentEntryData {
   const factory StudentEntryData({
     String email,
